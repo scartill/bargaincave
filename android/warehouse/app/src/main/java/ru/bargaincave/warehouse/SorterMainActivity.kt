@@ -3,8 +3,7 @@ package ru.bargaincave.warehouse
 import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
-import ru.bargaincave
-import ru.bargaincave.bargaincavewarehouse.databinding.ActivitySorterMainBinding
+import ru.bargaincave.warehouse.databinding.ActivitySorterMainBinding
 
 class SorterMainActivity : AppCompatActivity() {
     private lateinit var b : ActivitySorterMainBinding
@@ -18,7 +17,6 @@ class SorterMainActivity : AppCompatActivity() {
 
         b.newLot.setOnClickListener {
             val intent = Intent(this, NewLotActivity::class.java)
-                .addFlags(Intent.FLAG_GRANT_READ_URI_PERMISSION);
             startActivity(intent)
         }
     }

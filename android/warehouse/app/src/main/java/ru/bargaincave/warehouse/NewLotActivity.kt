@@ -1,6 +1,7 @@
 package ru.bargaincave.warehouse
 
 import android.content.ActivityNotFoundException
+import android.content.Context
 import android.content.Intent
 import android.graphics.Bitmap
 import android.net.Uri
@@ -30,6 +31,8 @@ class NewLotActivity : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
 
+        currentPhotoPath = ""
+
         b = ActivityNewLotBinding.inflate(layoutInflater)
         val view = b.root
         setContentView(view)
@@ -47,13 +50,17 @@ class NewLotActivity : AppCompatActivity() {
         b.photo.setOnClickListener {
             Log.i("Cave", "Taking a photo")
             try {
-                val outputDir: File = applicationContext.getCacheDir()
-                val outputFile = File.createTempFile("image/lot_photo", ".jpg", outputDir)
+                val outputDir = File(applicationContext.cacheDir, "/image")
+                outputDir.mkdir()
+                val outputFile = File.createTempFile("lot_photo_", ".jpg", outputDir)
                 outputFile.deleteOnExit()
                 currentPhotoPath = outputFile.path
+                Log.i("Cave", "Using temp file $currentPhotoPath")
 
-                val takePictureIntent = Intent(MediaStore.ACTION_IMAGE_CAPTURE)
-                val photoURI: Uri = FileProvider.getUriForFile(this, "ru.bargaincave.warehouse.fileprovider", outputFile)
+                val takePictureIntent = Intent(MediaStore.ACTION_IMAGE_CAPTURE).apply {
+                    addFlags(Intent.FLAG_GRANT_READ_URI_PERMISSION)
+                }
+                val photoURI = FileProvider.getUriForFile(this, "ru.bargaincave.warehouse.fileprovider", outputFile)
                 takePictureIntent.putExtra(MediaStore.EXTRA_OUTPUT, photoURI)
                 startActivityForResult(takePictureIntent, REQUEST_IMAGE_CAPTURE)
             } catch (error: Exception) {
@@ -88,7 +95,7 @@ class NewLotActivity : AppCompatActivity() {
 
     override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {
         Log.i("Cave", "Rendering a preview")
-        super.onActivityResult(requestCode, resultCode, data)
+//        super.onActivityResult(requestCode, resultCode, data)
         if (requestCode == REQUEST_IMAGE_CAPTURE && resultCode == RESULT_OK) {
             val imageBitmap = data?.extras?.get("data") as Bitmap
             b.imageView.setImageBitmap(imageBitmap)
