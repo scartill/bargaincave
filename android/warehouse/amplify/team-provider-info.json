@@ -1,0 +1,15 @@
+{
+  "staging": {
+    "awscloudformation": {
+      "AuthRoleName": "amplify-warehouse-staging-142503-authRole",
+      "UnauthRoleArn": "arn:aws:iam::466719640610:role/amplify-warehouse-staging-142503-unauthRole",
+      "AuthRoleArn": "arn:aws:iam::466719640610:role/amplify-warehouse-staging-142503-authRole",
+      "Region": "eu-west-2",
+      "DeploymentBucketName": "amplify-warehouse-staging-142503-deployment",
+      "UnauthRoleName": "amplify-warehouse-staging-142503-unauthRole",
+      "StackName": "amplify-warehouse-staging-142503",
+      "StackId": "arn:aws:cloudformation:eu-west-2:466719640610:stack/amplify-warehouse-staging-142503/1a877250-6887-11eb-84b4-061de1ed6718",
+      "AmplifyAppId": "d13at4rocoglfe"
+    }
+  }
+}

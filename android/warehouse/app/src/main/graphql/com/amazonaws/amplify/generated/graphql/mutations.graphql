@@ -1,0 +1,49 @@
+# this is an auto generated file. This will be overwritten
+mutation CreateLot(
+  $input: CreateLotInput!
+  $condition: ModelLotConditionInput
+) {
+  createLot(input: $input, condition: $condition) {
+    id
+    fruit
+    weightKg
+    comment
+    _version
+    _deleted
+    _lastChangedAt
+    createdAt
+    updatedAt
+  }
+}
+mutation UpdateLot(
+  $input: UpdateLotInput!
+  $condition: ModelLotConditionInput
+) {
+  updateLot(input: $input, condition: $condition) {
+    id
+    fruit
+    weightKg
+    comment
+    _version
+    _deleted
+    _lastChangedAt
+    createdAt
+    updatedAt
+  }
+}
+mutation DeleteLot(
+  $input: DeleteLotInput!
+  $condition: ModelLotConditionInput
+) {
+  deleteLot(input: $input, condition: $condition) {
+    id
+    fruit
+    weightKg
+    comment
+    _version
+    _deleted
+    _lastChangedAt
+    createdAt
+    updatedAt
+  }
+}

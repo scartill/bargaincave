@@ -1,0 +1,58 @@
+# this is an auto generated file. This will be overwritten
+query SyncLots(
+  $filter: ModelLotFilterInput
+  $limit: Int
+  $nextToken: String
+  $lastSync: AWSTimestamp
+) {
+  syncLots(
+    filter: $filter
+    limit: $limit
+    nextToken: $nextToken
+    lastSync: $lastSync
+  ) {
+    items {
+      id
+      fruit
+      weightKg
+      comment
+      _version
+      _deleted
+      _lastChangedAt
+      createdAt
+      updatedAt
+    }
+    nextToken
+    startedAt
+  }
+}
+query GetLot($id: ID!) {
+  getLot(id: $id) {
+    id
+    fruit
+    weightKg
+    comment
+    _version
+    _deleted
+    _lastChangedAt
+    createdAt
+    updatedAt
+  }
+}
+query ListLots($filter: ModelLotFilterInput, $limit: Int, $nextToken: String) {
+  listLots(filter: $filter, limit: $limit, nextToken: $nextToken) {
+    items {
+      id
+      fruit
+      weightKg
+      comment
+      _version
+      _deleted
+      _lastChangedAt
+      createdAt
+      updatedAt
+    }
+    nextToken
+    startedAt
+  }
+}

@@ -1,0 +1,8 @@
+type Lot @model @auth(rules: [{allow: public}]) {
+  id: ID!
+  weightKg: Float
+  comment: String
+  photo: String
+  fruit: String
+}
+ 

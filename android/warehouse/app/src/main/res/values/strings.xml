@@ -1,0 +1,28 @@
+<resources>
+    <string name="app_name">BargainCave Warehouse</string>
+    <string name="title_activity_login">BC Warehouse</string>
+    <string name="New">New</string>
+    <string-array name="fruit_type">
+        <item>Mango</item>
+        <item>Avocado</item>
+        <item>Banana</item>
+    </string-array>
+    <string name="prompt_email">Email</string>
+    <string name="prompt_password">Password</string>
+    <string name="action_sign_in">Sign in or register</string>
+    <string name="action_sign_in_short">Sign in</string>
+    <string name="welcome">"Welcome !"</string>
+    <string name="invalid_username">Not a valid username</string>
+    <string name="invalid_password">Password must be >5 characters</string>
+    <string name="login_failed">"Login failed"</string>
+    <string name="sorter">Sorter</string>
+    <string name="manager">Manager</string>
+    <string name="new_lot">New Lot</string>
+    <string name="submit">Submit</string>
+    <string name="weight">Weight</string>
+    <string name="comment">Comment</string>
+    <string name="kg">kg</string>
+    <string name="enter_lot_s_weight">Enter lot\'s weight in kilos</string>
+    <string name="optional_comment">Optional comment</string>
+    <string name="photo">Photo</string>
+</resources>
