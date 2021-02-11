@@ -25,4 +25,7 @@
     <string name="enter_lot_s_weight">Enter lot\'s weight in kilos</string>
     <string name="optional_comment">Optional comment</string>
     <string name="photo">Photo</string>
+    <string name="login">Login</string>
+    <string name="ok">OK</string>
+    <string name="cannot_login">Cannot login</string>
 </resources>
