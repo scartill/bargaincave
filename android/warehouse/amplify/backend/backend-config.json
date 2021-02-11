@@ -20,5 +20,19 @@
         }
       }
     }
+  },
+  "auth": {
+    "warehouse40c048f0": {
+      "service": "Cognito",
+      "providerPlugin": "awscloudformation",
+      "dependsOn": [],
+      "customAuth": false
+    }
+  },
+  "storage": {
+    "photos": {
+      "service": "S3",
+      "providerPlugin": "awscloudformation"
+    }
   }
 }

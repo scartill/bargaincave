@@ -4,6 +4,7 @@ import android.content.ActivityNotFoundException
 import android.content.Context
 import android.content.Intent
 import android.graphics.Bitmap
+import android.graphics.BitmapFactory
 import android.net.Uri
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
@@ -37,6 +38,8 @@ class NewLotActivity : AppCompatActivity() {
         val view = b.root
         setContentView(view)
 
+        b.submit.isEnabled = false
+
         val spinner: Spinner = b.spinFruit
         ArrayAdapter.createFromResource(
             this,
@@ -57,8 +60,8 @@ class NewLotActivity : AppCompatActivity() {
                 currentPhotoPath = outputFile.path
                 Log.i("Cave", "Using temp file $currentPhotoPath")
 
-                val takePictureIntent = Intent(MediaStore.ACTION_IMAGE_CAPTURE).apply {
-                    addFlags(Intent.FLAG_GRANT_READ_URI_PERMISSION)
+                val takePictureIntent = Intent(MediaStore.ACTION_IMAGE_CAPTURE).also {
+                    it.addFlags(Intent.FLAG_GRANT_READ_URI_PERMISSION)
                 }
                 val photoURI = FileProvider.getUriForFile(this, "ru.bargaincave.warehouse.fileprovider", outputFile)
                 takePictureIntent.putExtra(MediaStore.EXTRA_OUTPUT, photoURI)
@@ -70,37 +73,58 @@ class NewLotActivity : AppCompatActivity() {
         }
 
         b.submit.setOnClickListener {
-            val fruit = b.spinFruit.selectedItem.toString()
+            try {
+                val fruit = b.spinFruit.selectedItem.toString()
 
-            val weight = b.weight.text.toString().toFloatOrNull()
+                if (currentPhotoPath == "") {
+                    b.photo.requestFocus()
+                    return@setOnClickListener
+                }
 
-            if (weight == null) {
-                b.weight.requestFocus()
-                return@setOnClickListener
+                val weight = b.weight.text.toString().toFloatOrNull()
+
+                if (weight == null) {
+                    b.weight.requestFocus()
+                    return@setOnClickListener
+                }
+
+                val comment = b.comment.text.toString()
+
+                val item: Lot = Lot.builder()
+                    .fruit(fruit)
+                    .photo(currentPhotoPath)
+                    .weightKg(weight)
+                    .comment(comment)
+                    .build()
+
+                /*
+                Amplify.DataStore.save(
+                    item,
+                    { success -> Log.i("Cave", "Saved item: " + success.item().fruit.toString()) },
+                    { error -> Log.e("Cave", "Could not save item to DataStore", error) }
+                )
+                */
+            } catch (error: Exception) {
+                b.error.text = error.message
+                Log.e("Cave", "Unable to submit", error)
             }
-
-            val item: Lot = Lot.builder()
-                .fruit(fruit)
-                .weightKg(weight)
-                .comment("Some Israeli Class B Mango")
-                .build()
-
-            Amplify.DataStore.save(
-                item,
-                { success -> Log.i("Cave", "Saved item: " + success.item().fruit.toString()) },
-                { error -> Log.e("Cave", "Could not save item to DataStore", error) }
-            )
         }
     }
 
     override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {
-        Log.i("Cave", "Rendering a preview")
-//        super.onActivityResult(requestCode, resultCode, data)
-        if (requestCode == REQUEST_IMAGE_CAPTURE && resultCode == RESULT_OK) {
-            val imageBitmap = data?.extras?.get("data") as Bitmap
-            b.imageView.setImageBitmap(imageBitmap)
-
-            Log.i("Cave", "Photo path $currentPhotoPath")
+        try {
+            Log.i("Cave", "Rendering a preview")
+            super.onActivityResult(requestCode, resultCode, data)
+            if (requestCode == REQUEST_IMAGE_CAPTURE && resultCode == RESULT_OK) {
+                val file = File(currentPhotoPath)
+                BitmapFactory.decodeFile(currentPhotoPath)?.also {
+                    b.imageView.setImageBitmap(it)
+                    b.submit.isEnabled = true
+                }
+            }
+        } catch (error: Exception) {
+            b.error.text = error.message
+            Log.e("Cave", "Unable to render a preview", error)
         }
     }
 }

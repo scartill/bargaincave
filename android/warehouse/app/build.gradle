@@ -53,4 +53,5 @@ dependencies {
 
     implementation 'com.amplifyframework:aws-api:1.16.11'
     implementation 'com.amplifyframework:aws-datastore:1.16.11'
+    implementation 'com.amplifyframework:aws-auth-cognito:1.16.11'
 }
