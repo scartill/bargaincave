@@ -1,5 +1,13 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
+  <component name="DesignSurface">
+    <option name="filePathToZoomLevelMap">
+      <map>
+        <entry key="..\:/Libraries/Boris/Projects/bargaincave/git/android/warehouse/app/src/main/res/layout/activity_cognito_login.xml" value="0.37182971014492755" />
+        <entry key="..\:/Libraries/Boris/Projects/bargaincave/git/android/warehouse/app/src/main/res/layout/activity_new_password.xml" value="0.37182971014492755" />
+      </map>
+    </option>
+  </component>
   <component name="ExternalStorageConfigurationManager" enabled="true" />
   <component name="ProjectRootManager" version="2" languageLevel="JDK_11" default="true" project-jdk-name="JDK" project-jdk-type="JavaSDK">
     <output url="file://$PROJECT_DIR$/build/classes" />
