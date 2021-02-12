@@ -74,9 +74,11 @@ class NewLotActivity : AppCompatActivity() {
 
         b.submit.setOnClickListener {
             try {
+                Log.i("Cave", "Submitting a new lot")
                 val fruit = b.spinFruit.selectedItem.toString()
 
                 if (currentPhotoPath == "") {
+                    Log.i("Cave", "Unable: photo is required")
                     b.photo.requestFocus()
                     return@setOnClickListener
                 }
@@ -84,11 +86,20 @@ class NewLotActivity : AppCompatActivity() {
                 val weight = b.weight.text.toString().toFloatOrNull()
 
                 if (weight == null) {
+                    Log.i("Cave", "Unable: weight is required")
                     b.weight.requestFocus()
                     return@setOnClickListener
                 }
 
                 val comment = b.comment.text.toString()
+
+                val photoFile = File(currentPhotoPath)
+                Amplify.Storage.uploadFile(
+                    photoFile.name,
+                    photoFile,
+                    { result -> Log.i("Cave", "Successfully uploaded: " + result.getKey()) },
+                    { error -> Log.e("Cave", "Upload failed", error) }
+                )
 
                 val item: Lot = Lot.builder()
                     .fruit(fruit)

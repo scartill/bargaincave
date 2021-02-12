@@ -13,6 +13,7 @@ import com.amplifyframework.auth.options.AuthSignOutOptions
 import com.amplifyframework.auth.result.step.AuthSignInStep
 import com.amplifyframework.core.Amplify
 import com.amplifyframework.datastore.AWSDataStorePlugin
+import com.amplifyframework.storage.s3.AWSS3StoragePlugin
 import ru.bargaincave.warehouse.databinding.ActivityCognitoLoginBinding
 
 class CognitoLoginActivity : AppCompatActivity() {
@@ -43,6 +44,7 @@ class CognitoLoginActivity : AppCompatActivity() {
             Amplify.addPlugin(AWSDataStorePlugin())
             Amplify.addPlugin(AWSApiPlugin())
             Amplify.addPlugin(AWSCognitoAuthPlugin())
+            Amplify.addPlugin(AWSS3StoragePlugin())
             Amplify.configure(applicationContext)
             Log.i("Cave", "Initialized Amplify")
 

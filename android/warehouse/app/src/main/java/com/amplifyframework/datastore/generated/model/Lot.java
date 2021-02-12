@@ -24,11 +24,11 @@ import static com.amplifyframework.core.model.query.predicate.QueryField.field;
   @AuthRule(allow = AuthStrategy.PUBLIC, operations = { ModelOperation.CREATE, ModelOperation.UPDATE, ModelOperation.DELETE, ModelOperation.READ })
 })
 public final class Lot implements Model {
-  public static final QueryField ID = field("id");
-  public static final QueryField WEIGHT_KG = field("weightKg");
-  public static final QueryField COMMENT = field("comment");
-  public static final QueryField PHOTO = field("photo");
-  public static final QueryField FRUIT = field("fruit");
+  public static final QueryField ID = field("Lot", "id");
+  public static final QueryField WEIGHT_KG = field("Lot", "weightKg");
+  public static final QueryField COMMENT = field("Lot", "comment");
+  public static final QueryField PHOTO = field("Lot", "photo");
+  public static final QueryField FRUIT = field("Lot", "fruit");
   private final @ModelField(targetType="ID", isRequired = true) String id;
   private final @ModelField(targetType="Float") Float weightKg;
   private final @ModelField(targetType="String") String comment;
