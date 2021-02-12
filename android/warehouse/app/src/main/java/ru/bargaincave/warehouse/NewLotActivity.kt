@@ -13,6 +13,7 @@ import android.provider.MediaStore
 import android.util.Log
 import android.widget.ArrayAdapter
 import android.widget.Spinner
+import android.widget.Toast
 import androidx.core.content.FileProvider
 import com.amplifyframework.core.Amplify
 import com.amplifyframework.datastore.generated.model.Fruit
@@ -94,27 +95,35 @@ class NewLotActivity : AppCompatActivity() {
                 val comment = b.comment.text.toString()
 
                 val photoFile = File(currentPhotoPath)
+                val s3key = photoFile.name
                 Amplify.Storage.uploadFile(
-                    photoFile.name,
+                    s3key,
                     photoFile,
-                    { result -> Log.i("Cave", "Successfully uploaded: " + result.getKey()) },
-                    { error -> Log.e("Cave", "Upload failed", error) }
-                )
+                    { result ->
+                        Log.i("Cave", "Successfully uploaded: " + result.getKey())
 
-                val item: Lot = Lot.builder()
-                    .fruit(fruit)
-                    .photo(currentPhotoPath)
-                    .weightKg(weight)
-                    .comment(comment)
-                    .build()
+                        val item: Lot = Lot.builder()
+                            .fruit(fruit)
+                            .photo(s3key)
+                            .weightKg(weight)
+                            .comment(comment)
+                            .build()
 
-                /*
-                Amplify.DataStore.save(
-                    item,
-                    { success -> Log.i("Cave", "Saved item: " + success.item().fruit.toString()) },
-                    { error -> Log.e("Cave", "Could not save item to DataStore", error) }
+                        Amplify.DataStore.save(
+                            item,
+                            { success -> Log.i("Cave", "Saved item: " + success.item().photo.toString()) },
+                            { error -> Log.e("Cave", "Could not save item to DataStore", error) }
+                        )
+
+                        runOnUiThread {
+                            Toast.makeText(applicationContext, "Submitted successfully", Toast.LENGTH_LONG).show();
+                            finish()
+                        }
+                    },
+                    {
+                        error -> Log.e("Cave", "Upload failed", error)
+                    }
                 )
-                */
             } catch (error: Exception) {
                 b.error.text = error.message
                 Log.e("Cave", "Unable to submit", error)

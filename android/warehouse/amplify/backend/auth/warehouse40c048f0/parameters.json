@@ -1,4 +1,6 @@
 {
+    "identityPoolName": "warehouse40c048f0_identitypool_853a6552",
+    "allowUnauthenticatedIdentities": false,
     "resourceNameTruncated": "wareho40c048f0",
     "userPoolName": "warehouse40c048f0_userpool_40c048f0",
     "autoVerifiedAttributes": [
@@ -30,7 +32,7 @@
     "userpoolClientSetAttributes": false,
     "sharedId": "40c048f0",
     "resourceName": "warehouse40c048f0",
-    "authSelections": "userPoolOnly",
+    "authSelections": "identityPoolAndUserPool",
     "authRoleArn": {
         "Fn::GetAtt": [
             "AuthRole",
@@ -43,7 +45,7 @@
             "Arn"
         ]
     },
-    "useDefault": "manual",
+    "useDefault": "default",
     "usernameAttributes": [
         "email"
     ],
@@ -58,5 +60,6 @@
     "parentStack": {
         "Ref": "AWS::StackId"
     },
-    "permissions": []
+    "permissions": [],
+    "authProviders": []
 }

@@ -22,7 +22,7 @@
     <string name="weight">Weight</string>
     <string name="comment">Comment</string>
     <string name="kg">kg</string>
-    <string name="enter_lot_s_weight">Enter lot\'s weight in kilos</string>
+    <string name="enter_lot_s_weight">Enter this lot\'s weight in kilos</string>
     <string name="optional_comment">Optional comment</string>
     <string name="photo">Photo</string>
     <string name="login">Login</string>
