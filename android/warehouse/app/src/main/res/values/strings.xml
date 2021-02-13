@@ -35,4 +35,7 @@
     <string name="new_password_failed">Unable to set a new password</string>
     <string name="pass_change_ok">Password changed successfully</string>
     <string name="user_email_key">user_email_key</string>
+    <string name="sorter_cam_rationale">You are required to use a camera to create the lots</string>
+    <string name="submit_ok">Submitted successfully</string>
+    <string name="no_thanks">No, thanks</string>
 </resources>

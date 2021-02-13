@@ -18,7 +18,7 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/Theme.BargainCaveWarehouse">
-        <activity android:name=".NewPasswordActivity"></activity>
+        <activity android:name=".NewPasswordActivity" />
         <activity
             android:name=".CognitoLoginActivity"
             android:label="@string/title_activity_login">

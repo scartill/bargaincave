@@ -116,7 +116,7 @@ class NewLotActivity : AppCompatActivity() {
                         )
 
                         runOnUiThread {
-                            Toast.makeText(applicationContext, "Submitted successfully", Toast.LENGTH_LONG).show();
+                            Toast.makeText(applicationContext, getString(R.string.submit_ok), Toast.LENGTH_LONG).show();
                             finish()
                         }
                     },

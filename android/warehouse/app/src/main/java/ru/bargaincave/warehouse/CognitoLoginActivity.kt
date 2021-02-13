@@ -2,9 +2,13 @@ package ru.bargaincave.warehouse
 
 import android.content.Context
 import android.content.Intent
+import android.content.pm.PackageManager
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.util.Log
+import android.widget.Toast
+import androidx.activity.result.contract.ActivityResultContracts
+import androidx.appcompat.app.AlertDialog
 import androidx.core.widget.addTextChangedListener
 import com.amplifyframework.AmplifyException
 import com.amplifyframework.api.aws.AWSApiPlugin
@@ -15,6 +19,7 @@ import com.amplifyframework.core.Amplify
 import com.amplifyframework.datastore.AWSDataStorePlugin
 import com.amplifyframework.storage.s3.AWSS3StoragePlugin
 import ru.bargaincave.warehouse.databinding.ActivityCognitoLoginBinding
+import java.util.jar.Manifest
 
 class CognitoLoginActivity : AppCompatActivity() {
 
@@ -143,15 +148,46 @@ class CognitoLoginActivity : AppCompatActivity() {
             )
         }
 
+        val permRequester = registerForActivityResult(ActivityResultContracts.RequestPermission()) { granted ->
+            if (granted) {
+                startSorter()
+            } else {
+                showCamToast()
+            }
+        }
+
         b.sorter.setOnClickListener {
-            val intent = Intent(this, SorterMainActivity::class.java)
-            startActivity(intent)
+            val cam = android.Manifest.permission.CAMERA
+            if (applicationContext.checkSelfPermission(cam) == PackageManager.PERMISSION_DENIED) {
+                if (shouldShowRequestPermissionRationale(cam)) {
+                    val dialog = AlertDialog.Builder(this)
+                    dialog.run {
+                        setMessage(R.string.sorter_cam_rationale)
+                        setPositiveButton(R.string.ok) { _, _ ->
+                            permRequester.launch(cam)
+                        }
+                        setNegativeButton(R.string.no_thanks) { _, _ ->
+                            showCamToast()
+                        }
+                        create()
+                        show()
+                    }
+                } else {
+                    permRequester.launch(cam)
+                }
+            } else {
+                startSorter()
+            }
         }
 
         b.manager.setOnClickListener {
             val intent = Intent(this, ManagerMainActivity::class.java)
             startActivity(intent)
         }
+    }
+
+    private fun showCamToast() {
+        Toast.makeText(applicationContext, getString(R.string.sorter_cam_rationale), Toast.LENGTH_LONG).show();
     }
 
     private fun textChangeListener() {
@@ -169,5 +205,10 @@ class CognitoLoginActivity : AppCompatActivity() {
             b.sorter.isEnabled = signedIn
             b.manager.isEnabled = false
         }
+    }
+
+    private fun startSorter() {
+        val intent = Intent(this, SorterMainActivity::class.java)
+        startActivity(intent)
     }
 }
