@@ -38,4 +38,7 @@
     <string name="sorter_cam_rationale">You are required to use a camera to create the lots</string>
     <string name="submit_ok">Submitted successfully</string>
     <string name="no_thanks">No, thanks</string>
+    <string name="lorem">Lorem</string>
+    <string name="zero_zero">00</string>
+    <string name="active_lots">Active Lots</string>
 </resources>

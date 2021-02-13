@@ -1,38 +1,42 @@
 package ru.bargaincave.warehouse.manager
 
-import android.util.Log
 import android.view.LayoutInflater
-import android.view.View
 import android.view.ViewGroup
-import android.widget.TextView
+import androidx.recyclerview.widget.DiffUtil
+import androidx.recyclerview.widget.ListAdapter
 import androidx.recyclerview.widget.RecyclerView
-import ru.bargaincave.warehouse.R
+import com.amplifyframework.datastore.generated.model.Lot
+import ru.bargaincave.warehouse.databinding.ItemLotBinding
 
-class LotListAdapter: RecyclerView.Adapter<LotListAdapter.ViewHolder>() {
-    class ViewHolder(view: View): RecyclerView.ViewHolder(view) {
-        val textView : TextView
+class ViewHolder(binding: ItemLotBinding): RecyclerView.ViewHolder(binding.root) {
+    val b: ItemLotBinding = binding
 
-        init {
-            textView = view.findViewById(R.id.textView)
-        }
+    fun bind(lot: Lot) {
+        // TODO: fruit name is not localized
+        b.itemFruit.text = lot.fruit
+        b.itemWeight.text = lot.weightKg.toString()
+        b.itemComment.text = if(lot.comment.isNotEmpty()) lot.comment else "------"
     }
+}
 
+class LotListAdapter: ListAdapter<Lot, ViewHolder>(LotDiffCallback) {
     // Create new views (invoked by the layout manager)
     override fun onCreateViewHolder(viewGroup: ViewGroup, viewType: Int): ViewHolder {
-        val view = LayoutInflater.from(viewGroup.context)
-            .inflate(R.layout.item_lot, viewGroup, false)
-        /*
         val b = ItemLotBinding.inflate(LayoutInflater.from(viewGroup.context))
-        val view = b.root
-         */
-
-        return ViewHolder(view)
+        return ViewHolder(b)
     }
 
     override fun onBindViewHolder(viewHolder: ViewHolder, position: Int) {
-        viewHolder.textView.text = "test"
+        viewHolder.bind(getItem(position))
+    }
+}
+
+object LotDiffCallback: DiffUtil.ItemCallback<Lot>() {
+    override fun areItemsTheSame(oldItem: Lot, newItem: Lot): Boolean {
+        return oldItem == newItem
     }
 
-    // Return the size of your dataset (invoked by the layout manager)
-    override fun getItemCount() = 10
+    override fun areContentsTheSame(oldItem: Lot, newItem: Lot): Boolean {
+        return oldItem.id == newItem.id
+    }
 }

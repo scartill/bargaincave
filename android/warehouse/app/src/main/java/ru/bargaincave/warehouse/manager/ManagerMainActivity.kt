@@ -3,7 +3,9 @@ package ru.bargaincave.warehouse.manager
 import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
+import android.os.Looper
 import android.util.Log
+import android.view.View
 import com.amplifyframework.AmplifyException
 import com.amplifyframework.api.aws.AWSApiPlugin
 import com.amplifyframework.core.Amplify
@@ -17,6 +19,7 @@ import androidx.recyclerview.widget.LinearLayoutManager
 
 class ManagerMainActivity : AppCompatActivity() {
     private lateinit var b: ActivityManagerMainBinding
+    private var lots: MutableList<Lot> = mutableListOf()
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -28,43 +31,41 @@ class ManagerMainActivity : AppCompatActivity() {
         val linearLayoutManager = LinearLayoutManager(this)
         linearLayoutManager.orientation = LinearLayoutManager.VERTICAL
         b.lotList.layoutManager = linearLayoutManager
-        b.lotList.adapter = LotListAdapter()
+
+        val lla = LotListAdapter()
+        b.lotList.adapter = lla
+        lla.submitList(lots)
+
+        b.lotsLoadProgress.visibility = View.VISIBLE
+        Amplify.DataStore.query(
+            Lot::class.java,
+            {
+                val new_lots = it.asSequence().toMutableList()
+                Log.i("Cave", "Lots collected")
+
+                runOnUiThread {
+                    lots = new_lots
+                    lla.submitList(lots)
+                    b.lotsLoadProgress.visibility = View.GONE
+                }
+
+             },
+            { error ->
+                Log.e("Cave", "Could not query DataStore", error)
+                b.managerMainError.text = error.message
+                b.lotsLoadProgress.visibility = View.GONE
+            }
+        )
 
         /*
-        b.btnLoad.setOnClickListener {
-            Amplify.DataStore.query(
-                Lot::class.java,
-                Where.matches(
-                  Lot.FRUIT.eq(Fruit.MANGO)
-                ),
-                { lots ->
-                    while (lots.hasNext()) {
-                        val lot = lots.next()
-                        val comment: String? = lot.comment
-
-                        Log.i("Cave", "==== Lot ====")
-                        Log.i("Cave", "Fruit: ${lot.fruit}")
-                        Log.i("Cave", "Weight: ${lot.weightKg}")
-
-                        if (comment != null) {
-                            Log.i("Cave", "Comment: $comment")
-                        }
-                    }
-                },
-                { failure -> Log.e("Cave", "Could not query DataStore", failure) }
-            )
-        }
-         */
-
-        /*
-                // TODO: move to after-login code
-                Amplify.DataStore.observe(
-                    Lot::class.java,
-                    { Log.i("Cave", "Observation began.") },
-                    { Log.i("Cave", it.item().toString()) },
-                    { Log.e("Cave", "Observation failed.", it) },
-                    { Log.i("Cave", "Observation complete.") }
-                )
+        // TODO: move to after-login code
+        Amplify.DataStore.observe(
+            Lot::class.java,
+            { Log.i("Cave", "Observation began.") },
+            { Log.i("Cave", it.item().toString()) },
+            { Log.e("Cave", "Observation failed.", it) },
+            { Log.i("Cave", "Observation complete.") }
+        )
         */
     }
 }
