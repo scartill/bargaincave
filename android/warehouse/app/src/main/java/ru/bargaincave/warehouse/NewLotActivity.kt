@@ -10,12 +10,10 @@ import android.view.View
 import android.widget.ArrayAdapter
 import android.widget.Spinner
 import android.widget.Toast
-import androidx.annotation.BoolRes
 import androidx.core.content.FileProvider
 import androidx.lifecycle.coroutineScope
 import com.amplifyframework.core.Amplify
 import com.amplifyframework.datastore.generated.model.Lot
-import kotlinx.coroutines.delay
 import kotlinx.coroutines.launch
 import ru.bargaincave.warehouse.databinding.ActivityNewLotBinding
 import java.io.File
@@ -123,7 +121,7 @@ class NewLotActivity : AppCompatActivity() {
         b.progressBar.visibility = if(enabled) View.GONE else View.VISIBLE
     }
 
-    private suspend fun asyncSubmit(fruit: String, currentPhotoPath: String, weight: Float, comment: String) {
+    private fun asyncSubmit(fruit: String, currentPhotoPath: String, weight: Float, comment: String) {
         Log.i("cave", "submitting a new lot")
 
         val photoFile = File(currentPhotoPath)
