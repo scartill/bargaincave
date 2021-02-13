@@ -19,7 +19,8 @@ import androidx.recyclerview.widget.LinearLayoutManager
 
 class ManagerMainActivity : AppCompatActivity() {
     private lateinit var b: ActivityManagerMainBinding
-    private var lots: MutableList<Lot> = mutableListOf()
+    private val lla: LotListAdapter = LotListAdapter()
+    private val lots: MutableList<Lot> = mutableListOf()
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -31,29 +32,32 @@ class ManagerMainActivity : AppCompatActivity() {
         val linearLayoutManager = LinearLayoutManager(this)
         linearLayoutManager.orientation = LinearLayoutManager.VERTICAL
         b.lotList.layoutManager = linearLayoutManager
-
-        val lla = LotListAdapter()
         b.lotList.adapter = lla
-        lla.submitList(lots)
 
         b.lotsLoadProgress.visibility = View.VISIBLE
         Amplify.DataStore.query(
             Lot::class.java,
             {
-                val new_lots = it.asSequence().toMutableList()
-                Log.i("Cave", "Lots collected")
+                lots.clear()
+                while (it.hasNext()) {
+                    val lot = it.next()
+                    Log.i("Cave", "Lot $lot")
+                    lots.add(lot)
+                }
 
                 runOnUiThread {
-                    lots = new_lots
+                    Log.i("Cave", "Lots collected ${lots.size}")
                     lla.submitList(lots)
                     b.lotsLoadProgress.visibility = View.GONE
                 }
-
-             },
+            },
             { error ->
                 Log.e("Cave", "Could not query DataStore", error)
-                b.managerMainError.text = error.message
-                b.lotsLoadProgress.visibility = View.GONE
+
+                runOnUiThread {
+                    b.managerMainError.text = error.message
+                    b.lotsLoadProgress.visibility = View.GONE
+                }
             }
         )
 
