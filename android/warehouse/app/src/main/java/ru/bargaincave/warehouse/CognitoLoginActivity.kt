@@ -19,7 +19,7 @@ import com.amplifyframework.core.Amplify
 import com.amplifyframework.datastore.AWSDataStorePlugin
 import com.amplifyframework.storage.s3.AWSS3StoragePlugin
 import ru.bargaincave.warehouse.databinding.ActivityCognitoLoginBinding
-import java.util.jar.Manifest
+import ru.bargaincave.warehouse.manager.ManagerMainActivity
 
 class CognitoLoginActivity : AppCompatActivity() {
 
@@ -66,17 +66,6 @@ class CognitoLoginActivity : AppCompatActivity() {
                     }
                 }
             )
-
-    /*
-            // TODO: move to after-login code
-            Amplify.DataStore.observe(
-                Lot::class.java,
-                { Log.i("Cave", "Observation began.") },
-                { Log.i("Cave", it.item().toString()) },
-                { Log.e("Cave", "Observation failed.", it) },
-                { Log.i("Cave", "Observation complete.") }
-            )
-    */
         } catch (failure: AmplifyException) {
             Log.e("Cave", "Could not initialize Amplify", failure)
         }
@@ -203,7 +192,8 @@ class CognitoLoginActivity : AppCompatActivity() {
             b.login.isEnabled = !signedIn
             b.logout.isEnabled = signedIn
             b.sorter.isEnabled = signedIn
-            b.manager.isEnabled = false
+            // TODO: check manager's permissions
+            b.manager.isEnabled = signedIn
         }
     }
 

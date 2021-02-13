@@ -1,4 +1,4 @@
-package ru.bargaincave.warehouse
+package ru.bargaincave.warehouse.manager
 
 import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
@@ -10,6 +10,10 @@ import com.amplifyframework.core.Amplify
 import com.amplifyframework.datastore.AWSDataStorePlugin
 import com.amplifyframework.datastore.generated.model.Lot
 import ru.bargaincave.warehouse.databinding.ActivityManagerMainBinding
+import androidx.recyclerview.widget.LinearLayoutManager
+
+
+
 
 class ManagerMainActivity : AppCompatActivity() {
     private lateinit var b: ActivityManagerMainBinding
@@ -20,6 +24,11 @@ class ManagerMainActivity : AppCompatActivity() {
         b = ActivityManagerMainBinding.inflate(layoutInflater)
         val view = b.root
         setContentView(view)
+
+        val linearLayoutManager = LinearLayoutManager(this)
+        linearLayoutManager.orientation = LinearLayoutManager.VERTICAL
+        b.lotList.layoutManager = linearLayoutManager
+        b.lotList.adapter = LotListAdapter()
 
         /*
         b.btnLoad.setOnClickListener {
@@ -46,5 +55,16 @@ class ManagerMainActivity : AppCompatActivity() {
             )
         }
          */
+
+        /*
+                // TODO: move to after-login code
+                Amplify.DataStore.observe(
+                    Lot::class.java,
+                    { Log.i("Cave", "Observation began.") },
+                    { Log.i("Cave", it.item().toString()) },
+                    { Log.e("Cave", "Observation failed.", it) },
+                    { Log.i("Cave", "Observation complete.") }
+                )
+        */
     }
 }

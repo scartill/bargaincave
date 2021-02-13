@@ -41,7 +41,7 @@
 
         <activity android:name=".SorterMainActivity" />
         <activity android:name=".NewLotActivity" />
-        <activity android:name=".ManagerMainActivity" />
+        <activity android:name=".manager.ManagerMainActivity" />
     </application>
 
 </manifest>
