@@ -1,26 +1,24 @@
 package ru.bargaincave.warehouse
 
-import android.content.ActivityNotFoundException
-import android.content.Context
 import android.content.Intent
-import android.graphics.Bitmap
 import android.graphics.BitmapFactory
-import android.net.Uri
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
-import android.os.Environment
 import android.provider.MediaStore
 import android.util.Log
+import android.view.View
 import android.widget.ArrayAdapter
 import android.widget.Spinner
 import android.widget.Toast
+import androidx.annotation.BoolRes
 import androidx.core.content.FileProvider
+import androidx.lifecycle.coroutineScope
 import com.amplifyframework.core.Amplify
-import com.amplifyframework.datastore.generated.model.Fruit
 import com.amplifyframework.datastore.generated.model.Lot
+import kotlinx.coroutines.delay
+import kotlinx.coroutines.launch
 import ru.bargaincave.warehouse.databinding.ActivityNewLotBinding
 import java.io.File
-import java.text.SimpleDateFormat
 import java.util.*
 
 const val REQUEST_IMAGE_CAPTURE = 100
@@ -40,6 +38,7 @@ class NewLotActivity : AppCompatActivity() {
         setContentView(view)
 
         b.submit.isEnabled = false
+        b.progressBar.visibility = View.GONE
 
         val spinner: Spinner = b.spinFruit
         ArrayAdapter.createFromResource(
@@ -74,69 +73,97 @@ class NewLotActivity : AppCompatActivity() {
         }
 
         b.submit.setOnClickListener {
-            try {
-                Log.i("Cave", "Submitting a new lot")
-                val fruit = b.spinFruit.selectedItem.toString()
+            setGUI(false)
 
-                if (currentPhotoPath == "") {
-                    Log.i("Cave", "Unable: photo is required")
-                    b.photo.requestFocus()
-                    return@setOnClickListener
-                }
+            val fruit = b.spinFruit.selectedItem.toString()
 
-                val weight = b.weight.text.toString().toFloatOrNull()
+            if (currentPhotoPath == "") {
+                Log.i("cave", "unable: photo is required")
+                b.photo.requestFocus()
+                return@setOnClickListener
+            }
 
-                if (weight == null) {
-                    Log.i("Cave", "Unable: weight is required")
-                    b.weight.requestFocus()
-                    return@setOnClickListener
-                }
+            val weight = b.weight.text.toString().toFloatOrNull()
 
-                val comment = b.comment.text.toString()
+            if (weight == null) {
+                Log.i("Cave", "Unable: weight is required")
+                b.weight.requestFocus()
+                return@setOnClickListener
+            }
 
-                val photoFile = File(currentPhotoPath)
-                val s3key = photoFile.name
-                Amplify.Storage.uploadFile(
-                    s3key,
-                    photoFile,
-                    { result ->
-                        Log.i("Cave", "Successfully uploaded: " + result.getKey())
+            val comment = b.comment.text.toString()
+            Log.i("cave", "Launching async submit")
 
-                        val item: Lot = Lot.builder()
-                            .fruit(fruit)
-                            .photo(s3key)
-                            .weightKg(weight)
-                            .comment(comment)
-                            .build()
-
-                        Amplify.DataStore.save(
-                            item,
-                            { success -> Log.i("Cave", "Saved item: " + success.item().photo.toString()) },
-                            { error -> Log.e("Cave", "Could not save item to DataStore", error) }
-                        )
-
-                        runOnUiThread {
-                            Toast.makeText(applicationContext, getString(R.string.submit_ok), Toast.LENGTH_LONG).show();
+            this.lifecycle.coroutineScope.launch {
+                asyncSubmit(fruit, currentPhotoPath, weight, comment)
+            }.also {
+                it.invokeOnCompletion { error ->
+                    runOnUiThread {
+                        if (error == null) {
+                            Log.i("cave", "Submit successful")
+                            Toast.makeText(applicationContext, getString(R.string.submit_ok), Toast.LENGTH_LONG).show()
                             finish()
+                        } else {
+                            b.error.text = error.message
+                            Log.e("cave", "unable to submit", error)
+                            setGUI(true)
                         }
-                    },
-                    {
-                        error -> Log.e("Cave", "Upload failed", error)
                     }
-                )
-            } catch (error: Exception) {
-                b.error.text = error.message
-                Log.e("Cave", "Unable to submit", error)
+                }
             }
         }
     }
 
+    private fun setGUI(enabled: Boolean) {
+        b.submit.isEnabled = enabled
+        b.spinFruit.isEnabled = enabled
+        b.photo.isEnabled = enabled
+        b.weight.isEnabled = enabled
+        b.comment.isEnabled = enabled
+        b.progressBar.visibility = if(enabled) View.GONE else View.VISIBLE
+    }
+
+    private suspend fun asyncSubmit(fruit: String, currentPhotoPath: String, weight: Float, comment: String) {
+        Log.i("cave", "submitting a new lot")
+
+        val photoFile = File(currentPhotoPath)
+        val s3key = photoFile.name
+        Amplify.Storage.uploadFile(
+            s3key,
+            photoFile,
+            { result ->
+                Log.i("Cave", "Successfully uploaded: " + result.key)
+
+                val item: Lot = Lot.builder()
+                    .fruit(fruit)
+                    .photo(s3key)
+                    .weightKg(weight)
+                    .comment(comment)
+                    .build()
+
+                Amplify.DataStore.save(
+                    item,
+                    { success ->
+                        Log.i("Cave", "Saved item: " + success.item().photo.toString())
+                    },
+                    { error ->
+                        Log.e("Cave", "Could not save item to DataStore", error)
+                        throw error
+                    }
+                )
+            },
+            { error ->
+                Log.e("Cave", "Upload failed", error)
+                throw error
+            }
+        )
+    }
+
     override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {
         try {
-            Log.i("Cave", "Rendering a preview")
             super.onActivityResult(requestCode, resultCode, data)
             if (requestCode == REQUEST_IMAGE_CAPTURE && resultCode == RESULT_OK) {
-                val file = File(currentPhotoPath)
+                Log.i("Cave", "Rendering a preview")
                 BitmapFactory.decodeFile(currentPhotoPath)?.also {
                     b.imageView.setImageBitmap(it)
                     b.submit.isEnabled = true
