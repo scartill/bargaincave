@@ -5,9 +5,6 @@ BOT_API_KEY = "1604602953:AAFoaCe-CCSqbnX61zVcVIbg-I4bGgFAX8k"
 CHAT_ID = "-1001202477347"
 
 def handler(event, context):
-    print('received event:')
-    print(event)
-
     body = json.loads(event['body'])
     content = body['bot_message_contents']
 
