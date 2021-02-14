@@ -51,6 +51,7 @@ class CognitoLoginActivity : AppCompatActivity() {
             Amplify.addPlugin(AWSApiPlugin())
             Amplify.addPlugin(AWSCognitoAuthPlugin())
             Amplify.addPlugin(AWSS3StoragePlugin())
+            Amplify.addPlugin(AWSApiPlugin())
             Amplify.configure(applicationContext)
             Log.i("Cave", "Initialized Amplify")
 
@@ -177,7 +178,7 @@ class CognitoLoginActivity : AppCompatActivity() {
     }
 
     private fun showCamToast() {
-        Toast.makeText(applicationContext, getString(R.string.sorter_cam_rationale), Toast.LENGTH_LONG).show();
+        Toast.makeText(applicationContext, getString(R.string.sorter_cam_rationale), Toast.LENGTH_LONG).show()
     }
 
     private fun textChangeListener() {

@@ -1,0 +1,42 @@
+{
+    "paths": [
+        {
+            "name": "/telegrampublish",
+            "lambdaFunction": "telegrampublish",
+            "privacy": {
+                "private": true,
+                "auth": [
+                    "/POST",
+                    "/GET",
+                    "/PUT",
+                    "/PATCH",
+                    "/DELETE"
+                ]
+            },
+            "policyResourceName": "/telegrampublish"
+        }
+    ],
+    "resourceName": "warehouseapi",
+    "apiName": "warehouseapi",
+    "functionArns": [
+        {
+            "lambdaFunction": "telegrampublish"
+        }
+    ],
+    "privacy": {
+        "auth": 1,
+        "unauth": 0,
+        "authRoleName": "amplify-warehouse-staging-142503-authRole",
+        "unAuthRoleName": "amplify-warehouse-staging-142503-unauthRole"
+    },
+    "dependsOn": [
+        {
+            "category": "function",
+            "resourceName": "telegrampublish",
+            "attributes": [
+                "Name",
+                "Arn"
+            ]
+        }
+    ]
+}

@@ -1,3 +1,4 @@
+import json
 import requests
 
 BOT_API_KEY = "1604602953:AAFoaCe-CCSqbnX61zVcVIbg-I4bGgFAX8k"
@@ -7,7 +8,8 @@ def handler(event, context):
     print('received event:')
     print(event)
 
-    content = event['bot_message_contents']
+    body = json.loads(event['body'])
+    content = body['bot_message_contents']
 
     print('built content:')
     print(content)
@@ -20,7 +22,7 @@ def handler(event, context):
     print(response)
 
     return_code = 503
-    if (response['ok']):
+    if response['ok']:
         return_code = 200
 
     return {

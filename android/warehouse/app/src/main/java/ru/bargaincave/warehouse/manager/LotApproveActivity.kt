@@ -6,19 +6,20 @@ import android.util.Log
 import android.view.View
 import androidx.appcompat.app.AppCompatActivity
 import androidx.core.widget.addTextChangedListener
+import com.amplifyframework.api.rest.RestOptions
 import com.amplifyframework.core.Amplify
 import com.amplifyframework.core.model.query.Where
 import com.amplifyframework.datastore.generated.model.Lot
-import com.amplifyframework.storage.StorageAccessLevel
-import com.amplifyframework.storage.options.StorageDownloadFileOptions
 import ru.bargaincave.warehouse.R
 import ru.bargaincave.warehouse.databinding.ActivityLotApproveBinding
 import java.io.File
 
 class LotApproveActivity : AppCompatActivity() {
     private lateinit var b: ActivityLotApproveBinding
+    private var lot: Lot? = null
     private var loaded : Boolean = false
     private var priceValid : Boolean = false
+    private var publishing: Boolean = false
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -41,42 +42,44 @@ class LotApproveActivity : AppCompatActivity() {
             Where.matches(Lot.ID.eq(lotId)),
             {
                 if (it.hasNext()) {
-                    val lot = it.next()
+                    lot = it.next()
                     Log.i("Cave", "Loaded $lot")
 
                     runOnUiThread {
                         val na = getString(R.string.unknown)
-                        b.laFruit.text = lot.fruit ?: na
-                        b.laWeight.text = lot.weightKg?.toString() ?: na
-                        b.laComment.text = lot.comment ?: na
+                        lot?.let { lot ->
+                            b.laFruit.text = lot.fruit ?: na
+                            b.laWeight.text = lot.weightKg?.toString() ?: na
+                            b.laComment.text = lot.comment ?: na
 
-                        lot.photo?.also {
-                            val outputDir = File(applicationContext.cacheDir, "/image")
-                            outputDir.mkdir()
-                            val photoFile = File.createTempFile("lot_photo_", ".jpg", outputDir)
-                            photoFile.deleteOnExit()
+                            lot.photo?.also {
+                                val outputDir = File(applicationContext.cacheDir, "/image")
+                                outputDir.mkdir()
+                                val photoFile = File.createTempFile("lot_photo_", ".jpg", outputDir)
+                                photoFile.deleteOnExit()
 
-                            Amplify.Storage.downloadFile(
-                                lot.photo,
-                                photoFile,
-                                {
-                                    Log.i("Cave", "Photo download complete")
+                                Amplify.Storage.downloadFile(
+                                    lot.photo,
+                                    photoFile,
+                                    {
+                                        Log.i("Cave", "Photo download complete")
 
-                                    BitmapFactory.decodeFile(photoFile.path)?.also {
-                                        b.laPhoto.setImageBitmap(it)
+                                        BitmapFactory.decodeFile(photoFile.path)?.also { bitmap ->
+                                            b.laPhoto.setImageBitmap(bitmap)
+                                        }
+
+                                        loaded = true
+                                        setGUI()
+                                    },
+                                    { error ->
+                                        Log.e("Cave", "Photo Download failed", error)
+                                        runOnUiThread {
+                                            b.laError.text = error.message
+                                            b.laProgress.visibility = View.GONE
+                                        }
                                     }
-
-                                    loaded = true
-                                    setGUI()
-                                },
-                                { error ->
-                                    Log.e("Cave", "Photo Download failed", error)
-                                    runOnUiThread {
-                                        b.laError.text = error.message
-                                        b.laProgress.visibility = View.GONE
-                                    }
-                                }
-                            )
+                                )
+                            }
                         }
                     }
                 }
@@ -98,14 +101,47 @@ class LotApproveActivity : AppCompatActivity() {
         )
 
         b.publish.setOnClickListener {
-            
+            lot?.run {
+                publishing = true
+                setGUI()
+
+                val price = b.price.text
+                val message = "Heads up! Selling $weightKg kg of $fruit for $price"
+                val payload = "{ \"bot_message_contents\": \"$message\" }"
+                Log.i("Cave", "Telegraphing $payload")
+
+                val options = RestOptions.builder()
+                    .addPath("/telegrampublish")
+                    .addBody(payload.toByteArray())
+                    .build()
+
+                Amplify.API.post(options,
+                    {
+                        Log.i("Cave", "POST succeeded")
+                        runOnUiThread {
+                            publishing = false
+                            setGUI()
+                        }
+                    },
+                    { error ->
+                        Log.e("Cave", "Could execute API request", error)
+                        runOnUiThread {
+                            b.laError.text = error.message
+                            publishing = false
+                            setGUI()
+                        }
+                    }
+                )
+            }
         }
     }
 
     private fun setGUI() {
-        b.publish.isEnabled = loaded && priceValid
+        b.publish.isEnabled = loaded && priceValid && !publishing
         b.delete.isEnabled = false
         b.price.isEnabled = loaded
-        b.laProgress.visibility = if(loaded) View.GONE else View.VISIBLE
+
+        val inProgress = !loaded || publishing
+        b.laProgress.visibility = if(inProgress) View.VISIBLE else View.GONE
     }
 }
