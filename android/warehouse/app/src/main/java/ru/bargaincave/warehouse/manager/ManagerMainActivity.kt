@@ -61,6 +61,7 @@ class ManagerMainActivity : AppCompatActivity() {
             }
         )
 
+        /*
         Amplify.DataStore.observe(
             Lot::class.java,
             {
@@ -78,15 +79,17 @@ class ManagerMainActivity : AppCompatActivity() {
                             lots.add(lot)
                         }
                         DataStoreItemChange.Type.UPDATE -> {
-                            lots.firstOrNull { e -> e.id == lot.id }?.let { found ->
-                                Log.d("Cave", "Updating item $found")
-                                lots[lots.indexOf(found)] = lot
+                            lots.indexOfFirst { e -> e.id == lot.id }.let { inx ->
+                                Log.d("Cave", "Updating item $inx")
+                                lots[inx] = lot
                             }
                         }
                         DataStoreItemChange.Type.DELETE -> {
-                            lots.firstOrNull { e -> e.id == lot.id }?.let { found ->
-                                Log.d("Cave", "Deleting item $found")
-                                lots.remove(found)
+                            lots.indexOfFirst { e -> e.id == lot.id }.let { inx ->
+                                if (inx != -1) {
+                                    Log.d("Cave", "Deleting item $inx")
+                                    lots.removeAt(inx)
+                                }
                             }
                         }
                     }
@@ -107,5 +110,7 @@ class ManagerMainActivity : AppCompatActivity() {
                 Log.i("Cave", "Observation complete.")
             }
         )
+
+         */
     }
 }

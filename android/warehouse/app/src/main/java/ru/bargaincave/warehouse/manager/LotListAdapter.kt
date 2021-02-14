@@ -8,25 +8,13 @@ import androidx.recyclerview.widget.RecyclerView
 import com.amplifyframework.datastore.generated.model.Lot
 import ru.bargaincave.warehouse.databinding.ItemLotBinding
 
-class ViewHolder(binding: ItemLotBinding): RecyclerView.ViewHolder(binding.root) {
-    val b: ItemLotBinding = binding
-
-    fun bind(lot: Lot) {
-        // TODO: fruit name is not localized
-        b.itemFruit.text = lot.fruit
-        b.itemWeight.text = lot.weightKg.toString()
-        b.itemComment.text = if(lot.comment.isNotEmpty()) lot.comment else "------"
-    }
-}
-
-class LotListAdapter: ListAdapter<Lot, ViewHolder>(LotDiffCallback) {
+class LotListAdapter: ListAdapter<Lot, LotViewHolder>(LotDiffCallback) {
     // Create new views (invoked by the layout manager)
-    override fun onCreateViewHolder(viewGroup: ViewGroup, viewType: Int): ViewHolder {
-        val b = ItemLotBinding.inflate(LayoutInflater.from(viewGroup.context))
-        return ViewHolder(b)
+    override fun onCreateViewHolder(viewGroup: ViewGroup, viewType: Int): LotViewHolder {
+        return LotViewHolder.create(viewGroup)
     }
 
-    override fun onBindViewHolder(viewHolder: ViewHolder, position: Int) {
+    override fun onBindViewHolder(viewHolder: LotViewHolder, position: Int) {
         viewHolder.bind(getItem(position))
     }
 }
