@@ -14,6 +14,12 @@
     "categories": {
       "auth": {
         "warehouse40c048f0": {}
+      },
+      "function": {
+        "telegrampublish": {
+          "deploymentBucketName": "amplify-warehouse-staging-142503-deployment",
+          "s3Key": "amplify-builds/telegrampublish-335665726a6964494466-build.zip"
+        }
       }
     }
   }

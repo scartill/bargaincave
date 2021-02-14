@@ -36,7 +36,7 @@
     }
   },
   "function": {
-    "warehouse_publish": {
+    "telegrampublish": {
       "build": true,
       "providerPlugin": "awscloudformation",
       "service": "Lambda"
