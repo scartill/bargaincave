@@ -21,6 +21,7 @@
     <string name="submit">Submit</string>
     <string name="weight">Weight</string>
     <string name="comment">Comment</string>
+    <string name="sorter_comment">Sorter\'s comment: </string>
     <string name="kg">kg</string>
     <string name="enter_lot_s_weight">Enter this lot\'s weight in kilos</string>
     <string name="optional_comment">Optional comment</string>
@@ -41,4 +42,11 @@
     <string name="lorem">Lorem</string>
     <string name="zero_zero">00</string>
     <string name="active_lots">Active Lots</string>
+    <string name="choose_price">Choose a price for this lot"</string>
+    <string name="price">Price</string>
+    <string name="price_hint">Enter lot\'s price</string>
+    <string name="publish">Publish</string>
+    <string name="delete">Delete</string>
+    <string name="unable_to_load">Unable to load</string>
+    <string name="unknown">Unknown</string>
 </resources>

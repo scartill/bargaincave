@@ -1,8 +1,8 @@
-package ru.bargaincave.warehouse
+package ru.bargaincave.warehouse.sorter
 
 import android.content.Intent
-import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
+import androidx.appcompat.app.AppCompatActivity
 import ru.bargaincave.warehouse.databinding.ActivitySorterMainBinding
 
 class SorterMainActivity : AppCompatActivity() {

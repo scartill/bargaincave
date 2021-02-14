@@ -1,4 +1,4 @@
-package ru.bargaincave.warehouse
+package ru.bargaincave.warehouse.sorter
 
 import android.content.Intent
 import android.graphics.BitmapFactory
@@ -14,7 +14,10 @@ import androidx.core.content.FileProvider
 import androidx.lifecycle.coroutineScope
 import com.amplifyframework.core.Amplify
 import com.amplifyframework.datastore.generated.model.Lot
+import com.amplifyframework.storage.StorageAccessLevel
+import com.amplifyframework.storage.options.StorageUploadFileOptions
 import kotlinx.coroutines.launch
+import ru.bargaincave.warehouse.R
 import ru.bargaincave.warehouse.databinding.ActivityNewLotBinding
 import java.io.File
 import java.util.*
@@ -126,9 +129,15 @@ class NewLotActivity : AppCompatActivity() {
 
         val photoFile = File(currentPhotoPath)
         val s3key = photoFile.name
+
+        val options = StorageUploadFileOptions.builder()
+            .accessLevel(StorageAccessLevel.PUBLIC)
+            .build()
+
         Amplify.Storage.uploadFile(
             s3key,
             photoFile,
+            options,
             { result ->
                 Log.i("Cave", "Successfully uploaded: " + result.key)
 

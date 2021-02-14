@@ -3,13 +3,9 @@ package ru.bargaincave.warehouse.manager
 import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
-import android.os.Looper
 import android.util.Log
 import android.view.View
-import com.amplifyframework.AmplifyException
-import com.amplifyframework.api.aws.AWSApiPlugin
 import com.amplifyframework.core.Amplify
-import com.amplifyframework.datastore.AWSDataStorePlugin
 import com.amplifyframework.datastore.generated.model.Lot
 import ru.bargaincave.warehouse.databinding.ActivityManagerMainBinding
 import androidx.recyclerview.widget.LinearLayoutManager
@@ -17,7 +13,7 @@ import com.amplifyframework.datastore.DataStoreItemChange
 
 class ManagerMainActivity : AppCompatActivity() {
     private lateinit var b: ActivityManagerMainBinding
-    private val lla: LotListAdapter = LotListAdapter()
+    private val lla: LotListAdapter = LotListAdapter(::onLotClick)
     private val lots: MutableList<Lot> = mutableListOf()
 
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -108,5 +104,11 @@ class ManagerMainActivity : AppCompatActivity() {
                 Log.i("Cave", "Observation complete.")
             }
         )
+    }
+
+    private fun onLotClick(lot: Lot) {
+        val intent = Intent(this, LotApproveActivity::class.java)
+        intent.putExtra("lot_id", lot.id)
+        startActivity(intent)
     }
 }

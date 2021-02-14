@@ -1,17 +1,14 @@
 package ru.bargaincave.warehouse.manager
 
-import android.view.LayoutInflater
 import android.view.ViewGroup
 import androidx.recyclerview.widget.DiffUtil
 import androidx.recyclerview.widget.ListAdapter
-import androidx.recyclerview.widget.RecyclerView
 import com.amplifyframework.datastore.generated.model.Lot
-import ru.bargaincave.warehouse.databinding.ItemLotBinding
 
-class LotListAdapter: ListAdapter<Lot, LotViewHolder>(LotDiffCallback) {
+class LotListAdapter(private val onClick: (Lot) -> Unit): ListAdapter<Lot, LotViewHolder>(LotDiffCallback) {
     // Create new views (invoked by the layout manager)
     override fun onCreateViewHolder(viewGroup: ViewGroup, viewType: Int): LotViewHolder {
-        return LotViewHolder.create(viewGroup)
+        return LotViewHolder.create(viewGroup, onClick)
     }
 
     override fun onBindViewHolder(viewHolder: LotViewHolder, position: Int) {
