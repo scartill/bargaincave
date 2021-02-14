@@ -21,10 +21,12 @@ class LotListAdapter: ListAdapter<Lot, LotViewHolder>(LotDiffCallback) {
 
 object LotDiffCallback: DiffUtil.ItemCallback<Lot>() {
     override fun areItemsTheSame(oldItem: Lot, newItem: Lot): Boolean {
-        return oldItem == newItem
+        return oldItem.id == newItem.id
     }
 
     override fun areContentsTheSame(oldItem: Lot, newItem: Lot): Boolean {
-        return oldItem.id == newItem.id
+        return oldItem.id == newItem.id &&
+                oldItem.comment == newItem.comment
+
     }
 }

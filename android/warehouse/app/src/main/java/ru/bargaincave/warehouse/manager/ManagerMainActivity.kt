@@ -81,30 +81,21 @@ class ManagerMainActivity : AppCompatActivity() {
                             lots.add(lot)
                         }
                         DataStoreItemChange.Type.UPDATE -> {
-                            /*
                             lots.indexOfFirst { e -> e.id == lot.id }.let { inx ->
                                 Log.d("Cave", "Updating item $inx")
                                 lots[inx] = lot
                             }
-
-                             */
                         }
                         DataStoreItemChange.Type.DELETE -> {
-                            /*
-                            lots.indexOfFirst { e -> e.id == lot.id }.let { inx ->
-                                if (inx != -1) {
-                                    Log.d("Cave", "Deleting item $inx")
-                                    lots.removeAt(inx)
-                                }
-                            }
-
-                             */
+                            Log.d("Cave", "Deleting item $lot")
+                            lots.removeIf { e -> e.id == lot.id }
                         }
                     }
                 }
 
                 runOnUiThread {
                     lla.submitList(lots)
+                    lla.notifyDataSetChanged()
                 }
             },
             { error ->
