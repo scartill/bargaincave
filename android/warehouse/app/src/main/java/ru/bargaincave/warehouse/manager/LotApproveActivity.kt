@@ -31,6 +31,7 @@ class LotApproveActivity : AppCompatActivity() {
 
         b.price.addTextChangedListener {
             priceValid = !it.isNullOrBlank()
+            setGUI()
         }
 
         val lotId = intent.getStringExtra("lot_id")
@@ -95,11 +96,15 @@ class LotApproveActivity : AppCompatActivity() {
                 }
             }
         )
+
+        b.publish.setOnClickListener {
+            
+        }
     }
 
     private fun setGUI() {
         b.publish.isEnabled = loaded && priceValid
-        b.delete.isEnabled = loaded
+        b.delete.isEnabled = false
         b.price.isEnabled = loaded
         b.laProgress.visibility = if(loaded) View.GONE else View.VISIBLE
     }
