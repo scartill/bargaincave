@@ -13,9 +13,7 @@ import com.amplifyframework.datastore.AWSDataStorePlugin
 import com.amplifyframework.datastore.generated.model.Lot
 import ru.bargaincave.warehouse.databinding.ActivityManagerMainBinding
 import androidx.recyclerview.widget.LinearLayoutManager
-
-
-
+import com.amplifyframework.datastore.DataStoreItemChange
 
 class ManagerMainActivity : AppCompatActivity() {
     private lateinit var b: ActivityManagerMainBinding
@@ -38,11 +36,13 @@ class ManagerMainActivity : AppCompatActivity() {
         Amplify.DataStore.query(
             Lot::class.java,
             {
-                lots.clear()
-                while (it.hasNext()) {
-                    val lot = it.next()
-                    Log.i("Cave", "Lot $lot")
-                    lots.add(lot)
+                synchronized(lots) {
+                    lots.clear()
+                    while (it.hasNext()) {
+                        val lot = it.next()
+                        Log.i("Cave", "Lot $lot")
+                        lots.add(lot)
+                    }
                 }
 
                 runOnUiThread {
@@ -61,15 +61,51 @@ class ManagerMainActivity : AppCompatActivity() {
             }
         )
 
-        /*
-        // TODO: move to after-login code
         Amplify.DataStore.observe(
             Lot::class.java,
-            { Log.i("Cave", "Observation began.") },
-            { Log.i("Cave", it.item().toString()) },
-            { Log.e("Cave", "Observation failed.", it) },
-            { Log.i("Cave", "Observation complete.") }
+            {
+                Log.i("Cave", "Observation began.")
+            },
+            { change ->
+                val lot = change.item()
+                val type = change.type()
+                Log.i("Cave", "Item changed $lot $type")
+
+                synchronized(lots) {
+                    when(type) {
+                        DataStoreItemChange.Type.CREATE -> {
+                            Log.d("Cave", "Creating item")
+                            lots.add(lot)
+                        }
+                        DataStoreItemChange.Type.UPDATE -> {
+                            lots.firstOrNull { e -> e.id == lot.id }?.let { found ->
+                                Log.d("Cave", "Updating item $found")
+                                lots[lots.indexOf(found)] = lot
+                            }
+                        }
+                        DataStoreItemChange.Type.DELETE -> {
+                            lots.firstOrNull { e -> e.id == lot.id }?.let { found ->
+                                Log.d("Cave", "Deleting item $found")
+                                lots.remove(found)
+                            }
+                        }
+                    }
+                }
+
+                runOnUiThread {
+                    lla.submitList(lots)
+                    lla.notifyDataSetChanged()
+                }
+            },
+            { error ->
+                Log.e("Cave", "Observation failed.", error)
+                runOnUiThread {
+                    b.managerMainError.text = error.message
+                }
+            },
+            {
+                Log.i("Cave", "Observation complete.")
+            }
         )
-        */
     }
 }
