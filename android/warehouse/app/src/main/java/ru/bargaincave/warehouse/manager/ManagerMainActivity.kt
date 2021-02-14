@@ -49,6 +49,7 @@ class ManagerMainActivity : AppCompatActivity() {
                     Log.i("Cave", "Lots collected ${lots.size}")
                     lla.submitList(lots)
                     b.lotsLoadProgress.visibility = View.GONE
+                    startObserve()
                 }
             },
             { error ->
@@ -60,8 +61,9 @@ class ManagerMainActivity : AppCompatActivity() {
                 }
             }
         )
+    }
 
-        /*
+    private fun startObserve() {
         Amplify.DataStore.observe(
             Lot::class.java,
             {
@@ -79,25 +81,30 @@ class ManagerMainActivity : AppCompatActivity() {
                             lots.add(lot)
                         }
                         DataStoreItemChange.Type.UPDATE -> {
+                            /*
                             lots.indexOfFirst { e -> e.id == lot.id }.let { inx ->
                                 Log.d("Cave", "Updating item $inx")
                                 lots[inx] = lot
                             }
+
+                             */
                         }
                         DataStoreItemChange.Type.DELETE -> {
+                            /*
                             lots.indexOfFirst { e -> e.id == lot.id }.let { inx ->
                                 if (inx != -1) {
                                     Log.d("Cave", "Deleting item $inx")
                                     lots.removeAt(inx)
                                 }
                             }
+
+                             */
                         }
                     }
                 }
 
                 runOnUiThread {
                     lla.submitList(lots)
-                    lla.notifyDataSetChanged()
                 }
             },
             { error ->
@@ -110,7 +117,5 @@ class ManagerMainActivity : AppCompatActivity() {
                 Log.i("Cave", "Observation complete.")
             }
         )
-
-         */
     }
 }
