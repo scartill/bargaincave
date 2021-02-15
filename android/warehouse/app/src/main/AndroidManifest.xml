@@ -22,8 +22,7 @@
         <activity android:name=".manager.LotApproveActivity" />
         <activity android:name=".NewPasswordActivity" />
         <activity
-            android:name=".CognitoLoginActivity"
-            android:label="@string/title_activity_login">
+            android:name=".CognitoLoginActivity">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 

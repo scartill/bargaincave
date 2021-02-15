@@ -115,6 +115,7 @@ class CognitoLoginActivity : AppCompatActivity() {
                     Log.e("Cave", error.toString())
                     runOnUiThread {
                         b.loginError.text = error.message
+                        Toast.makeText(applicationContext, error.message, Toast.LENGTH_LONG).show()
                     }
                 }
             )
