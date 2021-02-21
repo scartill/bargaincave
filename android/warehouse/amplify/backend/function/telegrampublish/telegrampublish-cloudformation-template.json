@@ -15,6 +15,14 @@
     },
     "s3Key": {
       "Type": "String"
+    },
+    "functionbaselayerArn": {
+      "Type": "String",
+      "Default": "functionbaselayerArn"
+    },
+    "functiontelegramlayerArn": {
+      "Type": "String",
+      "Default": "functiontelegramlayerArn"
     }
   },
   "Conditions": {
@@ -79,7 +87,14 @@
           ]
         },
         "Runtime": "python3.8",
-        "Layers": [],
+        "Layers": [
+          {
+            "Fn::Sub": "arn:aws:lambda:${AWS::Region}:${AWS::AccountId}:layer:baselayer-staging:1"
+          },
+          {
+            "Fn::Sub": "arn:aws:lambda:${AWS::Region}:${AWS::AccountId}:layer:telegramlayer-staging:1"
+          }
+        ],
         "Timeout": "25"
       }
     },

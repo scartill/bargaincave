@@ -1,3 +1,14 @@
 {
-  "lambdaLayers": []
+  "lambdaLayers": [
+    {
+      "type": "ProjectLayer",
+      "resourceName": "baselayer",
+      "version": 1
+    },
+    {
+      "type": "ProjectLayer",
+      "resourceName": "telegramlayer",
+      "version": 1
+    }
+  ]
 }

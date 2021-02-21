@@ -18,7 +18,43 @@
       "function": {
         "telegrampublish": {
           "deploymentBucketName": "amplify-warehouse-staging-142503-deployment",
-          "s3Key": "amplify-builds/telegrampublish-346f7345677854516168-build.zip"
+          "s3Key": "amplify-builds/telegrampublish-565967732f344c35336e-build.zip"
+        },
+        "baselayer": {
+          "deploymentBucketName": "amplify-warehouse-staging-142503-deployment",
+          "s3Key": "amplify-builds/baselayer-build.zip"
+        },
+        "telegramlayer": {
+          "deploymentBucketName": "amplify-warehouse-staging-142503-deployment",
+          "s3Key": "amplify-builds/telegramlayer-build.zip"
+        }
+      }
+    },
+    "nonCFNdata": {
+      "function": {
+        "baselayer": {
+          "layerVersionMap": {
+            "1": {
+              "permissions": [
+                {
+                  "type": "private"
+                }
+              ],
+              "hash": "VlvPYP8etvgA7N4ybsXbBHdRJ50cklhSVau6kp+gGas="
+            }
+          }
+        },
+        "telegramlayer": {
+          "layerVersionMap": {
+            "1": {
+              "permissions": [
+                {
+                  "type": "private"
+                }
+              ],
+              "hash": "jxlRVoEsgjGHMR0IhKwPNIpSj+/TwAzyvg2HxJtEPF8="
+            }
+          }
         }
       }
     }
