@@ -105,9 +105,7 @@ class LotApproveActivity : AppCompatActivity() {
                 publishing = true
                 setGUI()
 
-                val price = b.price.text
-                val message = "Heads up! Selling $weightKg kg of $fruit for $price"
-                val payload = "{ \"bot_message_contents\": \"$message\" }"
+                val payload = "{ \"publish_lot_by_id\": \"${id}\" }"
                 Log.i("Cave", "Telegraphing $payload")
 
                 val options = RestOptions.builder()

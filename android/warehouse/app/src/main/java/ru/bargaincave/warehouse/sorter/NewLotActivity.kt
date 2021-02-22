@@ -84,7 +84,7 @@ class NewLotActivity : AppCompatActivity() {
                 return@setOnClickListener
             }
 
-            val weight = b.weight.text.toString().toFloatOrNull()
+            val weight = b.weight.text.toString().toDoubleOrNull()
 
             if (weight == null) {
                 Log.i("Cave", "Unable: weight is required")
@@ -124,7 +124,7 @@ class NewLotActivity : AppCompatActivity() {
         b.progressBar.visibility = if(enabled) View.GONE else View.VISIBLE
     }
 
-    private fun asyncSubmit(fruit: String, currentPhotoPath: String, weight: Float, comment: String) {
+    private fun asyncSubmit(fruit: String, currentPhotoPath: String, weight: Double, comment: String) {
         Log.i("cave", "submitting a new lot")
 
         val photoFile = File(currentPhotoPath)

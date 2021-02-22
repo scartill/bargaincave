@@ -30,7 +30,7 @@ public final class Lot implements Model {
   public static final QueryField PHOTO = field("Lot", "photo");
   public static final QueryField FRUIT = field("Lot", "fruit");
   private final @ModelField(targetType="ID", isRequired = true) String id;
-  private final @ModelField(targetType="Float") Float weightKg;
+  private final @ModelField(targetType="Float") Double weightKg;
   private final @ModelField(targetType="String") String comment;
   private final @ModelField(targetType="String") String photo;
   private final @ModelField(targetType="String") String fruit;
@@ -38,7 +38,7 @@ public final class Lot implements Model {
       return id;
   }
   
-  public Float getWeightKg() {
+  public Double getWeightKg() {
       return weightKg;
   }
   
@@ -54,7 +54,7 @@ public final class Lot implements Model {
       return fruit;
   }
   
-  private Lot(String id, Float weightKg, String comment, String photo, String fruit) {
+  private Lot(String id, Double weightKg, String comment, String photo, String fruit) {
     this.id = id;
     this.weightKg = weightKg;
     this.comment = comment;
@@ -145,7 +145,7 @@ public final class Lot implements Model {
   public interface BuildStep {
     Lot build();
     BuildStep id(String id) throws IllegalArgumentException;
-    BuildStep weightKg(Float weightKg);
+    BuildStep weightKg(Double weightKg);
     BuildStep comment(String comment);
     BuildStep photo(String photo);
     BuildStep fruit(String fruit);
@@ -154,7 +154,7 @@ public final class Lot implements Model {
 
   public static class Builder implements BuildStep {
     private String id;
-    private Float weightKg;
+    private Double weightKg;
     private String comment;
     private String photo;
     private String fruit;
@@ -171,7 +171,7 @@ public final class Lot implements Model {
     }
     
     @Override
-     public BuildStep weightKg(Float weightKg) {
+     public BuildStep weightKg(Double weightKg) {
         this.weightKg = weightKg;
         return this;
     }
@@ -217,7 +217,7 @@ public final class Lot implements Model {
   
 
   public final class CopyOfBuilder extends Builder {
-    private CopyOfBuilder(String id, Float weightKg, String comment, String photo, String fruit) {
+    private CopyOfBuilder(String id, Double weightKg, String comment, String photo, String fruit) {
       super.id(id);
       super.weightKg(weightKg)
         .comment(comment)
@@ -226,7 +226,7 @@ public final class Lot implements Model {
     }
     
     @Override
-     public CopyOfBuilder weightKg(Float weightKg) {
+     public CopyOfBuilder weightKg(Double weightKg) {
       return (CopyOfBuilder) super.weightKg(weightKg);
     }
     
