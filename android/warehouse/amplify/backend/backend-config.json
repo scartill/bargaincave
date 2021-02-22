@@ -81,5 +81,11 @@
       "service": "LambdaLayer",
       "build": true
     }
+  },
+  "secretman": {
+    "telegramtoken": {
+      "service": "secretsmanager",
+      "providerPlugin": "awscloudformation"
+    }
   }
 }

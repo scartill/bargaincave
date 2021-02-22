@@ -1,0 +1,19 @@
+{
+  "AWSTemplateFormatVersion": "2010-09-09",
+  "Description": "Telegram bot token stored as a secret in AWS SM using Amplify CLI",
+  "Parameters": {
+    "env": {
+      "Type": "String"
+    }
+  },
+  "Resources": {
+    "TelegramToken": {
+      "Type": "AWS::SecretsManager::Secret",
+      "Properties": {
+        "Description": "Telegram bot control token",
+        "Name": "telegram_token",
+        "SecretString": "<replace this with a telegram bot token>"
+      }
+    }
+  }
+}
