@@ -18,7 +18,7 @@
       "function": {
         "telegrampublish": {
           "deploymentBucketName": "amplify-warehouse-staging-142503-deployment",
-          "s3Key": "amplify-builds/telegrampublish-565967732f344c35336e-build.zip"
+          "s3Key": "amplify-builds/telegrampublish-474c4964595871657351-build.zip"
         },
         "baselayer": {
           "deploymentBucketName": "amplify-warehouse-staging-142503-deployment",
