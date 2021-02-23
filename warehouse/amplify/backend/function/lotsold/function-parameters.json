@@ -1,0 +1,20 @@
+{
+  "permissions": {},
+  "lambdaLayers": [
+    {
+      "type": "ProjectLayer",
+      "resourceName": "baselayer",
+      "version": 2
+    },
+    {
+      "type": "ProjectLayer",
+      "resourceName": "telegramlayer",
+      "version": 2
+    },
+    {
+      "type": "ProjectLayer",
+      "resourceName": "hubspotlayer",
+      "version": 1
+    }
+  ]
+}

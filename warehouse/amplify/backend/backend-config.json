@@ -39,6 +39,14 @@
             "Name",
             "Arn"
           ]
+        },
+        {
+          "category": "function",
+          "resourceName": "lotsold",
+          "attributes": [
+            "Name",
+            "Arn"
+          ]
         }
       ]
     }
@@ -111,6 +119,34 @@
         {
           "category": "function",
           "resourceName": "baselayer",
+          "attributes": [
+            "Arn"
+          ]
+        },
+        {
+          "category": "function",
+          "resourceName": "hubspotlayer",
+          "attributes": [
+            "Arn"
+          ]
+        }
+      ]
+    },
+    "lotsold": {
+      "build": true,
+      "providerPlugin": "awscloudformation",
+      "service": "Lambda",
+      "dependsOn": [
+        {
+          "category": "function",
+          "resourceName": "baselayer",
+          "attributes": [
+            "Arn"
+          ]
+        },
+        {
+          "category": "function",
+          "resourceName": "telegramlayer",
           "attributes": [
             "Arn"
           ]
