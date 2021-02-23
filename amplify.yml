@@ -10,7 +10,7 @@ applications:
           commands:
             - npm run build
       artifacts:
-        baseDirectory: orderspa/public
+        baseDirectory: public
         files:
           - '**/*'
       cache:
