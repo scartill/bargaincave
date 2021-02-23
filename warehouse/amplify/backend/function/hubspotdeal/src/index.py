@@ -1,3 +1,4 @@
+import json
 import boto3
 
 from hubspot import HubSpot
@@ -7,7 +8,7 @@ from hubspot.crm.objects import SimplePublicObjectInput
 HUBSPOT_API_TOKEN_SECRET_NAME = 'hubspot_token'
 
 
-def hubspot_deal_create(params):
+def hubspot_deal_create(params, payload):
     lot_id = params['lotid']
 
     sm = boto3.client('secretsmanager')

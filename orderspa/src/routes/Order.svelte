@@ -1,10 +1,30 @@
 <script>
+    import Amplify, { API } from 'aws-amplify';
+
     export let params = {};
     let name = ''
     let phone = ''
 
     function submitClick() {
-        alert('Submitting ' + params.lot_id + ' ' + name + ' ' + phone) 
+        console.log('submit', params.lot_id, name, phone) 
+
+        const apiName = 'warehouseapi';
+        const path = 'hubspot/deal/create/' + params.lot_id;
+        const post_init = {
+            body: {
+                name: name,
+                phone: phone
+            }
+        };
+
+        API
+            .post(apiName, path, post_init)
+            .then(response => {
+                console.log('API call success', response)
+            })
+            .catch(error => {
+                console.log(error.response);
+            });
     }
 </script>
 
