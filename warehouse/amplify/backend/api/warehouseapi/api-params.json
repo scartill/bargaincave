@@ -14,6 +14,14 @@
                 ]
             },
             "policyResourceName": "/telegrampublish"
+        },
+        {
+            "name": "/hubspot/deal/create/{lotid}",
+            "lambdaFunction": "hubspotdeal",
+            "privacy": {
+                "open": true
+            },
+            "policyResourceName": "/hubspot/deal/create/*"
         }
     ],
     "resourceName": "warehouseapi",
@@ -21,6 +29,9 @@
     "functionArns": [
         {
             "lambdaFunction": "telegrampublish"
+        },
+        {
+            "lambdaFunction": "hubspotdeal"
         }
     ],
     "privacy": {
@@ -37,6 +48,15 @@
                 "Name",
                 "Arn"
             ]
+        },
+        {
+            "category": "function",
+            "resourceName": "hubspotdeal",
+            "attributes": [
+                "Name",
+                "Arn"
+            ]
         }
-    ]
+    ],
+    "uuid": "a6d3dbb9"
 }

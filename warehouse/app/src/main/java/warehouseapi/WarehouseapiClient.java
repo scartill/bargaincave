@@ -35,6 +35,22 @@ public interface WarehouseapiClient {
      * 
      * @return void
      */
+    @com.amazonaws.mobileconnectors.apigateway.annotation.Operation(path = "/hubspot/deal/create/{lotid}", method = "OPTIONS")
+    void hubspotDealCreateLotidOptions();
+    
+    /**
+     * 
+     * 
+     * @return void
+     */
+    @com.amazonaws.mobileconnectors.apigateway.annotation.Operation(path = "/hubspot/deal/create/{lotid}/{proxy+}", method = "OPTIONS")
+    void hubspotDealCreateLotidProxyOptions();
+    
+    /**
+     * 
+     * 
+     * @return void
+     */
     @com.amazonaws.mobileconnectors.apigateway.annotation.Operation(path = "/telegrampublish", method = "OPTIONS")
     void telegrampublishOptions();
     

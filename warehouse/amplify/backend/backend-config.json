@@ -31,6 +31,14 @@
             "Name",
             "Arn"
           ]
+        },
+        {
+          "category": "function",
+          "resourceName": "hubspotdeal",
+          "attributes": [
+            "Name",
+            "Arn"
+          ]
         }
       ]
     }
@@ -80,10 +88,49 @@
       "providerPlugin": "awscloudformation",
       "service": "LambdaLayer",
       "build": true
+    },
+    "hubspotlayer": {
+      "providerPlugin": "awscloudformation",
+      "service": "LambdaLayer",
+      "build": true
+    },
+    "hubspotdeal": {
+      "build": true,
+      "providerPlugin": "awscloudformation",
+      "service": "Lambda",
+      "dependsOn": [
+        {
+          "category": "api",
+          "resourceName": "warehouse",
+          "attributes": [
+            "GraphQLAPIIdOutput",
+            "GraphQLAPIEndpointOutput",
+            "GraphQLAPIKeyOutput"
+          ]
+        },
+        {
+          "category": "function",
+          "resourceName": "baselayer",
+          "attributes": [
+            "Arn"
+          ]
+        },
+        {
+          "category": "function",
+          "resourceName": "hubspotlayer",
+          "attributes": [
+            "Arn"
+          ]
+        }
+      ]
     }
   },
   "secretman": {
     "telegramtoken": {
+      "service": "secretsmanager",
+      "providerPlugin": "awscloudformation"
+    },
+    "hubspottoken": {
       "service": "secretsmanager",
       "providerPlugin": "awscloudformation"
     }

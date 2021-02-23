@@ -1,0 +1,19 @@
+{
+  "AWSTemplateFormatVersion": "2010-09-09",
+  "Description": "HubSpot API token stored as a secret in AWS SM using Amplify CLI",
+  "Parameters": {
+    "env": {
+      "Type": "String"
+    }
+  },
+  "Resources": {
+    "HubspotToken": {
+      "Type": "AWS::SecretsManager::Secret",
+      "Properties": {
+        "Description": "HubSpot API token",
+        "Name": "hubspot_token",
+        "SecretString": "<replace this with a HubSpot API token>"
+      }
+    }
+  }
+}

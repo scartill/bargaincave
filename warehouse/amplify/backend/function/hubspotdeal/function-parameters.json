@@ -1,0 +1,22 @@
+{
+  "permissions": {
+    "api": {
+      "warehouse": [
+        "read",
+        "update"
+      ]
+    }
+  },
+  "lambdaLayers": [
+    {
+      "type": "ProjectLayer",
+      "resourceName": "baselayer",
+      "version": 2
+    },
+    {
+      "type": "ProjectLayer",
+      "resourceName": "hubspotlayer",
+      "version": 1
+    }
+  ]
+}

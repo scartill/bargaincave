@@ -27,6 +27,14 @@
         "telegramlayer": {
           "deploymentBucketName": "amplify-warehouse-staging-142503-deployment",
           "s3Key": "amplify-builds/telegramlayer-build.zip"
+        },
+        "hubspotlayer": {
+          "deploymentBucketName": "amplify-warehouse-staging-142503-deployment",
+          "s3Key": "amplify-builds/hubspotlayer-build.zip"
+        },
+        "hubspotdeal": {
+          "deploymentBucketName": "amplify-warehouse-staging-142503-deployment",
+          "s3Key": "amplify-builds/hubspotdeal-46385053363038595134-build.zip"
         }
       }
     },
@@ -41,6 +49,14 @@
                 }
               ],
               "hash": "VlvPYP8etvgA7N4ybsXbBHdRJ50cklhSVau6kp+gGas="
+            },
+            "2": {
+              "permissions": [
+                {
+                  "type": "private"
+                }
+              ],
+              "hash": "nu9FtgGTw6qb6hRv/Gkb5o3Hp/Rbf1vBuR63pKS3pzc="
             }
           }
         },
@@ -53,6 +69,26 @@
                 }
               ],
               "hash": "jxlRVoEsgjGHMR0IhKwPNIpSj+/TwAzyvg2HxJtEPF8="
+            },
+            "2": {
+              "permissions": [
+                {
+                  "type": "private"
+                }
+              ],
+              "hash": "xWxbVUZmP8kT3Nomw19MkaPskgn+rZziHhI7hzuD/EA="
+            }
+          }
+        },
+        "hubspotlayer": {
+          "layerVersionMap": {
+            "1": {
+              "permissions": [
+                {
+                  "type": "private"
+                }
+              ],
+              "hash": "7eoh9V/JCzzvnQ/otd0yXYJp5Iwb/xKVzokwliu+rwM="
             }
           }
         }
