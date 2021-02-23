@@ -1,6 +1,6 @@
 version: 1
 applications:
-  - appRoot: /orderspa
+  - appRoot: orderspa
     frontend:
       phases:
         preBuild:
@@ -10,7 +10,7 @@ applications:
           commands:
             - npm run build
       artifacts:
-        baseDirectory: /orderspa/public
+        baseDirectory: orderspa/public
         files:
           - '**/*'
       cache:
