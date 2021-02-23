@@ -2,17 +2,17 @@ version: 1
 applications:
   - appRoot: /orderspa
     frontend:
-        phases:
-          preBuild:
-            commands:
-              - npm ci
-          build:
-            commands:
-              - npm run build
-        artifacts:
-          baseDirectory: /orderspa/public
-          files:
-            - '**/*'
-        cache:
-          paths:
-            - node_modules/**/*
+      phases:
+        preBuild:
+          commands:
+            - npm ci
+        build:
+          commands:
+            - npm run build
+      artifacts:
+        baseDirectory: /orderspa/public
+        files:
+          - '**/*'
+      cache:
+        paths:
+          - node_modules/**/*
