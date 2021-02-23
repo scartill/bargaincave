@@ -12,7 +12,7 @@
 <div>
     <p>Name: <input bind:value={name}/>
     <p>Phone: <input bind:value={phone}/></p>
-    <button on:click={submitClick}>Submit</button>
+    <button on:click={submitClick}>Submit order</button>
 </div>
 
 <style>
