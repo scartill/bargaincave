@@ -16,3 +16,8 @@ applications:
       cache:
         paths:
           - node_modules/**/*
+    backend:
+      phases:
+        build:
+          commands:
+            - amplifyPush --simple

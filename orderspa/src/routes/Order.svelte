@@ -33,6 +33,7 @@
     <p>Name: <input bind:value={name}/>
     <p>Phone: <input bind:value={phone}/></p>
     <button on:click={submitClick}>Submit</button>
+    <br/>
 </div>
 
 <style>
