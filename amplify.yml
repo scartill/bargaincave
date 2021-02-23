@@ -5,6 +5,7 @@ applications:
       phases:
         preBuild:
           commands:
+            
             - npm ci
         build:
           commands:
@@ -16,8 +17,3 @@ applications:
       cache:
         paths:
           - node_modules/**/*
-    backend:
-      phases:
-        build:
-          commands:
-            - amplifyPush --simple
