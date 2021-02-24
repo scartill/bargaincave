@@ -34,7 +34,7 @@
     <p>Name: <input bind:value={name}/>
     <p>Phone: <input bind:value={phone}/></p>
     <button on:click={submitClick}>Submit</button>
-    <p>(c) Bargain Cave, 2021</p>
+    <p>&copy; Bargain Cave, 2021</p>
 </div>
 
 <style>
