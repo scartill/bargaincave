@@ -9,9 +9,10 @@
         console.log('submit', params.lot_id, name, phone) 
 
         const apiName = 'warehouseapi';
-        const path = 'hubspot/deal/create/' + params.lot_id;
+        const path = '/crm/deal/create';
         const post_init = {
             body: {
+                lot_id: params.lot_id,
                 name: name,
                 phone: phone
             }
@@ -33,6 +34,7 @@
     <p>Name: <input bind:value={name}/>
     <p>Phone: <input bind:value={phone}/></p>
     <button on:click={submitClick}>Submit</button>
+    <p>(c) Bargain Cave, 2021</p>
 </div>
 
 <style>

@@ -8,10 +8,7 @@ from hubspot.crm.objects import SimplePublicObjectInput
 HUBSPOT_API_TOKEN_SECRET_NAME = 'hubspot_token'
 
 
-def hubspot_deal_create(params, payload):
-    lot_id = params['lotid']
-    print('PAYLOAD', payload)
-
+def hubspot_deal_create(payload):
     sm = boto3.client('secretsmanager')
 
     secret_value_response = sm.get_secret_value(
@@ -21,6 +18,10 @@ def hubspot_deal_create(params, payload):
     api_key = secret_value_response['SecretString']
 
     hapi = HubSpot(api_key=api_key)
+
+    lot_id = payload['lot_id']
+    name = payload['name']
+    phone = payload['phone']
 
     simple_public_object_input = SimplePublicObjectInput(
         properties={
@@ -36,17 +37,7 @@ def hubspot_deal_create(params, payload):
     # TODO: Link HubSpot deal with a lot
     return 200
 
-
-def handler(event, context):  
-    return_code = 503
-
-    try:
-        params = event['pathParameters']
-        payload = json.loads(event['body'])
-        return_code = hubspot_deal_create(params, payload)
-    except Exception as e:
-        print(f'Hubspot exception {e}')
-
+def make_response(return_code):
     return {
         'statusCode': return_code,
         'headers': {
@@ -56,3 +47,19 @@ def handler(event, context):
         },
         'body': '{"result": "executed"}'
     }
+
+def handler(event, context):
+    if event['httpMethod'] == 'OPTIONS':
+        return make_response(200)
+
+    return_code = 503
+
+    try:
+        # Unused for 'create' method
+        # params = event['pathParameters']
+        payload = json.loads(event['body'])
+        return_code = hubspot_deal_create(payload)
+    except Exception as e:
+        print(f'Hubspot exception {e}')
+
+    return make_response(return_code)

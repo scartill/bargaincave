@@ -34,7 +34,7 @@
         },
         {
           "category": "function",
-          "resourceName": "hubspotdeal",
+          "resourceName": "lotsold",
           "attributes": [
             "Name",
             "Arn"
@@ -42,7 +42,7 @@
         },
         {
           "category": "function",
-          "resourceName": "lotsold",
+          "resourceName": "hubspotdeal",
           "attributes": [
             "Name",
             "Arn"

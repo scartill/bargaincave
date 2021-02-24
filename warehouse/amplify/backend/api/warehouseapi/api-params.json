@@ -16,14 +16,6 @@
             "policyResourceName": "/telegrampublish"
         },
         {
-            "name": "/hubspot/deal/create/{lotid}",
-            "lambdaFunction": "hubspotdeal",
-            "privacy": {
-                "open": true
-            },
-            "policyResourceName": "/hubspot/deal/create/*"
-        },
-        {
             "name": "/lot/{lotid}/sold",
             "lambdaFunction": "lotsold",
             "privacy": {
@@ -35,6 +27,14 @@
                 ]
             },
             "policyResourceName": "/lot/*/sold"
+        },
+        {
+            "name": "/crm/deal/create",
+            "lambdaFunction": "hubspotdeal",
+            "privacy": {
+                "open": true
+            },
+            "policyResourceName": "/crm/deal/create"
         }
     ],
     "resourceName": "warehouseapi",
@@ -44,10 +44,10 @@
             "lambdaFunction": "telegrampublish"
         },
         {
-            "lambdaFunction": "hubspotdeal"
+            "lambdaFunction": "lotsold"
         },
         {
-            "lambdaFunction": "lotsold"
+            "lambdaFunction": "hubspotdeal"
         }
     ],
     "privacy": {
@@ -67,7 +67,7 @@
         },
         {
             "category": "function",
-            "resourceName": "hubspotdeal",
+            "resourceName": "lotsold",
             "attributes": [
                 "Name",
                 "Arn"
@@ -75,12 +75,12 @@
         },
         {
             "category": "function",
-            "resourceName": "lotsold",
+            "resourceName": "hubspotdeal",
             "attributes": [
                 "Name",
                 "Arn"
             ]
         }
     ],
-    "uuid": "c6e11689"
+    "uuid": "32fdddba"
 }
