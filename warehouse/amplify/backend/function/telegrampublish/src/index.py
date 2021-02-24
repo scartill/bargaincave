@@ -73,8 +73,6 @@ def telegram_api_command(payload):
     channel_id = os.getenv('CHANNEL_ID')
     photo_url = get_photo_url(lot['photo'])
 
-    print('PHOTO URL', photo_url)
-
     bot = get_bot_client()
     message = bot.send_photo(
         chat_id=channel_id,

@@ -50,5 +50,5 @@
     <string name="unable_to_load">Unable to load</string>
     <string name="unknown">Unknown</string>
     <string name="publish_success">Published successfully</string>
-    <string name="error_code_colon">\"Error code: \"</string>
+    <string name="error_code_colon">Error code: </string>
 </resources>
