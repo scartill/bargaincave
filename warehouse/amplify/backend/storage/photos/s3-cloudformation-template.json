@@ -230,8 +230,99 @@
 				}
 			}
 		},
-      
-	    
+
+		"S3BucketPolicy": {
+			"Type" : "AWS::S3::BucketPolicy",
+			"Properties": {
+				"Bucket": {
+					"Fn::If": [
+						"ShouldNotCreateEnvResources",
+						{
+							"Ref": "bucketName"
+						},
+						{
+							"Fn::Join": [
+								"",
+								[
+									{
+										"Ref": "bucketName"
+									},
+									{
+										"Fn::Select": [
+											3,
+											{
+												"Fn::Split": [
+													"-",
+													{
+														"Ref": "AWS::StackName"
+													}
+												]
+											}
+										]
+									},
+									"-",
+									{
+										"Ref": "env"
+									}
+								]
+							]
+						}
+					]
+				},
+				"PolicyDocument": {
+					"Statement": [{
+						"Sid": "PublicReadGetObject",
+						"Effect": "Allow",
+						"Action": "s3:GetObject",
+						"Principal": "*",
+						"Resource": {
+							"Fn::Join" : [
+								"",
+								["arn:aws:s3:::",
+									{
+										"Fn::If": [
+											"ShouldNotCreateEnvResources",
+											{
+												"Ref": "bucketName"
+											},
+											{
+												"Fn::Join": [
+													"",
+													[
+														{
+															"Ref": "bucketName"
+														},
+														{
+															"Fn::Select": [
+																3,
+																{
+																	"Fn::Split": [
+																		"-",
+																		{
+																			"Ref": "AWS::StackName"
+																		}
+																	]
+																}
+															]
+														},
+														"-",
+														{
+															"Ref": "env"
+														}
+													]
+												]
+											}
+										]
+									},
+									"/public/*"
+								]
+							]
+						}
+					}]
+				}
+			}
+		},
+
 		"S3AuthPublicPolicy": {
 			"DependsOn": [
 				"S3Bucket"

@@ -26,14 +26,6 @@
       "dependsOn": [
         {
           "category": "function",
-          "resourceName": "telegrampublish",
-          "attributes": [
-            "Name",
-            "Arn"
-          ]
-        },
-        {
-          "category": "function",
           "resourceName": "lotsold",
           "attributes": [
             "Name",
@@ -43,6 +35,14 @@
         {
           "category": "function",
           "resourceName": "hubspotdeal",
+          "attributes": [
+            "Name",
+            "Arn"
+          ]
+        },
+        {
+          "category": "function",
+          "resourceName": "telegrampublish",
           "attributes": [
             "Name",
             "Arn"
@@ -72,17 +72,19 @@
       "service": "Lambda",
       "dependsOn": [
         {
-          "category": "function",
-          "resourceName": "baselayer",
+          "category": "api",
+          "resourceName": "warehouse",
           "attributes": [
-            "Arn"
+            "GraphQLAPIIdOutput",
+            "GraphQLAPIEndpointOutput",
+            "GraphQLAPIKeyOutput"
           ]
         },
         {
-          "category": "function",
-          "resourceName": "telegramlayer",
+          "category": "storage",
+          "resourceName": "photos",
           "attributes": [
-            "Arn"
+            "BucketName"
           ]
         }
       ]

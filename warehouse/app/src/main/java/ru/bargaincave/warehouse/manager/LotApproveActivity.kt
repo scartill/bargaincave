@@ -4,6 +4,7 @@ import android.graphics.BitmapFactory
 import android.os.Bundle
 import android.util.Log
 import android.view.View
+import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
 import androidx.core.widget.addTextChangedListener
 import com.amplifyframework.api.rest.RestOptions
@@ -51,6 +52,7 @@ class LotApproveActivity : AppCompatActivity() {
                             b.laFruit.text = lot.fruit ?: na
                             b.laWeight.text = lot.weightKg?.toString() ?: na
                             b.laComment.text = lot.comment ?: na
+                            b.price.setText(lot.price?.toString() ?: "")
 
                             lot.photo?.also {
                                 val outputDir = File(applicationContext.cacheDir, "/image")
@@ -105,24 +107,60 @@ class LotApproveActivity : AppCompatActivity() {
                 publishing = true
                 setGUI()
 
-                val payload = "{ \"publish_lot_by_id\": \"${id}\" }"
-                Log.i("Cave", "Telegraphing $payload")
+                val price = b.price.text.toString().toDoubleOrNull()
 
-                val options = RestOptions.builder()
-                    .addPath("/telegrampublish")
-                    .addBody(payload.toByteArray())
+                val editedLot = copyOfBuilder()
+                    .price(price)
+                    .priceCurrency("USD")
                     .build()
 
-                Amplify.API.post(options,
+                Amplify.DataStore.save(editedLot,
                     {
-                        Log.i("Cave", "POST succeeded")
-                        runOnUiThread {
-                            publishing = false
-                            setGUI()
-                        }
+                        Log.d("Cave", "Item updates ${id}")
+
+                        val payload = "{ \"lot_by_id\": \"${id}\" }"
+
+                        val options = RestOptions.builder()
+                            .addPath("/telegram/lot/publish")
+                            .addBody(payload.toByteArray())
+                            .build()
+
+                        Log.i("Cave", "Telegraphing $payload")
+                        Amplify.API.post(options,
+                            {
+                                Log.d("Cave", "POST succeeded ${it.code}")
+
+                                runOnUiThread {
+                                    publishing = false
+
+                                    if (it.code.isSuccessful) {
+                                        Toast.makeText(
+                                            applicationContext,
+                                            getString(R.string.publish_success),
+                                            Toast.LENGTH_LONG
+                                        ).show()
+                                    } else {
+                                        Toast.makeText(
+                                            applicationContext,
+                                            getString(R.string.error_code_colon) + it.code.toString(),
+                                            Toast.LENGTH_LONG
+                                        ).show()
+                                    }
+                                    setGUI()
+                                }
+                            },
+                            { error ->
+                                Log.e("Cave", "Could execute API request", error)
+                                runOnUiThread {
+                                    b.laError.text = error.message
+                                    publishing = false
+                                    setGUI()
+                                }
+                            }
+                        )
                     },
                     { error ->
-                        Log.e("Cave", "Could execute API request", error)
+                        Log.e("Cave", "Could not update a item", error)
                         runOnUiThread {
                             b.laError.text = error.message
                             publishing = false

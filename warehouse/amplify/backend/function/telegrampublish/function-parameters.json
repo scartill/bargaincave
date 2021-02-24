@@ -3,12 +3,30 @@
     {
       "type": "ProjectLayer",
       "resourceName": "baselayer",
-      "version": 1
+      "version": 2
     },
     {
       "type": "ProjectLayer",
       "resourceName": "telegramlayer",
-      "version": 1
+      "version": 2
+    },
+    {
+      "type": "ProjectLayer",
+      "resourceName": "amplifyhelperslayer",
+      "version": 2
     }
-  ]
+  ],
+  "permissions": {
+    "api": {
+      "warehouse": [
+        "read",
+        "update"
+      ]
+    },
+    "storage": {
+      "photos": [
+        "read"
+      ]
+    }
+  }
 }

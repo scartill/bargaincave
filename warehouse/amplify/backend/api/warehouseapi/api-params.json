@@ -1,21 +1,6 @@
 {
     "paths": [
         {
-            "name": "/telegrampublish",
-            "lambdaFunction": "telegrampublish",
-            "privacy": {
-                "private": true,
-                "auth": [
-                    "/POST",
-                    "/GET",
-                    "/PUT",
-                    "/PATCH",
-                    "/DELETE"
-                ]
-            },
-            "policyResourceName": "/telegrampublish"
-        },
-        {
             "name": "/lot/{lotid}/sold",
             "lambdaFunction": "lotsold",
             "privacy": {
@@ -35,19 +20,30 @@
                 "open": true
             },
             "policyResourceName": "/crm/deal/create"
+        },
+        {
+            "name": "/telegram/lot/publish",
+            "lambdaFunction": "telegrampublish",
+            "privacy": {
+                "private": true,
+                "auth": [
+                    "/POST"
+                ]
+            },
+            "policyResourceName": "/telegram/lot/publish"
         }
     ],
     "resourceName": "warehouseapi",
     "apiName": "warehouseapi",
     "functionArns": [
         {
-            "lambdaFunction": "telegrampublish"
-        },
-        {
             "lambdaFunction": "lotsold"
         },
         {
             "lambdaFunction": "hubspotdeal"
+        },
+        {
+            "lambdaFunction": "telegrampublish"
         }
     ],
     "privacy": {
@@ -57,14 +53,6 @@
         "unAuthRoleName": "amplify-warehouse-staging-142503-unauthRole"
     },
     "dependsOn": [
-        {
-            "category": "function",
-            "resourceName": "telegrampublish",
-            "attributes": [
-                "Name",
-                "Arn"
-            ]
-        },
         {
             "category": "function",
             "resourceName": "lotsold",
@@ -80,7 +68,15 @@
                 "Name",
                 "Arn"
             ]
+        },
+        {
+            "category": "function",
+            "resourceName": "telegrampublish",
+            "attributes": [
+                "Name",
+                "Arn"
+            ]
         }
     ],
-    "uuid": "32fdddba"
+    "uuid": "5fe43354"
 }

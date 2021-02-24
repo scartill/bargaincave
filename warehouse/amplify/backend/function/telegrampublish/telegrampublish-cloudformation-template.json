@@ -23,6 +23,26 @@
     "functiontelegramlayerArn": {
       "Type": "String",
       "Default": "functiontelegramlayerArn"
+    },
+    "storagephotosBucketName": {
+      "Type": "String",
+      "Default": "storagephotosBucketName"
+    },
+    "functionamplifyhelperslayerArn": {
+      "Type": "String",
+      "Default": "functionamplifyhelperslayerArn"
+    },
+    "apiwarehouseGraphQLAPIIdOutput": {
+      "Type": "String",
+      "Default": "apiwarehouseGraphQLAPIIdOutput"
+    },
+    "apiwarehouseGraphQLAPIEndpointOutput": {
+      "Type": "String",
+      "Default": "apiwarehouseGraphQLAPIEndpointOutput"
+    },
+    "apiwarehouseGraphQLAPIKeyOutput": {
+      "Type": "String",
+      "Default": "apiwarehouseGraphQLAPIKeyOutput"
     }
   },
   "Conditions": {
@@ -78,7 +98,19 @@
             "REGION": {
               "Ref": "AWS::Region"
             },
-            "CHANNEL_ID": "-1001202477347"
+            "CHANNEL_ID": "-1001202477347",
+            "STORAGE_PHOTOS_BUCKETNAME": {
+              "Ref": "storagephotosBucketName"
+            },
+            "API_WAREHOUSE_GRAPHQLAPIIDOUTPUT": {
+              "Ref": "apiwarehouseGraphQLAPIIdOutput"
+            },
+            "API_WAREHOUSE_GRAPHQLAPIENDPOINTOUTPUT": {
+              "Ref": "apiwarehouseGraphQLAPIEndpointOutput"
+            },
+            "API_WAREHOUSE_GRAPHQLAPIKEYOUTPUT": {
+              "Ref": "apiwarehouseGraphQLAPIKeyOutput"
+            }
           }
         },
         "Role": {
@@ -90,10 +122,13 @@
         "Runtime": "python3.8",
         "Layers": [
           {
-            "Fn::Sub": "arn:aws:lambda:${AWS::Region}:${AWS::AccountId}:layer:baselayer-staging:1"
+            "Fn::Sub": "arn:aws:lambda:${AWS::Region}:${AWS::AccountId}:layer:baselayer-staging:2"
           },
           {
-            "Fn::Sub": "arn:aws:lambda:${AWS::Region}:${AWS::AccountId}:layer:telegramlayer-staging:1"
+            "Fn::Sub": "arn:aws:lambda:${AWS::Region}:${AWS::AccountId}:layer:telegramlayer-staging:2"
+          },
+          {
+            "Fn::Sub": "arn:aws:lambda:${AWS::Region}:${AWS::AccountId}:layer:amplifyhelperslayer-staging:2"
           }
         ],
         "Timeout": "25"
@@ -198,6 +233,110 @@
                   }
                 ]
               }
+            }
+          ]
+        }
+      }
+    },
+    "AmplifyResourcesPolicy": {
+      "DependsOn": [
+        "LambdaExecutionRole"
+      ],
+      "Type": "AWS::IAM::Policy",
+      "Properties": {
+        "PolicyName": "amplify-lambda-execution-policy",
+        "Roles": [
+          {
+            "Ref": "LambdaExecutionRole"
+          }
+        ],
+        "PolicyDocument": {
+          "Version": "2012-10-17",
+          "Statement": [
+            {
+              "Effect": "Allow",
+              "Action": [
+                "appsync:GraphQL"
+              ],
+              "Resource": [
+                {
+                  "Fn::Join": [
+                    "",
+                    [
+                      "arn:aws:appsync:",
+                      {
+                        "Ref": "AWS::Region"
+                      },
+                      ":",
+                      {
+                        "Ref": "AWS::AccountId"
+                      },
+                      ":apis/",
+                      {
+                        "Ref": "apiwarehouseGraphQLAPIIdOutput"
+                      },
+                      "/types/read/*"
+                    ]
+                  ]
+                },
+                {
+                  "Fn::Join": [
+                    "",
+                    [
+                      "arn:aws:appsync:",
+                      {
+                        "Ref": "AWS::Region"
+                      },
+                      ":",
+                      {
+                        "Ref": "AWS::AccountId"
+                      },
+                      ":apis/",
+                      {
+                        "Ref": "apiwarehouseGraphQLAPIIdOutput"
+                      },
+                      "/types/update/*"
+                    ]
+                  ]
+                }
+              ]
+            },
+            {
+              "Effect": "Allow",
+              "Action": "s3:ListBucket",
+              "Resource": [
+                {
+                  "Fn::Join": [
+                    "",
+                    [
+                      "arn:aws:s3:::",
+                      {
+                        "Ref": "storagephotosBucketName"
+                      }
+                    ]
+                  ]
+                }
+              ]
+            },
+            {
+              "Effect": "Allow",
+              "Action": [
+                "s3:GetObject"
+              ],
+              "Resource": [
+                {
+                  "Fn::Join": [
+                    "",
+                    [
+                      "arn:aws:s3:::",
+                      {
+                        "Ref": "storagephotosBucketName"
+                      },
+                      "/*"
+                    ]
+                  ]
+                }
+              ]
             }
           ]
         }

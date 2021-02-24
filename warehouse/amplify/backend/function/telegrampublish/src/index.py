@@ -1,39 +1,82 @@
 import os
 import json
+import traceback
 
 import boto3
 
 from telegram import Bot
-from telegram.utils import helpers
 
 TELEGRAM_BOT_TOKEN_SECRET_NAME = "telegram_token"
 
-LOT_PHOTO = 'https://bargaincave-photos142503-staging.s3.eu-west-2.amazonaws.com/public/lot_photo_1307507264875693089.jpg'
+from gqlclient import GQLClient  # type: ignore
 
-def telegram_api_command(payload):
-    if 'publish_lot_by_id' not in payload:
-        print(f'Unsupported payload {payload}')
-        return 503
 
-    lot_id = payload['publish_lot_by_id']
+PRICE_QUERY = '''
+    query GetLotQuery($lotID:ID!) {
+        getLot(id: $lotID) {
+            id
+            fruit
+            price
+            photo
+            weightKg
+        }
+    }
+'''
 
+HUBSPOT_API_TOKEN_SECRET_NAME = 'hubspot_token'
+
+
+def get_lot(lot_id):
+    url = os.getenv('API_WAREHOUSE_GRAPHQLAPIENDPOINTOUTPUT')
+    api_key = os.getenv('API_WAREHOUSE_GRAPHQLAPIKEYOUTPUT')
+
+    cli = GQLClient(url, api_key)
+    r = cli.execute(PRICE_QUERY, variables={
+        'lotID' : lot_id
+    })
+
+    return r['getLot']
+
+
+def get_bot_client():
     sm = boto3.client('secretsmanager')
     secret_value_response = sm.get_secret_value(
         SecretId=TELEGRAM_BOT_TOKEN_SECRET_NAME
     )
     bot_token = secret_value_response['SecretString']
 
-    channel_id = os.environ['CHANNEL_ID']
+    return Bot(bot_token)
 
-    bot = Bot(bot_token)
-    deep_url = helpers.create_deep_linked_url(bot.username, lot_id)
 
-    message = 'Heads up! Selling {weightKg} kg of {fruit} for {price}'
+def get_photo_url(photo_key):
+    bucket_name = os.getenv('STORAGE_PHOTOS_BUCKETNAME')
+    full_key = f'public/{photo_key}'
+    region = os.getenv('REGION')
+    object_url = f'http://{bucket_name}.s3.{region}.amazonaws.com/{full_key}'
+
+    return object_url
+
+
+def telegram_api_command(payload):
+    if 'lot_by_id' not in payload:
+        print(f'Unsupported payload {payload}')
+        return 503
+
+    lot_id = payload['lot_by_id']
+    lot = get_lot(lot_id)
+
+    # TODO: Move order app URL to environment
+    deep_url = f'https://master.d13at4rocoglfe.amplifyapp.com/#/order/{lot_id}'
+    message = 'Heads up! Selling {weightKg} kg of {fruit} for {price} per kg'.format(**lot)
     caption = f'{message}: {deep_url}'
 
+    channel_id = os.getenv('CHANNEL_ID')
+    photo_url = get_photo_url(lot['photo'])
+
+    bot = get_bot_client()
     message = bot.send_photo(
         chat_id=channel_id,
-        photo=LOT_PHOTO,
+        photo=photo_url,
         caption=caption
     )
 
@@ -51,7 +94,9 @@ def handler(event, _):
         payload = json.loads(event['body'])
         return_code = telegram_api_command(payload)
     except Exception as e:
-        print(f'Telegram exception {e}')
+        print(e)
+        traceback.print_exc()
+        print(f'Telegram command exception {e}')
 
     return {
         'statusCode': return_code,
@@ -60,5 +105,5 @@ def handler(event, _):
             'Access-Control-Allow-Origin': '*',
             'Access-Control-Allow-Methods': 'OPTIONS,POST,GET'
         },
-        'body': '{"result": "executed"}'
+        'body': '{"result": "ok"}'
     }

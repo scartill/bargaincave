@@ -1,6 +1,6 @@
 {
     "identityPoolName": "warehouse40c048f0_identitypool_853a6552",
-    "allowUnauthenticatedIdentities": false,
+    "allowUnauthenticatedIdentities": true,
     "resourceNameTruncated": "wareho40c048f0",
     "userPoolName": "warehouse40c048f0_userpool_40c048f0",
     "autoVerifiedAttributes": [
