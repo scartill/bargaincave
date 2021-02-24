@@ -4,5 +4,7 @@ type Lot @model @auth(rules: [{allow: public}]) {
   comment: String
   photo: String
   fruit: String
+  price: Float
+  priceCurrency: String
 }
  

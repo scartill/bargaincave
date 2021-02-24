@@ -1,0 +1,76 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<svg
+   xmlns:dc="http://purl.org/dc/elements/1.1/"
+   xmlns:cc="http://creativecommons.org/ns#"
+   xmlns:rdf="http://www.w3.org/1999/02/22-rdf-syntax-ns#"
+   xmlns:svg="http://www.w3.org/2000/svg"
+   xmlns="http://www.w3.org/2000/svg"
+   xmlns:sodipodi="http://sodipodi.sourceforge.net/DTD/sodipodi-0.dtd"
+   xmlns:inkscape="http://www.inkscape.org/namespaces/inkscape"
+   width="210mm"
+   height="297mm"
+   viewBox="0 0 210 297"
+   version="1.1"
+   id="svg8"
+   inkscape:version="1.0.1 (3bc2e813f5, 2020-09-07)"
+   sodipodi:docname="background.logo.svg">
+  <defs
+     id="defs2" />
+  <sodipodi:namedview
+     id="base"
+     pagecolor="#ffffff"
+     bordercolor="#666666"
+     borderopacity="1.0"
+     inkscape:pageopacity="0.0"
+     inkscape:pageshadow="2"
+     inkscape:zoom="0.79236615"
+     inkscape:cx="151.62349"
+     inkscape:cy="646.40898"
+     inkscape:document-units="mm"
+     inkscape:current-layer="layer1"
+     inkscape:document-rotation="0"
+     showgrid="false"
+     inkscape:window-width="1920"
+     inkscape:window-height="1017"
+     inkscape:window-x="-8"
+     inkscape:window-y="-8"
+     inkscape:window-maximized="1" />
+  <metadata
+     id="metadata5">
+    <rdf:RDF>
+      <cc:Work
+         rdf:about="">
+        <dc:format>image/svg+xml</dc:format>
+        <dc:type
+           rdf:resource="http://purl.org/dc/dcmitype/StillImage" />
+        <dc:title></dc:title>
+      </cc:Work>
+    </rdf:RDF>
+  </metadata>
+  <g
+     inkscape:label="Слой 1"
+     inkscape:groupmode="layer"
+     id="layer1">
+    <rect
+       style="fill:#ff00ff;fill-opacity:1;stroke:#3b4422;stroke-width:0;stroke-linecap:round;stroke-opacity:1;paint-order:markers fill stroke"
+       id="rect1292"
+       width="146.22003"
+       height="148.11897"
+       x="29.442493"
+       y="84.846054"
+       rx="1.0374631"
+       ry="1.0374628" />
+    <path
+       style="fill:#008000;fill-opacity:1;stroke:#8d050e;stroke-width:0;stroke-linecap:round;paint-order:markers fill stroke"
+       id="path853"
+       sodipodi:type="arc"
+       sodipodi:cx="295.22345"
+       sodipodi:cy="176.01811"
+       sodipodi:rx="1.3526849"
+       sodipodi:ry="3.8889689"
+       sodipodi:start="6.2453291"
+       sodipodi:end="6.2638471"
+       sodipodi:arc-type="slice"
+       d="m 296.57517,175.87093 a 1.3526849,3.8889689 0 0 1 7.1e-4,0.072 l -1.35243,0.0752 z" />
+  </g>
+</svg>

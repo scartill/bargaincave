@@ -29,11 +29,15 @@ public final class Lot implements Model {
   public static final QueryField COMMENT = field("Lot", "comment");
   public static final QueryField PHOTO = field("Lot", "photo");
   public static final QueryField FRUIT = field("Lot", "fruit");
+  public static final QueryField PRICE = field("Lot", "price");
+  public static final QueryField PRICE_CURRENCY = field("Lot", "priceCurrency");
   private final @ModelField(targetType="ID", isRequired = true) String id;
   private final @ModelField(targetType="Float") Double weightKg;
   private final @ModelField(targetType="String") String comment;
   private final @ModelField(targetType="String") String photo;
   private final @ModelField(targetType="String") String fruit;
+  private final @ModelField(targetType="Float") Double price;
+  private final @ModelField(targetType="String") String priceCurrency;
   public String getId() {
       return id;
   }
@@ -54,12 +58,22 @@ public final class Lot implements Model {
       return fruit;
   }
   
-  private Lot(String id, Double weightKg, String comment, String photo, String fruit) {
+  public Double getPrice() {
+      return price;
+  }
+  
+  public String getPriceCurrency() {
+      return priceCurrency;
+  }
+  
+  private Lot(String id, Double weightKg, String comment, String photo, String fruit, Double price, String priceCurrency) {
     this.id = id;
     this.weightKg = weightKg;
     this.comment = comment;
     this.photo = photo;
     this.fruit = fruit;
+    this.price = price;
+    this.priceCurrency = priceCurrency;
   }
   
   @Override
@@ -74,7 +88,9 @@ public final class Lot implements Model {
               ObjectsCompat.equals(getWeightKg(), lot.getWeightKg()) &&
               ObjectsCompat.equals(getComment(), lot.getComment()) &&
               ObjectsCompat.equals(getPhoto(), lot.getPhoto()) &&
-              ObjectsCompat.equals(getFruit(), lot.getFruit());
+              ObjectsCompat.equals(getFruit(), lot.getFruit()) &&
+              ObjectsCompat.equals(getPrice(), lot.getPrice()) &&
+              ObjectsCompat.equals(getPriceCurrency(), lot.getPriceCurrency());
       }
   }
   
@@ -86,6 +102,8 @@ public final class Lot implements Model {
       .append(getComment())
       .append(getPhoto())
       .append(getFruit())
+      .append(getPrice())
+      .append(getPriceCurrency())
       .toString()
       .hashCode();
   }
@@ -98,7 +116,9 @@ public final class Lot implements Model {
       .append("weightKg=" + String.valueOf(getWeightKg()) + ", ")
       .append("comment=" + String.valueOf(getComment()) + ", ")
       .append("photo=" + String.valueOf(getPhoto()) + ", ")
-      .append("fruit=" + String.valueOf(getFruit()))
+      .append("fruit=" + String.valueOf(getFruit()) + ", ")
+      .append("price=" + String.valueOf(getPrice()) + ", ")
+      .append("priceCurrency=" + String.valueOf(getPriceCurrency()))
       .append("}")
       .toString();
   }
@@ -131,6 +151,8 @@ public final class Lot implements Model {
       null,
       null,
       null,
+      null,
+      null,
       null
     );
   }
@@ -140,7 +162,9 @@ public final class Lot implements Model {
       weightKg,
       comment,
       photo,
-      fruit);
+      fruit,
+      price,
+      priceCurrency);
   }
   public interface BuildStep {
     Lot build();
@@ -149,6 +173,8 @@ public final class Lot implements Model {
     BuildStep comment(String comment);
     BuildStep photo(String photo);
     BuildStep fruit(String fruit);
+    BuildStep price(Double price);
+    BuildStep priceCurrency(String priceCurrency);
   }
   
 
@@ -158,6 +184,8 @@ public final class Lot implements Model {
     private String comment;
     private String photo;
     private String fruit;
+    private Double price;
+    private String priceCurrency;
     @Override
      public Lot build() {
         String id = this.id != null ? this.id : UUID.randomUUID().toString();
@@ -167,7 +195,9 @@ public final class Lot implements Model {
           weightKg,
           comment,
           photo,
-          fruit);
+          fruit,
+          price,
+          priceCurrency);
     }
     
     @Override
@@ -194,6 +224,18 @@ public final class Lot implements Model {
         return this;
     }
     
+    @Override
+     public BuildStep price(Double price) {
+        this.price = price;
+        return this;
+    }
+    
+    @Override
+     public BuildStep priceCurrency(String priceCurrency) {
+        this.priceCurrency = priceCurrency;
+        return this;
+    }
+    
     /** 
      * WARNING: Do not set ID when creating a new object. Leave this blank and one will be auto generated for you.
      * This should only be set when referring to an already existing object.
@@ -217,12 +259,14 @@ public final class Lot implements Model {
   
 
   public final class CopyOfBuilder extends Builder {
-    private CopyOfBuilder(String id, Double weightKg, String comment, String photo, String fruit) {
+    private CopyOfBuilder(String id, Double weightKg, String comment, String photo, String fruit, Double price, String priceCurrency) {
       super.id(id);
       super.weightKg(weightKg)
         .comment(comment)
         .photo(photo)
-        .fruit(fruit);
+        .fruit(fruit)
+        .price(price)
+        .priceCurrency(priceCurrency);
     }
     
     @Override
@@ -243,6 +287,16 @@ public final class Lot implements Model {
     @Override
      public CopyOfBuilder fruit(String fruit) {
       return (CopyOfBuilder) super.fruit(fruit);
+    }
+    
+    @Override
+     public CopyOfBuilder price(Double price) {
+      return (CopyOfBuilder) super.price(price);
+    }
+    
+    @Override
+     public CopyOfBuilder priceCurrency(String priceCurrency) {
+      return (CopyOfBuilder) super.priceCurrency(priceCurrency);
     }
   }
   

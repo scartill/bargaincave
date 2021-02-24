@@ -10,6 +10,8 @@ export declare class Lot {
   readonly comment?: string;
   readonly photo?: string;
   readonly fruit?: string;
+  readonly price?: number;
+  readonly priceCurrency?: string;
   constructor(init: ModelInit<Lot>);
   static copyOf(source: Lot, mutator: (draft: MutableModel<Lot>) => MutableModel<Lot> | void): Lot;
 }
