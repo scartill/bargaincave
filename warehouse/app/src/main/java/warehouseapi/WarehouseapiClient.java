@@ -35,16 +35,32 @@ public interface WarehouseapiClient {
      * 
      * @return void
      */
-    @com.amazonaws.mobileconnectors.apigateway.annotation.Operation(path = "/hubspot/deal/create/{lotid}", method = "OPTIONS")
-    void hubspotDealCreateLotidOptions();
+    @com.amazonaws.mobileconnectors.apigateway.annotation.Operation(path = "/crm/deal/create", method = "OPTIONS")
+    void crmDealCreateOptions();
     
     /**
      * 
      * 
      * @return void
      */
-    @com.amazonaws.mobileconnectors.apigateway.annotation.Operation(path = "/hubspot/deal/create/{lotid}/{proxy+}", method = "OPTIONS")
-    void hubspotDealCreateLotidProxyOptions();
+    @com.amazonaws.mobileconnectors.apigateway.annotation.Operation(path = "/crm/deal/create/{proxy+}", method = "OPTIONS")
+    void crmDealCreateProxyOptions();
+    
+    /**
+     * 
+     * 
+     * @return void
+     */
+    @com.amazonaws.mobileconnectors.apigateway.annotation.Operation(path = "/lot/{lotid}/sold", method = "OPTIONS")
+    void lotLotidSoldOptions();
+    
+    /**
+     * 
+     * 
+     * @return void
+     */
+    @com.amazonaws.mobileconnectors.apigateway.annotation.Operation(path = "/lot/{lotid}/sold/{proxy+}", method = "OPTIONS")
+    void lotLotidSoldProxyOptions();
     
     /**
      * 
