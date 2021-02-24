@@ -157,7 +157,6 @@ Parameters:
   permissions:
     Type: CommaDelimitedList
       
-            
         
   authProviders:
     Type: CommaDelimitedList

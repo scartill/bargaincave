@@ -18,7 +18,7 @@
       "function": {
         "telegrampublish": {
           "deploymentBucketName": "amplify-warehouse-staging-142503-deployment",
-          "s3Key": "amplify-builds/telegrampublish-6451444648613677554f-build.zip"
+          "s3Key": "amplify-builds/telegrampublish-6b554e692b3354414d6d-build.zip"
         },
         "baselayer": {
           "deploymentBucketName": "amplify-warehouse-staging-142503-deployment",
@@ -34,7 +34,7 @@
         },
         "hubspotdeal": {
           "deploymentBucketName": "amplify-warehouse-staging-142503-deployment",
-          "s3Key": "amplify-builds/hubspotdeal-347936776e4150675553-build.zip"
+          "s3Key": "amplify-builds/hubspotdeal-6e737366437a4b34796d-build.zip"
         },
         "lotsold": {
           "deploymentBucketName": "amplify-warehouse-staging-142503-deployment",
@@ -126,6 +126,17 @@
                 }
               ],
               "hash": "B/Gf1d72qEqOvdtCcqXAEPSaMVxwKkm5zXeZmvgb+Xo="
+            },
+            "2": {
+              "permissions": [
+                {
+                  "type": "public"
+                },
+                {
+                  "type": "private"
+                }
+              ],
+              "hash": "VIfJ1Ar440PBnMxXqKGSWeAUS9Fn49h2XplhpPWV/6w="
             }
           }
         }

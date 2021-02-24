@@ -67,16 +67,16 @@ public interface WarehouseapiClient {
      * 
      * @return void
      */
-    @com.amazonaws.mobileconnectors.apigateway.annotation.Operation(path = "/telegrampublish", method = "OPTIONS")
-    void telegrampublishOptions();
+    @com.amazonaws.mobileconnectors.apigateway.annotation.Operation(path = "/telegram/lot/publish", method = "OPTIONS")
+    void telegramLotPublishOptions();
     
     /**
      * 
      * 
      * @return void
      */
-    @com.amazonaws.mobileconnectors.apigateway.annotation.Operation(path = "/telegrampublish/{proxy+}", method = "OPTIONS")
-    void telegrampublishProxyOptions();
+    @com.amazonaws.mobileconnectors.apigateway.annotation.Operation(path = "/telegram/lot/publish/{proxy+}", method = "OPTIONS")
+    void telegramLotPublishProxyOptions();
     
 }
 
