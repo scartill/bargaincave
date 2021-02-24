@@ -129,6 +129,13 @@
           "attributes": [
             "Arn"
           ]
+        },
+        {
+          "category": "function",
+          "resourceName": "amplifyhelperslayer",
+          "attributes": [
+            "Arn"
+          ]
         }
       ]
     },
@@ -159,6 +166,11 @@
           ]
         }
       ]
+    },
+    "amplifyhelperslayer": {
+      "providerPlugin": "awscloudformation",
+      "service": "LambdaLayer",
+      "build": true
     }
   },
   "secretman": {

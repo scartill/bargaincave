@@ -35,6 +35,10 @@
     "functionhubspotlayerArn": {
       "Type": "String",
       "Default": "functionhubspotlayerArn"
+    },
+    "functionamplifyhelperslayerArn": {
+      "Type": "String",
+      "Default": "functionamplifyhelperslayerArn"
     }
   },
   "Conditions": {
@@ -114,6 +118,9 @@
           },
           {
             "Fn::Sub": "arn:aws:lambda:${AWS::Region}:${AWS::AccountId}:layer:hubspotlayer-staging:1"
+          },
+          {
+            "Fn::Sub": "arn:aws:lambda:${AWS::Region}:${AWS::AccountId}:layer:amplifyhelperslayer-staging:1"
           }
         ],
         "Timeout": "25"

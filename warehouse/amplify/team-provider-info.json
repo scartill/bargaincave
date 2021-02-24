@@ -34,11 +34,15 @@
         },
         "hubspotdeal": {
           "deploymentBucketName": "amplify-warehouse-staging-142503-deployment",
-          "s3Key": "amplify-builds/hubspotdeal-3355556e674b6b317773-build.zip"
+          "s3Key": "amplify-builds/hubspotdeal-347936776e4150675553-build.zip"
         },
         "lotsold": {
           "deploymentBucketName": "amplify-warehouse-staging-142503-deployment",
           "s3Key": "amplify-builds/lotsold-797347365a6930365268-build.zip"
+        },
+        "amplifyhelperslayer": {
+          "deploymentBucketName": "amplify-warehouse-staging-142503-deployment",
+          "s3Key": "amplify-builds/amplifyhelperslayer-build.zip"
         }
       }
     },
@@ -93,6 +97,35 @@
                 }
               ],
               "hash": "7eoh9V/JCzzvnQ/otd0yXYJp5Iwb/xKVzokwliu+rwM="
+            }
+          }
+        },
+        "warehousehelpers": {
+          "layerVersionMap": {
+            "1": {
+              "permissions": [
+                {
+                  "type": "public"
+                },
+                {
+                  "type": "private"
+                }
+              ]
+            }
+          }
+        },
+        "amplifyhelperslayer": {
+          "layerVersionMap": {
+            "1": {
+              "permissions": [
+                {
+                  "type": "public"
+                },
+                {
+                  "type": "private"
+                }
+              ],
+              "hash": "B/Gf1d72qEqOvdtCcqXAEPSaMVxwKkm5zXeZmvgb+Xo="
             }
           }
         }

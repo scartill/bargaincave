@@ -17,6 +17,11 @@
       "type": "ProjectLayer",
       "resourceName": "hubspotlayer",
       "version": 1
+    },
+    {
+      "type": "ProjectLayer",
+      "resourceName": "amplifyhelperslayer",
+      "version": 1
     }
   ]
 }
