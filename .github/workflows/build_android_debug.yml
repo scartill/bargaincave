@@ -10,7 +10,7 @@ jobs:
        with: {java-version: 1.8}
      - name: Install Amplify CLI
        run: |
-          npm install -g @aws-amplify/cli --unsafe-perm=true
+          sudo npm install -g @aws-amplify/cli --unsafe-perm=true
      - name: Build debug APK
        run: |
           chmod +x gradlew
