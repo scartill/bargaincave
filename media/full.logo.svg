@@ -12,8 +12,11 @@
    viewBox="0 0 210 297"
    version="1.1"
    id="svg8"
-   inkscape:version="1.0.1 (3bc2e813f5, 2020-09-07)"
-   sodipodi:docname="avocado.logo.svg">
+   inkscape:version="0.92.4 (5da689c313, 2019-01-14)"
+   sodipodi:docname="full.logo.svg"
+   inkscape:export-filename="H:\Libraries\Boris\Desktop\full.logo.png"
+   inkscape:export-xdpi="300"
+   inkscape:export-ydpi="300">
   <defs
      id="defs2" />
   <sodipodi:namedview
@@ -23,16 +26,16 @@
      borderopacity="1.0"
      inkscape:pageopacity="0.0"
      inkscape:pageshadow="2"
-     inkscape:zoom="0.79236615"
-     inkscape:cx="181.39837"
-     inkscape:cy="646.40898"
+     inkscape:zoom="1.120575"
+     inkscape:cx="749.24999"
+     inkscape:cy="553.96409"
      inkscape:document-units="mm"
      inkscape:current-layer="layer1"
      inkscape:document-rotation="0"
      showgrid="false"
-     inkscape:window-width="1920"
-     inkscape:window-height="1017"
-     inkscape:window-x="-8"
+     inkscape:window-width="2560"
+     inkscape:window-height="1377"
+     inkscape:window-x="1912"
      inkscape:window-y="-8"
      inkscape:window-maximized="1" />
   <metadata
@@ -43,7 +46,7 @@
         <dc:format>image/svg+xml</dc:format>
         <dc:type
            rdf:resource="http://purl.org/dc/dcmitype/StillImage" />
-        <dc:title></dc:title>
+        <dc:title />
       </cc:Work>
     </rdf:RDF>
   </metadata>
@@ -60,18 +63,6 @@
        y="83.870789"
        rx="1.0374631"
        ry="1.0374628" />
-    <path
-       style="fill:#008000;fill-opacity:1;stroke:#8d050e;stroke-width:0;stroke-linecap:round;paint-order:markers fill stroke"
-       id="path853"
-       sodipodi:type="arc"
-       sodipodi:cx="295.22345"
-       sodipodi:cy="176.01811"
-       sodipodi:rx="1.3526849"
-       sodipodi:ry="3.8889689"
-       sodipodi:start="6.2453291"
-       sodipodi:end="6.2638471"
-       sodipodi:arc-type="slice"
-       d="m 296.57517,175.87093 a 1.3526849,3.8889689 0 0 1 7.1e-4,0.072 l -1.35243,0.0752 z" />
     <g
        id="g1270"
        transform="translate(-170.59415,-66.167126)">
