@@ -10,6 +10,6 @@ jobs:
        with: {java-version: 1.8}
      - name: Build debug APK
        run: |
-          ls -al
-#         gradlew assembleDebug
+          chmod +x gradlew
+          ./gradlew assembleDebug
        working-directory: ./warehouse
