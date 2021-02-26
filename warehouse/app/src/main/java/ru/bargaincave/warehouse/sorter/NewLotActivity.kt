@@ -1,8 +1,8 @@
 package ru.bargaincave.warehouse.sorter
 
 import android.content.Intent
+import android.graphics.Bitmap
 import android.graphics.BitmapFactory
-import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.provider.MediaStore
 import android.util.Log
@@ -10,7 +10,9 @@ import android.view.View
 import android.widget.ArrayAdapter
 import android.widget.Spinner
 import android.widget.Toast
+import androidx.appcompat.app.AppCompatActivity
 import androidx.core.content.FileProvider
+import androidx.core.graphics.scale
 import androidx.lifecycle.coroutineScope
 import com.amplifyframework.core.Amplify
 import com.amplifyframework.datastore.generated.model.Lot
@@ -20,9 +22,12 @@ import kotlinx.coroutines.launch
 import ru.bargaincave.warehouse.R
 import ru.bargaincave.warehouse.databinding.ActivityNewLotBinding
 import java.io.File
+import java.io.FileOutputStream
 import java.util.*
 
+
 const val REQUEST_IMAGE_CAPTURE = 100
+const val BITMAP_TARGET_WIDTH = 1024
 
 class NewLotActivity : AppCompatActivity() {
 
@@ -80,6 +85,7 @@ class NewLotActivity : AppCompatActivity() {
 
             if (currentPhotoPath == "") {
                 Log.i("cave", "unable: photo is required")
+                setGUI(true)
                 b.photo.requestFocus()
                 return@setOnClickListener
             }
@@ -88,6 +94,7 @@ class NewLotActivity : AppCompatActivity() {
 
             if (weight == null) {
                 Log.i("Cave", "Unable: weight is required")
+                setGUI(true)
                 b.weight.requestFocus()
                 return@setOnClickListener
             }
@@ -121,7 +128,7 @@ class NewLotActivity : AppCompatActivity() {
         b.photo.isEnabled = enabled
         b.weight.isEnabled = enabled
         b.comment.isEnabled = enabled
-        b.progressBar.visibility = if(enabled) View.GONE else View.VISIBLE
+        b.progressBar.visibility = if (enabled) View.GONE else View.VISIBLE
     }
 
     private fun asyncSubmit(fruit: String, currentPhotoPath: String, weight: Double, comment: String) {
@@ -172,7 +179,18 @@ class NewLotActivity : AppCompatActivity() {
             if (requestCode == REQUEST_IMAGE_CAPTURE && resultCode == RESULT_OK) {
                 Log.i("Cave", "Rendering a preview")
                 BitmapFactory.decodeFile(currentPhotoPath)?.also {
-                    b.imageView.setImageBitmap(it)
+                    val ratio = it.width.toDouble() / it.height.toDouble()
+                    val w = BITMAP_TARGET_WIDTH
+                    val h = (BITMAP_TARGET_WIDTH / ratio).toInt()
+                    val scaled = it.scale(w, h)
+
+                    b.imageView.setImageBitmap(scaled)
+
+                    val out = FileOutputStream(currentPhotoPath)
+                    scaled.compress(Bitmap.CompressFormat.JPEG, 100, out)
+                    out.flush()
+                    out.close()
+
                     b.submit.isEnabled = true
                 }
             }
