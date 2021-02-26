@@ -1,5 +1,5 @@
 <resources>
-    <string name="app_name">BargainCave Warehouse</string>
+    <string name="app_name">Warehouse</string>
     <string name="title_activity_login">BC Warehouse</string>
     <string name="New">New</string>
     <string-array name="fruit_type">
