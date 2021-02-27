@@ -1,10 +1,11 @@
 import os
 import json
+import re
 
 import boto3
 
 from hubspot import HubSpot
-from hubspot.crm.objects import SimplePublicObjectInput
+from hubspot.crm.objects import SimplePublicObjectInput, PublicObjectSearchRequest, Filter, FilterGroup
 
 from gqlclient import GQLClient  # type: ignore
 
@@ -46,6 +47,36 @@ def get_hs_client():
     return HubSpot(api_key=api_key)
 
 
+def hubspot_contact_ensure(hapi, name, phone):
+    filter = Filter(
+        property_name="mobilephone",
+        operator="EQ",
+        value=phone,
+    )
+
+    filter_group = FilterGroup(filters=[filter])
+
+    posr = PublicObjectSearchRequest(
+        filter_groups=[filter_group],
+    )
+
+    contacts_page = hapi.crm.contacts.search_api.do_search(
+        public_object_search_request=posr
+    )
+
+    for contact in contacts_page.results:
+        return contact
+
+    new_contact = SimplePublicObjectInput(
+        properties={
+            'firstname': name,
+            'mobilephone': phone
+        }
+    )
+
+    return hapi.crm.contacts.basic_api.create(new_contact)
+
+
 def hubspot_deal_create(payload):
     lot_id = payload['lot_id']
     name = payload['name']
@@ -55,16 +86,7 @@ def hubspot_deal_create(payload):
 
     hapi = get_hs_client()
 
-    new_contact = SimplePublicObjectInput(
-        properties={
-            'firstname': name,
-            'mobilephone': phone
-        }
-    )
-    # TODO: check of a contact already exists
-    hapi.crm.contacts.basic_api.create(new_contact)
-
-    simple_public_object_input = SimplePublicObjectInput(
+    new_deal = SimplePublicObjectInput(
         properties={
             'amount': str(lot['price']),
             'dealname': f'Order for {lot["fruit"]}',
@@ -73,7 +95,11 @@ def hubspot_deal_create(payload):
             'pipeline': 'default'
         }
     )
-    hapi.crm.deals.basic_api.create(simple_public_object_input)
+    deal = hapi.crm.deals.basic_api.create(new_deal)
+
+    contact = hubspot_contact_ensure(hapi, name, phone)
+
+    assoc = hapi.crm.deals.associations_api.create(deal.id, 'contact', contact.id, 3)
 
     return 200
 
