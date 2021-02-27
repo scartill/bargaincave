@@ -1,5 +1,6 @@
 <script>
     import Amplify, { API } from 'aws-amplify';
+    import GDPR from '../components/GDPR.svelte';
 
     export let params = {};
     let status = 'init';
@@ -51,7 +52,7 @@
 
 {#if status == 'success'}
     <div>
-        <p>Thank you for your order!</p>
+        <p>Thank you for your order! We will call you to agree on delivery or pickup.</p>
     </div>
 {/if}
 
@@ -62,6 +63,8 @@
 {/if}
 
 <p>&copy; Bargain Cave, 2021</p>
+
+<GDPR/>
 
 <style>
 	h1 {

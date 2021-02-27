@@ -67,7 +67,7 @@ def telegram_api_command(payload):
 
     # TODO: Move order app URL to environment
     deep_url = f'https://master.d13at4rocoglfe.amplifyapp.com/#/order/{lot_id}'
-    message = 'Heads up! Selling {weightKg} kg of {fruit} for {price} per kg'.format(**lot)
+    message = 'Heads up! Selling {weightKg} kg of {fruit} for {price} ₽ per kg'.format(**lot)
     caption = f'{message}: {deep_url}'
 
     channel_id = os.getenv('CHANNEL_ID')
