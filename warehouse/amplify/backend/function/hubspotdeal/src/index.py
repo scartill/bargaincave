@@ -1,6 +1,6 @@
 import os
 import json
-import re
+import traceback
 
 import boto3
 
@@ -99,12 +99,27 @@ def hubspot_deal_create(payload):
 
     contact = hubspot_contact_ensure(hapi, name, phone)
 
-    assoc = hapi.crm.deals.associations_api.create(deal.id, 'contact', contact.id, 3)
-
-    return 200
+    hapi.crm.deals.associations_api.create(deal.id, 'contact', contact.id, 3)
 
 
-def make_response(return_code):
+def make_response(response=None, error=None):
+    if error:
+        return_code = 503
+        body = {
+            'result': 'error',
+            'error': str(error.message)
+        }
+    else:
+        return_code = 200
+        body = {
+            'result': 'ok'
+        }
+
+        if response:
+            body['data'] = response
+
+    body_string = json.dumps(body)
+
     return {
         'statusCode': return_code,
         'headers': {
@@ -112,22 +127,22 @@ def make_response(return_code):
             'Access-Control-Allow-Origin': '*',
             'Access-Control-Allow-Methods': 'OPTIONS,POST,GET'
         },
-        'body': '{"result": "executed"}'
+        'body': body_string
     }
 
 
 def handler(event, context):
     if event['httpMethod'] == 'OPTIONS':
-        return make_response(200)
-
-    return_code = 503
+        return make_response()
 
     try:
         # Unused for 'create' method
         # params = event['pathParameters']
         payload = json.loads(event['body'])
-        return_code = hubspot_deal_create(payload)
-    except Exception as e:
-        print(f'Hubspot exception {e}')
+        hubspot_deal_create(payload)
 
-    return make_response(return_code)
+        return make_response()
+    except Exception as e:
+        print(e)
+        traceback.print_exc()
+        return make_response(error=e)

@@ -34,7 +34,7 @@
         },
         "hubspotdeal": {
           "deploymentBucketName": "amplify-warehouse-staging-142503-deployment",
-          "s3Key": "amplify-builds/hubspotdeal-6341334f7a3661766a49-build.zip"
+          "s3Key": "amplify-builds/hubspotdeal-414b67577571626d6241-build.zip"
         },
         "lotsold": {
           "deploymentBucketName": "amplify-warehouse-staging-142503-deployment",
