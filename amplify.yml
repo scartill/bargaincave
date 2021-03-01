@@ -1,18 +1,14 @@
 version: 1
 applications:
   - appRoot: orderspa
-    backend:
+    frontend:
       phases:
-        build:
+        preBuild:
           commands:
             - amazon-linux-extras install python3.8
             - ln -fs /usr/bin/python3.8 /usr/bin/python3
             - pip3.8 install pipenv
             - bash contrib/amplifyPull.sh
-    frontend:
-      phases:
-        preBuild:
-          commands:
             - npm ci
         build:
           commands:
