@@ -36,5 +36,5 @@ PROVIDERS="{\
 amplify pull \
 --amplify $AMPLIFY \
 --frontend $FRONTEND \
---providers $PROVIDERS 
+--providers $PROVIDERS \
 --yes
