@@ -86,6 +86,27 @@
           "attributes": [
             "BucketName"
           ]
+        },
+        {
+          "category": "function",
+          "resourceName": "baselayer",
+          "attributes": [
+            "Arn"
+          ]
+        },
+        {
+          "category": "function",
+          "resourceName": "telegramlayer",
+          "attributes": [
+            "Arn"
+          ]
+        },
+        {
+          "category": "function",
+          "resourceName": "amplifyhelperslayer",
+          "attributes": [
+            "Arn"
+          ]
         }
       ]
     },

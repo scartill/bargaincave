@@ -128,7 +128,7 @@
             "Fn::Sub": "arn:aws:lambda:${AWS::Region}:${AWS::AccountId}:layer:telegramlayer-staging:2"
           },
           {
-            "Fn::Sub": "arn:aws:lambda:${AWS::Region}:${AWS::AccountId}:layer:amplifyhelperslayer-staging:2"
+            "Fn::Sub": "arn:aws:lambda:${AWS::Region}:${AWS::AccountId}:layer:amplifyhelperslayer-staging:4"
           }
         ],
         "Timeout": "25"

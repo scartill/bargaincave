@@ -8,6 +8,7 @@ from hubspot import HubSpot
 from hubspot.crm.objects import SimplePublicObjectInput, PublicObjectSearchRequest, Filter, FilterGroup
 
 from gqlclient import GQLClient  # type: ignore
+from rest_response import make_response  # type: ignore
 
 
 PRICE_QUERY = '''
@@ -100,35 +101,6 @@ def hubspot_deal_create(payload):
     contact = hubspot_contact_ensure(hapi, name, phone)
 
     hapi.crm.deals.associations_api.create(deal.id, 'contact', contact.id, 3)
-
-
-def make_response(response=None, error=None):
-    if error:
-        return_code = 503
-        body = {
-            'result': 'error',
-            'error': str(error.message)
-        }
-    else:
-        return_code = 200
-        body = {
-            'result': 'ok'
-        }
-
-        if response:
-            body['data'] = response
-
-    body_string = json.dumps(body)
-
-    return {
-        'statusCode': return_code,
-        'headers': {
-            'Access-Control-Allow-Headers': '*',
-            'Access-Control-Allow-Origin': '*',
-            'Access-Control-Allow-Methods': 'OPTIONS,POST,GET'
-        },
-        'body': body_string
-    }
 
 
 def handler(event, context):

@@ -9,6 +9,7 @@ from telegram import Bot
 TELEGRAM_BOT_TOKEN_SECRET_NAME = "telegram_token"
 
 from gqlclient import GQLClient  # type: ignore
+from rest_response import make_response  # type: ignore
 
 
 PRICE_QUERY = '''
@@ -80,30 +81,19 @@ def telegram_api_command(payload):
         caption=caption
     )
 
-    if message:
-        return 200
-
-    return 503
+    if not message:
+        raise RuntimeError('Cannot send telegram message')
 
 
 # Parameters: event, context
 def handler(event, _):
-    return_code = 503
-
     try:
         payload = json.loads(event['body'])
-        return_code = telegram_api_command(payload)
+        telegram_api_command(payload)
+
+        return make_response()
     except Exception as e:
         print(e)
         traceback.print_exc()
-        print(f'Telegram command exception {e}')
+        return make_response(error=e)
 
-    return {
-        'statusCode': return_code,
-        'headers': {
-            'Access-Control-Allow-Headers': '*',
-            'Access-Control-Allow-Origin': '*',
-            'Access-Control-Allow-Methods': 'OPTIONS,POST,GET'
-        },
-        'body': '{"result": "ok"}'
-    }
