@@ -1,17 +1,21 @@
 version: 1
 applications:
   - appRoot: orderspa
+    backend:
+      phases:
+        build:
+          commands:
+            - bash contrib/amplifyPull.sh
     frontend:
       phases:
         preBuild:
           commands:
-            
             - npm ci
         build:
           commands:
             - npm run build
       artifacts:
-        baseDirectory: public
+        baseDirectory: dist
         files:
           - '**/*'
       cache:

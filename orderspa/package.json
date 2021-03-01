@@ -3,7 +3,7 @@
 	"private": true,
 	"scripts": {
 		"build": "cross-env NODE_ENV=production webpack",
-		"dev": "webpack serve --content-base public",
+		"dev": "webpack serve --content-base dist",
 		"amplify-modelgen": "node amplify/scripts/amplify-modelgen.js",
 		"amplify-push": "node amplify/scripts/amplify-push.js"
 	},

@@ -50,7 +50,7 @@ const config: Configuration = {
 		mainFields: ['svelte', 'browser', 'module', 'main']
 	},
 	output: {
-		path: path.resolve(__dirname, 'public/build'),
+		path: path.resolve(__dirname, 'dist/build'),
 		publicPath: '/build/',
 		filename: '[name].js',
 		chunkFilename: '[name].[id].js'
@@ -146,7 +146,7 @@ const config: Configuration = {
 	devServer: {
 		hot: true,
 		stats: 'none',
-		contentBase: 'public',
+		contentBase: 'dist',
 		watchContentBase: true
 	},
 	target: isDevelopment ? 'web' : 'browserslist',
