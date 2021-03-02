@@ -1,6 +1,6 @@
 {
     "identityPoolName": "warehouse40c048f0_identitypool_853a6552",
-    "allowUnauthenticatedIdentities": true,
+    "allowUnauthenticatedIdentities": false,
     "resourceNameTruncated": "wareho40c048f0",
     "userPoolName": "warehouse40c048f0_userpool_40c048f0",
     "autoVerifiedAttributes": [
@@ -45,21 +45,30 @@
             "Arn"
         ]
     },
-    "useDefault": "default",
+    "useDefault": "manual",
     "usernameAttributes": [
         "email"
     ],
-    "userPoolGroupList": [],
+    "userPoolGroupList": [
+        "admins",
+        "managers",
+        "sorters"
+    ],
     "serviceName": "Cognito",
     "usernameCaseSensitive": false,
     "dependsOn": [],
-    "userPoolGroups": false,
+    "userPoolGroups": true,
     "adminQueries": false,
     "triggers": "{}",
-    "hostedUI": false,
+    "hostedUI": true,
     "parentStack": {
         "Ref": "AWS::StackId"
     },
     "permissions": [],
-    "authProviders": []
+    "authProviders": [],
+    "thirdPartyAuth": false,
+    "hostedUIDomainName": "warehouse-bargaincave",
+    "authProvidersUserPool": [],
+    "hostedUIProviderMeta": "[]",
+    "oAuthMetadata": "{\"AllowedOAuthFlows\":[\"code\"],\"AllowedOAuthScopes\":[\"phone\",\"email\",\"openid\",\"profile\",\"aws.cognito.signin.user.admin\"],\"CallbackURLs\":[\"https://warehouse.bargaincave.ru/\"],\"LogoutURLs\":[\"https://warehouse.bargaincave.ru/\"]}"
 }

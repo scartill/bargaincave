@@ -13,7 +13,8 @@
     },
     "categories": {
       "auth": {
-        "warehouse40c048f0": {}
+        "warehouse40c048f0": {},
+        "userPoolGroups": {}
       },
       "function": {
         "telegrampublish": {

@@ -200,9 +200,17 @@ class CognitoLoginActivity : AppCompatActivity() {
                 Log.i("Cave", "Signed in: $signedIn")
 
                 if (signedIn) {
-                    val userGroups = CognitoHelper.getUserGroups()
-                    isManager = userGroups?.contains("managers") ?: false
-                    isSorter = userGroups?.contains("sorters") ?: false
+                    val r = kotlin.runCatching {
+                        val userGroups = CognitoHelper.getUserGroups()
+                        isManager = userGroups?.contains("managers") ?: false
+                        isSorter = userGroups?.contains("sorters") ?: false
+                    }
+
+                    if (r.isFailure) {
+                        runOnUiThread {
+                            Toast.makeText(applicationContext, getString(R.string.re_login_prompt), Toast.LENGTH_LONG).show()
+                        }
+                    }
                 }
 
                 logginin = false
