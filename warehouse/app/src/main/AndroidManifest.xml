@@ -19,7 +19,7 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/Theme.BargainCaveWarehouse">
-        <activity android:name=".manager.LotApproveActivity" />
+        <activity android:name=".manager.LotApproveActivity" android:label="@string/approve_lot_activity_label"/>
         <activity android:name=".NewPasswordActivity" />
         <activity
             android:name=".CognitoLoginActivity">
@@ -40,9 +40,9 @@
                 android:resource="@xml/fileprovider" />
         </provider>
 
-        <activity android:name=".sorter.SorterMainActivity" />
-        <activity android:name=".sorter.NewLotActivity" />
-        <activity android:name=".manager.ManagerMainActivity" />
+        <activity android:name=".sorter.SorterMainActivity" android:label="@string/sorter_activity_label" />
+        <activity android:name=".sorter.NewLotActivity" android:label="@string/new_lot_activity_label"/>
+        <activity android:name=".manager.ManagerMainActivity"  android:label="@string/manager_activity_label"/>
     </application>
 
 </manifest>

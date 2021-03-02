@@ -1,6 +1,10 @@
 <resources>
     <string name="app_name">Warehouse</string>
     <string name="title_activity_login">BC Warehouse</string>
+    <string name="sorter_activity_label">Sorter Mode</string>
+    <string name="manager_activity_label">Manager Mode</string>
+    <string name="new_lot_activity_label">Create New Lot</string>
+    <string name="approve_lot_activity_label">Approve This Lot</string>
     <string name="New">New</string>
     <string-array name="fruit_type">
         <item>Mango</item>

@@ -6,6 +6,7 @@ import android.content.pm.PackageManager
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.util.Log
+import android.view.View
 import android.widget.Toast
 import androidx.activity.result.contract.ActivityResultContracts
 import androidx.appcompat.app.AlertDialog
@@ -26,6 +27,7 @@ class CognitoLoginActivity : AppCompatActivity() {
 
     private lateinit var b: ActivityCognitoLoginBinding
     private var signedIn = false
+    private var logginin = false
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -59,7 +61,9 @@ class CognitoLoginActivity : AppCompatActivity() {
                 { result ->
                     signedIn = result.isSignedIn
                     Log.i("Cave", "Signed in: $signedIn")
-                    updateGUI()
+                    runOnUiThread {
+                        updateGUI()
+                    }
                 },
                 { error ->
                     Log.i("Cave", "Unable to fetch authentication session")
@@ -73,16 +77,10 @@ class CognitoLoginActivity : AppCompatActivity() {
         }
 
         b.login.setOnClickListener {
-            b.loginError.text = getString(R.string.ok)
+            logginin = true
+            updateGUI()
 
-            // TODO: move to successful login
-            getPreferences(Context.MODE_PRIVATE).also {
-                with(it.edit()) {
-                    val email = b.email.text.toString()
-                    putString(getString(R.string.user_email_key), email)
-                    apply()
-                }
-            }
+            b.loginError.text = getString(R.string.ok)
 
             val email = b.email.text.toString()
             val password = b.password.text.toString()
@@ -94,18 +92,34 @@ class CognitoLoginActivity : AppCompatActivity() {
                 { result ->
                     if (result.isSignInComplete) {
                         Log.i("Cave", "Sign in succeeded")
+
                         signedIn = true
-                        updateGUI()
+                        logginin = false
+
+                        runOnUiThread {
+                            getPreferences(Context.MODE_PRIVATE).also {
+                                with(it.edit()) {
+                                    val email = b.email.text.toString()
+                                    putString(getString(R.string.user_email_key), email)
+                                    apply()
+                                }
+                            }
+
+                            updateGUI()
+                        }
                     } else {
                         Log.i("Cave", "Sign in not complete - ${result.nextStep.signInStep}")
-                        signedIn = false
-                        updateGUI()
 
-                        if (result.nextStep.signInStep == AuthSignInStep.CONFIRM_SIGN_IN_WITH_NEW_PASSWORD) {
-                            val intent = Intent(this, NewPasswordActivity::class.java)
-                            startActivity(intent)
-                        } else {
-                            runOnUiThread {
+                        signedIn = false
+                        logginin = false
+
+                        runOnUiThread {
+                            updateGUI()
+
+                            if (result.nextStep.signInStep == AuthSignInStep.CONFIRM_SIGN_IN_WITH_NEW_PASSWORD) {
+                                val intent = Intent(this, NewPasswordActivity::class.java)
+                                startActivity(intent)
+                            } else {
                                 b.loginError.text = getString(R.string.cannot_login)
                             }
                         }
@@ -113,7 +127,10 @@ class CognitoLoginActivity : AppCompatActivity() {
                 },
                 { error ->
                     Log.e("Cave", error.toString())
+                    logginin = false
+
                     runOnUiThread {
+                        updateGUI()
                         b.loginError.text = error.message
                         Toast.makeText(applicationContext, error.message, Toast.LENGTH_LONG).show()
                     }
@@ -123,16 +140,23 @@ class CognitoLoginActivity : AppCompatActivity() {
 
         b.logout.setOnClickListener {
             Log.i("Cave", "Logging out")
+            logginin = true
+            updateGUI()
+
             Amplify.Auth.signOut(
                 AuthSignOutOptions.builder().globalSignOut(true).build(),
                 {
                     Log.i("Cave", "Signed out")
                     signedIn = false
+                    logginin = false
                     updateGUI()
                 },
                 { error ->
                     Log.e("Cave", error.toString())
+                    logginin = false
+
                     runOnUiThread {
+                        updateGUI()
                         b.loginError.text = error.message
                     }
                 }
@@ -189,15 +213,21 @@ class CognitoLoginActivity : AppCompatActivity() {
     }
 
     private fun updateGUI() {
-        runOnUiThread {
-            b.email.isEnabled = !signedIn
-            b.password.isEnabled = !signedIn
-            b.login.isEnabled = !signedIn
-            b.logout.isEnabled = signedIn
-            b.sorter.isEnabled = signedIn
-            // TODO: check manager's permissions
-            b.manager.isEnabled = signedIn
+
+        if (logginin) {
+            b.loginProgress.visibility = View.VISIBLE
+        } else {
+            b.loginProgress.visibility = View.GONE
         }
+
+        b.email.isEnabled = !signedIn && !logginin
+        b.password.isEnabled = !signedIn && !logginin
+        b.login.isEnabled = !signedIn && !logginin
+        b.logout.isEnabled = signedIn && !logginin
+        b.sorter.isEnabled = signedIn && !logginin
+
+        // TODO: check manager's permissions
+        b.manager.isEnabled = signedIn && !logginin
     }
 
     private fun startSorter() {
