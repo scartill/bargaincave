@@ -202,8 +202,9 @@ class CognitoLoginActivity : AppCompatActivity() {
                 if (signedIn) {
                     val r = kotlin.runCatching {
                         val userGroups = CognitoHelper.getUserGroups()
-                        isManager = userGroups?.contains("managers") ?: false
-                        isSorter = userGroups?.contains("sorters") ?: false
+                        val isAdmin = userGroups?.contains("admins") ?: false
+                        isManager = isAdmin || userGroups?.contains("managers") ?: false
+                        isSorter = isAdmin || userGroups?.contains("sorters") ?: false
                     }
 
                     if (r.isFailure) {
@@ -215,7 +216,6 @@ class CognitoLoginActivity : AppCompatActivity() {
 
                 logginin = false
 
-                // TODO: Support group authorization on the backend
                 runOnUiThread {
                     updateGUI()
                 }
