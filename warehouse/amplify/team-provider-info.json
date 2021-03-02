@@ -34,7 +34,7 @@
         },
         "hubspotdeal": {
           "deploymentBucketName": "amplify-warehouse-staging-142503-deployment",
-          "s3Key": "amplify-builds/hubspotdeal-6669416d546535502f52-build.zip"
+          "s3Key": "amplify-builds/hubspotdeal-4c4e2f3034793068326a-build.zip"
         },
         "lotsold": {
           "deploymentBucketName": "amplify-warehouse-staging-142503-deployment",
@@ -159,6 +159,17 @@
                 }
               ],
               "hash": "hVbZJN0nYTdMvnlHjUbYTAJmd96DkcFdQLfYVTWudlk="
+            },
+            "5": {
+              "permissions": [
+                {
+                  "type": "public"
+                },
+                {
+                  "type": "private"
+                }
+              ],
+              "hash": "0s31oohzcRLvv0a5OQLM+cH1RlTcVnx+LJpXGzt9808="
             }
           }
         }

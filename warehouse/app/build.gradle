@@ -66,4 +66,6 @@ dependencies {
     implementation 'com.amplifyframework:aws-auth-cognito:1.16.11'
     implementation 'com.amplifyframework:aws-storage-s3:1.16.11'
     implementation 'com.amplifyframework:aws-api:1.16.11'
+
+    implementation 'com.beust:klaxon:5.0.1'
 }

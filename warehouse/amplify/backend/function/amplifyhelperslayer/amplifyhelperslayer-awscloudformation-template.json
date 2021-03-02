@@ -117,6 +117,25 @@
       "Properties": {
         "Action": "lambda:GetLayerVersion",
         "LayerVersionArn": {
+          "Fn::Sub": [
+            "arn:aws:lambda:${AWS::Region}:${AWS::AccountId}:layer:${layerName}-${env}:${layerVersion}",
+            {
+              "layerName": "amplifyhelperslayer",
+              "env": {
+                "Ref": "env"
+              },
+              "layerVersion": "4"
+            }
+          ]
+        },
+        "Principal": "*"
+      }
+    },
+    "LambdaLayerPermissionpublic5": {
+      "Type": "AWS::Lambda::LayerVersionPermission",
+      "Properties": {
+        "Action": "lambda:GetLayerVersion",
+        "LayerVersionArn": {
           "Ref": "LambdaLayer"
         },
         "Principal": "*"

@@ -120,7 +120,7 @@
             "Fn::Sub": "arn:aws:lambda:${AWS::Region}:${AWS::AccountId}:layer:hubspotlayer-staging:1"
           },
           {
-            "Fn::Sub": "arn:aws:lambda:${AWS::Region}:${AWS::AccountId}:layer:amplifyhelperslayer-staging:4"
+            "Fn::Sub": "arn:aws:lambda:${AWS::Region}:${AWS::AccountId}:layer:amplifyhelperslayer-staging:5"
           }
         ],
         "Timeout": "25"
