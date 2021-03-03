@@ -37,6 +37,11 @@ class CognitoLoginActivity : AppCompatActivity() {
         b = ActivityCognitoLoginBinding.inflate(layoutInflater)
         setContentView(b.root)
 
+        signedIn = false
+        logginin = false
+        isSorter = false
+        isManager = false
+
         getPreferences(Context.MODE_PRIVATE).also {
             it.getString(getString(R.string.user_email_key), "").also { value ->
                 b.email.setText(value ?: "")
@@ -48,20 +53,6 @@ class CognitoLoginActivity : AppCompatActivity() {
         }
         b.password.addTextChangedListener {
             textChangeListener()
-        }
-
-        try {
-            Amplify.addPlugin(AWSDataStorePlugin())
-            Amplify.addPlugin(AWSApiPlugin())
-            Amplify.addPlugin(AWSCognitoAuthPlugin())
-            Amplify.addPlugin(AWSS3StoragePlugin())
-            Amplify.addPlugin(AWSApiPlugin())
-            Amplify.configure(applicationContext)
-            Log.i("Cave", "Initialized Amplify")
-
-            fetchAuthSession()
-        } catch (failure: AmplifyException) {
-            Log.e("Cave", "Could not initialize Amplify", failure)
         }
 
         b.login.setOnClickListener {
@@ -142,6 +133,7 @@ class CognitoLoginActivity : AppCompatActivity() {
                 },
                 { error ->
                     Log.e("Cave", error.toString())
+                    signedIn = false
                     logginin = false
 
                     runOnUiThread {
@@ -189,10 +181,25 @@ class CognitoLoginActivity : AppCompatActivity() {
             val intent = Intent(this, ManagerMainActivity::class.java)
             startActivity(intent)
         }
+
+        try {
+            Amplify.addPlugin(AWSDataStorePlugin())
+            Amplify.addPlugin(AWSApiPlugin())
+            Amplify.addPlugin(AWSCognitoAuthPlugin())
+            Amplify.addPlugin(AWSS3StoragePlugin())
+            Amplify.addPlugin(AWSApiPlugin())
+            Amplify.configure(applicationContext)
+            Log.i("Cave", "Initialized Amplify")
+
+            fetchAuthSession()
+        } catch (failure: AmplifyException) {
+            Log.e("Cave", "Could not initialize Amplify", failure)
+        }
     }
 
     private fun fetchAuthSession() {
         logginin = true
+        updateGUI()
 
         Amplify.Auth.fetchAuthSession(
             { result ->
@@ -225,6 +232,7 @@ class CognitoLoginActivity : AppCompatActivity() {
                 logginin = false
 
                 runOnUiThread {
+                    updateGUI()
                     b.loginError.text = error.message
                 }
             }

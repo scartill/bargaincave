@@ -10,6 +10,7 @@ import android.view.View
 import android.widget.ArrayAdapter
 import android.widget.Spinner
 import android.widget.Toast
+import androidx.activity.result.contract.ActivityResultContracts
 import androidx.appcompat.app.AppCompatActivity
 import androidx.core.content.FileProvider
 import androidx.core.graphics.scale
@@ -56,6 +57,32 @@ class NewLotActivity : AppCompatActivity() {
             spinner.adapter = adapter
         }
 
+        val photoRequester = registerForActivityResult(ActivityResultContracts.TakePicture()) { taken ->
+            try {
+                if (taken) {
+                    Log.i("Cave", "Rendering a preview")
+                    BitmapFactory.decodeFile(currentPhotoPath)?.also {
+                        val ratio = it.width.toDouble() / it.height.toDouble()
+                        val w = BITMAP_TARGET_WIDTH
+                        val h = (BITMAP_TARGET_WIDTH / ratio).toInt()
+                        val scaled = it.scale(w, h)
+
+                        b.imageView.setImageBitmap(scaled)
+
+                        val out = FileOutputStream(currentPhotoPath)
+                        scaled.compress(Bitmap.CompressFormat.JPEG, 100, out)
+                        out.flush()
+                        out.close()
+
+                        b.submit.isEnabled = true
+                    }
+                }
+            } catch (error: Exception) {
+                b.error.text = error.message
+                Log.e("Cave", "Unable to render a preview", error)
+            }
+        }
+
         b.photo.setOnClickListener {
             Log.i("Cave", "Taking a photo")
             try {
@@ -66,12 +93,14 @@ class NewLotActivity : AppCompatActivity() {
                 currentPhotoPath = outputFile.path
                 Log.i("Cave", "Using temp file $currentPhotoPath")
 
+                val photoURI = FileProvider.getUriForFile(this, "ru.bargaincave.warehouse.fileprovider", outputFile)
+                /*
                 val takePictureIntent = Intent(MediaStore.ACTION_IMAGE_CAPTURE).also {
                     it.addFlags(Intent.FLAG_GRANT_READ_URI_PERMISSION)
                 }
-                val photoURI = FileProvider.getUriForFile(this, "ru.bargaincave.warehouse.fileprovider", outputFile)
                 takePictureIntent.putExtra(MediaStore.EXTRA_OUTPUT, photoURI)
-                startActivityForResult(takePictureIntent, REQUEST_IMAGE_CAPTURE)
+                startActivityForResult(takePictureIntent, REQUEST_IMAGE_CAPTURE)*/
+                photoRequester.launch(photoURI)
             } catch (error: Exception) {
                 b.error.text = error.message
                 Log.e("Cave", "Unable to take a photo", error)
@@ -171,32 +200,5 @@ class NewLotActivity : AppCompatActivity() {
                 throw error
             }
         )
-    }
-
-    override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {
-        try {
-            super.onActivityResult(requestCode, resultCode, data)
-            if (requestCode == REQUEST_IMAGE_CAPTURE && resultCode == RESULT_OK) {
-                Log.i("Cave", "Rendering a preview")
-                BitmapFactory.decodeFile(currentPhotoPath)?.also {
-                    val ratio = it.width.toDouble() / it.height.toDouble()
-                    val w = BITMAP_TARGET_WIDTH
-                    val h = (BITMAP_TARGET_WIDTH / ratio).toInt()
-                    val scaled = it.scale(w, h)
-
-                    b.imageView.setImageBitmap(scaled)
-
-                    val out = FileOutputStream(currentPhotoPath)
-                    scaled.compress(Bitmap.CompressFormat.JPEG, 100, out)
-                    out.flush()
-                    out.close()
-
-                    b.submit.isEnabled = true
-                }
-            }
-        } catch (error: Exception) {
-            b.error.text = error.message
-            Log.e("Cave", "Unable to render a preview", error)
-        }
     }
 }
