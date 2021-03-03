@@ -90,8 +90,8 @@ class NewLotActivity : AppCompatActivity() {
                 outputDir.mkdir()
                 val outputFile = File.createTempFile("lot_photo_", ".jpg", outputDir)
                 outputFile.deleteOnExit()
+
                 currentPhotoPath = outputFile.path
-                Log.i("Cave", "Using temp file $currentPhotoPath")
 
                 val photoURI = FileProvider.getUriForFile(this, "ru.bargaincave.warehouse.fileprovider", outputFile)
                 photoRequester.launch(photoURI)
