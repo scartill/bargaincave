@@ -94,12 +94,6 @@ class NewLotActivity : AppCompatActivity() {
                 Log.i("Cave", "Using temp file $currentPhotoPath")
 
                 val photoURI = FileProvider.getUriForFile(this, "ru.bargaincave.warehouse.fileprovider", outputFile)
-                /*
-                val takePictureIntent = Intent(MediaStore.ACTION_IMAGE_CAPTURE).also {
-                    it.addFlags(Intent.FLAG_GRANT_READ_URI_PERMISSION)
-                }
-                takePictureIntent.putExtra(MediaStore.EXTRA_OUTPUT, photoURI)
-                startActivityForResult(takePictureIntent, REQUEST_IMAGE_CAPTURE)*/
                 photoRequester.launch(photoURI)
             } catch (error: Exception) {
                 b.error.text = error.message
