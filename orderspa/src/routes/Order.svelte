@@ -38,8 +38,12 @@
 
 {#if status == 'init'}
     <div>
-        <p>Name: <input bind:value={name}/></p>
-        <p>Phone: <input bind:value={phone}/></p>
+        <label for="fname">Name:</label>
+        <input id="fname" bind:value={name}/><br/>
+        <br/>
+        <label for="fphone">Phone:</label>
+        <input id="fphone" bind:value={phone}/><br/>
+        <br/>
         <button on:click={submitClick}>Submit</button>
     </div>
 {/if}
