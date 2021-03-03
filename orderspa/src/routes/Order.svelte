@@ -38,7 +38,7 @@
 
 {#if status == 'init'}
     <div>
-        <p>Name: <input bind:value={name}/>
+        <p>Name: <input bind:value={name}/></p>
         <p>Phone: <input bind:value={phone}/></p>
         <button on:click={submitClick}>Submit</button>
     </div>
