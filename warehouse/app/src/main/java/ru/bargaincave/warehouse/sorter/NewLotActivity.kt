@@ -20,6 +20,7 @@ import com.amplifyframework.datastore.generated.model.Lot
 import com.amplifyframework.storage.StorageAccessLevel
 import com.amplifyframework.storage.options.StorageUploadFileOptions
 import kotlinx.coroutines.launch
+import okhttp3.internal.wait
 import ru.bargaincave.warehouse.R
 import ru.bargaincave.warehouse.databinding.ActivityNewLotBinding
 import java.io.File
@@ -135,8 +136,8 @@ class NewLotActivity : AppCompatActivity() {
                             Toast.makeText(applicationContext, getString(R.string.submit_ok), Toast.LENGTH_LONG).show()
                             finish()
                         } else {
-                            b.error.text = error.message
                             Log.e("cave", "unable to submit", error)
+                            b.error.text = error.message
                             setGUI(true)
                         }
                     }
@@ -185,13 +186,17 @@ class NewLotActivity : AppCompatActivity() {
                     },
                     { error ->
                         Log.e("Cave", "Could not save item to DataStore", error)
-                        throw error
+                        runOnUiThread {
+                            b.error.text = error.message
+                        }
                     }
                 )
             },
             { error ->
                 Log.e("Cave", "Upload failed", error)
-                throw error
+                runOnUiThread {
+                    b.error.text = error.message
+                }
             }
         )
     }
