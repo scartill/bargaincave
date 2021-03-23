@@ -6,10 +6,12 @@
             "delete"
         ],
         "managers": [
+            "create/update",
             "read"
         ],
         "sorters": [
-            "create/update"
+            "create/update",
+            "read"
         ]
     }
 }
