@@ -121,19 +121,35 @@ class CognitoLoginActivity : AppCompatActivity() {
             logginin = true
             updateGUI()
 
-            Amplify.Auth.signOut(
-                AuthSignOutOptions.builder().globalSignOut(true).build(),
+            Log.i("Cave", "Clearing local cache")
+            Amplify.DataStore.clear(
                 {
-                    Log.i("Cave", "Signed out")
-                    signedIn = false
-                    logginin = false
-                    runOnUiThread {
-                        updateGUI()
-                    }
+                    Log.i("Cave", "Clearing completed, proceed to logout")
+
+                    Amplify.Auth.signOut(
+                        AuthSignOutOptions.builder().globalSignOut(true).build(),
+                        {
+                            Log.i("Cave", "Signed out")
+                            signedIn = false
+                            logginin = false
+                            runOnUiThread {
+                                updateGUI()
+                            }
+                        },
+                        { error ->
+                            Log.e("Cave", error.toString())
+                            signedIn = false
+                            logginin = false
+
+                            runOnUiThread {
+                                updateGUI()
+                                b.loginError.text = error.message
+                            }
+                        }
+                    )
                 },
                 { error ->
                     Log.e("Cave", error.toString())
-                    signedIn = false
                     logginin = false
 
                     runOnUiThread {
@@ -141,7 +157,6 @@ class CognitoLoginActivity : AppCompatActivity() {
                         b.loginError.text = error.message
                     }
                 }
-
             )
         }
 
