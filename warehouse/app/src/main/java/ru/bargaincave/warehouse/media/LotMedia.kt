@@ -30,24 +30,27 @@ class LotPhotoHolder(private val b: ItemLotPhotoBinding): RecyclerView.ViewHolde
 
     private var currentPhoto: LotPhoto? = null
 
-    fun bind(photo: LotPhoto) {
+    fun bind(ctx: Context, photo: LotPhoto) {
         currentPhoto = photo
-        currentPhoto?.photoFile.let { filename ->
-            BitmapFactory.decodeFile(filename)?.also {
+        currentPhoto?.photoFile?.let { filename ->
+            Log.d("Cave", "Rendering $filename")
+            val outputDir = File(ctx.cacheDir, "/image")
+            val filepath = File(outputDir, filename).path
+            BitmapFactory.decodeFile(filepath)?.also {
                 b.imageView.setImageBitmap(it)
             }
         }
     }
 }
 
-class LotPhotoListAdapter : ListAdapter<LotPhoto, LotPhotoHolder>(LotPhotoDiffCallback) {
+class LotPhotoListAdapter(val ctx: Context) : ListAdapter<LotPhoto, LotPhotoHolder>(LotPhotoDiffCallback) {
     // Create new views (invoked by the layout manager)
     override fun onCreateViewHolder(viewGroup: ViewGroup, viewType: Int): LotPhotoHolder {
         return LotPhotoHolder.create(viewGroup)
     }
 
     override fun onBindViewHolder(viewHolder: LotPhotoHolder, position: Int) {
-        viewHolder.bind(getItem(position))
+        viewHolder.bind(ctx, getItem(position))
     }
 }
 
@@ -62,41 +65,42 @@ object LotPhotoDiffCallback: DiffUtil.ItemCallback<LotPhoto>() {
 }
 
 class S3Uploader(val media: LotMedia) {
-    var failed: Boolean = false
 
-    suspend fun uploadAsync() = withContext(Dispatchers.IO) {
-        uploadFrom(0)
+    fun uploadAsync(ctx: Context, onSuccess: () -> Unit, onError: (Exception) -> Unit) {
+        uploadFrom(ctx, 0, onSuccess, onError)
     }
 
-    private fun uploadFrom(index: Int) {
+    private fun uploadFrom(ctx: Context, index: Int, onSuccess: () -> Unit, onError: (Exception) -> Unit) {
         try {
             val photos = media.photos
-            val photo = photos[index]
-            val photoFile = File(photo.photoFile)
-            val s3key = photoFile.name
-            Log.i("Cave", "Uploading $index ($s3key)")
+            val photoKey = media.photos[index].photoFile
+            val outputDir = File(ctx.cacheDir, "/image")
+            val photoFile = File(outputDir, photoKey)
+            Log.i("Cave", "Uploading $index ($photoKey)")
 
             val options = StorageUploadFileOptions.builder()
                 .accessLevel(StorageAccessLevel.PUBLIC)
                 .build()
 
-            Log.i("Cave", "Uploading $s3key")
-            Amplify.Storage.uploadFile(s3key, photoFile, options,
+            Log.i("Cave", "Uploading $photoKey")
+            Amplify.Storage.uploadFile(photoKey, photoFile, options,
                 {
                     Log.i("Cave", "Upload completed")
                     if (index < photos.size - 1) {
-                        uploadFrom(index + 1)
+                        uploadFrom(ctx, index + 1, onSuccess, onError)
+                    } else {
+                        onSuccess()
                     }
                 },
                 { error ->
                     Log.e("Cave", "Upload failed", error)
-                    failed = true
+                    onError(error)
                 }
             )
         }
         catch(error: Exception) {
             Log.e("Cave", "Upload failed", error)
-            failed = true
+            onError(error)
         }
     }
 }

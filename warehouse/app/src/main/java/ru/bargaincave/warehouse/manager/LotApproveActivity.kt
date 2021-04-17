@@ -32,7 +32,7 @@ class LotApproveActivity : AppCompatActivity() {
     private var publishing: Boolean = false
 
     private var media: LotMedia? = null
-    private val photoLA: LotPhotoListAdapter = LotPhotoListAdapter()
+    private lateinit var photoLA: LotPhotoListAdapter
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -40,6 +40,8 @@ class LotApproveActivity : AppCompatActivity() {
         b = ActivityLotApproveBinding.inflate(layoutInflater)
         val view = b.root
         setContentView(view)
+
+        photoLA = LotPhotoListAdapter(applicationContext)
 
         val linearLayoutManager = LinearLayoutManager(this)
         linearLayoutManager.orientation = LinearLayoutManager.HORIZONTAL
@@ -122,10 +124,7 @@ class LotApproveActivity : AppCompatActivity() {
         }
 
         setGUI()
-
-        this.lifecycle.coroutineScope.launch {
-            loadAsync()
-        }
+        loadAsync()
     }
 
     private fun setGUI() {
@@ -137,68 +136,66 @@ class LotApproveActivity : AppCompatActivity() {
         b.laProgress.visibility = if (inProgress) View.VISIBLE else View.GONE
     }
 
-    private suspend fun loadAsync() {
+    private fun loadAsync() {
         val lotId = intent.getStringExtra("lot_id")
 
-        withContext(Dispatchers.IO) {
-            Amplify.DataStore.query(
-                Lot::class.java,
-                Where.matches(Lot.ID.eq(lotId)),
-                {
-                    if (it.hasNext()) {
-                        lot = it.next()
-                        Log.i("Cave", "Loaded $lot")
+        Amplify.DataStore.query(
+            Lot::class.java,
+            Where.matches(Lot.ID.eq(lotId)),
+            {
+                if (it.hasNext()) {
+                    lot = it.next()
+                    Log.i("Cave", "Loaded $lot")
 
-                        lot?.let { lot ->
-                            media = LotMedia.restore(lot.resources)
-                            media?.let {
-                                val s3 = S3Downloader(it)
-                                s3.downloadAsync(applicationContext,
-                                    {
-                                        runOnUiThread {
-                                            Log.i("Cave", "Media download complete")
+                    lot?.let { lot ->
+                        media = LotMedia.restore(lot.resources)
+                        media?.let {
+                            val s3 = S3Downloader(it)
+                            s3.downloadAsync(applicationContext,
+                                {
+                                    runOnUiThread {
+                                        Log.i("Cave", "Media download complete")
 
-                                            val na = getString(R.string.unknown)
-                                            b.laFruit.text = lot.fruit ?: na
-                                            b.laWeight.text = lot.weightKg?.toString() ?: na
-                                            b.laComment.text = lot.comment ?: na
-                                            b.price.setText(lot.price?.toString() ?: "")
-                                            photoLA.submitList(it.photos)
+                                        val na = getString(R.string.unknown)
+                                        b.laFruit.text = lot.fruit ?: na
+                                        b.laWeight.text = lot.weightKg?.toString() ?: na
+                                        b.laComment.text = lot.comment ?: na
+                                        b.price.setText(lot.price?.toString() ?: "")
+                                        photoLA.submitList(it.photos)
 
-                                            loaded = true
-                                            setGUI()
-                                        }
-                                    },
-                                    { error ->
-                                        Log.e("Cave", "Photo download failure", error)
-                                        runOnUiThread {
-                                            b.laError.text = error.message
-                                            b.laProgress.visibility = View.GONE
-                                        }
+                                        loaded = true
+                                        setGUI()
                                     }
-                                )
-                            } ?: run {
-                                Log.w("Cave", "Bad resources JSON")
-                            }
-                        }
-
-                    } else {
-                        Log.i("Cave", "A lot was not found")
-
-                        runOnUiThread {
-                            b.laError.text = getString(R.string.unable_to_load)
+                                },
+                                { error ->
+                                    Log.e("Cave", "Photo download failure", error)
+                                    runOnUiThread {
+                                        b.laError.text = error.message
+                                        b.laProgress.visibility = View.GONE
+                                    }
+                                }
+                            )
+                        } ?: run {
+                            Log.w("Cave", "Bad resources JSON")
                         }
                     }
-                },
-                { error ->
-                    Log.e("Cave", "Could not query DataStore", error)
+
+                } else {
+                    Log.i("Cave", "A lot was not found")
 
                     runOnUiThread {
-                        b.laError.text = error.message
-                        b.laProgress.visibility = View.GONE
+                        b.laError.text = getString(R.string.unable_to_load)
                     }
                 }
-            )
-        }
+            },
+            { error ->
+                Log.e("Cave", "Could not query DataStore", error)
+
+                runOnUiThread {
+                    b.laError.text = error.message
+                    b.laProgress.visibility = View.GONE
+                }
+            }
+        )
     }
 }

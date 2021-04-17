@@ -35,7 +35,7 @@ class NewLotActivity : AppCompatActivity() {
     private lateinit var b: ActivityNewLotBinding
     private lateinit var currentPhotoPath: String
     private var photos = mutableListOf<LotPhoto>()
-    private val photoLA: LotPhotoListAdapter = LotPhotoListAdapter()
+    private lateinit var photoLA: LotPhotoListAdapter
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -45,6 +45,8 @@ class NewLotActivity : AppCompatActivity() {
         b = ActivityNewLotBinding.inflate(layoutInflater)
         val view = b.root
         setContentView(view)
+
+        photoLA = LotPhotoListAdapter(applicationContext)
 
         b.submit.isEnabled = false
         b.progressBar.visibility = View.GONE
@@ -81,8 +83,9 @@ class NewLotActivity : AppCompatActivity() {
                         out.close()
                     }
 
-                    Log.i("Cave", "Rendering a preview")
-                    photos.add(0, LotPhoto(currentPhotoPath))
+                    val filename = File(currentPhotoPath).name
+                    Log.i("Cave", "Rendering a preview for $filename")
+                    photos.add(LotPhoto(filename))
                     photoLA.submitList(photos)
                     b.submit.isEnabled = true
                 }
@@ -133,10 +136,7 @@ class NewLotActivity : AppCompatActivity() {
 
             val comment = b.comment.text.toString()
             Log.i("cave", "Launching async submit")
-
-            this.lifecycle.coroutineScope.launch {
-                submitAsync(fruit, photos, weight, comment)
-            }
+            submitAsync(fruit, photos, weight, comment)
         }
     }
 
@@ -149,7 +149,7 @@ class NewLotActivity : AppCompatActivity() {
         b.progressBar.visibility = if (enabled) View.GONE else View.VISIBLE
     }
 
-    private suspend fun submitAsync(fruit: String, photos: List<LotPhoto>, weight: Double, comment: String) {
+    private fun submitAsync(fruit: String, photos: List<LotPhoto>, weight: Double, comment: String) {
         Log.i("cave", "submitting a new lot")
         setGUI(false)
 
@@ -157,41 +157,36 @@ class NewLotActivity : AppCompatActivity() {
         val resourcesJson = LotMedia.describe(media)
 
         val s3 = S3Uploader(media)
-        s3.uploadAsync()
+        s3.uploadAsync(applicationContext,
+            {
+                val item: Lot = Lot.builder()
+                    .fruit(fruit)
+                    .resources(resourcesJson)
+                    .weightKg(weight)
+                    .comment(comment)
+                    .build()
 
-        if (s3.failed) {
-            Log.i("Cave", "Photos upload failed, returning")
-            return
-        }
-
-        Log.d("Cave", "Resource JSON: $resourcesJson")
-
-        val item: Lot = Lot.builder()
-            .fruit(fruit)
-            .resources(resourcesJson)
-            .weightKg(weight)
-            .comment(comment)
-            .build()
-
-        withContext(Dispatchers.IO) {
-            Amplify.DataStore.save(
-                item,
-                { success ->
-                    Log.i("Cave", "Saved item " + success.item().fruit.toString())
-                    runOnUiThread {
-                        Toast.makeText(applicationContext, getString(R.string.submit_ok), Toast.LENGTH_LONG).show()
-                        finish()
+                Amplify.DataStore.save(
+                    item,
+                    { success ->
+                        Log.i("Cave", "Saved item " + success.item().fruit.toString())
+                        runOnUiThread {
+                            Toast.makeText(applicationContext, getString(R.string.submit_ok), Toast.LENGTH_LONG).show()
+                            finish()
+                        }
+                    },
+                    { error ->
+                        Log.e("Cave", "Could not save item to DataStore", error)
                     }
-                },
-                { error ->
-                    Log.e("Cave", "Could not save item to DataStore", error)
-                    runOnUiThread {
-                        b.error.text = error.message
-                    }
+                )
+            },
+            { error ->
+                Log.i("Cave", "Photos upload failed")
+                runOnUiThread {
+                    b.error.text = error.message
+                    setGUI(true)
                 }
-            )
-        }
-
-        setGUI(true)
+            }
+        )
     }
 }
