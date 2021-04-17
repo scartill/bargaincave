@@ -109,12 +109,11 @@ class S3Downloader(val media: LotMedia) {
     private fun downloadFrom(ctx: Context, index: Int, onSuccess: () -> Unit, onError: (Exception) -> Unit) {
         try {
             val photos = media.photos
-            val photoFileName = media.photos[index].photoFile
+            val photoKey = media.photos[index].photoFile
             val outputDir = File(ctx.cacheDir, "/image")
             outputDir.mkdir()
-            val photoFile = File(outputDir, photoFileName)
+            val photoFile = File(outputDir, photoKey)
             photoFile.deleteOnExit()
-            val photoKey = photoFile.name
 
             Log.d("Cave", "Downloading $index ($photoKey)")
             Amplify.Storage.downloadFile(
