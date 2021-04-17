@@ -27,14 +27,14 @@ public final class Lot implements Model {
   public static final QueryField ID = field("Lot", "id");
   public static final QueryField WEIGHT_KG = field("Lot", "weightKg");
   public static final QueryField COMMENT = field("Lot", "comment");
-  public static final QueryField PHOTO = field("Lot", "photo");
+  public static final QueryField RESOURCES = field("Lot", "resources");
   public static final QueryField FRUIT = field("Lot", "fruit");
   public static final QueryField PRICE = field("Lot", "price");
   public static final QueryField PRICE_CURRENCY = field("Lot", "priceCurrency");
   private final @ModelField(targetType="ID", isRequired = true) String id;
   private final @ModelField(targetType="Float") Double weightKg;
   private final @ModelField(targetType="String") String comment;
-  private final @ModelField(targetType="String") String photo;
+  private final @ModelField(targetType="AWSJSON") String resources;
   private final @ModelField(targetType="String") String fruit;
   private final @ModelField(targetType="Float") Double price;
   private final @ModelField(targetType="String") String priceCurrency;
@@ -50,8 +50,8 @@ public final class Lot implements Model {
       return comment;
   }
   
-  public String getPhoto() {
-      return photo;
+  public String getResources() {
+      return resources;
   }
   
   public String getFruit() {
@@ -66,11 +66,11 @@ public final class Lot implements Model {
       return priceCurrency;
   }
   
-  private Lot(String id, Double weightKg, String comment, String photo, String fruit, Double price, String priceCurrency) {
+  private Lot(String id, Double weightKg, String comment, String resources, String fruit, Double price, String priceCurrency) {
     this.id = id;
     this.weightKg = weightKg;
     this.comment = comment;
-    this.photo = photo;
+    this.resources = resources;
     this.fruit = fruit;
     this.price = price;
     this.priceCurrency = priceCurrency;
@@ -87,7 +87,7 @@ public final class Lot implements Model {
       return ObjectsCompat.equals(getId(), lot.getId()) &&
               ObjectsCompat.equals(getWeightKg(), lot.getWeightKg()) &&
               ObjectsCompat.equals(getComment(), lot.getComment()) &&
-              ObjectsCompat.equals(getPhoto(), lot.getPhoto()) &&
+              ObjectsCompat.equals(getResources(), lot.getResources()) &&
               ObjectsCompat.equals(getFruit(), lot.getFruit()) &&
               ObjectsCompat.equals(getPrice(), lot.getPrice()) &&
               ObjectsCompat.equals(getPriceCurrency(), lot.getPriceCurrency());
@@ -100,7 +100,7 @@ public final class Lot implements Model {
       .append(getId())
       .append(getWeightKg())
       .append(getComment())
-      .append(getPhoto())
+      .append(getResources())
       .append(getFruit())
       .append(getPrice())
       .append(getPriceCurrency())
@@ -115,7 +115,7 @@ public final class Lot implements Model {
       .append("id=" + String.valueOf(getId()) + ", ")
       .append("weightKg=" + String.valueOf(getWeightKg()) + ", ")
       .append("comment=" + String.valueOf(getComment()) + ", ")
-      .append("photo=" + String.valueOf(getPhoto()) + ", ")
+      .append("resources=" + String.valueOf(getResources()) + ", ")
       .append("fruit=" + String.valueOf(getFruit()) + ", ")
       .append("price=" + String.valueOf(getPrice()) + ", ")
       .append("priceCurrency=" + String.valueOf(getPriceCurrency()))
@@ -161,7 +161,7 @@ public final class Lot implements Model {
     return new CopyOfBuilder(id,
       weightKg,
       comment,
-      photo,
+      resources,
       fruit,
       price,
       priceCurrency);
@@ -171,7 +171,7 @@ public final class Lot implements Model {
     BuildStep id(String id) throws IllegalArgumentException;
     BuildStep weightKg(Double weightKg);
     BuildStep comment(String comment);
-    BuildStep photo(String photo);
+    BuildStep resources(String resources);
     BuildStep fruit(String fruit);
     BuildStep price(Double price);
     BuildStep priceCurrency(String priceCurrency);
@@ -182,7 +182,7 @@ public final class Lot implements Model {
     private String id;
     private Double weightKg;
     private String comment;
-    private String photo;
+    private String resources;
     private String fruit;
     private Double price;
     private String priceCurrency;
@@ -194,7 +194,7 @@ public final class Lot implements Model {
           id,
           weightKg,
           comment,
-          photo,
+          resources,
           fruit,
           price,
           priceCurrency);
@@ -213,8 +213,8 @@ public final class Lot implements Model {
     }
     
     @Override
-     public BuildStep photo(String photo) {
-        this.photo = photo;
+     public BuildStep resources(String resources) {
+        this.resources = resources;
         return this;
     }
     
@@ -259,11 +259,11 @@ public final class Lot implements Model {
   
 
   public final class CopyOfBuilder extends Builder {
-    private CopyOfBuilder(String id, Double weightKg, String comment, String photo, String fruit, Double price, String priceCurrency) {
+    private CopyOfBuilder(String id, Double weightKg, String comment, String resources, String fruit, Double price, String priceCurrency) {
       super.id(id);
       super.weightKg(weightKg)
         .comment(comment)
-        .photo(photo)
+        .resources(resources)
         .fruit(fruit)
         .price(price)
         .priceCurrency(priceCurrency);
@@ -280,8 +280,8 @@ public final class Lot implements Model {
     }
     
     @Override
-     public CopyOfBuilder photo(String photo) {
-      return (CopyOfBuilder) super.photo(photo);
+     public CopyOfBuilder resources(String resources) {
+      return (CopyOfBuilder) super.resources(resources);
     }
     
     @Override

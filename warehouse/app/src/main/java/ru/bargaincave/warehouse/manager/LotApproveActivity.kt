@@ -37,7 +37,6 @@ class LotApproveActivity : AppCompatActivity() {
         }
 
         val lotId = intent.getStringExtra("lot_id")
-        Where.matches(Lot.ID.eq(lotId))
         Amplify.DataStore.query(
             Lot::class.java,
             Where.matches(Lot.ID.eq(lotId)),
@@ -54,6 +53,7 @@ class LotApproveActivity : AppCompatActivity() {
                             b.laComment.text = lot.comment ?: na
                             b.price.setText(lot.price?.toString() ?: "")
 
+                            /*
                             lot.photo?.also {
                                 val outputDir = File(applicationContext.cacheDir, "/image")
                                 outputDir.mkdir()
@@ -81,7 +81,7 @@ class LotApproveActivity : AppCompatActivity() {
                                         }
                                     }
                                 )
-                            }
+                            }*/
                         }
                     }
                 }

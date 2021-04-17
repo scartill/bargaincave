@@ -57,4 +57,5 @@
     <string name="error_code_colon">Error code: </string>
     <string name="no_access_token">No access token</string>
     <string name="re_login_prompt">You belong to no groups. Please re-login</string>
+    <string name="context_fruit_kind">A kind of the lot\'s fruit</string>
 </resources>

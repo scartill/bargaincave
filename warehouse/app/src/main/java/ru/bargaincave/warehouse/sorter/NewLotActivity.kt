@@ -6,7 +6,9 @@ import android.graphics.BitmapFactory
 import android.os.Bundle
 import android.provider.MediaStore
 import android.util.Log
+import android.view.LayoutInflater
 import android.view.View
+import android.view.ViewGroup
 import android.widget.ArrayAdapter
 import android.widget.Spinner
 import android.widget.Toast
@@ -15,6 +17,10 @@ import androidx.appcompat.app.AppCompatActivity
 import androidx.core.content.FileProvider
 import androidx.core.graphics.scale
 import androidx.lifecycle.coroutineScope
+import androidx.recyclerview.widget.DiffUtil
+import androidx.recyclerview.widget.LinearLayoutManager
+import androidx.recyclerview.widget.ListAdapter
+import androidx.recyclerview.widget.RecyclerView
 import com.amplifyframework.core.Amplify
 import com.amplifyframework.datastore.generated.model.Lot
 import com.amplifyframework.storage.StorageAccessLevel
@@ -23,18 +29,26 @@ import kotlinx.coroutines.launch
 import okhttp3.internal.wait
 import ru.bargaincave.warehouse.R
 import ru.bargaincave.warehouse.databinding.ActivityNewLotBinding
+import ru.bargaincave.warehouse.databinding.ItemLotBinding
+import ru.bargaincave.warehouse.databinding.ItemLotPhotoBinding
+import ru.bargaincave.warehouse.manager.LotListAdapter
+import ru.bargaincave.warehouse.manager.LotViewHolder
+import ru.bargaincave.warehouse.media.LotPhoto
+import ru.bargaincave.warehouse.media.LotPhotoListAdapter
 import java.io.File
 import java.io.FileOutputStream
 import java.util.*
 
 
-const val REQUEST_IMAGE_CAPTURE = 100
 const val BITMAP_TARGET_WIDTH = 1024
+
 
 class NewLotActivity : AppCompatActivity() {
 
     private lateinit var b: ActivityNewLotBinding
     private lateinit var currentPhotoPath: String
+    private var photos = mutableListOf<LotPhoto>()
+    private val photoLA: LotPhotoListAdapter = LotPhotoListAdapter()
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -47,6 +61,12 @@ class NewLotActivity : AppCompatActivity() {
 
         b.submit.isEnabled = false
         b.progressBar.visibility = View.GONE
+
+        val linearLayoutManager = LinearLayoutManager(this)
+        linearLayoutManager.orientation = LinearLayoutManager.HORIZONTAL
+        b.photoList.layoutManager = linearLayoutManager
+        b.photoList.adapter = photoLA
+        photoLA.submitList(photos)
 
         val spinner: Spinner = b.spinFruit
         ArrayAdapter.createFromResource(
@@ -61,22 +81,23 @@ class NewLotActivity : AppCompatActivity() {
         val photoRequester = registerForActivityResult(ActivityResultContracts.TakePicture()) { taken ->
             try {
                 if (taken) {
-                    Log.i("Cave", "Rendering a preview")
+                    Log.i("Cave", "Scaling the image")
                     BitmapFactory.decodeFile(currentPhotoPath)?.also {
                         val ratio = it.width.toDouble() / it.height.toDouble()
                         val w = BITMAP_TARGET_WIDTH
                         val h = (BITMAP_TARGET_WIDTH / ratio).toInt()
                         val scaled = it.scale(w, h)
 
-                        b.imageView.setImageBitmap(scaled)
-
                         val out = FileOutputStream(currentPhotoPath)
                         scaled.compress(Bitmap.CompressFormat.JPEG, 100, out)
                         out.flush()
                         out.close()
-
-                        b.submit.isEnabled = true
                     }
+
+                    Log.i("Cave", "Rendering a preview")
+                    photos.add(0, LotPhoto(currentPhotoPath))
+                    photoLA.submitList(photos)
+                    b.submit.isEnabled = true
                 }
             } catch (error: Exception) {
                 b.error.text = error.message
@@ -128,20 +149,6 @@ class NewLotActivity : AppCompatActivity() {
 
             this.lifecycle.coroutineScope.launch {
                 asyncSubmit(fruit, currentPhotoPath, weight, comment)
-            }.also {
-                it.invokeOnCompletion { error ->
-                    runOnUiThread {
-                        if (error == null) {
-                            Log.i("cave", "Submit successful")
-                            Toast.makeText(applicationContext, getString(R.string.submit_ok), Toast.LENGTH_LONG).show()
-                            finish()
-                        } else {
-                            Log.e("cave", "unable to submit", error)
-                            b.error.text = error.message
-                            setGUI(true)
-                        }
-                    }
-                }
             }
         }
     }
@@ -174,7 +181,7 @@ class NewLotActivity : AppCompatActivity() {
 
                 val item: Lot = Lot.builder()
                     .fruit(fruit)
-                    .photo(s3key)
+                    //.photo(s3key)
                     .weightKg(weight)
                     .comment(comment)
                     .build()
@@ -182,7 +189,7 @@ class NewLotActivity : AppCompatActivity() {
                 Amplify.DataStore.save(
                     item,
                     { success ->
-                        Log.i("Cave", "Saved item: " + success.item().photo.toString())
+                   //     Log.i("Cave", "Saved item: " + success.item().photo.toString())
                     },
                     { error ->
                         Log.e("Cave", "Could not save item to DataStore", error)
@@ -199,5 +206,8 @@ class NewLotActivity : AppCompatActivity() {
                 }
             }
         )
+
+        Log.i("cave", "Submit successful")
+        Toast.makeText(applicationContext, getString(R.string.submit_ok), Toast.LENGTH_LONG).show()
     }
 }
