@@ -153,15 +153,17 @@ class NewLotActivity : AppCompatActivity() {
         Log.i("cave", "submitting a new lot")
         setGUI(false)
 
-        val s3 = S3Uploader(photos)
-        s3.uploadPhotosAsync()
+        val media = LotMedia(photos)
+        val resourcesJson = LotMedia.describe(media)
+
+        val s3 = S3Uploader(media)
+        s3.uploadAsync()
 
         if (s3.failed) {
             Log.i("Cave", "Photos upload failed, returning")
             return
         }
 
-        val resourcesJson = LotMedia.describe(LotMedia(photos))
         Log.d("Cave", "Resource JSON: $resourcesJson")
 
         val item: Lot = Lot.builder()
