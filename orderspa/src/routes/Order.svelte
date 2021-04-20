@@ -34,7 +34,7 @@
     }
 </script>
 
-<h1>Bargain Cave Order</h1>
+<h1>VkusB Order</h1>
 
 {#if status == 'init'}
     <div>

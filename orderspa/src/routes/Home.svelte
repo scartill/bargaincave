@@ -1,5 +1,5 @@
-<h1>Bargain Cave Orders Portal</h1>
-<p>Join Bargain Cave Telegram channel to receive new lot announcements</p>
+<h1>VkusB Orders Portal</h1>
+<p><a href="https://t.me/joinchat/R6xZI-KrAb5mekH1">Join VkusB Telegram channel</a> to receive new lot announcements</p>
 
 <style>
 	h1 {
