@@ -185,6 +185,7 @@ class LotApproveActivity : AppCompatActivity() {
 
                     runOnUiThread {
                         b.laError.text = getString(R.string.unable_to_load)
+                        b.laProgress.visibility = View.GONE
                     }
                 }
             },

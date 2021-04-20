@@ -4,7 +4,7 @@ import traceback
 
 import boto3
 
-from telegram import Bot
+from telegram import Bot, InputMediaPhoto
 
 TELEGRAM_BOT_TOKEN_SECRET_NAME = "telegram_token"
 
@@ -18,7 +18,7 @@ PRICE_QUERY = '''
             id
             fruit
             price
-            photo
+            resources
             weightKg
         }
     }
@@ -66,19 +66,29 @@ def telegram_api_command(payload):
     lot_id = payload['lot_by_id']
     lot = get_lot(lot_id)
 
-    # TODO: Move order app URL to environment
-    deep_url = f'https://master.d13at4rocoglfe.amplifyapp.com/#/order/{lot_id}'
-    message = 'Heads up! Selling {weightKg} kg of {fruit} for {price} ₽ per kg'.format(**lot)
-    caption = f'{message}: {deep_url}'
+    resources = json.loads(lot['resources'])
+    photo_keys = resources['photos']
+    media = [InputMediaPhoto(get_photo_url(k['photoFile'])) for k in photo_keys]
 
     channel_id = os.getenv('CHANNEL_ID')
-    photo_url = get_photo_url(lot['photo'])
 
     bot = get_bot_client()
-    message = bot.send_photo(
+    message = bot.send_media_group(
         chat_id=channel_id,
-        photo=photo_url,
-        caption=caption
+        media=media
+    )
+
+    if not message:
+        raise RuntimeError('Cannot send telegram album')
+
+    app_host = os.getenv('APP_HOST')
+    deep_url = f'https://{app_host}/#/order/{lot_id}'
+    announce = 'Heads up! Selling {weightKg} kg of {fruit} for {price} ₽ per kg'.format(**lot)
+    text = f'{announce}: {deep_url}'
+
+    message = bot.send_message(
+        chat_id=channel_id,
+        text=text
     )
 
     if not message:
