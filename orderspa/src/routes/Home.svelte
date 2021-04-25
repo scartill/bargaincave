@@ -1,5 +1,5 @@
 <h1>VkusB Orders Portal</h1>
-<p><a href="https://t.me/joinchat/R6xZI-KrAb5mekH1">Join VkusB Telegram channel</a> to receive new lot announcements</p>
+<p><a href="https://t.me/joinchat/91prONyOBJc4MTIy">Join VkusB Telegram channel</a> to receive new lot announcements</p>
 
 <style>
 	h1 {

@@ -99,7 +99,7 @@
               "Ref": "AWS::Region"
             },
             "APP_HOST": "app.vkusb.ru",
-            "CHANNEL_ID": "-1001202477347",
+            "CHANNEL_ID": "-1001239807464",
             "STORAGE_PHOTOS_BUCKETNAME": {
               "Ref": "storagephotosBucketName"
             },
