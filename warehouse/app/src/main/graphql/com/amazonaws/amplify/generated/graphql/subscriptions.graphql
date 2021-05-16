@@ -2,9 +2,12 @@
 subscription OnCreateLot {
   onCreateLot {
     id
-    fruit
     weightKg
     comment
+    resources
+    fruit
+    price
+    priceCurrency
     _version
     _deleted
     _lastChangedAt
@@ -15,9 +18,12 @@ subscription OnCreateLot {
 subscription OnUpdateLot {
   onUpdateLot {
     id
-    fruit
     weightKg
     comment
+    resources
+    fruit
+    price
+    priceCurrency
     _version
     _deleted
     _lastChangedAt
@@ -28,9 +34,12 @@ subscription OnUpdateLot {
 subscription OnDeleteLot {
   onDeleteLot {
     id
-    fruit
     weightKg
     comment
+    resources
+    fruit
+    price
+    priceCurrency
     _version
     _deleted
     _lastChangedAt

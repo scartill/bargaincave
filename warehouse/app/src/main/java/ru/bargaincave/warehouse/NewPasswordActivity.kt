@@ -32,11 +32,13 @@ class NewPasswordActivity : AppCompatActivity() {
                 { result ->
                     if (result.isSignInComplete) {
                         Log.i("Cave", "Password changed")
-                        val text = getString(R.string.pass_change_ok)
-                        val duration = Toast.LENGTH_SHORT
-                        val toast = Toast.makeText(applicationContext, text, duration)
-                        toast.show()
-                        finish()
+                        runOnUiThread {
+                            val text = getString(R.string.pass_change_ok)
+                            val duration = Toast.LENGTH_SHORT
+                            val toast = Toast.makeText(applicationContext, text, duration)
+                            toast.show()
+                            finish()
+                        }
                     }
                     else {
                         Log.i("Cave", "Unable to set a new password (${result.nextStep})")

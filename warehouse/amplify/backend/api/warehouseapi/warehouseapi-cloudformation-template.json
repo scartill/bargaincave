@@ -3,42 +3,36 @@
     "Description": "API Gateway resource stack creation using Amplify CLI",
     
     "Parameters": {
-        "authRoleName": {
-            "Type":  "String"
-        },
-        "unauthRoleName": {
-            "Type":  "String"
-        },
         "env": {
             "Type": "String"
         },
     
     
-          "functionlotsoldName": {
-            "Type": "String",
-            "Default": "functionlotsoldName"
-          },
-        
-          
-          "functionlotsoldArn": {
-            "Type": "String",
-            "Default": "functionlotsoldArn"
-          },
-        
-          
-          
-    
           "functionhubspotdealName": {
             "Type": "String",
             "Default": "functionhubspotdealName"
           },
-        
+
           
           "functionhubspotdealArn": {
             "Type": "String",
             "Default": "functionhubspotdealArn"
           },
-        
+
+          
+          
+    
+          "functionlotsoldName": {
+            "Type": "String",
+            "Default": "functionlotsoldName"
+          },
+
+          
+          "functionlotsoldArn": {
+            "Type": "String",
+            "Default": "functionlotsoldArn"
+          },
+
           
           
     
@@ -46,37 +40,13 @@
             "Type": "String",
             "Default": "functiontelegrampublishName"
           },
-        
+
           
           "functiontelegrampublishArn": {
             "Type": "String",
             "Default": "functiontelegrampublishArn"
-          },
-        
-          
-          
-    
-          "authwarehouse40c048f0UserPoolId": {
-            "Type": "String",
-            "Default": "authwarehouse40c048f0UserPoolId"
-          },
-        
-          
-          
-    
-          "authuserPoolGroupsadminsGroupRole": {
-            "Type": "String",
-            "Default": "authuserPoolGroupsadminsGroupRole"
-          },
-        
-          
-          
-    
-          "authuserPoolGroupsmanagersGroupRole": {
-            "Type": "String",
-            "Default": "authuserPoolGroupsmanagersGroupRole"
           }
-        
+
           
           
     
@@ -93,452 +63,9 @@
     },
     "Resources": {
         
-        "PolicyAPIGWwarehouseapiauth": {
-            "DependsOn": [
-              "warehouseapi"
-            ],
-            "Type": "AWS::IAM::Policy",
-            "Properties": {
-              "PolicyName": "PolicyAPIGWwarehouseapiauth",
-              "Roles": [
-                {"Ref": "authRoleName"}
-              ],
-              "PolicyDocument": {
-                "Version": "2012-10-17",
-                "Statement": [
-                  {
-                    "Effect": "Allow",
-                    "Action": [
-                      "execute-api:Invoke"
-                    ],
-                    "Resource": [
-                    
-                    
-                    
-                      {
-                        "Fn::Join": [
-                          "",
-                          [
-                            "arn:aws:execute-api:",
-                            {
-                              "Ref": "AWS::Region"
-                            },
-                            ":",
-                            {
-                              "Ref": "AWS::AccountId"
-                            },
-                            ":",
-                            {
-                              "Ref": "warehouseapi"
-                            },
-                            "/",
-                            {
-                              "Fn::If": [
-                                "ShouldNotCreateEnvResources",
-                                "Prod", 
-                                {
-                                  "Ref": "env"
-                                } 
-                              ]
-                            },
-                              "/GET",
-                            "/lot/*/sold/*"
-                          ]
-                        ]
-                      },
-                                            {
-                        "Fn::Join": [
-                          "",
-                          [
-                            "arn:aws:execute-api:",
-                            {
-                              "Ref": "AWS::Region"
-                            },
-                            ":",
-                            {
-                              "Ref": "AWS::AccountId"
-                            },
-                            ":",
-                            {
-                              "Ref": "warehouseapi"
-                            },
-                            "/",
-                            {
-                              "Fn::If": [
-                                "ShouldNotCreateEnvResources",
-                                "Prod", 
-                                {
-                                  "Ref": "env"
-                                } 
-                              ]
-                            },
-                              "/GET",
-                            "/lot/*/sold"
-                          ]
-                        ]
-                      }
-                    
-                      ,
-                    
-                    
-                      {
-                        "Fn::Join": [
-                          "",
-                          [
-                            "arn:aws:execute-api:",
-                            {
-                              "Ref": "AWS::Region"
-                            },
-                            ":",
-                            {
-                              "Ref": "AWS::AccountId"
-                            },
-                            ":",
-                            {
-                              "Ref": "warehouseapi"
-                            },
-                            "/",
-                            {
-                              "Fn::If": [
-                                "ShouldNotCreateEnvResources",
-                                "Prod", 
-                                {
-                                  "Ref": "env"
-                                } 
-                              ]
-                            },
-                              "/PUT",
-                            "/lot/*/sold/*"
-                          ]
-                        ]
-                      },
-                                            {
-                        "Fn::Join": [
-                          "",
-                          [
-                            "arn:aws:execute-api:",
-                            {
-                              "Ref": "AWS::Region"
-                            },
-                            ":",
-                            {
-                              "Ref": "AWS::AccountId"
-                            },
-                            ":",
-                            {
-                              "Ref": "warehouseapi"
-                            },
-                            "/",
-                            {
-                              "Fn::If": [
-                                "ShouldNotCreateEnvResources",
-                                "Prod", 
-                                {
-                                  "Ref": "env"
-                                } 
-                              ]
-                            },
-                              "/PUT",
-                            "/lot/*/sold"
-                          ]
-                        ]
-                      }
-                    
-                      ,
-                    
-                    
-                      {
-                        "Fn::Join": [
-                          "",
-                          [
-                            "arn:aws:execute-api:",
-                            {
-                              "Ref": "AWS::Region"
-                            },
-                            ":",
-                            {
-                              "Ref": "AWS::AccountId"
-                            },
-                            ":",
-                            {
-                              "Ref": "warehouseapi"
-                            },
-                            "/",
-                            {
-                              "Fn::If": [
-                                "ShouldNotCreateEnvResources",
-                                "Prod", 
-                                {
-                                  "Ref": "env"
-                                } 
-                              ]
-                            },
-                              "/PATCH",
-                            "/lot/*/sold/*"
-                          ]
-                        ]
-                      },
-                                            {
-                        "Fn::Join": [
-                          "",
-                          [
-                            "arn:aws:execute-api:",
-                            {
-                              "Ref": "AWS::Region"
-                            },
-                            ":",
-                            {
-                              "Ref": "AWS::AccountId"
-                            },
-                            ":",
-                            {
-                              "Ref": "warehouseapi"
-                            },
-                            "/",
-                            {
-                              "Fn::If": [
-                                "ShouldNotCreateEnvResources",
-                                "Prod", 
-                                {
-                                  "Ref": "env"
-                                } 
-                              ]
-                            },
-                              "/PATCH",
-                            "/lot/*/sold"
-                          ]
-                        ]
-                      }
-                    
-                    
-                    
-                      ,
-                    
-                    
-                    
-                    
-                    
-                    
-                    
-                    ]
-                  }
-                ]
-              }
-            }
-          },
         
         
         
-        
-        
-        
-        
-          
-          
-          "adminsGrouptelegramlotpublishPolicy": {
-          "DependsOn": [
-              "warehouseapi"
-            ],
-          "Type": "AWS::IAM::Policy",
-          "Properties": {
-              "PolicyName": "warehouseapi-telegramlotpublish-admins-group-policy",
-              "Roles": [
-                {
-                    "Fn::Join": [
-                        "",
-                        [
-                          {
-                            "Ref": "authwarehouse40c048f0UserPoolId"
-                          },
-                          "-adminsGroupRole"
-                        ]
-                    ]
-                }
-              ],
-              "PolicyDocument": {
-                "Version": "2012-10-17",
-                "Statement": [
-                  {
-                    "Effect": "Allow",
-                    "Action": [
-                      "execute-api:Invoke"
-                    ],
-                     "Resource": [
-                    
-                    
-                      {
-                        "Fn::Join": [
-                          "",
-                          [
-                            "arn:aws:execute-api:",
-                            {
-                              "Ref": "AWS::Region"
-                            },
-                            ":",
-                            {
-                              "Ref": "AWS::AccountId"
-                            },
-                            ":",
-                            {
-                              "Ref": "warehouseapi"
-                            },
-                            "/",
-                            {
-                              "Fn::If": [
-                                "ShouldNotCreateEnvResources",
-                                "Prod", 
-                                {
-                                  "Ref": "env"
-                                } 
-                              ]
-                            },
-                              "/POST",
-                            "/telegram/lot/publish/*"
-                          ]
-                        ]
-                      },
-                      {
-                        "Fn::Join": [
-                          "",
-                          [
-                            "arn:aws:execute-api:",
-                            {
-                              "Ref": "AWS::Region"
-                            },
-                            ":",
-                            {
-                              "Ref": "AWS::AccountId"
-                            },
-                            ":",
-                            {
-                              "Ref": "warehouseapi"
-                            },
-                            "/",
-                            {
-                              "Fn::If": [
-                                "ShouldNotCreateEnvResources",
-                                "Prod",
-                                {
-                                  "Ref": "env"
-                                }
-                              ]
-                            },
-                              "/POST",
-                            "/telegram/lot/publish"
-                          ]
-                        ]
-                      }
-                    
-                    
-                    ]
-                  }
-                ]
-              }
-            }
-          },
-          
-          "managersGrouptelegramlotpublishPolicy": {
-          "DependsOn": [
-              "warehouseapi"
-            ],
-          "Type": "AWS::IAM::Policy",
-          "Properties": {
-              "PolicyName": "warehouseapi-telegramlotpublish-managers-group-policy",
-              "Roles": [
-                {
-                    "Fn::Join": [
-                        "",
-                        [
-                          {
-                            "Ref": "authwarehouse40c048f0UserPoolId"
-                          },
-                          "-managersGroupRole"
-                        ]
-                    ]
-                }
-              ],
-              "PolicyDocument": {
-                "Version": "2012-10-17",
-                "Statement": [
-                  {
-                    "Effect": "Allow",
-                    "Action": [
-                      "execute-api:Invoke"
-                    ],
-                     "Resource": [
-                    
-                    
-                      {
-                        "Fn::Join": [
-                          "",
-                          [
-                            "arn:aws:execute-api:",
-                            {
-                              "Ref": "AWS::Region"
-                            },
-                            ":",
-                            {
-                              "Ref": "AWS::AccountId"
-                            },
-                            ":",
-                            {
-                              "Ref": "warehouseapi"
-                            },
-                            "/",
-                            {
-                              "Fn::If": [
-                                "ShouldNotCreateEnvResources",
-                                "Prod", 
-                                {
-                                  "Ref": "env"
-                                } 
-                              ]
-                            },
-                              "/POST",
-                            "/telegram/lot/publish/*"
-                          ]
-                        ]
-                      },
-                      {
-                        "Fn::Join": [
-                          "",
-                          [
-                            "arn:aws:execute-api:",
-                            {
-                              "Ref": "AWS::Region"
-                            },
-                            ":",
-                            {
-                              "Ref": "AWS::AccountId"
-                            },
-                            ":",
-                            {
-                              "Ref": "warehouseapi"
-                            },
-                            "/",
-                            {
-                              "Fn::If": [
-                                "ShouldNotCreateEnvResources",
-                                "Prod",
-                                {
-                                  "Ref": "env"
-                                }
-                              ]
-                            },
-                              "/POST",
-                            "/telegram/lot/publish"
-                          ]
-                        ]
-                      }
-                    
-                    
-                    ]
-                  }
-                ]
-              }
-            }
-          },
-          
         
         
         
@@ -579,224 +106,13 @@
                           }
                       ]
                   ]
-                } 
+                }
               ]
             },
             "schemes": [
               "https"
             ],
             "paths": {
-              
-              "/lot/{lotid}/sold": {
-                "options": {
-                  "consumes": [
-                    "application/json"
-                  ],
-                  "produces": [
-                    "application/json"
-                  ],
-                  "responses": {
-                    "200": {
-                      "description": "200 response",
-                      "headers": {
-                        "Access-Control-Allow-Origin": {
-                          "type": "string"
-                        },
-                        "Access-Control-Allow-Methods": {
-                          "type": "string"
-                        },
-                        "Access-Control-Allow-Headers": {
-                          "type": "string"
-                        }
-                      }
-                    }
-                  },
-                  "x-amazon-apigateway-integration": {
-                    "responses": {
-                      "default": {
-                        "statusCode": "200",
-                        "responseParameters": {
-                          "method.response.header.Access-Control-Allow-Methods": "'DELETE,GET,HEAD,OPTIONS,PATCH,POST,PUT'",
-                          "method.response.header.Access-Control-Allow-Headers": "'Content-Type,X-Amz-Date,Authorization,X-Api-Key,X-Amz-Security-Token,X-Amz-User-Agent'",
-                          "method.response.header.Access-Control-Allow-Origin": "'*'"
-                        }
-                      }
-                    },
-                    "requestTemplates": {
-                      "application/json": "{\"statusCode\": 200}"
-                    },
-                    "passthroughBehavior": "when_no_match",
-                    "type": "mock"
-                  }
-                },
-                "x-amazon-apigateway-any-method": {
-                  "consumes": [
-                    "application/json"
-                  ],
-                  "produces": [
-                    "application/json"
-                  ],
-                  "parameters": [
-                    {
-                      "in": "body",
-                      "name": "RequestSchema",
-                      "required": false,
-                      "schema": {
-                        "$ref": "#/definitions/RequestSchema"
-                      }
-                    }
-                  ],
-                  "responses": {
-                    "200": {
-                      "description": "200 response",
-                      "schema": {
-                        "$ref": "#/definitions/ResponseSchema"
-                      }
-                    }
-                  },
-                          
-                    "security": [
-                        {
-                          "sigv4": []
-                        }
-                      ],
-                  
-                  "x-amazon-apigateway-integration": {
-                    "responses": {
-                      "default": {
-                        "statusCode": "200"
-                      }
-                    },
-                    "uri": {
-                        "Fn::Join": [
-                          "",
-                          [
-                            "arn:aws:apigateway:",
-                            {
-                              "Ref": "AWS::Region"
-                            },
-                            ":lambda:path/2015-03-31/functions/",
-                            
-                            {
-                                
-                                "Ref": "functionlotsoldArn"
-                            },
-                            
-                            "/invocations"
-                          ]
-                        ]
-                      },
-                    "passthroughBehavior": "when_no_match",
-                    "httpMethod": "POST",
-                    "type": "aws_proxy"
-                  }
-                }
-              },
-              "/lot/{lotid}/sold/{proxy+}": {
-                "options": {
-                  "consumes": [
-                    "application/json"
-                  ],
-                  "produces": [
-                    "application/json"
-                  ],
-                  "responses": {
-                    "200": {
-                      "description": "200 response",
-                      "headers": {
-                        "Access-Control-Allow-Origin": {
-                          "type": "string"
-                        },
-                        "Access-Control-Allow-Methods": {
-                          "type": "string"
-                        },
-                        "Access-Control-Allow-Headers": {
-                          "type": "string"
-                        }
-                      }
-                    }
-                  },
-                  "x-amazon-apigateway-integration": {
-                    "responses": {
-                      "default": {
-                        "statusCode": "200",
-                        "responseParameters": {
-                          "method.response.header.Access-Control-Allow-Methods": "'DELETE,GET,HEAD,OPTIONS,PATCH,POST,PUT'",
-                          "method.response.header.Access-Control-Allow-Headers": "'Content-Type,X-Amz-Date,Authorization,X-Api-Key,X-Amz-Security-Token,X-Amz-User-Agent'",
-                          "method.response.header.Access-Control-Allow-Origin": "'*'"
-                        }
-                      }
-                    },
-                    "requestTemplates": {
-                      "application/json": "{\"statusCode\": 200}"
-                    },
-                    "passthroughBehavior": "when_no_match",
-                    "type": "mock"
-                  }
-                },
-                "x-amazon-apigateway-any-method": {
-                  "consumes": [
-                    "application/json"
-                  ],
-                  "produces": [
-                    "application/json"
-                  ],
-                  "parameters": [
-                    {
-                      "in": "body",
-                      "name": "RequestSchema",
-                      "required": false,
-                      "schema": {
-                        "$ref": "#/definitions/RequestSchema"
-                      }
-                    }
-                  ],
-                  "responses": {
-                    "200": {
-                      "description": "200 response",
-                      "schema": {
-                        "$ref": "#/definitions/ResponseSchema"
-                      }
-                    }
-                  },
-                          
-                    "security": [
-                        {
-                          "sigv4": []
-                        }
-                      ],
-                  
-                  "x-amazon-apigateway-integration": {
-                    "responses": {
-                      "default": {
-                        "statusCode": "200"
-                      }
-                    },
-                    "uri": {
-                      "Fn::Join": [
-                        "",
-                        [
-                          "arn:aws:apigateway:",
-                          {
-                            "Ref": "AWS::Region"
-                          },
-                          ":lambda:path/2015-03-31/functions/",
-                          
-                          {
-                            
-                            "Ref": "functionlotsoldArn"
-                          },
-                          
-                          "/invocations"
-                        ]
-                      ]
-                    },
-                    "passthroughBehavior": "when_no_match",
-                    "httpMethod": "POST",
-                    "type": "aws_proxy"
-                  }
-                }
-              },   
               
               "/crm/deal/create": {
                 "options": {
@@ -883,7 +199,7 @@
                             ":lambda:path/2015-03-31/functions/",
                             
                             {
-                                
+
                                 "Ref": "functionhubspotdealArn"
                             },
                             
@@ -982,7 +298,7 @@
                           ":lambda:path/2015-03-31/functions/",
                           
                           {
-                            
+
                             "Ref": "functionhubspotdealArn"
                           },
                           
@@ -995,7 +311,218 @@
                     "type": "aws_proxy"
                   }
                 }
-              },   
+              },
+              
+              "/lot/{lotid}/sold": {
+                "options": {
+                  "consumes": [
+                    "application/json"
+                  ],
+                  "produces": [
+                    "application/json"
+                  ],
+                  "responses": {
+                    "200": {
+                      "description": "200 response",
+                      "headers": {
+                        "Access-Control-Allow-Origin": {
+                          "type": "string"
+                        },
+                        "Access-Control-Allow-Methods": {
+                          "type": "string"
+                        },
+                        "Access-Control-Allow-Headers": {
+                          "type": "string"
+                        }
+                      }
+                    }
+                  },
+                  "x-amazon-apigateway-integration": {
+                    "responses": {
+                      "default": {
+                        "statusCode": "200",
+                        "responseParameters": {
+                          "method.response.header.Access-Control-Allow-Methods": "'DELETE,GET,HEAD,OPTIONS,PATCH,POST,PUT'",
+                          "method.response.header.Access-Control-Allow-Headers": "'Content-Type,X-Amz-Date,Authorization,X-Api-Key,X-Amz-Security-Token,X-Amz-User-Agent'",
+                          "method.response.header.Access-Control-Allow-Origin": "'*'"
+                        }
+                      }
+                    },
+                    "requestTemplates": {
+                      "application/json": "{\"statusCode\": 200}"
+                    },
+                    "passthroughBehavior": "when_no_match",
+                    "type": "mock"
+                  }
+                },
+                "x-amazon-apigateway-any-method": {
+                  "consumes": [
+                    "application/json"
+                  ],
+                  "produces": [
+                    "application/json"
+                  ],
+                  "parameters": [
+                    {
+                      "in": "body",
+                      "name": "RequestSchema",
+                      "required": false,
+                      "schema": {
+                        "$ref": "#/definitions/RequestSchema"
+                      }
+                    }
+                  ],
+                  "responses": {
+                    "200": {
+                      "description": "200 response",
+                      "schema": {
+                        "$ref": "#/definitions/ResponseSchema"
+                      }
+                    }
+                  },
+                  
+                    "security": [
+                        {
+                          "sigv4": []
+                        }
+                      ],
+                  
+                  "x-amazon-apigateway-integration": {
+                    "responses": {
+                      "default": {
+                        "statusCode": "200"
+                      }
+                    },
+                    "uri": {
+                        "Fn::Join": [
+                          "",
+                          [
+                            "arn:aws:apigateway:",
+                            {
+                              "Ref": "AWS::Region"
+                            },
+                            ":lambda:path/2015-03-31/functions/",
+                            
+                            {
+
+                                "Ref": "functionlotsoldArn"
+                            },
+                            
+                            "/invocations"
+                          ]
+                        ]
+                      },
+                    "passthroughBehavior": "when_no_match",
+                    "httpMethod": "POST",
+                    "type": "aws_proxy"
+                  }
+                }
+              },
+              "/lot/{lotid}/sold/{proxy+}": {
+                "options": {
+                  "consumes": [
+                    "application/json"
+                  ],
+                  "produces": [
+                    "application/json"
+                  ],
+                  "responses": {
+                    "200": {
+                      "description": "200 response",
+                      "headers": {
+                        "Access-Control-Allow-Origin": {
+                          "type": "string"
+                        },
+                        "Access-Control-Allow-Methods": {
+                          "type": "string"
+                        },
+                        "Access-Control-Allow-Headers": {
+                          "type": "string"
+                        }
+                      }
+                    }
+                  },
+                  "x-amazon-apigateway-integration": {
+                    "responses": {
+                      "default": {
+                        "statusCode": "200",
+                        "responseParameters": {
+                          "method.response.header.Access-Control-Allow-Methods": "'DELETE,GET,HEAD,OPTIONS,PATCH,POST,PUT'",
+                          "method.response.header.Access-Control-Allow-Headers": "'Content-Type,X-Amz-Date,Authorization,X-Api-Key,X-Amz-Security-Token,X-Amz-User-Agent'",
+                          "method.response.header.Access-Control-Allow-Origin": "'*'"
+                        }
+                      }
+                    },
+                    "requestTemplates": {
+                      "application/json": "{\"statusCode\": 200}"
+                    },
+                    "passthroughBehavior": "when_no_match",
+                    "type": "mock"
+                  }
+                },
+                "x-amazon-apigateway-any-method": {
+                  "consumes": [
+                    "application/json"
+                  ],
+                  "produces": [
+                    "application/json"
+                  ],
+                  "parameters": [
+                    {
+                      "in": "body",
+                      "name": "RequestSchema",
+                      "required": false,
+                      "schema": {
+                        "$ref": "#/definitions/RequestSchema"
+                      }
+                    }
+                  ],
+                  "responses": {
+                    "200": {
+                      "description": "200 response",
+                      "schema": {
+                        "$ref": "#/definitions/ResponseSchema"
+                      }
+                    }
+                  },
+                  
+                    "security": [
+                        {
+                          "sigv4": []
+                        }
+                      ],
+                  
+                  "x-amazon-apigateway-integration": {
+                    "responses": {
+                      "default": {
+                        "statusCode": "200"
+                      }
+                    },
+                    "uri": {
+                      "Fn::Join": [
+                        "",
+                        [
+                          "arn:aws:apigateway:",
+                          {
+                            "Ref": "AWS::Region"
+                          },
+                          ":lambda:path/2015-03-31/functions/",
+                          
+                          {
+
+                            "Ref": "functionlotsoldArn"
+                          },
+                          
+                          "/invocations"
+                        ]
+                      ]
+                    },
+                    "passthroughBehavior": "when_no_match",
+                    "httpMethod": "POST",
+                    "type": "aws_proxy"
+                  }
+                }
+              },
               
               "/telegram/lot/publish": {
                 "options": {
@@ -1064,7 +591,7 @@
                       }
                     }
                   },
-                          
+                  
                     "security": [
                         {
                           "sigv4": []
@@ -1088,7 +615,7 @@
                             ":lambda:path/2015-03-31/functions/",
                             
                             {
-                                
+
                                 "Ref": "functiontelegrampublishArn"
                             },
                             
@@ -1169,7 +696,7 @@
                       }
                     }
                   },
-                          
+                  
                     "security": [
                         {
                           "sigv4": []
@@ -1193,7 +720,7 @@
                           ":lambda:path/2015-03-31/functions/",
                           
                           {
-                            
+
                             "Ref": "functiontelegrampublishArn"
                           },
                           
@@ -1206,7 +733,7 @@
                     "type": "aws_proxy"
                   }
                 }
-              }   
+              }
               
             },
             "securityDefinitions": {
@@ -1248,43 +775,9 @@
         }
       },
 
-                  
+      
         
-        
-        "functionlotsoldPermissionwarehouseapi": {
-            "Type": "AWS::Lambda::Permission",
-            "Properties": {
-                "FunctionName": 
-                    {
-                        "Ref":  "functionlotsoldName"
-                    },
-                    
-                    "Action": "lambda:InvokeFunction",
-                "Principal": "apigateway.amazonaws.com",
-                "SourceArn": {
-                    "Fn::Join": [
-                        "",
-                        [
-                            "arn:aws:execute-api:",
-                            {
-                                "Ref": "AWS::Region"
-                            },
-                            ":",
-                            {
-                                "Ref": "AWS::AccountId"
-                            },
-                            ":",
-                            {
-                                "Ref": "warehouseapi"
-                            },
-                            "/*/*/*"
-                        ]
-                    ]
-                }
-            }
-        },
-        
-        
+
         "functionhubspotdealPermissionwarehouseapi": {
             "Type": "AWS::Lambda::Permission",
             "Properties": {
@@ -1318,7 +811,41 @@
             }
         },
         
+
+        "functionlotsoldPermissionwarehouseapi": {
+            "Type": "AWS::Lambda::Permission",
+            "Properties": {
+                "FunctionName": 
+                    {
+                        "Ref":  "functionlotsoldName"
+                    },
+                    
+                    "Action": "lambda:InvokeFunction",
+                "Principal": "apigateway.amazonaws.com",
+                "SourceArn": {
+                    "Fn::Join": [
+                        "",
+                        [
+                            "arn:aws:execute-api:",
+                            {
+                                "Ref": "AWS::Region"
+                            },
+                            ":",
+                            {
+                                "Ref": "AWS::AccountId"
+                            },
+                            ":",
+                            {
+                                "Ref": "warehouseapi"
+                            },
+                            "/*/*/*"
+                        ]
+                    ]
+                }
+            }
+        },
         
+
         "functiontelegrampublishPermissionwarehouseapi": {
             "Type": "AWS::Lambda::Permission",
             "Properties": {
@@ -1353,18 +880,18 @@
         },
         
         
-        
-      "DeploymentAPIGWwarehouseapidc7b813f": {
+
+      "DeploymentAPIGWwarehouseapic9b72f6d": {
         "Type": "AWS::ApiGateway::Deployment",
         "Properties": {
           "Description": "The Development stage deployment of your API.",
           "StageName": {
             "Fn::If": [
               "ShouldNotCreateEnvResources",
-              "Prod", 
+              "Prod",
               {
                 "Ref": "env"
-              } 
+              }
             ]
           },
           "RestApiId": {

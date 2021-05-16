@@ -55,90 +55,16 @@
       "DeletionPolicy": "Retain",
       "UpdateReplacePolicy": "Retain"
     },
-    "LambdaLayerPermissionpublic1": {
-      "Type": "AWS::Lambda::LayerVersionPermission",
-      "Properties": {
-        "Action": "lambda:GetLayerVersion",
-        "LayerVersionArn": {
-          "Fn::Sub": [
-            "arn:aws:lambda:${AWS::Region}:${AWS::AccountId}:layer:${layerName}-${env}:${layerVersion}",
-            {
-              "layerName": "amplifyhelperslayer",
-              "env": {
-                "Ref": "env"
-              },
-              "layerVersion": "1"
-            }
-          ]
-        },
-        "Principal": "*"
-      }
-    },
-    "LambdaLayerPermissionpublic2": {
-      "Type": "AWS::Lambda::LayerVersionPermission",
-      "Properties": {
-        "Action": "lambda:GetLayerVersion",
-        "LayerVersionArn": {
-          "Fn::Sub": [
-            "arn:aws:lambda:${AWS::Region}:${AWS::AccountId}:layer:${layerName}-${env}:${layerVersion}",
-            {
-              "layerName": "amplifyhelperslayer",
-              "env": {
-                "Ref": "env"
-              },
-              "layerVersion": "2"
-            }
-          ]
-        },
-        "Principal": "*"
-      }
-    },
-    "LambdaLayerPermissionpublic3": {
-      "Type": "AWS::Lambda::LayerVersionPermission",
-      "Properties": {
-        "Action": "lambda:GetLayerVersion",
-        "LayerVersionArn": {
-          "Fn::Sub": [
-            "arn:aws:lambda:${AWS::Region}:${AWS::AccountId}:layer:${layerName}-${env}:${layerVersion}",
-            {
-              "layerName": "amplifyhelperslayer",
-              "env": {
-                "Ref": "env"
-              },
-              "layerVersion": "3"
-            }
-          ]
-        },
-        "Principal": "*"
-      }
-    },
-    "LambdaLayerPermissionpublic4": {
-      "Type": "AWS::Lambda::LayerVersionPermission",
-      "Properties": {
-        "Action": "lambda:GetLayerVersion",
-        "LayerVersionArn": {
-          "Fn::Sub": [
-            "arn:aws:lambda:${AWS::Region}:${AWS::AccountId}:layer:${layerName}-${env}:${layerVersion}",
-            {
-              "layerName": "amplifyhelperslayer",
-              "env": {
-                "Ref": "env"
-              },
-              "layerVersion": "4"
-            }
-          ]
-        },
-        "Principal": "*"
-      }
-    },
-    "LambdaLayerPermissionpublic5": {
+    "LambdaLayerPermissionprivate1": {
       "Type": "AWS::Lambda::LayerVersionPermission",
       "Properties": {
         "Action": "lambda:GetLayerVersion",
         "LayerVersionArn": {
           "Ref": "LambdaLayer"
         },
-        "Principal": "*"
+        "Principal": {
+          "Ref": "AWS::AccountId"
+        }
       }
     }
   },

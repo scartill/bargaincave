@@ -125,7 +125,7 @@ class NewLotActivity : AppCompatActivity() {
                 return@setOnClickListener
             }
 
-            val weight = b.weight.text.toString().toDoubleOrNull()
+            val weight = b.weight.text.toString().toFloatOrNull()
 
             if (weight == null) {
                 Log.i("Cave", "Unable: weight is required")
@@ -149,7 +149,7 @@ class NewLotActivity : AppCompatActivity() {
         b.progressBar.visibility = if (enabled) View.GONE else View.VISIBLE
     }
 
-    private fun submitAsync(fruit: String, photos: List<LotPhoto>, weight: Double, comment: String) {
+    private fun submitAsync(fruit: String, photos: List<LotPhoto>, weight: Float, comment: String) {
         Log.i("cave", "submitting a new lot")
         setGUI(false)
 

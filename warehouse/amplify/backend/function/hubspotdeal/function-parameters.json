@@ -11,7 +11,7 @@
     {
       "type": "ProjectLayer",
       "resourceName": "baselayer",
-      "version": 2
+      "version": 1
     },
     {
       "type": "ProjectLayer",
@@ -21,7 +21,7 @@
     {
       "type": "ProjectLayer",
       "resourceName": "amplifyhelperslayer",
-      "version": 5
+      "version": 1
     }
   ]
 }

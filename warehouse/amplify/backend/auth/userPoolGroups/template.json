@@ -41,65 +41,11 @@
     },
     "Resources": {
     
-        "adminsGroup": {
-          "Type" : "AWS::Cognito::UserPoolGroup",
-          "Properties" : {
-              "GroupName" : "admins",
-              "Precedence" : 1,
-              
-              "RoleArn" : {
-                "Fn::GetAtt": [
-                    "adminsGroupRole",
-                    "Arn"
-                ]
-              },
-              
-              "UserPoolId" : {
-                "Ref": "authwarehouse40c048f0UserPoolId"
-              }
-            }
-        },
-        
-        "adminsGroupRole": {
-            "Type": "AWS::IAM::Role",
-            "Properties": {
-                "RoleName":{
-                    "Fn::Join": [
-                        "",
-                        [
-                          {
-                            "Ref": "authwarehouse40c048f0UserPoolId"
-                          },
-                          "-adminsGroupRole"
-                        ]
-                    ]
-                },
-                "AssumeRolePolicyDocument": {
-                    "Version": "2012-10-17",
-                    "Statement": [
-                        {
-                            "Sid": "",
-                            "Effect": "Allow",
-                            "Principal": {
-                                "Federated": "cognito-identity.amazonaws.com"
-                            },
-                            "Action": "sts:AssumeRoleWithWebIdentity",
-                            "Condition": {
-                              "StringEquals": {"cognito-identity.amazonaws.com:aud": {"Ref":"authwarehouse40c048f0IdentityPoolId"}},
-                              "ForAnyValue:StringLike": {"cognito-identity.amazonaws.com:amr": "authenticated"}
-                            }
-                        }
-                    ]
-                }
-            }
-        },
-     
-    
         "managersGroup": {
           "Type" : "AWS::Cognito::UserPoolGroup",
           "Properties" : {
               "GroupName" : "managers",
-              "Precedence" : 2,
+              "Precedence" : 1,
               
               "RoleArn" : {
                 "Fn::GetAtt": [
@@ -153,7 +99,7 @@
           "Type" : "AWS::Cognito::UserPoolGroup",
           "Properties" : {
               "GroupName" : "sorters",
-              "Precedence" : 3,
+              "Precedence" : 2,
               
               "RoleArn" : {
                 "Fn::GetAtt": [
@@ -402,17 +348,6 @@
     },
     
     "Outputs": {
-      
-        "adminsGroupRole": {
-            "Value": {
-                "Fn::GetAtt": [
-                    "adminsGroupRole",
-                    "Arn"
-                ]
-            }
-        
-        },
-        
       
         "managersGroupRole": {
             "Value": {

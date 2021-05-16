@@ -224,9 +224,8 @@ class CognitoLoginActivity : AppCompatActivity() {
                 if (signedIn) {
                     val r = kotlin.runCatching {
                         val userGroups = CognitoHelper.getUserGroups()
-                        val isAdmin = userGroups?.contains("admins") ?: false
-                        isManager = isAdmin || userGroups?.contains("managers") ?: false
-                        isSorter = isAdmin || userGroups?.contains("sorters") ?: false
+                        isManager = userGroups?.contains("managers") ?: false
+                        isSorter = userGroups?.contains("sorters") ?: false
                     }
 
                     if (r.isFailure) {

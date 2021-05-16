@@ -13,9 +13,12 @@ query SyncLots(
   ) {
     items {
       id
-      fruit
       weightKg
       comment
+      resources
+      fruit
+      price
+      priceCurrency
       _version
       _deleted
       _lastChangedAt
@@ -29,9 +32,12 @@ query SyncLots(
 query GetLot($id: ID!) {
   getLot(id: $id) {
     id
-    fruit
     weightKg
     comment
+    resources
+    fruit
+    price
+    priceCurrency
     _version
     _deleted
     _lastChangedAt
@@ -43,9 +49,12 @@ query ListLots($filter: ModelLotFilterInput, $limit: Int, $nextToken: String) {
   listLots(filter: $filter, limit: $limit, nextToken: $nextToken) {
     items {
       id
-      fruit
       weightKg
       comment
+      resources
+      fruit
+      price
+      priceCurrency
       _version
       _deleted
       _lastChangedAt

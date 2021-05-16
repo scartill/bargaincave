@@ -8,13 +8,16 @@
           "defaultAuthentication": {
             "authenticationType": "API_KEY",
             "apiKeyConfig": {
-              "apiKeyExpirationDays": 30,
-              "description": "api key description"
+              "apiKeyExpirationDays": 365,
+              "description": "datastore-api"
             }
           },
           "additionalAuthenticationProviders": [
             {
-              "authenticationType": "AWS_IAM"
+              "authenticationType": "AMAZON_COGNITO_USER_POOLS",
+              "userPoolConfig": {
+                "userPoolId": "authwarehouse40c048f0"
+              }
             }
           ]
         }
@@ -26,7 +29,7 @@
       "dependsOn": [
         {
           "category": "function",
-          "resourceName": "lotsold",
+          "resourceName": "hubspotdeal",
           "attributes": [
             "Name",
             "Arn"
@@ -34,7 +37,7 @@
         },
         {
           "category": "function",
-          "resourceName": "hubspotdeal",
+          "resourceName": "lotsold",
           "attributes": [
             "Name",
             "Arn"
@@ -46,27 +49,6 @@
           "attributes": [
             "Name",
             "Arn"
-          ]
-        },
-        {
-          "category": "auth",
-          "resourceName": "warehouse40c048f0",
-          "attributes": [
-            "UserPoolId"
-          ]
-        },
-        {
-          "category": "auth",
-          "resourceName": "userPoolGroups",
-          "attributes": [
-            "adminsGroupRole"
-          ]
-        },
-        {
-          "category": "auth",
-          "resourceName": "userPoolGroups",
-          "attributes": [
-            "managersGroupRole"
           ]
         }
       ]
@@ -139,22 +121,6 @@
       "service": "Lambda",
       "dependsOn": [
         {
-          "category": "api",
-          "resourceName": "warehouse",
-          "attributes": [
-            "GraphQLAPIIdOutput",
-            "GraphQLAPIEndpointOutput",
-            "GraphQLAPIKeyOutput"
-          ]
-        },
-        {
-          "category": "storage",
-          "resourceName": "photos",
-          "attributes": [
-            "BucketName"
-          ]
-        },
-        {
           "category": "function",
           "resourceName": "baselayer",
           "attributes": [
@@ -173,6 +139,22 @@
           "resourceName": "amplifyhelperslayer",
           "attributes": [
             "Arn"
+          ]
+        },
+        {
+          "category": "api",
+          "resourceName": "warehouse",
+          "attributes": [
+            "GraphQLAPIIdOutput",
+            "GraphQLAPIEndpointOutput",
+            "GraphQLAPIKeyOutput"
+          ]
+        },
+        {
+          "category": "storage",
+          "resourceName": "photos",
+          "attributes": [
+            "BucketName"
           ]
         }
       ]
@@ -198,15 +180,6 @@
       "service": "Lambda",
       "dependsOn": [
         {
-          "category": "api",
-          "resourceName": "warehouse",
-          "attributes": [
-            "GraphQLAPIIdOutput",
-            "GraphQLAPIEndpointOutput",
-            "GraphQLAPIKeyOutput"
-          ]
-        },
-        {
           "category": "function",
           "resourceName": "baselayer",
           "attributes": [
@@ -225,6 +198,15 @@
           "resourceName": "amplifyhelperslayer",
           "attributes": [
             "Arn"
+          ]
+        },
+        {
+          "category": "api",
+          "resourceName": "warehouse",
+          "attributes": [
+            "GraphQLAPIIdOutput",
+            "GraphQLAPIEndpointOutput",
+            "GraphQLAPIKeyOutput"
           ]
         }
       ]

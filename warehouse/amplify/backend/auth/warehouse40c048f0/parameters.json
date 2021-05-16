@@ -60,15 +60,12 @@
     "userPoolGroups": true,
     "adminQueries": false,
     "triggers": "{}",
-    "hostedUI": true,
+    "hostedUI": false,
     "parentStack": {
         "Ref": "AWS::StackId"
     },
     "permissions": [],
+    "breakCircularDependency": false,
     "authProviders": [],
-    "thirdPartyAuth": false,
-    "hostedUIDomainName": "warehouse-bargaincave",
-    "authProvidersUserPool": [],
-    "hostedUIProviderMeta": "[]",
-    "oAuthMetadata": "{\"AllowedOAuthFlows\":[\"code\"],\"AllowedOAuthScopes\":[\"phone\",\"email\",\"openid\",\"profile\",\"aws.cognito.signin.user.admin\"],\"CallbackURLs\":[\"https://warehouse.bargaincave.ru/\"],\"LogoutURLs\":[\"https://warehouse.bargaincave.ru/\"]}"
+    "thirdPartyAuth": false
 }
