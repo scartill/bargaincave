@@ -15,6 +15,6 @@
 	}
 
 	p.grey {
-		color: #CCCCCB;
+		color: #CCCCCC;
 	}
 </style>
