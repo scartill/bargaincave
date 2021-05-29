@@ -87,10 +87,6 @@
             "Type": "String",
             "Default": "authwarehouse40c048f0UserPoolId"
         },
-        "authuserPoolGroupsadminsGroupRole": {
-            "Type": "String",
-            "Default": "authuserPoolGroupsadminsGroupRole"
-        },
         "authuserPoolGroupsmanagersGroupRole": {
             "Type": "String",
             "Default": "authuserPoolGroupsmanagersGroupRole"
@@ -790,70 +786,6 @@
                                     ]
                                 }
                             }
-                        }
-                    ]
-                }
-            }
-        },
-        "adminsGroupPolicy": {
-            "Type": "AWS::IAM::Policy",
-            "Properties": {
-                "PolicyName": "admins-group-s3-policy",
-                "Roles": [
-                    {
-                        "Fn::Join": [
-                            "",
-                            [
-                                {
-                                    "Ref": "authwarehouse40c048f0UserPoolId"
-                                },
-                                "-adminsGroupRole"
-                            ]
-                        ]
-                    }
-                ],
-                "PolicyDocument": {
-                    "Version": "2012-10-17",
-                    "Statement": [
-                        {
-                            "Effect": "Allow",
-                            "Action": [
-                                "s3:PutObject",
-                                "s3:GetObject",
-                                "s3:ListBucket",
-                                "s3:DeleteObject"
-                            ],
-                            "Resource": [
-                                {
-                                    "Fn::Join": [
-                                        "",
-                                        [
-                                            "arn:aws:s3:::",
-                                            {
-                                                "Ref": "S3Bucket"
-                                            },
-                                            "/*"
-                                        ]
-                                    ]
-                                }
-                            ]
-                        },
-                        {
-                            "Effect": "Allow",
-                            "Action": "s3:ListBucket",
-                            "Resource": [
-                                {
-                                    "Fn::Join": [
-                                        "",
-                                        [
-                                            "arn:aws:s3:::",
-                                            {
-                                                "Ref": "S3Bucket"
-                                            }
-                                        ]
-                                    ]
-                                }
-                            ]
                         }
                     ]
                 }

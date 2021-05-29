@@ -24,25 +24,25 @@ import static com.amplifyframework.core.model.query.predicate.QueryField.field;
   @AuthRule(allow = AuthStrategy.PUBLIC, operations = { ModelOperation.CREATE, ModelOperation.UPDATE, ModelOperation.DELETE, ModelOperation.READ })
 })
 public final class Lot implements Model {
-  public static final QueryField ID = field("id");
-  public static final QueryField WEIGHT_KG = field("weightKg");
-  public static final QueryField COMMENT = field("comment");
-  public static final QueryField RESOURCES = field("resources");
-  public static final QueryField FRUIT = field("fruit");
-  public static final QueryField PRICE = field("price");
-  public static final QueryField PRICE_CURRENCY = field("priceCurrency");
+  public static final QueryField ID = field("Lot", "id");
+  public static final QueryField WEIGHT_KG = field("Lot", "weightKg");
+  public static final QueryField COMMENT = field("Lot", "comment");
+  public static final QueryField RESOURCES = field("Lot", "resources");
+  public static final QueryField FRUIT = field("Lot", "fruit");
+  public static final QueryField PRICE = field("Lot", "price");
+  public static final QueryField PRICE_CURRENCY = field("Lot", "priceCurrency");
   private final @ModelField(targetType="ID", isRequired = true) String id;
-  private final @ModelField(targetType="Float") Float weightKg;
+  private final @ModelField(targetType="Float") Double weightKg;
   private final @ModelField(targetType="String") String comment;
   private final @ModelField(targetType="AWSJSON") String resources;
   private final @ModelField(targetType="String") String fruit;
-  private final @ModelField(targetType="Float") Float price;
+  private final @ModelField(targetType="Float") Double price;
   private final @ModelField(targetType="String") String priceCurrency;
   public String getId() {
       return id;
   }
   
-  public Float getWeightKg() {
+  public Double getWeightKg() {
       return weightKg;
   }
   
@@ -58,7 +58,7 @@ public final class Lot implements Model {
       return fruit;
   }
   
-  public Float getPrice() {
+  public Double getPrice() {
       return price;
   }
   
@@ -66,7 +66,7 @@ public final class Lot implements Model {
       return priceCurrency;
   }
   
-  private Lot(String id, Float weightKg, String comment, String resources, String fruit, Float price, String priceCurrency) {
+  private Lot(String id, Double weightKg, String comment, String resources, String fruit, Double price, String priceCurrency) {
     this.id = id;
     this.weightKg = weightKg;
     this.comment = comment;
@@ -169,22 +169,22 @@ public final class Lot implements Model {
   public interface BuildStep {
     Lot build();
     BuildStep id(String id) throws IllegalArgumentException;
-    BuildStep weightKg(Float weightKg);
+    BuildStep weightKg(Double weightKg);
     BuildStep comment(String comment);
     BuildStep resources(String resources);
     BuildStep fruit(String fruit);
-    BuildStep price(Float price);
+    BuildStep price(Double price);
     BuildStep priceCurrency(String priceCurrency);
   }
   
 
   public static class Builder implements BuildStep {
     private String id;
-    private Float weightKg;
+    private Double weightKg;
     private String comment;
     private String resources;
     private String fruit;
-    private Float price;
+    private Double price;
     private String priceCurrency;
     @Override
      public Lot build() {
@@ -201,7 +201,7 @@ public final class Lot implements Model {
     }
     
     @Override
-     public BuildStep weightKg(Float weightKg) {
+     public BuildStep weightKg(Double weightKg) {
         this.weightKg = weightKg;
         return this;
     }
@@ -225,7 +225,7 @@ public final class Lot implements Model {
     }
     
     @Override
-     public BuildStep price(Float price) {
+     public BuildStep price(Double price) {
         this.price = price;
         return this;
     }
@@ -259,7 +259,7 @@ public final class Lot implements Model {
   
 
   public final class CopyOfBuilder extends Builder {
-    private CopyOfBuilder(String id, Float weightKg, String comment, String resources, String fruit, Float price, String priceCurrency) {
+    private CopyOfBuilder(String id, Double weightKg, String comment, String resources, String fruit, Double price, String priceCurrency) {
       super.id(id);
       super.weightKg(weightKg)
         .comment(comment)
@@ -270,7 +270,7 @@ public final class Lot implements Model {
     }
     
     @Override
-     public CopyOfBuilder weightKg(Float weightKg) {
+     public CopyOfBuilder weightKg(Double weightKg) {
       return (CopyOfBuilder) super.weightKg(weightKg);
     }
     
@@ -290,7 +290,7 @@ public final class Lot implements Model {
     }
     
     @Override
-     public CopyOfBuilder price(Float price) {
+     public CopyOfBuilder price(Double price) {
       return (CopyOfBuilder) super.price(price);
     }
     
