@@ -6,12 +6,39 @@
       "Type": "String"
     }
   },
+  "Conditions": {
+    "ShouldNotCreateEnvResources": {
+      "Fn::Equals": [
+        {
+          "Ref": "env"
+        },
+        "NONE"
+      ]
+    }
+  },
   "Resources": {
     "HubspotToken": {
       "Type": "AWS::SecretsManager::Secret",
       "Properties": {
         "Description": "HubSpot API token",
-        "Name": "hubspot_token",
+        "Name": {
+          "Fn::If": [
+            "ShouldNotCreateEnvResources",
+            "hubspot_token",
+            {
+              "Fn::Join": [
+                "",
+                [
+                  "hubspot_token",
+                  "-",
+                  {
+                    "Ref": "env"
+                  }
+                ]
+              ]
+            }
+          ]
+        },
         "SecretString": "<replace this with a HubSpot API token>"
       }
     }

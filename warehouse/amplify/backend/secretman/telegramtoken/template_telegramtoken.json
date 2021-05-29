@@ -6,12 +6,39 @@
       "Type": "String"
     }
   },
+  "Conditions": {
+    "ShouldNotCreateEnvResources": {
+      "Fn::Equals": [
+        {
+          "Ref": "env"
+        },
+        "NONE"
+      ]
+    }
+  },
   "Resources": {
     "TelegramToken": {
       "Type": "AWS::SecretsManager::Secret",
       "Properties": {
         "Description": "Telegram bot control token",
-        "Name": "telegram_token",
+        "Name": {
+          "Fn::If": [
+            "ShouldNotCreateEnvResources",
+            "telegram_token",
+            {
+              "Fn::Join": [
+                "",
+                [
+                  "telegram_token",
+                  "-",
+                  {
+                    "Ref": "env"
+                  }
+                ]
+              ]
+            }
+          ]
+        },
         "SecretString": "<replace this with a telegram bot token>"
       }
     }
