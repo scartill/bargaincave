@@ -23,6 +23,7 @@ import SveltePreprocess from 'svelte-preprocess';
 import Autoprefixer from 'autoprefixer';
 import MiniCssExtractPlugin from 'mini-css-extract-plugin';
 import OptimizeCSSAssetsPlugin from 'optimize-css-assets-webpack-plugin';
+import Dotenv from 'dotenv-webpack'
 
 import { CleanWebpackPlugin } from 'clean-webpack-plugin';
 
@@ -153,6 +154,10 @@ const config: Configuration = {
 	plugins: [
 		new MiniCssExtractPlugin({
 			filename: '[name].css'
+		}),
+		new Dotenv({
+			safe: true, // load '.env.example' to verify the '.env' variables are all set. Can also be a string to a different file.
+			systemvars: true // load all the predefined 'process.env' variables which will trump anything local per dotenv specs.
 		})
 	],
 	devtool: isProduction && !sourceMapsInProduction ? false : 'source-map',
