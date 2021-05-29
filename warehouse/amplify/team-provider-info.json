@@ -19,15 +19,15 @@
       "function": {
         "telegrampublish": {
           "deploymentBucketName": "amplify-warehouse-dev-140728-deployment",
-          "s3Key": "amplify-builds/telegrampublish-56584b43324551457370-build.zip"
+          "s3Key": "amplify-builds/telegrampublish-476a684e6d6551566954-build.zip"
         },
         "hubspotdeal": {
           "deploymentBucketName": "amplify-warehouse-dev-140728-deployment",
-          "s3Key": "amplify-builds/hubspotdeal-6c466271697274754579-build.zip"
+          "s3Key": "amplify-builds/hubspotdeal-504a5432377656467133-build.zip"
         },
         "lotsold": {
           "deploymentBucketName": "amplify-warehouse-dev-140728-deployment",
-          "s3Key": "amplify-builds/lotsold-2f63382f366a72544f61-build.zip"
+          "s3Key": "amplify-builds/lotsold-44426e436b756c515873-build.zip"
         },
         "amplifyhelperslayer": {
           "deploymentBucketName": "amplify-warehouse-dev-140728-deployment",
