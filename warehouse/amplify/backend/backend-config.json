@@ -94,13 +94,6 @@
           "category": "auth",
           "resourceName": "userPoolGroups",
           "attributes": [
-            "adminsGroupRole"
-          ]
-        },
-        {
-          "category": "auth",
-          "resourceName": "userPoolGroups",
-          "attributes": [
             "managersGroupRole"
           ]
         },

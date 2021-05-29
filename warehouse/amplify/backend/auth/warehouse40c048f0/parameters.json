@@ -50,7 +50,6 @@
         "email"
     ],
     "userPoolGroupList": [
-        "admins",
         "managers",
         "sorters"
     ],

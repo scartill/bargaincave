@@ -229,6 +229,8 @@ Resources:
           Mutable: true
         
       
+      
+      
       AutoVerifiedAttributes: !Ref autoVerifiedAttributes
       
       
@@ -460,7 +462,6 @@ Outputs :
   AppClientSecret:
     Value: !GetAtt UserPoolClientInputs.appSecret
     Condition: ShouldOutputAppClientSecrets
-  
   
   
   
