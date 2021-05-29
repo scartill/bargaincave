@@ -3,6 +3,7 @@ IFS='|'
 
 AWS_PROFILE=${AWS_PROFILE:=default}
 echo AWS_PROFILE $AWS_PROFILE
+echo BUILD_ENV $BUILD_ENV
 
 SVELTECONFIG="{\
 \"SourceDir\":\"src\",\
@@ -21,7 +22,7 @@ AWSCLOUDFORMATIONCONFIG="{\
 AMPLIFY="{\
 \"projectName\":\"orderspa\",\
 \"appId\":\"$AWS_APP_ID\",\
-\"envName\":\"staging\",\
+\"envName\":\"$BUILD_ENV\",\
 \"defaultEditor\":\"vscode\"\
 }"
 
