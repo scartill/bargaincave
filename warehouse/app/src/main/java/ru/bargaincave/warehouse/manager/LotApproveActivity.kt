@@ -53,7 +53,7 @@ class LotApproveActivity : AppCompatActivity() {
                 publishing = true
                 setGUI()
 
-                val price = b.price.text.toString().toFloatOrNull()
+                val price = b.price.text.toString().toDoubleOrNull()
 
                 val editedLot = copyOfBuilder()
                     .pricePerPallet(price)

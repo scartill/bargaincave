@@ -63,4 +63,7 @@
     <string name="hint_pallet_weight">Enter a one pallet\'s weight</string>
     <string name="arrival_date">Arrival Date</string>
     <string name="expiration_date">Expiration Date</string>
+    <string name="origin">Country of Origin</string>
+    <string name="label_pallet_weight">Pallet Weight</string>
+    <string name="total_weight_required">Total weight is required</string>
 </resources>

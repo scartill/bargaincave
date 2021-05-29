@@ -5,11 +5,18 @@ mutation CreateLot(
 ) {
   createLot(input: $input, condition: $condition) {
     id
-    weightKg
-    comment
-    resources
     fruit
-    price
+    variety
+    totalWeightKg
+    caliber
+    palletWeightKg
+    condition
+    origin
+    arrival
+    expiration
+    resources
+    comment
+    pricePerPallet
     priceCurrency
     _version
     _deleted
@@ -24,11 +31,18 @@ mutation UpdateLot(
 ) {
   updateLot(input: $input, condition: $condition) {
     id
-    weightKg
-    comment
-    resources
     fruit
-    price
+    variety
+    totalWeightKg
+    caliber
+    palletWeightKg
+    condition
+    origin
+    arrival
+    expiration
+    resources
+    comment
+    pricePerPallet
     priceCurrency
     _version
     _deleted
@@ -43,11 +57,18 @@ mutation DeleteLot(
 ) {
   deleteLot(input: $input, condition: $condition) {
     id
-    weightKg
-    comment
-    resources
     fruit
-    price
+    variety
+    totalWeightKg
+    caliber
+    palletWeightKg
+    condition
+    origin
+    arrival
+    expiration
+    resources
+    comment
+    pricePerPallet
     priceCurrency
     _version
     _deleted

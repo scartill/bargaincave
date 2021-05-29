@@ -13,11 +13,18 @@ query SyncLots(
   ) {
     items {
       id
-      weightKg
-      comment
-      resources
       fruit
-      price
+      variety
+      totalWeightKg
+      caliber
+      palletWeightKg
+      condition
+      origin
+      arrival
+      expiration
+      resources
+      comment
+      pricePerPallet
       priceCurrency
       _version
       _deleted
@@ -32,11 +39,18 @@ query SyncLots(
 query GetLot($id: ID!) {
   getLot(id: $id) {
     id
-    weightKg
-    comment
-    resources
     fruit
-    price
+    variety
+    totalWeightKg
+    caliber
+    palletWeightKg
+    condition
+    origin
+    arrival
+    expiration
+    resources
+    comment
+    pricePerPallet
     priceCurrency
     _version
     _deleted
@@ -49,11 +63,18 @@ query ListLots($filter: ModelLotFilterInput, $limit: Int, $nextToken: String) {
   listLots(filter: $filter, limit: $limit, nextToken: $nextToken) {
     items {
       id
-      weightKg
-      comment
-      resources
       fruit
-      price
+      variety
+      totalWeightKg
+      caliber
+      palletWeightKg
+      condition
+      origin
+      arrival
+      expiration
+      resources
+      comment
+      pricePerPallet
       priceCurrency
       _version
       _deleted

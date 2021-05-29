@@ -24,33 +24,33 @@ import static com.amplifyframework.core.model.query.predicate.QueryField.field;
   @AuthRule(allow = AuthStrategy.PUBLIC, operations = { ModelOperation.CREATE, ModelOperation.UPDATE, ModelOperation.DELETE, ModelOperation.READ })
 })
 public final class Lot implements Model {
-  public static final QueryField ID = field("id");
-  public static final QueryField FRUIT = field("fruit");
-  public static final QueryField VARIETY = field("variety");
-  public static final QueryField TOTAL_WEIGHT_KG = field("totalWeightKg");
-  public static final QueryField CALIBER = field("caliber");
-  public static final QueryField PALLET_WEIGHT_KG = field("palletWeightKg");
-  public static final QueryField CONDITION = field("condition");
-  public static final QueryField ORIGIN = field("origin");
-  public static final QueryField ARRIVAL = field("arrival");
-  public static final QueryField EXPIRATION = field("expiration");
-  public static final QueryField RESOURCES = field("resources");
-  public static final QueryField COMMENT = field("comment");
-  public static final QueryField PRICE_PER_PALLET = field("pricePerPallet");
-  public static final QueryField PRICE_CURRENCY = field("priceCurrency");
+  public static final QueryField ID = field("Lot", "id");
+  public static final QueryField FRUIT = field("Lot", "fruit");
+  public static final QueryField VARIETY = field("Lot", "variety");
+  public static final QueryField TOTAL_WEIGHT_KG = field("Lot", "totalWeightKg");
+  public static final QueryField CALIBER = field("Lot", "caliber");
+  public static final QueryField PALLET_WEIGHT_KG = field("Lot", "palletWeightKg");
+  public static final QueryField CONDITION = field("Lot", "condition");
+  public static final QueryField ORIGIN = field("Lot", "origin");
+  public static final QueryField ARRIVAL = field("Lot", "arrival");
+  public static final QueryField EXPIRATION = field("Lot", "expiration");
+  public static final QueryField RESOURCES = field("Lot", "resources");
+  public static final QueryField COMMENT = field("Lot", "comment");
+  public static final QueryField PRICE_PER_PALLET = field("Lot", "pricePerPallet");
+  public static final QueryField PRICE_CURRENCY = field("Lot", "priceCurrency");
   private final @ModelField(targetType="ID", isRequired = true) String id;
   private final @ModelField(targetType="String") String fruit;
   private final @ModelField(targetType="String") String variety;
-  private final @ModelField(targetType="Float") Float totalWeightKg;
+  private final @ModelField(targetType="Float") Double totalWeightKg;
   private final @ModelField(targetType="Int") Integer caliber;
-  private final @ModelField(targetType="Float") Float palletWeightKg;
+  private final @ModelField(targetType="Float") Double palletWeightKg;
   private final @ModelField(targetType="String") String condition;
   private final @ModelField(targetType="String") String origin;
   private final @ModelField(targetType="String") String arrival;
   private final @ModelField(targetType="String") String expiration;
   private final @ModelField(targetType="AWSJSON") String resources;
   private final @ModelField(targetType="String") String comment;
-  private final @ModelField(targetType="Float") Float pricePerPallet;
+  private final @ModelField(targetType="Float") Double pricePerPallet;
   private final @ModelField(targetType="String") String priceCurrency;
   public String getId() {
       return id;
@@ -64,7 +64,7 @@ public final class Lot implements Model {
       return variety;
   }
   
-  public Float getTotalWeightKg() {
+  public Double getTotalWeightKg() {
       return totalWeightKg;
   }
   
@@ -72,7 +72,7 @@ public final class Lot implements Model {
       return caliber;
   }
   
-  public Float getPalletWeightKg() {
+  public Double getPalletWeightKg() {
       return palletWeightKg;
   }
   
@@ -100,7 +100,7 @@ public final class Lot implements Model {
       return comment;
   }
   
-  public Float getPricePerPallet() {
+  public Double getPricePerPallet() {
       return pricePerPallet;
   }
   
@@ -108,7 +108,7 @@ public final class Lot implements Model {
       return priceCurrency;
   }
   
-  private Lot(String id, String fruit, String variety, Float totalWeightKg, Integer caliber, Float palletWeightKg, String condition, String origin, String arrival, String expiration, String resources, String comment, Float pricePerPallet, String priceCurrency) {
+  private Lot(String id, String fruit, String variety, Double totalWeightKg, Integer caliber, Double palletWeightKg, String condition, String origin, String arrival, String expiration, String resources, String comment, Double pricePerPallet, String priceCurrency) {
     this.id = id;
     this.fruit = fruit;
     this.variety = variety;
@@ -255,16 +255,16 @@ public final class Lot implements Model {
     BuildStep id(String id) throws IllegalArgumentException;
     BuildStep fruit(String fruit);
     BuildStep variety(String variety);
-    BuildStep totalWeightKg(Float totalWeightKg);
+    BuildStep totalWeightKg(Double totalWeightKg);
     BuildStep caliber(Integer caliber);
-    BuildStep palletWeightKg(Float palletWeightKg);
+    BuildStep palletWeightKg(Double palletWeightKg);
     BuildStep condition(String condition);
     BuildStep origin(String origin);
     BuildStep arrival(String arrival);
     BuildStep expiration(String expiration);
     BuildStep resources(String resources);
     BuildStep comment(String comment);
-    BuildStep pricePerPallet(Float pricePerPallet);
+    BuildStep pricePerPallet(Double pricePerPallet);
     BuildStep priceCurrency(String priceCurrency);
   }
   
@@ -273,16 +273,16 @@ public final class Lot implements Model {
     private String id;
     private String fruit;
     private String variety;
-    private Float totalWeightKg;
+    private Double totalWeightKg;
     private Integer caliber;
-    private Float palletWeightKg;
+    private Double palletWeightKg;
     private String condition;
     private String origin;
     private String arrival;
     private String expiration;
     private String resources;
     private String comment;
-    private Float pricePerPallet;
+    private Double pricePerPallet;
     private String priceCurrency;
     @Override
      public Lot build() {
@@ -318,7 +318,7 @@ public final class Lot implements Model {
     }
     
     @Override
-     public BuildStep totalWeightKg(Float totalWeightKg) {
+     public BuildStep totalWeightKg(Double totalWeightKg) {
         this.totalWeightKg = totalWeightKg;
         return this;
     }
@@ -330,7 +330,7 @@ public final class Lot implements Model {
     }
     
     @Override
-     public BuildStep palletWeightKg(Float palletWeightKg) {
+     public BuildStep palletWeightKg(Double palletWeightKg) {
         this.palletWeightKg = palletWeightKg;
         return this;
     }
@@ -372,7 +372,7 @@ public final class Lot implements Model {
     }
     
     @Override
-     public BuildStep pricePerPallet(Float pricePerPallet) {
+     public BuildStep pricePerPallet(Double pricePerPallet) {
         this.pricePerPallet = pricePerPallet;
         return this;
     }
@@ -406,7 +406,7 @@ public final class Lot implements Model {
   
 
   public final class CopyOfBuilder extends Builder {
-    private CopyOfBuilder(String id, String fruit, String variety, Float totalWeightKg, Integer caliber, Float palletWeightKg, String condition, String origin, String arrival, String expiration, String resources, String comment, Float pricePerPallet, String priceCurrency) {
+    private CopyOfBuilder(String id, String fruit, String variety, Double totalWeightKg, Integer caliber, Double palletWeightKg, String condition, String origin, String arrival, String expiration, String resources, String comment, Double pricePerPallet, String priceCurrency) {
       super.id(id);
       super.fruit(fruit)
         .variety(variety)
@@ -434,7 +434,7 @@ public final class Lot implements Model {
     }
     
     @Override
-     public CopyOfBuilder totalWeightKg(Float totalWeightKg) {
+     public CopyOfBuilder totalWeightKg(Double totalWeightKg) {
       return (CopyOfBuilder) super.totalWeightKg(totalWeightKg);
     }
     
@@ -444,7 +444,7 @@ public final class Lot implements Model {
     }
     
     @Override
-     public CopyOfBuilder palletWeightKg(Float palletWeightKg) {
+     public CopyOfBuilder palletWeightKg(Double palletWeightKg) {
       return (CopyOfBuilder) super.palletWeightKg(palletWeightKg);
     }
     
@@ -479,7 +479,7 @@ public final class Lot implements Model {
     }
     
     @Override
-     public CopyOfBuilder pricePerPallet(Float pricePerPallet) {
+     public CopyOfBuilder pricePerPallet(Double pricePerPallet) {
       return (CopyOfBuilder) super.pricePerPallet(pricePerPallet);
     }
     
