@@ -1,10 +1,17 @@
 type Lot @model @auth(rules: [{allow: public}]) {
   id: ID!
-  weightKg: Float
-  comment: String
-  resources: AWSJSON
   fruit: String
-  price: Float
+  variety: String
+  totalWeightKg: Float
+  caliber: Int
+  palletWeightKg: Float
+  condition: String
+  origin: String
+  arrival: String
+  expiration: String
+  resources: AWSJSON
+  comment: String
+  pricePerPallet: Float
   priceCurrency: String
 }
  

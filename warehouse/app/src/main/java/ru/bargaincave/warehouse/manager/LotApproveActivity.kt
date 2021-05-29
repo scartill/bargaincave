@@ -1,28 +1,22 @@
 package ru.bargaincave.warehouse.manager
 
-import android.graphics.BitmapFactory
 import android.os.Bundle
 import android.util.Log
 import android.view.View
 import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
 import androidx.core.widget.addTextChangedListener
-import androidx.lifecycle.coroutineScope
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.amplifyframework.api.rest.RestOptions
 import com.amplifyframework.core.Amplify
 import com.amplifyframework.core.model.query.Where
 import com.amplifyframework.datastore.generated.model.Lot
-import kotlinx.coroutines.Dispatchers
-import kotlinx.coroutines.launch
-import kotlinx.coroutines.withContext
 import ru.bargaincave.warehouse.R
 import ru.bargaincave.warehouse.databinding.ActivityLotApproveBinding
 import ru.bargaincave.warehouse.media.LotMedia
 import ru.bargaincave.warehouse.media.LotPhoto
 import ru.bargaincave.warehouse.media.LotPhotoListAdapter
 import ru.bargaincave.warehouse.media.S3Downloader
-import java.io.File
 
 class LotApproveActivity : AppCompatActivity() {
     private lateinit var b: ActivityLotApproveBinding
@@ -62,7 +56,7 @@ class LotApproveActivity : AppCompatActivity() {
                 val price = b.price.text.toString().toFloatOrNull()
 
                 val editedLot = copyOfBuilder()
-                    .price(price)
+                    .pricePerPallet(price)
                     .priceCurrency("USD")
                     .build()
 
@@ -158,9 +152,9 @@ class LotApproveActivity : AppCompatActivity() {
 
                                         val na = getString(R.string.unknown)
                                         b.laFruit.text = lot.fruit ?: na
-                                        b.laWeight.text = lot.weightKg?.toString() ?: na
+                                        b.laWeight.text = lot.totalWeightKg?.toString() ?: na
                                         b.laComment.text = lot.comment ?: na
-                                        b.price.setText(lot.price?.toString() ?: "")
+                                        b.price.setText(lot.pricePerPallet?.toString() ?: "")
                                         photoLA.submitList(it.photos)
 
                                         loaded = true
