@@ -21,6 +21,7 @@ import com.amplifyframework.datastore.AWSDataStorePlugin
 import com.amplifyframework.storage.s3.AWSS3StoragePlugin
 import ru.bargaincave.warehouse.databinding.ActivityCognitoLoginBinding
 import ru.bargaincave.warehouse.manager.ManagerMainActivity
+import ru.bargaincave.warehouse.sorter.NewLotActivity
 import ru.bargaincave.warehouse.sorter.SorterMainActivity
 
 class CognitoLoginActivity : AppCompatActivity() {
@@ -279,7 +280,10 @@ class CognitoLoginActivity : AppCompatActivity() {
     }
 
     private fun startSorter() {
-        val intent = Intent(this, SorterMainActivity::class.java)
+        // NB: for now, there is a single Sorter's activity
+        // val intent = Intent(this, SorterMainActivity::class.java)
+
+        val intent = Intent(this, NewLotActivity::class.java)
         startActivity(intent)
     }
 }
