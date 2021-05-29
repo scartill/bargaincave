@@ -45,6 +45,22 @@
           "functiontelegrampublishArn": {
             "Type": "String",
             "Default": "functiontelegrampublishArn"
+          },
+
+          
+          
+    
+          "authwarehouse40c048f0UserPoolId": {
+            "Type": "String",
+            "Default": "authwarehouse40c048f0UserPoolId"
+          },
+
+          
+          
+    
+          "authuserPoolGroupsmanagersGroupRole": {
+            "Type": "String",
+            "Default": "authuserPoolGroupsmanagersGroupRole"
           }
 
           
@@ -67,6 +83,375 @@
         
         
         
+        
+          
+          
+          "managersGrouptelegramlotpublishPolicy": {
+          "DependsOn": [
+              "warehouseapi"
+            ],
+          "Type": "AWS::IAM::Policy",
+          "Properties": {
+              "PolicyName": "warehouseapi-telegramlotpublish-managers-group-policy",
+              "Roles": [
+                {
+                    "Fn::Join": [
+                        "",
+                        [
+                          {
+                            "Ref": "authwarehouse40c048f0UserPoolId"
+                          },
+                          "-managersGroupRole"
+                        ]
+                    ]
+                }
+              ],
+              "PolicyDocument": {
+                "Version": "2012-10-17",
+                "Statement": [
+                  {
+                    "Effect": "Allow",
+                    "Action": [
+                      "execute-api:Invoke"
+                    ],
+                     "Resource": [
+
+                    
+                      {
+                        "Fn::Join": [
+                          "",
+                          [
+                            "arn:aws:execute-api:",
+                            {
+                              "Ref": "AWS::Region"
+                            },
+                            ":",
+                            {
+                              "Ref": "AWS::AccountId"
+                            },
+                            ":",
+                            {
+                              "Ref": "warehouseapi"
+                            },
+                            "/",
+                            {
+                              "Fn::If": [
+                                "ShouldNotCreateEnvResources",
+                                "Prod",
+                                {
+                                  "Ref": "env"
+                                }
+                              ]
+                            },
+                              "/POST",
+                            "/telegram/lot/publish/*"
+                          ]
+                        ]
+                      },
+                      {
+                        "Fn::Join": [
+                          "",
+                          [
+                            "arn:aws:execute-api:",
+                            {
+                              "Ref": "AWS::Region"
+                            },
+                            ":",
+                            {
+                              "Ref": "AWS::AccountId"
+                            },
+                            ":",
+                            {
+                              "Ref": "warehouseapi"
+                            },
+                            "/",
+                            {
+                              "Fn::If": [
+                                "ShouldNotCreateEnvResources",
+                                "Prod",
+                                {
+                                  "Ref": "env"
+                                }
+                              ]
+                            },
+                              "/POST",
+                            "/telegram/lot/publish"
+                          ]
+                        ]
+                      }
+                    
+                      ,
+                    
+                    
+                      {
+                        "Fn::Join": [
+                          "",
+                          [
+                            "arn:aws:execute-api:",
+                            {
+                              "Ref": "AWS::Region"
+                            },
+                            ":",
+                            {
+                              "Ref": "AWS::AccountId"
+                            },
+                            ":",
+                            {
+                              "Ref": "warehouseapi"
+                            },
+                            "/",
+                            {
+                              "Fn::If": [
+                                "ShouldNotCreateEnvResources",
+                                "Prod",
+                                {
+                                  "Ref": "env"
+                                }
+                              ]
+                            },
+                              "/GET",
+                            "/telegram/lot/publish/*"
+                          ]
+                        ]
+                      },
+                      {
+                        "Fn::Join": [
+                          "",
+                          [
+                            "arn:aws:execute-api:",
+                            {
+                              "Ref": "AWS::Region"
+                            },
+                            ":",
+                            {
+                              "Ref": "AWS::AccountId"
+                            },
+                            ":",
+                            {
+                              "Ref": "warehouseapi"
+                            },
+                            "/",
+                            {
+                              "Fn::If": [
+                                "ShouldNotCreateEnvResources",
+                                "Prod",
+                                {
+                                  "Ref": "env"
+                                }
+                              ]
+                            },
+                              "/GET",
+                            "/telegram/lot/publish"
+                          ]
+                        ]
+                      }
+                    
+                      ,
+                    
+                    
+                      {
+                        "Fn::Join": [
+                          "",
+                          [
+                            "arn:aws:execute-api:",
+                            {
+                              "Ref": "AWS::Region"
+                            },
+                            ":",
+                            {
+                              "Ref": "AWS::AccountId"
+                            },
+                            ":",
+                            {
+                              "Ref": "warehouseapi"
+                            },
+                            "/",
+                            {
+                              "Fn::If": [
+                                "ShouldNotCreateEnvResources",
+                                "Prod",
+                                {
+                                  "Ref": "env"
+                                }
+                              ]
+                            },
+                              "/PUT",
+                            "/telegram/lot/publish/*"
+                          ]
+                        ]
+                      },
+                      {
+                        "Fn::Join": [
+                          "",
+                          [
+                            "arn:aws:execute-api:",
+                            {
+                              "Ref": "AWS::Region"
+                            },
+                            ":",
+                            {
+                              "Ref": "AWS::AccountId"
+                            },
+                            ":",
+                            {
+                              "Ref": "warehouseapi"
+                            },
+                            "/",
+                            {
+                              "Fn::If": [
+                                "ShouldNotCreateEnvResources",
+                                "Prod",
+                                {
+                                  "Ref": "env"
+                                }
+                              ]
+                            },
+                              "/PUT",
+                            "/telegram/lot/publish"
+                          ]
+                        ]
+                      }
+                    
+                      ,
+                    
+                    
+                      {
+                        "Fn::Join": [
+                          "",
+                          [
+                            "arn:aws:execute-api:",
+                            {
+                              "Ref": "AWS::Region"
+                            },
+                            ":",
+                            {
+                              "Ref": "AWS::AccountId"
+                            },
+                            ":",
+                            {
+                              "Ref": "warehouseapi"
+                            },
+                            "/",
+                            {
+                              "Fn::If": [
+                                "ShouldNotCreateEnvResources",
+                                "Prod",
+                                {
+                                  "Ref": "env"
+                                }
+                              ]
+                            },
+                              "/PATCH",
+                            "/telegram/lot/publish/*"
+                          ]
+                        ]
+                      },
+                      {
+                        "Fn::Join": [
+                          "",
+                          [
+                            "arn:aws:execute-api:",
+                            {
+                              "Ref": "AWS::Region"
+                            },
+                            ":",
+                            {
+                              "Ref": "AWS::AccountId"
+                            },
+                            ":",
+                            {
+                              "Ref": "warehouseapi"
+                            },
+                            "/",
+                            {
+                              "Fn::If": [
+                                "ShouldNotCreateEnvResources",
+                                "Prod",
+                                {
+                                  "Ref": "env"
+                                }
+                              ]
+                            },
+                              "/PATCH",
+                            "/telegram/lot/publish"
+                          ]
+                        ]
+                      }
+                    
+                      ,
+                    
+                    
+                      {
+                        "Fn::Join": [
+                          "",
+                          [
+                            "arn:aws:execute-api:",
+                            {
+                              "Ref": "AWS::Region"
+                            },
+                            ":",
+                            {
+                              "Ref": "AWS::AccountId"
+                            },
+                            ":",
+                            {
+                              "Ref": "warehouseapi"
+                            },
+                            "/",
+                            {
+                              "Fn::If": [
+                                "ShouldNotCreateEnvResources",
+                                "Prod",
+                                {
+                                  "Ref": "env"
+                                }
+                              ]
+                            },
+                              "/DELETE",
+                            "/telegram/lot/publish/*"
+                          ]
+                        ]
+                      },
+                      {
+                        "Fn::Join": [
+                          "",
+                          [
+                            "arn:aws:execute-api:",
+                            {
+                              "Ref": "AWS::Region"
+                            },
+                            ":",
+                            {
+                              "Ref": "AWS::AccountId"
+                            },
+                            ":",
+                            {
+                              "Ref": "warehouseapi"
+                            },
+                            "/",
+                            {
+                              "Fn::If": [
+                                "ShouldNotCreateEnvResources",
+                                "Prod",
+                                {
+                                  "Ref": "env"
+                                }
+                              ]
+                            },
+                              "/DELETE",
+                            "/telegram/lot/publish"
+                          ]
+                        ]
+                      }
+                    
+                    
+                    ]
+                  }
+                ]
+              }
+            }
+          },
+          
         
         
       "warehouseapi": {
@@ -881,7 +1266,7 @@
         
         
 
-      "DeploymentAPIGWwarehouseapic9b72f6d": {
+      "DeploymentAPIGWwarehouseapi416545f5": {
         "Type": "AWS::ApiGateway::Deployment",
         "Properties": {
           "Description": "The Development stage deployment of your API.",

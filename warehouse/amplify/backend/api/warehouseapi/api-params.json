@@ -25,14 +25,15 @@
             "name": "/telegram/lot/publish",
             "lambdaFunction": "telegrampublish",
             "privacy": {
-                "private": true,
-                "auth": [
-                    "/POST",
-                    "/GET",
-                    "/PUT",
-                    "/PATCH",
-                    "/DELETE"
-                ]
+                "userPoolGroups": {
+                    "managers": [
+                        "/POST",
+                        "/GET",
+                        "/PUT",
+                        "/PATCH",
+                        "/DELETE"
+                    ]
+                }
             },
             "policyResourceName": "/telegram/lot/publish"
         }
@@ -51,10 +52,10 @@
         }
     ],
     "privacy": {
-        "auth": 2,
+        "auth": 1,
         "unauth": 0,
-        "authRoleName": "amplify-warehouse-staging-142503-authRole",
-        "unAuthRoleName": "amplify-warehouse-staging-142503-unauthRole"
+        "authRoleName": "amplify-warehouse-dev-140728-authRole",
+        "unAuthRoleName": "amplify-warehouse-dev-140728-unauthRole"
     },
     "dependsOn": [
         {
@@ -80,8 +81,22 @@
                 "Name",
                 "Arn"
             ]
+        },
+        {
+            "category": "auth",
+            "resourceName": "warehouse40c048f0",
+            "attributes": [
+                "UserPoolId"
+            ]
+        },
+        {
+            "category": "auth",
+            "resourceName": "userPoolGroups",
+            "attributes": [
+                "managersGroupRole"
+            ]
         }
     ],
-    "uuid": "c9b72f6d",
+    "uuid": "416545f5",
     "authResourceName": "warehouse40c048f0"
 }

@@ -19,13 +19,13 @@
       "function": {
         "telegrampublish": {
           "deploymentBucketName": "amplify-warehouse-dev-140728-deployment",
-          "s3Key": "amplify-builds/telegrampublish-485a2f4c4c726f557268-build.zip",
+          "s3Key": "amplify-builds/telegrampublish-7738792f5a476d636c49-build.zip",
           "telegramChannel": "-1001202477347",
           "orderAppHost": "dev-app.vkusb.ru"
         },
         "hubspotdeal": {
           "deploymentBucketName": "amplify-warehouse-dev-140728-deployment",
-          "s3Key": "amplify-builds/hubspotdeal-504a5432377656467133-build.zip"
+          "s3Key": "amplify-builds/hubspotdeal-344674672b784a676e33-build.zip"
         },
         "lotsold": {
           "deploymentBucketName": "amplify-warehouse-dev-140728-deployment",
@@ -72,6 +72,14 @@
                 }
               ],
               "hash": "xWxbVUZmP8kT3Nomw19MkaPskgn+rZziHhI7hzuD/EA="
+            },
+            "2": {
+              "permissions": [
+                {
+                  "type": "private"
+                }
+              ],
+              "hash": "b0YXkQosD/5/v0LiMHaHP8I/j/+sUKc9n6jYTHtTwKo="
             }
           }
         },
@@ -84,6 +92,22 @@
                 }
               ],
               "hash": "7eoh9V/JCzzvnQ/otd0yXYJp5Iwb/xKVzokwliu+rwM="
+            },
+            "2": {
+              "permissions": [
+                {
+                  "type": "private"
+                }
+              ],
+              "hash": "McJgC8taV20gW5wX2NB6lWzLCiD7qn5Ep3QEux+cHu4="
+            },
+            "3": {
+              "permissions": [
+                {
+                  "type": "private"
+                }
+              ],
+              "hash": "cqzrBkInaZOXphpTjxAzf+mA3a26/15VwibY6pO9vPo="
             }
           }
         },

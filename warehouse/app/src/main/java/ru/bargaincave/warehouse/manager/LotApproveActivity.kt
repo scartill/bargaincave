@@ -57,7 +57,7 @@ class LotApproveActivity : AppCompatActivity() {
 
                 val editedLot = copyOfBuilder()
                     .pricePerPallet(price)
-                    .priceCurrency("USD")
+                    .priceCurrency("RUB")
                     .build()
 
                 Amplify.DataStore.save(editedLot,

@@ -16,7 +16,7 @@ PRICE_QUERY = '''
         getLot(id: $lotID) {
             id
             fruit
-            price
+            pricePerPallet
         }
     }
 '''
@@ -40,7 +40,7 @@ def get_hs_client():
     sm = boto3.client('secretsmanager')
 
     secret_value_response = sm.get_secret_value(
-        SecretId=HUBSPOT_API_TOKEN_SECRET_NAME
+        SecretId=f"{HUBSPOT_API_TOKEN_SECRET_NAME}-{os.getenv('ENV')}"
     )
 
     api_key = secret_value_response['SecretString']
@@ -89,7 +89,7 @@ def hubspot_deal_create(payload):
 
     new_deal = SimplePublicObjectInput(
         properties={
-            'amount': str(lot['price']),
+            'amount': str(lot['pricePerPallet']),
             'dealname': f'Order for {lot["fruit"]}',
             'lot_id': lot['id'],
             'dealstage': '11141448',
