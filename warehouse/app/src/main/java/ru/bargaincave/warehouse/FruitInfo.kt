@@ -15,7 +15,7 @@ class FruitInfo {
             "Colombia",
             "Kenya",
             "Venezuela",
-            "Brasil"
+            "Brazil"
         )
 
         val Conditions = listOf(

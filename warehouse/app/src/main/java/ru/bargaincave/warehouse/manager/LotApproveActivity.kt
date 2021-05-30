@@ -85,6 +85,7 @@ class LotApproveActivity : AppCompatActivity() {
                                             getString(R.string.publish_success),
                                             Toast.LENGTH_LONG
                                         ).show()
+                                        finish()
                                     } else {
                                         Toast.makeText(
                                             applicationContext,

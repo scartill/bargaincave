@@ -22,7 +22,6 @@ import com.amplifyframework.storage.s3.AWSS3StoragePlugin
 import ru.bargaincave.warehouse.databinding.ActivityCognitoLoginBinding
 import ru.bargaincave.warehouse.manager.ManagerMainActivity
 import ru.bargaincave.warehouse.sorter.NewLotActivity
-import ru.bargaincave.warehouse.sorter.SorterMainActivity
 
 class CognitoLoginActivity : AppCompatActivity() {
 
