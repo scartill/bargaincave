@@ -146,13 +146,13 @@
       "function": {
         "telegrampublish": {
           "deploymentBucketName": "amplify-warehouse-prod-111000-deployment",
-          "s3Key": "amplify-builds/telegrampublish-36476333755a6d6a6a66-build.zip",
+          "s3Key": "amplify-builds/telegrampublish-366b414a34684a2b4d63-build.zip",
           "telegramChannel": "-1001239807464",
           "orderAppHost": "app.vkusb.ru"
         },
         "hubspotdeal": {
           "deploymentBucketName": "amplify-warehouse-prod-111000-deployment",
-          "s3Key": "amplify-builds/hubspotdeal-7243496c586130715465-build.zip"
+          "s3Key": "amplify-builds/hubspotdeal-344674672b784a676e33-build.zip"
         },
         "lotsold": {
           "deploymentBucketName": "amplify-warehouse-prod-111000-deployment",
