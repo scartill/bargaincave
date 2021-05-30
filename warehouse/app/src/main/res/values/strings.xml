@@ -6,11 +6,6 @@
     <string name="new_lot_activity_label">Create New Lot</string>
     <string name="approve_lot_activity_label">Approve This Lot</string>
     <string name="New">New</string>
-    <string-array name="fruit_type">
-        <item>Mango</item>
-        <item>Avocado</item>
-        <item>Banana</item>
-    </string-array>
     <string name="prompt_email">Email</string>
     <string name="prompt_password">Password</string>
     <string name="action_sign_in">Sign in or register</string>
@@ -58,6 +53,17 @@
     <string name="no_access_token">No access token</string>
     <string name="re_login_prompt">You belong to no groups. Please re-login</string>
     <string name="context_fruit_kind">A kind of the lot\'s fruit</string>
+    <string name="context_fruit_variety">A variety of the lot\'s fruit</string>
     <string name="data_conn_ready">Data connection established</string>
     <string name="main_approve_lot">Approve</string>
+    <string name="new_photo">New Photo</string>
+    <string name="hint_caliber">Fruit\'s caliber</string>
+    <string name="hint_origin">Country of origin</string>
+    <string name="hint_condition">Fruit\'s condition</string>
+    <string name="hint_pallet_weight">Enter a one pallet\'s weight</string>
+    <string name="arrival_date">Arrival Date</string>
+    <string name="expiration_date">Expiration Date</string>
+    <string name="origin">Country of Origin</string>
+    <string name="label_pallet_weight">Pallet Weight</string>
+    <string name="total_weight_required">Total weight is required</string>
 </resources>

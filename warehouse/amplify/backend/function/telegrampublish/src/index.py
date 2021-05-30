@@ -17,14 +17,48 @@ PRICE_QUERY = '''
         getLot(id: $lotID) {
             id
             fruit
-            price
+            variety
+            origin
+            caliber
+            totalWeightKg
+            pricePerPallet
             resources
-            weightKg
         }
     }
 '''
 
-HUBSPOT_API_TOKEN_SECRET_NAME = 'hubspot_token'
+FRUIT_TRANSLATE = {
+    "RU": {
+        "Mango": "манго",
+        "Avocado": "авокадо"
+    }
+}
+
+VARIETY_TRANSLATE = {
+    "RU": {
+        "Kent": "Кент",
+        "Keitt": "Кит",
+        "Fuerte": "Фуэрте",
+        "Hass": "Хасс"
+    }
+}
+
+ORIGIN_TRANSLATE = {
+    "RU": {
+        "Peru": "Перу",
+        "Africa": "Африка",
+        "Egypt": "Египет",
+        "Israel": "Израиль",
+        "Colombia": "Колумбия",
+        "Kenya": "Кения",
+        "Venezuela": "Венесуэла",
+        "Brazil": "Бразилия"
+    }
+}
+
+ANNOUNCE_TEMPLATE = '''Продается {fruitLocal} {varietyLocal} ({originLocal}) по цене {pricePerPallet} ₽ за коробку.
+Минимальный заказ - 1 коробка ({caliber} {fruitLocal})
+'''
 
 
 def get_lot(lot_id):
@@ -42,7 +76,7 @@ def get_lot(lot_id):
 def get_bot_client():
     sm = boto3.client('secretsmanager')
     secret_value_response = sm.get_secret_value(
-        SecretId=TELEGRAM_BOT_TOKEN_SECRET_NAME
+        SecretId=f"{TELEGRAM_BOT_TOKEN_SECRET_NAME}-{os.getenv('ENV')}"
     )
     bot_token = secret_value_response['SecretString']
 
@@ -70,6 +104,11 @@ def telegram_api_command(payload):
     photo_keys = resources['photos']
     media = [InputMediaPhoto(get_photo_url(k['photoFile'])) for k in photo_keys]
 
+    lang = 'RU'
+    lot['fruitLocal'] = FRUIT_TRANSLATE[lang][lot['fruit']]
+    lot['varietyLocal'] = VARIETY_TRANSLATE[lang][lot['variety']]
+    lot['originLocal'] = ORIGIN_TRANSLATE[lang][lot['origin']]
+
     channel_id = os.getenv('CHANNEL_ID')
 
     bot = get_bot_client()
@@ -83,8 +122,8 @@ def telegram_api_command(payload):
 
     app_host = os.getenv('APP_HOST')
     deep_url = f'https://{app_host}/#/order/{lot_id}'
-    announce = 'Heads up! Selling {weightKg} kg of {fruit} for {price} ₽ per kg'.format(**lot)
-    text = f'{announce}: {deep_url}'
+    announce = ANNOUNCE_TEMPLATE.format(**lot)
+    text = f'{announce}{deep_url}'
 
     message = bot.send_message(
         chat_id=channel_id,

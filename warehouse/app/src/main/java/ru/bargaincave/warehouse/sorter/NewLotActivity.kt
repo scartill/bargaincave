@@ -5,26 +5,26 @@ import android.graphics.BitmapFactory
 import android.os.Bundle
 import android.util.Log
 import android.view.View
+import android.widget.AdapterView
 import android.widget.ArrayAdapter
-import android.widget.Spinner
 import android.widget.Toast
 import androidx.activity.result.contract.ActivityResultContracts
 import androidx.appcompat.app.AppCompatActivity
 import androidx.core.content.FileProvider
 import androidx.core.graphics.scale
-import androidx.lifecycle.coroutineScope
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.amplifyframework.core.Amplify
 import com.amplifyframework.datastore.generated.model.Lot
-import kotlinx.coroutines.Dispatchers
-import kotlinx.coroutines.launch
-import kotlinx.coroutines.withContext
+import ru.bargaincave.warehouse.FruitInfo
 import ru.bargaincave.warehouse.R
 import ru.bargaincave.warehouse.databinding.ActivityNewLotBinding
-import ru.bargaincave.warehouse.media.*
+import ru.bargaincave.warehouse.media.LotMedia
+import ru.bargaincave.warehouse.media.LotPhoto
+import ru.bargaincave.warehouse.media.LotPhotoListAdapter
+import ru.bargaincave.warehouse.media.S3Uploader
 import java.io.File
 import java.io.FileOutputStream
-import java.util.*
+import java.time.LocalDate
 
 
 const val BITMAP_TARGET_WIDTH = 1024
@@ -36,6 +36,14 @@ class NewLotActivity : AppCompatActivity() {
     private lateinit var currentPhotoPath: String
     private var photos = mutableListOf<LotPhoto>()
     private lateinit var photoLA: LotPhotoListAdapter
+    private lateinit var fruitAdapter: ArrayAdapter<String>
+    private lateinit var varietyAdapter: ArrayAdapter<String>
+    private lateinit var conditionsAdapter: ArrayAdapter<String>
+    private lateinit var calibersAdapter: ArrayAdapter<Int>
+    private lateinit var originsAdapter: ArrayAdapter<String>
+
+    private lateinit var arrivalDate : LocalDate
+    private lateinit var expirationDate : LocalDate
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -57,14 +65,48 @@ class NewLotActivity : AppCompatActivity() {
         b.photoList.adapter = photoLA
         photoLA.submitList(photos)
 
-        val spinner: Spinner = b.spinFruit
-        ArrayAdapter.createFromResource(
-            this,
-            R.array.fruit_type,
-            android.R.layout.simple_spinner_item
-        ).also { adapter ->
-            adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item)
-            spinner.adapter = adapter
+        fruitAdapter = createSpinAdapter(FruitInfo.Sorts.keys.toMutableList())
+        b.spinFruit.adapter = fruitAdapter
+
+        val initialSorts = FruitInfo.Sorts[fruitAdapter.getItem(0)] ?: arrayListOf(getString(R.string.unknown))
+        varietyAdapter = createSpinAdapter(initialSorts.toMutableList())
+        b.spinVariety.adapter = varietyAdapter
+
+        b.spinFruit.onItemSelectedListener = object : AdapterView.OnItemSelectedListener {
+            override fun onItemSelected(parent: AdapterView<*>?, v: View?, position: Int, id: Long) {
+                val na = getString(R.string.unknown)
+                val fruit = parent?.getItemAtPosition(position).toString()
+                val sorts = FruitInfo.Sorts[fruit] ?: arrayListOf(na)
+                varietyAdapter.clear()
+                varietyAdapter.addAll(sorts)
+            }
+
+            override fun onNothingSelected(p0: AdapterView<*>?) {
+                // Empty
+                return
+            }
+        }
+
+        conditionsAdapter = createSpinAdapter(FruitInfo.Conditions.toMutableList())
+        b.condition.adapter = conditionsAdapter
+
+        calibersAdapter = createSpinAdapter(FruitInfo.Calibers.toMutableList())
+        b.caliber.adapter = calibersAdapter
+
+        originsAdapter = createSpinAdapter(FruitInfo.Origins.toMutableList())
+        b.origin.adapter = originsAdapter
+
+        arrivalDate = LocalDate.now()
+        b.arrival.init(arrivalDate.year, arrivalDate.monthValue - 1, arrivalDate.dayOfMonth) {
+            _, year, month, day ->
+                arrivalDate = LocalDate.of(year, month + 1, day)
+                Log.i("Cave", "Arrival $arrivalDate")
+        }
+
+        expirationDate = LocalDate.now()
+        b.expiration.init(expirationDate.year, expirationDate.monthValue - 1, expirationDate.dayOfMonth) {
+            _, year, month, day ->
+                expirationDate = LocalDate.of(year, month + 1, day)
         }
 
         val photoRequester = registerForActivityResult(ActivityResultContracts.TakePicture()) { taken ->
@@ -116,40 +158,76 @@ class NewLotActivity : AppCompatActivity() {
         b.submit.setOnClickListener {
             setGUI(false)
 
-            val fruit = b.spinFruit.selectedItem.toString()
+            val submitting = submit()
 
-            if (photos.size == 0) {
-                Log.i("cave", "unable: photo is required")
+            if(!submitting) {
+                // Restoring GUI is async submit wasn't launched
                 setGUI(true)
-                b.photo.requestFocus()
-                return@setOnClickListener
             }
-
-            val weight = b.weight.text.toString().toFloatOrNull()
-
-            if (weight == null) {
-                Log.i("Cave", "Unable: weight is required")
-                setGUI(true)
-                b.weight.requestFocus()
-                return@setOnClickListener
-            }
-
-            val comment = b.comment.text.toString()
-            Log.i("cave", "Launching async submit")
-            submitAsync(fruit, photos, weight, comment)
         }
     }
 
+    private fun <T> createSpinAdapter(list : MutableList<T>) : ArrayAdapter<T> {
+        val result = ArrayAdapter(
+            this,
+            android.R.layout.simple_spinner_item,
+            list
+        )
+        result.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item)
+        return result
+    }
+
     private fun setGUI(enabled: Boolean) {
-        b.submit.isEnabled = enabled
         b.spinFruit.isEnabled = enabled
+        b.spinVariety.isEnabled = enabled
         b.photo.isEnabled = enabled
-        b.weight.isEnabled = enabled
+        b.totalWeightKg.isEnabled = enabled
+        b.caliber.isEnabled = enabled
+        b.palletLabel.isEnabled = enabled
+        b.condition.isEnabled = enabled
+        b.origin.isEnabled = enabled
+        b.arrival.isEnabled = enabled
+        b.expiration.isEnabled = enabled
         b.comment.isEnabled = enabled
+
+        b.submit.isEnabled = enabled
         b.progressBar.visibility = if (enabled) View.GONE else View.VISIBLE
     }
 
-    private fun submitAsync(fruit: String, photos: List<LotPhoto>, weight: Float, comment: String) {
+    private fun submit() : Boolean {
+        if (photos.size == 0) {
+            b.photo.requestFocus()
+            return false
+        }
+
+        val builder = Lot.builder()
+
+        builder.fruit(b.spinFruit.selectedItem.toString())
+        builder.variety(b.spinVariety.selectedItem.toString())
+
+        val tw = b.totalWeightKg.text.toString().toDoubleOrNull()
+        if (tw == null) {
+            Toast.makeText(applicationContext, getString(R.string.total_weight_required), Toast.LENGTH_SHORT).show()
+            b.totalWeightKg.requestFocus()
+            return false
+        }
+        builder.totalWeightKg(tw)
+        builder.caliber(b.caliber.selectedItem.toString().toInt())
+        builder.palletWeightKg(b.palletWeighKg.text.toString().toDoubleOrNull() ?: 0.0)
+        builder.condition(b.condition.selectedItem.toString())
+        builder.origin(b.origin.selectedItem.toString())
+        builder.arrival(arrivalDate.toString())
+        builder.expiration(expirationDate.toString())
+
+        builder.comment(b.comment.text.toString())
+
+        Log.i("cave", "Launching async submit")
+        submitAsync(builder, photos)
+
+        return true
+    }
+
+    private fun submitAsync(builder: Lot.BuildStep, photos: List<LotPhoto>) {
         Log.i("cave", "submitting a new lot")
         setGUI(false)
 
@@ -159,11 +237,8 @@ class NewLotActivity : AppCompatActivity() {
         val s3 = S3Uploader(media)
         s3.uploadAsync(applicationContext,
             {
-                val item: Lot = Lot.builder()
-                    .fruit(fruit)
+                val item = builder
                     .resources(resourcesJson)
-                    .weightKg(weight)
-                    .comment(comment)
                     .build()
 
                 Amplify.DataStore.save(

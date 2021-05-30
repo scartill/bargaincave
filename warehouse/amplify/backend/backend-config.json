@@ -50,6 +50,20 @@
             "Name",
             "Arn"
           ]
+        },
+        {
+          "category": "auth",
+          "resourceName": "warehouse40c048f0",
+          "attributes": [
+            "UserPoolId"
+          ]
+        },
+        {
+          "category": "auth",
+          "resourceName": "userPoolGroups",
+          "attributes": [
+            "managersGroupRole"
+          ]
         }
       ]
     }

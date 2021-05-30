@@ -19,13 +19,13 @@
       "function": {
         "telegrampublish": {
           "deploymentBucketName": "amplify-warehouse-dev-140728-deployment",
-          "s3Key": "amplify-builds/telegrampublish-485a2f4c4c726f557268-build.zip",
+          "s3Key": "amplify-builds/telegrampublish-366b414a34684a2b4d63-build.zip",
           "telegramChannel": "-1001202477347",
           "orderAppHost": "dev-app.vkusb.ru"
         },
         "hubspotdeal": {
           "deploymentBucketName": "amplify-warehouse-dev-140728-deployment",
-          "s3Key": "amplify-builds/hubspotdeal-504a5432377656467133-build.zip"
+          "s3Key": "amplify-builds/hubspotdeal-344674672b784a676e33-build.zip"
         },
         "lotsold": {
           "deploymentBucketName": "amplify-warehouse-dev-140728-deployment",
@@ -72,6 +72,14 @@
                 }
               ],
               "hash": "xWxbVUZmP8kT3Nomw19MkaPskgn+rZziHhI7hzuD/EA="
+            },
+            "2": {
+              "permissions": [
+                {
+                  "type": "private"
+                }
+              ],
+              "hash": "b0YXkQosD/5/v0LiMHaHP8I/j/+sUKc9n6jYTHtTwKo="
             }
           }
         },
@@ -84,6 +92,22 @@
                 }
               ],
               "hash": "7eoh9V/JCzzvnQ/otd0yXYJp5Iwb/xKVzokwliu+rwM="
+            },
+            "2": {
+              "permissions": [
+                {
+                  "type": "private"
+                }
+              ],
+              "hash": "McJgC8taV20gW5wX2NB6lWzLCiD7qn5Ep3QEux+cHu4="
+            },
+            "3": {
+              "permissions": [
+                {
+                  "type": "private"
+                }
+              ],
+              "hash": "cqzrBkInaZOXphpTjxAzf+mA3a26/15VwibY6pO9vPo="
             }
           }
         },
@@ -104,14 +128,14 @@
   },
   "prod": {
     "awscloudformation": {
-      "AuthRoleName": "amplify-warehouse-prod-125905-authRole",
-      "UnauthRoleArn": "arn:aws:iam::466719640610:role/amplify-warehouse-prod-125905-unauthRole",
-      "AuthRoleArn": "arn:aws:iam::466719640610:role/amplify-warehouse-prod-125905-authRole",
+      "AuthRoleName": "amplify-warehouse-prod-111000-authRole",
+      "UnauthRoleArn": "arn:aws:iam::466719640610:role/amplify-warehouse-prod-111000-unauthRole",
+      "AuthRoleArn": "arn:aws:iam::466719640610:role/amplify-warehouse-prod-111000-authRole",
       "Region": "eu-west-2",
-      "DeploymentBucketName": "amplify-warehouse-prod-125905-deployment",
-      "UnauthRoleName": "amplify-warehouse-prod-125905-unauthRole",
-      "StackName": "amplify-warehouse-prod-125905",
-      "StackId": "arn:aws:cloudformation:eu-west-2:466719640610:stack/amplify-warehouse-prod-125905/81307030-c064-11eb-80c1-0a290e8f7d04",
+      "DeploymentBucketName": "amplify-warehouse-prod-111000-deployment",
+      "UnauthRoleName": "amplify-warehouse-prod-111000-unauthRole",
+      "StackName": "amplify-warehouse-prod-111000",
+      "StackId": "arn:aws:cloudformation:eu-west-2:466719640610:stack/amplify-warehouse-prod-111000/6e52ec80-c11e-11eb-bf7d-0a891d7a7dbe",
       "AmplifyAppId": "dljkcmaj5jw74"
     },
     "categories": {
@@ -121,33 +145,33 @@
       },
       "function": {
         "telegrampublish": {
-          "deploymentBucketName": "amplify-warehouse-prod-125905-deployment",
-          "s3Key": "amplify-builds/telegrampublish-485a2f4c4c726f557268-build.zip",
+          "deploymentBucketName": "amplify-warehouse-prod-111000-deployment",
+          "s3Key": "amplify-builds/telegrampublish-366b414a34684a2b4d63-build.zip",
           "telegramChannel": "-1001239807464",
           "orderAppHost": "app.vkusb.ru"
         },
         "hubspotdeal": {
-          "deploymentBucketName": "amplify-warehouse-prod-125905-deployment",
-          "s3Key": "amplify-builds/hubspotdeal-504a5432377656467133-build.zip"
+          "deploymentBucketName": "amplify-warehouse-prod-111000-deployment",
+          "s3Key": "amplify-builds/hubspotdeal-344674672b784a676e33-build.zip"
         },
         "lotsold": {
-          "deploymentBucketName": "amplify-warehouse-prod-125905-deployment",
+          "deploymentBucketName": "amplify-warehouse-prod-111000-deployment",
           "s3Key": "amplify-builds/lotsold-44426e436b756c515873-build.zip"
         },
         "amplifyhelperslayer": {
-          "deploymentBucketName": "amplify-warehouse-prod-125905-deployment",
+          "deploymentBucketName": "amplify-warehouse-prod-111000-deployment",
           "s3Key": "amplify-builds/amplifyhelperslayer-build.zip"
         },
         "telegramlayer": {
-          "deploymentBucketName": "amplify-warehouse-prod-125905-deployment",
+          "deploymentBucketName": "amplify-warehouse-prod-111000-deployment",
           "s3Key": "amplify-builds/telegramlayer-build.zip"
         },
         "baselayer": {
-          "deploymentBucketName": "amplify-warehouse-prod-125905-deployment",
+          "deploymentBucketName": "amplify-warehouse-prod-111000-deployment",
           "s3Key": "amplify-builds/baselayer-build.zip"
         },
         "hubspotlayer": {
-          "deploymentBucketName": "amplify-warehouse-prod-125905-deployment",
+          "deploymentBucketName": "amplify-warehouse-prod-111000-deployment",
           "s3Key": "amplify-builds/hubspotlayer-build.zip"
         }
       }
@@ -174,7 +198,7 @@
                   "type": "private"
                 }
               ],
-              "hash": "xWxbVUZmP8kT3Nomw19MkaPskgn+rZziHhI7hzuD/EA="
+              "hash": "b0YXkQosD/5/v0LiMHaHP8I/j/+sUKc9n6jYTHtTwKo="
             }
           }
         },
@@ -186,21 +210,13 @@
                   "type": "private"
                 }
               ],
-              "hash": "7eoh9V/JCzzvnQ/otd0yXYJp5Iwb/xKVzokwliu+rwM="
+              "hash": "cqzrBkInaZOXphpTjxAzf+mA3a26/15VwibY6pO9vPo="
             }
           }
         },
         "amplifyhelperslayer": {
           "layerVersionMap": {
             "1": {
-              "permissions": [
-                {
-                  "type": "private"
-                }
-              ],
-              "hash": "Tko1Kwr7pSm1+wdq4W0ZqYAyYRQLkOFgdAr34Q7nlEs="
-            },
-            "2": {
               "permissions": [
                 {
                   "type": "private"

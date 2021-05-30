@@ -25,54 +25,103 @@ import static com.amplifyframework.core.model.query.predicate.QueryField.field;
 })
 public final class Lot implements Model {
   public static final QueryField ID = field("Lot", "id");
-  public static final QueryField WEIGHT_KG = field("Lot", "weightKg");
-  public static final QueryField COMMENT = field("Lot", "comment");
-  public static final QueryField RESOURCES = field("Lot", "resources");
   public static final QueryField FRUIT = field("Lot", "fruit");
-  public static final QueryField PRICE = field("Lot", "price");
+  public static final QueryField VARIETY = field("Lot", "variety");
+  public static final QueryField TOTAL_WEIGHT_KG = field("Lot", "totalWeightKg");
+  public static final QueryField CALIBER = field("Lot", "caliber");
+  public static final QueryField PALLET_WEIGHT_KG = field("Lot", "palletWeightKg");
+  public static final QueryField CONDITION = field("Lot", "condition");
+  public static final QueryField ORIGIN = field("Lot", "origin");
+  public static final QueryField ARRIVAL = field("Lot", "arrival");
+  public static final QueryField EXPIRATION = field("Lot", "expiration");
+  public static final QueryField RESOURCES = field("Lot", "resources");
+  public static final QueryField COMMENT = field("Lot", "comment");
+  public static final QueryField PRICE_PER_PALLET = field("Lot", "pricePerPallet");
   public static final QueryField PRICE_CURRENCY = field("Lot", "priceCurrency");
   private final @ModelField(targetType="ID", isRequired = true) String id;
-  private final @ModelField(targetType="Float") Double weightKg;
-  private final @ModelField(targetType="String") String comment;
-  private final @ModelField(targetType="AWSJSON") String resources;
   private final @ModelField(targetType="String") String fruit;
-  private final @ModelField(targetType="Float") Double price;
+  private final @ModelField(targetType="String") String variety;
+  private final @ModelField(targetType="Float") Double totalWeightKg;
+  private final @ModelField(targetType="Int") Integer caliber;
+  private final @ModelField(targetType="Float") Double palletWeightKg;
+  private final @ModelField(targetType="String") String condition;
+  private final @ModelField(targetType="String") String origin;
+  private final @ModelField(targetType="String") String arrival;
+  private final @ModelField(targetType="String") String expiration;
+  private final @ModelField(targetType="AWSJSON") String resources;
+  private final @ModelField(targetType="String") String comment;
+  private final @ModelField(targetType="Float") Double pricePerPallet;
   private final @ModelField(targetType="String") String priceCurrency;
   public String getId() {
       return id;
-  }
-  
-  public Double getWeightKg() {
-      return weightKg;
-  }
-  
-  public String getComment() {
-      return comment;
-  }
-  
-  public String getResources() {
-      return resources;
   }
   
   public String getFruit() {
       return fruit;
   }
   
-  public Double getPrice() {
-      return price;
+  public String getVariety() {
+      return variety;
+  }
+  
+  public Double getTotalWeightKg() {
+      return totalWeightKg;
+  }
+  
+  public Integer getCaliber() {
+      return caliber;
+  }
+  
+  public Double getPalletWeightKg() {
+      return palletWeightKg;
+  }
+  
+  public String getCondition() {
+      return condition;
+  }
+  
+  public String getOrigin() {
+      return origin;
+  }
+  
+  public String getArrival() {
+      return arrival;
+  }
+  
+  public String getExpiration() {
+      return expiration;
+  }
+  
+  public String getResources() {
+      return resources;
+  }
+  
+  public String getComment() {
+      return comment;
+  }
+  
+  public Double getPricePerPallet() {
+      return pricePerPallet;
   }
   
   public String getPriceCurrency() {
       return priceCurrency;
   }
   
-  private Lot(String id, Double weightKg, String comment, String resources, String fruit, Double price, String priceCurrency) {
+  private Lot(String id, String fruit, String variety, Double totalWeightKg, Integer caliber, Double palletWeightKg, String condition, String origin, String arrival, String expiration, String resources, String comment, Double pricePerPallet, String priceCurrency) {
     this.id = id;
-    this.weightKg = weightKg;
-    this.comment = comment;
-    this.resources = resources;
     this.fruit = fruit;
-    this.price = price;
+    this.variety = variety;
+    this.totalWeightKg = totalWeightKg;
+    this.caliber = caliber;
+    this.palletWeightKg = palletWeightKg;
+    this.condition = condition;
+    this.origin = origin;
+    this.arrival = arrival;
+    this.expiration = expiration;
+    this.resources = resources;
+    this.comment = comment;
+    this.pricePerPallet = pricePerPallet;
     this.priceCurrency = priceCurrency;
   }
   
@@ -85,11 +134,18 @@ public final class Lot implements Model {
       } else {
       Lot lot = (Lot) obj;
       return ObjectsCompat.equals(getId(), lot.getId()) &&
-              ObjectsCompat.equals(getWeightKg(), lot.getWeightKg()) &&
-              ObjectsCompat.equals(getComment(), lot.getComment()) &&
-              ObjectsCompat.equals(getResources(), lot.getResources()) &&
               ObjectsCompat.equals(getFruit(), lot.getFruit()) &&
-              ObjectsCompat.equals(getPrice(), lot.getPrice()) &&
+              ObjectsCompat.equals(getVariety(), lot.getVariety()) &&
+              ObjectsCompat.equals(getTotalWeightKg(), lot.getTotalWeightKg()) &&
+              ObjectsCompat.equals(getCaliber(), lot.getCaliber()) &&
+              ObjectsCompat.equals(getPalletWeightKg(), lot.getPalletWeightKg()) &&
+              ObjectsCompat.equals(getCondition(), lot.getCondition()) &&
+              ObjectsCompat.equals(getOrigin(), lot.getOrigin()) &&
+              ObjectsCompat.equals(getArrival(), lot.getArrival()) &&
+              ObjectsCompat.equals(getExpiration(), lot.getExpiration()) &&
+              ObjectsCompat.equals(getResources(), lot.getResources()) &&
+              ObjectsCompat.equals(getComment(), lot.getComment()) &&
+              ObjectsCompat.equals(getPricePerPallet(), lot.getPricePerPallet()) &&
               ObjectsCompat.equals(getPriceCurrency(), lot.getPriceCurrency());
       }
   }
@@ -98,11 +154,18 @@ public final class Lot implements Model {
    public int hashCode() {
     return new StringBuilder()
       .append(getId())
-      .append(getWeightKg())
-      .append(getComment())
-      .append(getResources())
       .append(getFruit())
-      .append(getPrice())
+      .append(getVariety())
+      .append(getTotalWeightKg())
+      .append(getCaliber())
+      .append(getPalletWeightKg())
+      .append(getCondition())
+      .append(getOrigin())
+      .append(getArrival())
+      .append(getExpiration())
+      .append(getResources())
+      .append(getComment())
+      .append(getPricePerPallet())
       .append(getPriceCurrency())
       .toString()
       .hashCode();
@@ -113,11 +176,18 @@ public final class Lot implements Model {
     return new StringBuilder()
       .append("Lot {")
       .append("id=" + String.valueOf(getId()) + ", ")
-      .append("weightKg=" + String.valueOf(getWeightKg()) + ", ")
-      .append("comment=" + String.valueOf(getComment()) + ", ")
-      .append("resources=" + String.valueOf(getResources()) + ", ")
       .append("fruit=" + String.valueOf(getFruit()) + ", ")
-      .append("price=" + String.valueOf(getPrice()) + ", ")
+      .append("variety=" + String.valueOf(getVariety()) + ", ")
+      .append("totalWeightKg=" + String.valueOf(getTotalWeightKg()) + ", ")
+      .append("caliber=" + String.valueOf(getCaliber()) + ", ")
+      .append("palletWeightKg=" + String.valueOf(getPalletWeightKg()) + ", ")
+      .append("condition=" + String.valueOf(getCondition()) + ", ")
+      .append("origin=" + String.valueOf(getOrigin()) + ", ")
+      .append("arrival=" + String.valueOf(getArrival()) + ", ")
+      .append("expiration=" + String.valueOf(getExpiration()) + ", ")
+      .append("resources=" + String.valueOf(getResources()) + ", ")
+      .append("comment=" + String.valueOf(getComment()) + ", ")
+      .append("pricePerPallet=" + String.valueOf(getPricePerPallet()) + ", ")
       .append("priceCurrency=" + String.valueOf(getPriceCurrency()))
       .append("}")
       .toString();
@@ -153,38 +223,66 @@ public final class Lot implements Model {
       null,
       null,
       null,
+      null,
+      null,
+      null,
+      null,
+      null,
+      null,
+      null,
       null
     );
   }
   
   public CopyOfBuilder copyOfBuilder() {
     return new CopyOfBuilder(id,
-      weightKg,
-      comment,
-      resources,
       fruit,
-      price,
+      variety,
+      totalWeightKg,
+      caliber,
+      palletWeightKg,
+      condition,
+      origin,
+      arrival,
+      expiration,
+      resources,
+      comment,
+      pricePerPallet,
       priceCurrency);
   }
   public interface BuildStep {
     Lot build();
     BuildStep id(String id) throws IllegalArgumentException;
-    BuildStep weightKg(Double weightKg);
-    BuildStep comment(String comment);
-    BuildStep resources(String resources);
     BuildStep fruit(String fruit);
-    BuildStep price(Double price);
+    BuildStep variety(String variety);
+    BuildStep totalWeightKg(Double totalWeightKg);
+    BuildStep caliber(Integer caliber);
+    BuildStep palletWeightKg(Double palletWeightKg);
+    BuildStep condition(String condition);
+    BuildStep origin(String origin);
+    BuildStep arrival(String arrival);
+    BuildStep expiration(String expiration);
+    BuildStep resources(String resources);
+    BuildStep comment(String comment);
+    BuildStep pricePerPallet(Double pricePerPallet);
     BuildStep priceCurrency(String priceCurrency);
   }
   
 
   public static class Builder implements BuildStep {
     private String id;
-    private Double weightKg;
-    private String comment;
-    private String resources;
     private String fruit;
-    private Double price;
+    private String variety;
+    private Double totalWeightKg;
+    private Integer caliber;
+    private Double palletWeightKg;
+    private String condition;
+    private String origin;
+    private String arrival;
+    private String expiration;
+    private String resources;
+    private String comment;
+    private Double pricePerPallet;
     private String priceCurrency;
     @Override
      public Lot build() {
@@ -192,23 +290,72 @@ public final class Lot implements Model {
         
         return new Lot(
           id,
-          weightKg,
-          comment,
-          resources,
           fruit,
-          price,
+          variety,
+          totalWeightKg,
+          caliber,
+          palletWeightKg,
+          condition,
+          origin,
+          arrival,
+          expiration,
+          resources,
+          comment,
+          pricePerPallet,
           priceCurrency);
     }
     
     @Override
-     public BuildStep weightKg(Double weightKg) {
-        this.weightKg = weightKg;
+     public BuildStep fruit(String fruit) {
+        this.fruit = fruit;
         return this;
     }
     
     @Override
-     public BuildStep comment(String comment) {
-        this.comment = comment;
+     public BuildStep variety(String variety) {
+        this.variety = variety;
+        return this;
+    }
+    
+    @Override
+     public BuildStep totalWeightKg(Double totalWeightKg) {
+        this.totalWeightKg = totalWeightKg;
+        return this;
+    }
+    
+    @Override
+     public BuildStep caliber(Integer caliber) {
+        this.caliber = caliber;
+        return this;
+    }
+    
+    @Override
+     public BuildStep palletWeightKg(Double palletWeightKg) {
+        this.palletWeightKg = palletWeightKg;
+        return this;
+    }
+    
+    @Override
+     public BuildStep condition(String condition) {
+        this.condition = condition;
+        return this;
+    }
+    
+    @Override
+     public BuildStep origin(String origin) {
+        this.origin = origin;
+        return this;
+    }
+    
+    @Override
+     public BuildStep arrival(String arrival) {
+        this.arrival = arrival;
+        return this;
+    }
+    
+    @Override
+     public BuildStep expiration(String expiration) {
+        this.expiration = expiration;
         return this;
     }
     
@@ -219,14 +366,14 @@ public final class Lot implements Model {
     }
     
     @Override
-     public BuildStep fruit(String fruit) {
-        this.fruit = fruit;
+     public BuildStep comment(String comment) {
+        this.comment = comment;
         return this;
     }
     
     @Override
-     public BuildStep price(Double price) {
-        this.price = price;
+     public BuildStep pricePerPallet(Double pricePerPallet) {
+        this.pricePerPallet = pricePerPallet;
         return this;
     }
     
@@ -259,29 +406,21 @@ public final class Lot implements Model {
   
 
   public final class CopyOfBuilder extends Builder {
-    private CopyOfBuilder(String id, Double weightKg, String comment, String resources, String fruit, Double price, String priceCurrency) {
+    private CopyOfBuilder(String id, String fruit, String variety, Double totalWeightKg, Integer caliber, Double palletWeightKg, String condition, String origin, String arrival, String expiration, String resources, String comment, Double pricePerPallet, String priceCurrency) {
       super.id(id);
-      super.weightKg(weightKg)
-        .comment(comment)
+      super.fruit(fruit)
+        .variety(variety)
+        .totalWeightKg(totalWeightKg)
+        .caliber(caliber)
+        .palletWeightKg(palletWeightKg)
+        .condition(condition)
+        .origin(origin)
+        .arrival(arrival)
+        .expiration(expiration)
         .resources(resources)
-        .fruit(fruit)
-        .price(price)
+        .comment(comment)
+        .pricePerPallet(pricePerPallet)
         .priceCurrency(priceCurrency);
-    }
-    
-    @Override
-     public CopyOfBuilder weightKg(Double weightKg) {
-      return (CopyOfBuilder) super.weightKg(weightKg);
-    }
-    
-    @Override
-     public CopyOfBuilder comment(String comment) {
-      return (CopyOfBuilder) super.comment(comment);
-    }
-    
-    @Override
-     public CopyOfBuilder resources(String resources) {
-      return (CopyOfBuilder) super.resources(resources);
     }
     
     @Override
@@ -290,8 +429,58 @@ public final class Lot implements Model {
     }
     
     @Override
-     public CopyOfBuilder price(Double price) {
-      return (CopyOfBuilder) super.price(price);
+     public CopyOfBuilder variety(String variety) {
+      return (CopyOfBuilder) super.variety(variety);
+    }
+    
+    @Override
+     public CopyOfBuilder totalWeightKg(Double totalWeightKg) {
+      return (CopyOfBuilder) super.totalWeightKg(totalWeightKg);
+    }
+    
+    @Override
+     public CopyOfBuilder caliber(Integer caliber) {
+      return (CopyOfBuilder) super.caliber(caliber);
+    }
+    
+    @Override
+     public CopyOfBuilder palletWeightKg(Double palletWeightKg) {
+      return (CopyOfBuilder) super.palletWeightKg(palletWeightKg);
+    }
+    
+    @Override
+     public CopyOfBuilder condition(String condition) {
+      return (CopyOfBuilder) super.condition(condition);
+    }
+    
+    @Override
+     public CopyOfBuilder origin(String origin) {
+      return (CopyOfBuilder) super.origin(origin);
+    }
+    
+    @Override
+     public CopyOfBuilder arrival(String arrival) {
+      return (CopyOfBuilder) super.arrival(arrival);
+    }
+    
+    @Override
+     public CopyOfBuilder expiration(String expiration) {
+      return (CopyOfBuilder) super.expiration(expiration);
+    }
+    
+    @Override
+     public CopyOfBuilder resources(String resources) {
+      return (CopyOfBuilder) super.resources(resources);
+    }
+    
+    @Override
+     public CopyOfBuilder comment(String comment) {
+      return (CopyOfBuilder) super.comment(comment);
+    }
+    
+    @Override
+     public CopyOfBuilder pricePerPallet(Double pricePerPallet) {
+      return (CopyOfBuilder) super.pricePerPallet(pricePerPallet);
     }
     
     @Override

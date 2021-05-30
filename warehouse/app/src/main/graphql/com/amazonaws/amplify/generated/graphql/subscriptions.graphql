@@ -2,11 +2,18 @@
 subscription OnCreateLot {
   onCreateLot {
     id
-    weightKg
-    comment
-    resources
     fruit
-    price
+    variety
+    totalWeightKg
+    caliber
+    palletWeightKg
+    condition
+    origin
+    arrival
+    expiration
+    resources
+    comment
+    pricePerPallet
     priceCurrency
     _version
     _deleted
@@ -18,11 +25,18 @@ subscription OnCreateLot {
 subscription OnUpdateLot {
   onUpdateLot {
     id
-    weightKg
-    comment
-    resources
     fruit
-    price
+    variety
+    totalWeightKg
+    caliber
+    palletWeightKg
+    condition
+    origin
+    arrival
+    expiration
+    resources
+    comment
+    pricePerPallet
     priceCurrency
     _version
     _deleted
@@ -34,11 +48,18 @@ subscription OnUpdateLot {
 subscription OnDeleteLot {
   onDeleteLot {
     id
-    weightKg
-    comment
-    resources
     fruit
-    price
+    variety
+    totalWeightKg
+    caliber
+    palletWeightKg
+    condition
+    origin
+    arrival
+    expiration
+    resources
+    comment
+    pricePerPallet
     priceCurrency
     _version
     _deleted
