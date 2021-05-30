@@ -202,6 +202,7 @@ class NewLotActivity : AppCompatActivity() {
 
         val builder = Lot.builder()
 
+        builder.state("NEW")
         builder.fruit(b.spinFruit.selectedItem.toString())
         builder.variety(b.spinVariety.selectedItem.toString())
 

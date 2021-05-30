@@ -38,6 +38,7 @@ public final class Lot implements Model {
   public static final QueryField COMMENT = field("Lot", "comment");
   public static final QueryField PRICE_PER_PALLET = field("Lot", "pricePerPallet");
   public static final QueryField PRICE_CURRENCY = field("Lot", "priceCurrency");
+  public static final QueryField STATE = field("Lot", "state");
   private final @ModelField(targetType="ID", isRequired = true) String id;
   private final @ModelField(targetType="String") String fruit;
   private final @ModelField(targetType="String") String variety;
@@ -52,6 +53,7 @@ public final class Lot implements Model {
   private final @ModelField(targetType="String") String comment;
   private final @ModelField(targetType="Float") Double pricePerPallet;
   private final @ModelField(targetType="String") String priceCurrency;
+  private final @ModelField(targetType="String") String state;
   public String getId() {
       return id;
   }
@@ -108,7 +110,11 @@ public final class Lot implements Model {
       return priceCurrency;
   }
   
-  private Lot(String id, String fruit, String variety, Double totalWeightKg, Integer caliber, Double palletWeightKg, String condition, String origin, String arrival, String expiration, String resources, String comment, Double pricePerPallet, String priceCurrency) {
+  public String getState() {
+      return state;
+  }
+  
+  private Lot(String id, String fruit, String variety, Double totalWeightKg, Integer caliber, Double palletWeightKg, String condition, String origin, String arrival, String expiration, String resources, String comment, Double pricePerPallet, String priceCurrency, String state) {
     this.id = id;
     this.fruit = fruit;
     this.variety = variety;
@@ -123,6 +129,7 @@ public final class Lot implements Model {
     this.comment = comment;
     this.pricePerPallet = pricePerPallet;
     this.priceCurrency = priceCurrency;
+    this.state = state;
   }
   
   @Override
@@ -146,7 +153,8 @@ public final class Lot implements Model {
               ObjectsCompat.equals(getResources(), lot.getResources()) &&
               ObjectsCompat.equals(getComment(), lot.getComment()) &&
               ObjectsCompat.equals(getPricePerPallet(), lot.getPricePerPallet()) &&
-              ObjectsCompat.equals(getPriceCurrency(), lot.getPriceCurrency());
+              ObjectsCompat.equals(getPriceCurrency(), lot.getPriceCurrency()) &&
+              ObjectsCompat.equals(getState(), lot.getState());
       }
   }
   
@@ -167,6 +175,7 @@ public final class Lot implements Model {
       .append(getComment())
       .append(getPricePerPallet())
       .append(getPriceCurrency())
+      .append(getState())
       .toString()
       .hashCode();
   }
@@ -188,7 +197,8 @@ public final class Lot implements Model {
       .append("resources=" + String.valueOf(getResources()) + ", ")
       .append("comment=" + String.valueOf(getComment()) + ", ")
       .append("pricePerPallet=" + String.valueOf(getPricePerPallet()) + ", ")
-      .append("priceCurrency=" + String.valueOf(getPriceCurrency()))
+      .append("priceCurrency=" + String.valueOf(getPriceCurrency()) + ", ")
+      .append("state=" + String.valueOf(getState()))
       .append("}")
       .toString();
   }
@@ -230,6 +240,7 @@ public final class Lot implements Model {
       null,
       null,
       null,
+      null,
       null
     );
   }
@@ -248,7 +259,8 @@ public final class Lot implements Model {
       resources,
       comment,
       pricePerPallet,
-      priceCurrency);
+      priceCurrency,
+      state);
   }
   public interface BuildStep {
     Lot build();
@@ -266,6 +278,7 @@ public final class Lot implements Model {
     BuildStep comment(String comment);
     BuildStep pricePerPallet(Double pricePerPallet);
     BuildStep priceCurrency(String priceCurrency);
+    BuildStep state(String state);
   }
   
 
@@ -284,6 +297,7 @@ public final class Lot implements Model {
     private String comment;
     private Double pricePerPallet;
     private String priceCurrency;
+    private String state;
     @Override
      public Lot build() {
         String id = this.id != null ? this.id : UUID.randomUUID().toString();
@@ -302,7 +316,8 @@ public final class Lot implements Model {
           resources,
           comment,
           pricePerPallet,
-          priceCurrency);
+          priceCurrency,
+          state);
     }
     
     @Override
@@ -383,6 +398,12 @@ public final class Lot implements Model {
         return this;
     }
     
+    @Override
+     public BuildStep state(String state) {
+        this.state = state;
+        return this;
+    }
+    
     /** 
      * WARNING: Do not set ID when creating a new object. Leave this blank and one will be auto generated for you.
      * This should only be set when referring to an already existing object.
@@ -406,7 +427,7 @@ public final class Lot implements Model {
   
 
   public final class CopyOfBuilder extends Builder {
-    private CopyOfBuilder(String id, String fruit, String variety, Double totalWeightKg, Integer caliber, Double palletWeightKg, String condition, String origin, String arrival, String expiration, String resources, String comment, Double pricePerPallet, String priceCurrency) {
+    private CopyOfBuilder(String id, String fruit, String variety, Double totalWeightKg, Integer caliber, Double palletWeightKg, String condition, String origin, String arrival, String expiration, String resources, String comment, Double pricePerPallet, String priceCurrency, String state) {
       super.id(id);
       super.fruit(fruit)
         .variety(variety)
@@ -420,7 +441,8 @@ public final class Lot implements Model {
         .resources(resources)
         .comment(comment)
         .pricePerPallet(pricePerPallet)
-        .priceCurrency(priceCurrency);
+        .priceCurrency(priceCurrency)
+        .state(state);
     }
     
     @Override
@@ -486,6 +508,11 @@ public final class Lot implements Model {
     @Override
      public CopyOfBuilder priceCurrency(String priceCurrency) {
       return (CopyOfBuilder) super.priceCurrency(priceCurrency);
+    }
+    
+    @Override
+     public CopyOfBuilder state(String state) {
+      return (CopyOfBuilder) super.state(state);
     }
   }
   

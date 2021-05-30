@@ -15,6 +15,7 @@ subscription OnCreateLot {
     comment
     pricePerPallet
     priceCurrency
+    state
     _version
     _deleted
     _lastChangedAt
@@ -38,6 +39,7 @@ subscription OnUpdateLot {
     comment
     pricePerPallet
     priceCurrency
+    state
     _version
     _deleted
     _lastChangedAt
@@ -61,6 +63,7 @@ subscription OnDeleteLot {
     comment
     pricePerPallet
     priceCurrency
+    state
     _version
     _deleted
     _lastChangedAt
