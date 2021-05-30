@@ -26,6 +26,7 @@ query SyncLots(
       comment
       pricePerPallet
       priceCurrency
+      state
       _version
       _deleted
       _lastChangedAt
@@ -52,6 +53,7 @@ query GetLot($id: ID!) {
     comment
     pricePerPallet
     priceCurrency
+    state
     _version
     _deleted
     _lastChangedAt
@@ -76,6 +78,7 @@ query ListLots($filter: ModelLotFilterInput, $limit: Int, $nextToken: String) {
       comment
       pricePerPallet
       priceCurrency
+      state
       _version
       _deleted
       _lastChangedAt
