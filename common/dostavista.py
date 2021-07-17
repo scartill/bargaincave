@@ -1,6 +1,8 @@
 import os
 import requests
 import json
+from argparse import ArgumentParser
+import logging
 
 DOST_ON_FOOT = 6
 DOST_BY_CAR = 7
@@ -8,14 +10,8 @@ DOST_BY_CAR = 7
 
 class DostavistaAPI:
     
-    def __init__(self):
+    def __init__(self, domain, api_key):
         api_base = 'api/business/1.1'
-
-        domain = os.getenv('DOST_DOMAIN')
-        print('DOST DOMAIN', domain)
-
-        api_key = os.getenv('DOST_KEY')
-        print('DOST KEY', api_key[0:3])
 
         self.base_url = f'https://{domain}/{api_base}'
 
@@ -27,7 +23,7 @@ class DostavistaAPI:
         r = requests.post(f'{self.base_url}/{endpoint}', headers=self.headers, json=payload).json()
         
         if not r['is_successful']:
-            print('DOST ERROR', r['errors'], r.get('parameter_errors'))
+            logging.error(f'DOST ERROR: {r['errors']}, {r.get('parameter_errors')}'')
             raise RuntimeError('Dostavista API call error')
 
         return r['order']
@@ -79,7 +75,25 @@ order_props = {
     'customer_phone': '+79161437959'
 }
 
-dost = DostavistaAPI()
+dost = DostavistaAPI(os.getenv('DOST_DOMAIN'), os.getenv('DOST_KEY'))
 
-print(dost.get_price(order_props)['delivery_fee_amount'])
-dump(dost.place_order(order_props))
+
+def cli_getargs():
+    parser = ArgumentParser()
+    parser.add_argument('-v', "--verbose", action='store_true', help="sets logging level to debug")
+    parser.add_argument('-p', "--price", action='store_true', help="request test price")
+    parser.add_argument('-o', "--order", action='store_true', help="place test order")
+    return parser.parse_args()
+
+def main():
+    args = cli_getargs()
+    logging.basicConfig(level = logging.DEBUG if args.verbose else logging.INFO)
+
+    if args.price:
+        print(dost.get_price(order_props)['delivery_fee_amount'])
+
+    if args.order:
+        dump(dost.place_order(order_props))
+
+if __name__ == '__main__':
+    main()
