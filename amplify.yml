@@ -5,6 +5,9 @@ applications:
       phases:
         preBuild:
           commands:
+            - amazon-linux-extras install python3.8
+            - ln -fs /usr/bin/python3.8 /usr/bin/python3
+            - pip3.8 install pipenv
             - npm ci
         build:
           commands:
