@@ -19,109 +19,13 @@
       "function": {
         "telegrampublish": {
           "deploymentBucketName": "amplify-warehouse-dev-140728-deployment",
-          "s3Key": "amplify-builds/telegrampublish-366b414a34684a2b4d63-build.zip",
+          "s3Key": "amplify-builds/telegrampublish-473073635077467a6735-build.zip",
           "telegramChannel": "-1001202477347",
           "orderAppHost": "dev-app.vkusb.ru"
         },
-        "hubspotdeal": {
+        "warehousecommonlayer": {
           "deploymentBucketName": "amplify-warehouse-dev-140728-deployment",
-          "s3Key": "amplify-builds/hubspotdeal-344674672b784a676e33-build.zip"
-        },
-        "lotsold": {
-          "deploymentBucketName": "amplify-warehouse-dev-140728-deployment",
-          "s3Key": "amplify-builds/lotsold-44426e436b756c515873-build.zip"
-        },
-        "amplifyhelperslayer": {
-          "deploymentBucketName": "amplify-warehouse-dev-140728-deployment",
-          "s3Key": "amplify-builds/amplifyhelperslayer-build.zip"
-        },
-        "telegramlayer": {
-          "deploymentBucketName": "amplify-warehouse-dev-140728-deployment",
-          "s3Key": "amplify-builds/telegramlayer-build.zip"
-        },
-        "baselayer": {
-          "deploymentBucketName": "amplify-warehouse-dev-140728-deployment",
-          "s3Key": "amplify-builds/baselayer-build.zip"
-        },
-        "hubspotlayer": {
-          "deploymentBucketName": "amplify-warehouse-dev-140728-deployment",
-          "s3Key": "amplify-builds/hubspotlayer-build.zip"
-        }
-      }
-    },
-    "nonCFNdata": {
-      "function": {
-        "baselayer": {
-          "layerVersionMap": {
-            "1": {
-              "permissions": [
-                {
-                  "type": "private"
-                }
-              ],
-              "hash": "nu9FtgGTw6qb6hRv/Gkb5o3Hp/Rbf1vBuR63pKS3pzc="
-            }
-          }
-        },
-        "telegramlayer": {
-          "layerVersionMap": {
-            "1": {
-              "permissions": [
-                {
-                  "type": "private"
-                }
-              ],
-              "hash": "xWxbVUZmP8kT3Nomw19MkaPskgn+rZziHhI7hzuD/EA="
-            },
-            "2": {
-              "permissions": [
-                {
-                  "type": "private"
-                }
-              ],
-              "hash": "b0YXkQosD/5/v0LiMHaHP8I/j/+sUKc9n6jYTHtTwKo="
-            }
-          }
-        },
-        "hubspotlayer": {
-          "layerVersionMap": {
-            "1": {
-              "permissions": [
-                {
-                  "type": "private"
-                }
-              ],
-              "hash": "7eoh9V/JCzzvnQ/otd0yXYJp5Iwb/xKVzokwliu+rwM="
-            },
-            "2": {
-              "permissions": [
-                {
-                  "type": "private"
-                }
-              ],
-              "hash": "McJgC8taV20gW5wX2NB6lWzLCiD7qn5Ep3QEux+cHu4="
-            },
-            "3": {
-              "permissions": [
-                {
-                  "type": "private"
-                }
-              ],
-              "hash": "cqzrBkInaZOXphpTjxAzf+mA3a26/15VwibY6pO9vPo="
-            }
-          }
-        },
-        "amplifyhelperslayer": {
-          "layerVersionMap": {
-            "1": {
-              "permissions": [
-                {
-                  "type": "private"
-                }
-              ],
-              "hash": "0s31oohzcRLvv0a5OQLM+cH1RlTcVnx+LJpXGzt9808="
-            }
-          }
+          "s3Key": "amplify-builds/warehousecommonlayer-LambdaLayerVersion210dc295-build.zip"
         }
       }
     }

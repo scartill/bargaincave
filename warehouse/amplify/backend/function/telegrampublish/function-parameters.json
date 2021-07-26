@@ -2,18 +2,10 @@
   "lambdaLayers": [
     {
       "type": "ProjectLayer",
-      "resourceName": "baselayer",
-      "version": 1
-    },
-    {
-      "type": "ProjectLayer",
-      "resourceName": "telegramlayer",
-      "version": 2
-    },
-    {
-      "type": "ProjectLayer",
-      "resourceName": "amplifyhelperslayer",
-      "version": 1
+      "resourceName": "warehousecommonlayer",
+      "env": "dev",
+      "version": "Always choose latest version",
+      "isLatestVersionSelected": true
     }
   ],
   "permissions": {

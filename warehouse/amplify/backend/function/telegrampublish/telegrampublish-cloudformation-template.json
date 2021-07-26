@@ -49,6 +49,10 @@
     "apiwarehouseGraphQLAPIKeyOutput": {
       "Type": "String",
       "Default": "apiwarehouseGraphQLAPIKeyOutput"
+    },
+    "functionwarehousecommonlayerArn": {
+      "Type": "String",
+      "Default": "functionwarehousecommonlayerArn"
     }
   },
   "Conditions": {
@@ -133,13 +137,7 @@
         "Runtime": "python3.8",
         "Layers": [
           {
-            "Fn::Sub": "arn:aws:lambda:${AWS::Region}:${AWS::AccountId}:layer:baselayer-dev:1"
-          },
-          {
-            "Fn::Sub": "arn:aws:lambda:${AWS::Region}:${AWS::AccountId}:layer:telegramlayer-dev:2"
-          },
-          {
-            "Fn::Sub": "arn:aws:lambda:${AWS::Region}:${AWS::AccountId}:layer:amplifyhelperslayer-dev:1"
+            "Ref": "functionwarehousecommonlayerArn"
           }
         ],
         "Timeout": "25"

@@ -19,7 +19,7 @@ import java.util.*;
 
 
 
-@com.amazonaws.mobileconnectors.apigateway.annotation.Service(endpoint = "https://qfqdtwzs6a.execute-api.eu-west-2.amazonaws.com/prod")
+@com.amazonaws.mobileconnectors.apigateway.annotation.Service(endpoint = "https://1klpcb6r2i.execute-api.eu-west-2.amazonaws.com/dev")
 public interface WarehouseapiClient {
 
 
@@ -29,38 +29,6 @@ public interface WarehouseapiClient {
      * @return ApiResponse
      */
     com.amazonaws.mobileconnectors.apigateway.ApiResponse execute(com.amazonaws.mobileconnectors.apigateway.ApiRequest request);
-    
-    /**
-     * 
-     * 
-     * @return void
-     */
-    @com.amazonaws.mobileconnectors.apigateway.annotation.Operation(path = "/crm/deal/create", method = "OPTIONS")
-    void crmDealCreateOptions();
-    
-    /**
-     * 
-     * 
-     * @return void
-     */
-    @com.amazonaws.mobileconnectors.apigateway.annotation.Operation(path = "/crm/deal/create/{proxy+}", method = "OPTIONS")
-    void crmDealCreateProxyOptions();
-    
-    /**
-     * 
-     * 
-     * @return void
-     */
-    @com.amazonaws.mobileconnectors.apigateway.annotation.Operation(path = "/lot/{lotid}/sold", method = "OPTIONS")
-    void lotLotidSoldOptions();
-    
-    /**
-     * 
-     * 
-     * @return void
-     */
-    @com.amazonaws.mobileconnectors.apigateway.annotation.Operation(path = "/lot/{lotid}/sold/{proxy+}", method = "OPTIONS")
-    void lotLotidSoldProxyOptions();
     
     /**
      * 
