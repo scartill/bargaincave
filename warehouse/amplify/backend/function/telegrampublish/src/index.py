@@ -9,7 +9,7 @@ from telegram import Bot, InputMediaPhoto
 TELEGRAM_BOT_TOKEN_SECRET_NAME = "telegram_token"
 
 from gqlclient import GQLClient  # type: ignore
-from rest_response import make_response  # type: ignore
+from rest import make_response  # type: ignore
 
 
 PRICE_QUERY = '''

@@ -113,7 +113,7 @@
       "dependsOn": [
         {
           "category": "function",
-          "resourceName": "warehousecommonlayer",
+          "resourceName": "warehousepycommon",
           "attributes": [
             "Arn"
           ]
@@ -136,7 +136,7 @@
         }
       ]
     },
-    "warehousecommonlayer": {
+    "warehousepycommon": {
       "providerPlugin": "awscloudformation",
       "service": "LambdaLayer",
       "build": true

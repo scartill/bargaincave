@@ -2,7 +2,7 @@
   "lambdaLayers": [
     {
       "type": "ProjectLayer",
-      "resourceName": "warehousecommonlayer",
+      "resourceName": "warehousepycommon",
       "env": "dev",
       "version": "Always choose latest version",
       "isLatestVersionSelected": true
