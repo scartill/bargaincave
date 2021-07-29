@@ -150,6 +150,10 @@
     "hubspottoken": {
       "service": "secretsmanager",
       "providerPlugin": "awscloudformation"
+    },
+    "ecwidapi": {
+      "service": "secretsmanager",
+      "providerPlugin": "awscloudformation"
     }
   }
 }
