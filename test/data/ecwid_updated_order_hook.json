@@ -1,0 +1,41 @@
+{
+    "version": "2.0",
+    "routeKey": "ANY /ecwid/order/v0",
+    "rawPath": "/ecwid/order/v0",
+    "rawQueryString": "eventtype=order.updated",
+    "headers": {
+        "accept-encoding": "gzip,deflate",
+        "content-length": "310",
+        "content-type": "application/json; charset=UTF-8",
+        "host": "devwebapi.vkusb.ru",
+        "user-agent": "Apache-HttpClient/4.5.2 (Java/11.0.9.1)",
+        "x-amzn-trace-id": "Root=1-60ffedf9-28e8c7e231e26a85007c7e5d",
+        "x-ecwid-webhook-signature": "muiU+AtbH1JAzzdYK9TBOP78JpN3HM+DLtJalKuehY4=",
+        "x-forwarded-for": "3.217.160.183",
+        "x-forwarded-port": "443",
+        "x-forwarded-proto": "https"
+    },
+    "queryStringParameters": {
+        "eventtype": "order.updated"
+    },
+    "requestContext": {
+        "accountId": "466719640610",
+        "apiId": "gujgniupqa",
+        "domainName": "devwebapi.vkusb.ru",
+        "domainPrefix": "devwebapi",
+        "http": {
+            "method": "POST",
+            "path": "/ecwid/order/v0",
+            "protocol": "HTTP/1.1",
+            "sourceIp": "3.217.160.183",
+            "userAgent": "Apache-HttpClient/4.5.2 (Java/11.0.9.1)"
+        },
+        "requestId": "DIIe-idgLPEEMlA=",
+        "routeKey": "ANY /ecwid/order/v0",
+        "stage": "$default",
+        "time": "27/Jul/2021:11:28:57 +0000",
+        "timeEpoch": 1627385337243
+    },
+    "body": "{\"eventId\":\"60f109be-ba89-4b78-825f-dd0001c0a0c2\",\"eventCreated\":1627384432,\"storeId\":62177472,\"entityId\":276008847,\"eventType\":\"order.updated\",\"data\":{\"oldPaymentStatus\":\"PAID\",\"newPaymentStatus\":\"PAID\",\"oldFulfillmentStatus\":\"AWAITING_PROCESSING\",\"newFulfillmentStatus\":\"WILL_NOT_DELIVER\",\"orderId\":\"SD08Z\"}}",
+    "isBase64Encoded": false
+}
