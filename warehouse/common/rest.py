@@ -23,3 +23,7 @@ def make_response(response=None, error=None):
         'statusCode': return_code,
         'body': body_string
     }
+
+
+def norm_headers(headers):
+    return {k.lower(): v for (k, v) in headers.items()}

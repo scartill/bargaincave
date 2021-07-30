@@ -4,6 +4,8 @@ import hashlib
 import hmac
 import base64
 
+from rest import norm_headers
+
 
 class EcwidAPI:
 
@@ -76,7 +78,9 @@ class EcwidWebhook:
         body = json.loads(payload['body'])
         event_id = body['eventId']
         event_created = body['eventCreated']
-        signature = payload['headers']['X-Ecwid-Webhook-Sgnature']
+        headers = norm_headers(payload['headers'])
+        print(headers)
+        signature = headers['x-ecwid-webhook-signature']
         self.verify_signature(event_id, event_created, signature)
 
         return {
