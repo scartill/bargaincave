@@ -22,6 +22,9 @@
     "functionwarehousepycommonArn": {
       "Type": "String",
       "Default": "functionwarehousepycommonArn"
+    },
+    "serviceGroupId": {
+      "Type": "String"
     }
   },
   "Conditions": {
@@ -79,6 +82,9 @@
             },
             "ECWID_DOMAIN": {
               "Ref": "ecwidDomain"
+            },
+            "SERVICE_GROUP_ID": {
+              "Ref": "serviceGroupId"
             }
           }
         },

@@ -4,12 +4,14 @@ PY_DEPS = {
         'rest',
         'ecwid',
         'dostavista',
-        'secrets'
+        'secrets',
+        'bargain_cave_bot'
     ],
     'telegrampublish': [
         'rest',
         'gqlclient',
-        'secrets'
+        'secrets',
+        'bargain_cave_bot'
     ]
 }
 

@@ -11,3 +11,5 @@ set ECWID_STORE=Test Ecwid Store ID
 set ECWID_PUBLIC=Test Ecwid Store Public Key
 set ECWID_SECRET=Test Ecwid Store Secret Key
 
+set SERVICE_GROUP_ID=Service Telegram Group ID
+

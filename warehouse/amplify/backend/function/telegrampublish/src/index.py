@@ -73,6 +73,7 @@ def get_lot(lot_id):
     return r['getLot']
 
 
+# TODO: Use library
 def get_bot_client():
     # TODO: use secrets.py
     sm = boto3.client('secretsmanager')

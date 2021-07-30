@@ -12,6 +12,10 @@
     {
       "cloudFormationParameterName": "ecwidDomain",
       "environmentVariableName": "ECWID_DOMAIN"
+    },
+    {
+      "cloudFormationParameterName": "serviceGroupId",
+      "environmentVariableName": "SERVICE_GROUP_ID"
     }
   ],
   "permissions": {}

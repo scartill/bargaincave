@@ -19,7 +19,7 @@
       "function": {
         "telegrampublish": {
           "deploymentBucketName": "amplify-warehouse-dev-140728-deployment",
-          "s3Key": "amplify-builds/telegrampublish-49654845696f34682b36-build.zip",
+          "s3Key": "amplify-builds/telegrampublish-3752323055586e5a6275-build.zip",
           "telegramChannel": "-1001202477347",
           "orderAppHost": "dev-app.vkusb.ru"
         },
@@ -29,8 +29,9 @@
         },
         "ecwidorder": {
           "deploymentBucketName": "amplify-warehouse-dev-140728-deployment",
-          "s3Key": "amplify-builds/ecwidorder-70592b555663624d4344-build.zip",
-          "ecwidDomain": "app.ecwid.com"
+          "s3Key": "amplify-builds/ecwidorder-7371652b727868444262-build.zip",
+          "ecwidDomain": "app.ecwid.com",
+          "serviceGroupId": "-411578852"
         }
       }
     }
