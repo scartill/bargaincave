@@ -3,9 +3,9 @@
     {
       "type": "ProjectLayer",
       "resourceName": "warehousepycommon",
-      "env": "dev",
       "version": "Always choose latest version",
-      "isLatestVersionSelected": true
+      "isLatestVersionSelected": true,
+      "env": "dev"
     }
   ],
   "environmentVariableList": [
@@ -16,6 +16,10 @@
     {
       "cloudFormationParameterName": "serviceGroupId",
       "environmentVariableName": "SERVICE_GROUP_ID"
+    },
+    {
+      "cloudFormationParameterName": "dostaDomain",
+      "environmentVariableName": "DOSTA_DOMAIN"
     }
   ],
   "permissions": {}

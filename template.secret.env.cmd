@@ -13,3 +13,9 @@ set ECWID_SECRET=Test Ecwid Store Secret Key
 
 set SERVICE_GROUP_ID=Service Telegram Group ID
 
+set DOSTA_DOMAIN=Dostavista API
+set DOSTA_API_KEY=Dostavista API Key
+set DOSTA_CALLBACK_KEY=Dostavista Callback Key
+set DOSTA_BANKCARD_ID=none
+set DOSTA_DISPATCH_ADDRESS=Physical Warehouse Address
+set DOSTA_DISPATCH_PHONE=Dispatcher's Phone

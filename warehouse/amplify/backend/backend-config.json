@@ -176,6 +176,10 @@
     "ecwidapi": {
       "service": "secretsmanager",
       "providerPlugin": "awscloudformation"
+    },
+    "dostaapi": {
+      "service": "secretsmanager",
+      "providerPlugin": "awscloudformation"
     }
   }
 }

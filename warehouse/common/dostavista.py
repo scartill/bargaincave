@@ -1,11 +1,10 @@
-import os
 import requests
-import json
-from argparse import ArgumentParser
-import logging
 
 DOST_ON_FOOT = 6
 DOST_BY_CAR = 7
+
+class DostavistaError(RuntimeError):
+    pass
 
 
 class DostavistaAPI:
@@ -19,12 +18,20 @@ class DostavistaAPI:
             'X-DV-Auth-Token': api_key
         }
 
+    def set_origin(self, dispatch_address, dispatch_phone):
+        self.dispatch_address = dispatch_address
+        self.dispatch_phone = dispatch_phone
+
+    def set_bankcard(self, bankcard_id):
+        self.bankcard_id = bankcard_id
+
     def post(self, endpoint, payload):
         r = requests.post(f'{self.base_url}/{endpoint}', headers=self.headers, json=payload).json()
         
         if not r['is_successful']:
-            logging.error(f'DOST ERROR: {r['errors']}, {r.get('parameter_errors')}'')
-            raise RuntimeError('Dostavista API call error')
+            dosta_error = f"{r['errors']}, {r.get('parameter_errors')}"
+            print(f"DOSTA ERROR: {dosta_error}")
+            raise DostavistaError(f'Dostavista API error {dosta_error}')
 
         return r['order']
 
@@ -36,7 +43,7 @@ class DostavistaAPI:
             'total_weight_kg': order_props['weight_kg'],
             'points': [
                 {
-                    'address': order_props['origin']
+                    'address': self.dispatch_address
                 },
                 {
                     'address': order_props['target']
@@ -51,50 +58,15 @@ class DostavistaAPI:
     def place_order(self, order_props):
         order = self._fill_basic_props(order_props)
 
+        order['points'][0]['client_order_id'] = order_props['internal_order_id']
         order['points'][0]['contact_person'] = {
-            'phone': order_props['dispatcher_phone']
+            'phone': self.dispatch_phone
         }
 
+        order['points'][1]['note'] = order_props['customer_note']
         order['points'][1]['contact_person'] = {
+            'name': order_props['customer_name'],
             'phone': order_props['customer_phone']
         }
 
-        print(order)
-
         return self.post('create-order', order)
-    
-
-def dump(r):
-    print(json.dumps(r, indent=2))
-
-order_props = {
-    'origin': 'Москва, Михайловский проезд, 5',
-    'target': 'Москва, улица Острякова, 5',
-    'weight_kg': 4.0,
-    'dispatcher_phone': '+79161437959',
-    'customer_phone': '+79161437959'
-}
-
-dost = DostavistaAPI(os.getenv('DOST_DOMAIN'), os.getenv('DOST_KEY'))
-
-
-def cli_getargs():
-    parser = ArgumentParser()
-    parser.add_argument('-v', "--verbose", action='store_true', help="sets logging level to debug")
-    parser.add_argument('-p', "--price", action='store_true', help="request test price")
-    parser.add_argument('-o', "--order", action='store_true', help="place test order")
-    return parser.parse_args()
-
-def main():
-    args = cli_getargs()
-    logging.basicConfig(level = logging.DEBUG if args.verbose else logging.INFO)
-
-    if args.price:
-        print(dost.get_price(order_props)['delivery_fee_amount'])
-
-    if args.order:
-        dump(dost.place_order(order_props))
-
-if __name__ == '__main__':
-    main()
-

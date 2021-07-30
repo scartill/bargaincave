@@ -29,9 +29,10 @@
         },
         "ecwidorder": {
           "deploymentBucketName": "amplify-warehouse-dev-140728-deployment",
-          "s3Key": "amplify-builds/ecwidorder-7371652b727868444262-build.zip",
+          "s3Key": "amplify-builds/ecwidorder-332f6e6a61666f444d6f-build.zip",
           "ecwidDomain": "app.ecwid.com",
-          "serviceGroupId": "-411578852"
+          "serviceGroupId": "-411578852",
+          "dostaDomain": "robotapitest.dostavista.ru"
         }
       }
     }

@@ -25,6 +25,9 @@
     },
     "serviceGroupId": {
       "Type": "String"
+    },
+    "dostaDomain": {
+      "Type": "String"
     }
   },
   "Conditions": {
@@ -85,6 +88,9 @@
             },
             "SERVICE_GROUP_ID": {
               "Ref": "serviceGroupId"
+            },
+            "DOSTA_DOMAIN": {
+              "Ref": "dostaDomain"
             }
           }
         },
