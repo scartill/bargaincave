@@ -74,6 +74,7 @@ def get_lot(lot_id):
 
 
 def get_bot_client():
+    # TODO: use secrets.py
     sm = boto3.client('secretsmanager')
     secret_value_response = sm.get_secret_value(
         SecretId=f"{TELEGRAM_BOT_TOKEN_SECRET_NAME}-{os.getenv('ENV')}"

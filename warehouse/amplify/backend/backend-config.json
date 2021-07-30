@@ -48,6 +48,14 @@
           "attributes": [
             "managersGroupRole"
           ]
+        },
+        {
+          "category": "function",
+          "resourceName": "ecwidorder",
+          "attributes": [
+            "Name",
+            "Arn"
+          ]
         }
       ]
     }
@@ -140,6 +148,20 @@
       "providerPlugin": "awscloudformation",
       "service": "LambdaLayer",
       "build": true
+    },
+    "ecwidorder": {
+      "build": true,
+      "providerPlugin": "awscloudformation",
+      "service": "Lambda",
+      "dependsOn": [
+        {
+          "category": "function",
+          "resourceName": "warehousepycommon",
+          "attributes": [
+            "Arn"
+          ]
+        }
+      ]
     }
   },
   "secretman": {

@@ -1,3 +1,6 @@
 .vscode
 .temp
 .secret.*
+
+__pycache__
+src.egg-info

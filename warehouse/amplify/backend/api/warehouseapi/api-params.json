@@ -15,6 +15,14 @@
                 }
             },
             "policyResourceName": "/telegram/lot/publish"
+        },
+        {
+            "name": "/ecwid/order/v0",
+            "lambdaFunction": "ecwidorder",
+            "privacy": {
+                "open": true
+            },
+            "policyResourceName": "/ecwid/order/v0"
         }
     ],
     "resourceName": "warehouseapi",
@@ -22,10 +30,13 @@
     "functionArns": [
         {
             "lambdaFunction": "telegrampublish"
+        },
+        {
+            "lambdaFunction": "ecwidorder"
         }
     ],
     "privacy": {
-        "auth": 1,
+        "auth": 0,
         "unauth": 0,
         "authRoleName": "amplify-warehouse-dev-140728-authRole",
         "unAuthRoleName": "amplify-warehouse-dev-140728-unauthRole"
@@ -52,8 +63,16 @@
             "attributes": [
                 "managersGroupRole"
             ]
+        },
+        {
+            "category": "function",
+            "resourceName": "ecwidorder",
+            "attributes": [
+                "Name",
+                "Arn"
+            ]
         }
     ],
-    "uuid": "bef5b637",
+    "uuid": "ec862987",
     "authResourceName": "warehouse40c048f0"
 }

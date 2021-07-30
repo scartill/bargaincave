@@ -35,6 +35,22 @@ public interface WarehouseapiClient {
      * 
      * @return void
      */
+    @com.amazonaws.mobileconnectors.apigateway.annotation.Operation(path = "/ecwid/order/v0", method = "OPTIONS")
+    void ecwidOrderV0Options();
+    
+    /**
+     * 
+     * 
+     * @return void
+     */
+    @com.amazonaws.mobileconnectors.apigateway.annotation.Operation(path = "/ecwid/order/v0/{proxy+}", method = "OPTIONS")
+    void ecwidOrderV0ProxyOptions();
+    
+    /**
+     * 
+     * 
+     * @return void
+     */
     @com.amazonaws.mobileconnectors.apigateway.annotation.Operation(path = "/telegram/lot/publish", method = "OPTIONS")
     void telegramLotPublishOptions();
     

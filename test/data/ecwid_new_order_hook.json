@@ -10,7 +10,7 @@
         "host": "devwebapi.vkusb.ru",
         "user-agent": "Apache-HttpClient/4.5.2 (Java/11.0.9.1)",
         "x-amzn-trace-id": "Root=1-60ffecc0-7e5412157e878e1c05eca79b",
-        "x-ecwid-webhook-signature": "mWLh1ZsjOf3vkDHB9vr5I8333loBwkFuHZYr2bXuqUs=",
+        "X-Ecwid-Webhook-Signature": "mWLh1ZsjOf3vkDHB9vr5I8333loBwkFuHZYr2bXuqUs=",
         "x-forwarded-for": "52.7.224.192",
         "x-forwarded-port": "443",
         "x-forwarded-proto": "https"
