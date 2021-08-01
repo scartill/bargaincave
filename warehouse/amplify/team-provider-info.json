@@ -57,33 +57,20 @@
       "function": {
         "telegrampublish": {
           "deploymentBucketName": "amplify-warehouse-prod-111000-deployment",
-          "s3Key": "amplify-builds/telegrampublish-366b414a34684a2b4d63-build.zip",
+          "s3Key": "amplify-builds/telegrampublish-36634e736563732b3356-build.zip",
           "telegramChannel": "-1001239807464",
           "orderAppHost": "app.vkusb.ru"
         },
-        "hubspotdeal": {
+        "ecwidorder": {
+          "ecwidDomain": "app.ecwid.com",
+          "serviceGroupId": "-524002722",
+          "dostaDomain": "robotapitest.dostavista.ru",
           "deploymentBucketName": "amplify-warehouse-prod-111000-deployment",
-          "s3Key": "amplify-builds/hubspotdeal-344674672b784a676e33-build.zip"
+          "s3Key": "amplify-builds/ecwidorder-533869722f4c39664e6b-build.zip"
         },
-        "lotsold": {
+        "warehousepycommon": {
           "deploymentBucketName": "amplify-warehouse-prod-111000-deployment",
-          "s3Key": "amplify-builds/lotsold-44426e436b756c515873-build.zip"
-        },
-        "amplifyhelperslayer": {
-          "deploymentBucketName": "amplify-warehouse-prod-111000-deployment",
-          "s3Key": "amplify-builds/amplifyhelperslayer-build.zip"
-        },
-        "telegramlayer": {
-          "deploymentBucketName": "amplify-warehouse-prod-111000-deployment",
-          "s3Key": "amplify-builds/telegramlayer-build.zip"
-        },
-        "baselayer": {
-          "deploymentBucketName": "amplify-warehouse-prod-111000-deployment",
-          "s3Key": "amplify-builds/baselayer-build.zip"
-        },
-        "hubspotlayer": {
-          "deploymentBucketName": "amplify-warehouse-prod-111000-deployment",
-          "s3Key": "amplify-builds/hubspotlayer-build.zip"
+          "s3Key": "amplify-builds/warehousepycommon-LambdaLayerVersionc797a4bb-build.zip"
         }
       }
     },
