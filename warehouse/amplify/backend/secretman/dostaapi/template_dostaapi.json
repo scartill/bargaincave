@@ -1,0 +1,46 @@
+{
+  "AWSTemplateFormatVersion": "2010-09-09",
+  "Description": "Dostavista API secrets stored in AWS SM using Amplify CLI",
+  "Parameters": {
+    "env": {
+      "Type": "String"
+    }
+  },
+  "Conditions": {
+    "ShouldNotCreateEnvResources": {
+      "Fn::Equals": [
+        {
+          "Ref": "env"
+        },
+        "NONE"
+      ]
+    }
+  },
+  "Resources": {
+    "EcwidAPI": {
+      "Type": "AWS::SecretsManager::Secret",
+      "Properties": {
+        "Description": "Dostavista API secrets",
+        "Name": {
+          "Fn::If": [
+            "ShouldNotCreateEnvResources",
+            "dostavista_api",
+            {
+              "Fn::Join": [
+                "",
+                [
+                  "dostavista_api",
+                  "-",
+                  {
+                    "Ref": "env"
+                  }
+                ]
+              ]
+            }
+          ]
+        },
+        "SecretString": "{\"APIKey\": \"\", \"CallbackKey\": \"\", \"BankCardID\": \"\", \"DispatchAddress\": \"\", \"DispatchPhone\": \"\"}"
+      }
+    }
+  }
+}

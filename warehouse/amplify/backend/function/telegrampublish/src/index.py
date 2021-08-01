@@ -9,7 +9,7 @@ from telegram import Bot, InputMediaPhoto
 TELEGRAM_BOT_TOKEN_SECRET_NAME = "telegram_token"
 
 from gqlclient import GQLClient  # type: ignore
-from rest_response import make_response  # type: ignore
+from rest import make_response  # type: ignore
 
 
 PRICE_QUERY = '''
@@ -73,7 +73,9 @@ def get_lot(lot_id):
     return r['getLot']
 
 
+# TODO: Use library
 def get_bot_client():
+    # TODO: use secrets.py
     sm = boto3.client('secretsmanager')
     secret_value_response = sm.get_secret_value(
         SecretId=f"{TELEGRAM_BOT_TOKEN_SECRET_NAME}-{os.getenv('ENV')}"

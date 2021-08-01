@@ -1,0 +1,26 @@
+{
+  "lambdaLayers": [
+    {
+      "type": "ProjectLayer",
+      "resourceName": "warehousepycommon",
+      "version": "Always choose latest version",
+      "isLatestVersionSelected": true,
+      "env": "prod"
+    }
+  ],
+  "environmentVariableList": [
+    {
+      "cloudFormationParameterName": "ecwidDomain",
+      "environmentVariableName": "ECWID_DOMAIN"
+    },
+    {
+      "cloudFormationParameterName": "serviceGroupId",
+      "environmentVariableName": "SERVICE_GROUP_ID"
+    },
+    {
+      "cloudFormationParameterName": "dostaDomain",
+      "environmentVariableName": "DOSTA_DOMAIN"
+    }
+  ],
+  "permissions": {}
+}

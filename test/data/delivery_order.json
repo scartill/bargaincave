@@ -1,0 +1,113 @@
+{
+  "id": "8IFOE",
+  "refundedAmount": 0,
+  "subtotal": 1,
+  "subtotalWithoutTax": 1,
+  "total": 1,
+  "totalWithoutTax": 1,
+  "giftCardRedemption": 0,
+  "totalBeforeGiftCardRedemption": 1,
+  "giftCardDoubleSpending": false,
+  "email": "boris@resnick.ru",
+  "paymentMethod": "\u041d\u0430\u043b\u0438\u0447\u043d\u044b\u043c\u0438",
+  "tax": 0,
+  "ipAddress": "62.148.10.162",
+  "couponDiscount": 0,
+  "paymentStatus": "AWAITING_PAYMENT",
+  "fulfillmentStatus": "AWAITING_PROCESSING",
+  "orderNumber": 276018491,
+  "vendorOrderNumber": "8IFOE",
+  "refererUrl": "https://store62177472.company.site/products/",
+  "orderComments": "",
+  "volumeDiscount": 0,
+  "customerId": 161701374,
+  "membershipBasedDiscount": 0,
+  "totalAndMembershipBasedDiscount": 0,
+  "customSurcharges": [],
+  "discount": 0,
+  "usdTotal": 0.013524296398479869,
+  "globalReferer": "https://store62177472.company.site/",
+  "createDate": "2021-07-27 11:23:40 +0000",
+  "updateDate": "2021-07-27 11:23:45 +0000",
+  "createTimestamp": 1627385020,
+  "updateTimestamp": 1627385025,
+  "items": [
+    {
+      "id": 798914396,
+      "productId": 378362891,
+      "categoryId": 0,
+      "price": 1,
+      "priceWithoutTax": 1,
+      "productPrice": 1,
+      "sku": "00000",
+      "quantity": 1,
+      "shortDescription": "Sepuled from the Sepulkarium",
+      "shortDescriptionTranslated": {
+        "ru": "Sepuled from the Sepulkarium"
+      },
+      "tax": 0,
+      "shipping": 0,
+      "quantityInStock": 0,
+      "name": "Sepulcas",
+      "nameTranslated": {
+        "ru": "Sepulcas"
+      },
+      "isShippingRequired": true,
+      "weight": 0,
+      "trackQuantity": false,
+      "fixedShippingRateOnly": false,
+      "fixedShippingRate": 0,
+      "digital": false,
+      "productAvailable": true,
+      "couponApplied": false,
+      "discountsAllowed": true,
+      "taxable": true,
+      "isGiftCard": false,
+      "isCustomerSetPrice": false
+    }
+  ],
+  "refunds": [],
+  "shippingPerson": {
+    "name": "\u0411\u043e\u0440\u0438\u0441 \u0420\u0435\u0437\u043d\u0438\u043a",
+    "firstName": "\u0411\u043e\u0440\u0438\u0441",
+    "lastName": "\u0420\u0435\u0437\u043d\u0438\u043a",
+    "street": "\u041e\u0441\u0442\u0440\u044f\u043a\u043e\u0432\u0430, 5, 6",
+    "city": "\u041c\u043e\u0441\u043a\u0432\u0430",
+    "countryCode": "RU",
+    "countryName": "Russian Federation",
+    "postalCode": "123057",
+    "stateOrProvinceCode": "77",
+    "stateOrProvinceName": "Moscow"
+  },
+  "shippingOption": {
+    "shippingMethodName": "\u0411\u0435\u0441\u043f\u043b\u0430\u0442\u043d\u0430\u044f \u0434\u043e\u0441\u0442\u0430\u0432\u043a\u0430",
+    "shippingRate": 0,
+    "shippingRateWithoutTax": 0,
+    "isPickup": false,
+    "fulfillmentType": "DELIVERY"
+  },
+  "handlingFee": {
+    "value": 0,
+    "valueWithoutTax": 0,
+    "taxes": []
+  },
+  "predictedPackage": [],
+  "shipments": [],
+  "additionalInfo": {},
+  "paymentParams": {},
+  "hidden": false,
+  "taxesOnShipping": [],
+  "acceptMarketing": false,
+  "disableAllCustomerNotifications": false,
+  "externalFulfillment": false,
+  "invoices": [
+    {
+      "internalId": 1779830,
+      "id": "1",
+      "created": "2021-07-27 11:23:40 +0000",
+      "link": "https://app.ecwid.com/download_tax_invoice?ownerid=62177472&invoice_id=1779830&access_key=agP8QLTKMXiFq78VaMcxamHzewEtZFjf",
+      "type": "SALE"
+    }
+  ],
+  "pricesIncludeTax": true
+}

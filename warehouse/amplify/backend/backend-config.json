@@ -29,22 +29,6 @@
       "dependsOn": [
         {
           "category": "function",
-          "resourceName": "hubspotdeal",
-          "attributes": [
-            "Name",
-            "Arn"
-          ]
-        },
-        {
-          "category": "function",
-          "resourceName": "lotsold",
-          "attributes": [
-            "Name",
-            "Arn"
-          ]
-        },
-        {
-          "category": "function",
           "resourceName": "telegrampublish",
           "attributes": [
             "Name",
@@ -63,6 +47,14 @@
           "resourceName": "userPoolGroups",
           "attributes": [
             "managersGroupRole"
+          ]
+        },
+        {
+          "category": "function",
+          "resourceName": "ecwidorder",
+          "attributes": [
+            "Name",
+            "Arn"
           ]
         }
       ]
@@ -129,21 +121,7 @@
       "dependsOn": [
         {
           "category": "function",
-          "resourceName": "baselayer",
-          "attributes": [
-            "Arn"
-          ]
-        },
-        {
-          "category": "function",
-          "resourceName": "telegramlayer",
-          "attributes": [
-            "Arn"
-          ]
-        },
-        {
-          "category": "function",
-          "resourceName": "amplifyhelperslayer",
+          "resourceName": "warehousepycommon",
           "attributes": [
             "Arn"
           ]
@@ -166,90 +144,24 @@
         }
       ]
     },
-    "baselayer": {
+    "warehousepycommon": {
       "providerPlugin": "awscloudformation",
       "service": "LambdaLayer",
       "build": true
     },
-    "telegramlayer": {
-      "providerPlugin": "awscloudformation",
-      "service": "LambdaLayer",
-      "build": true
-    },
-    "hubspotlayer": {
-      "providerPlugin": "awscloudformation",
-      "service": "LambdaLayer",
-      "build": true
-    },
-    "hubspotdeal": {
+    "ecwidorder": {
       "build": true,
       "providerPlugin": "awscloudformation",
       "service": "Lambda",
       "dependsOn": [
         {
           "category": "function",
-          "resourceName": "baselayer",
-          "attributes": [
-            "Arn"
-          ]
-        },
-        {
-          "category": "function",
-          "resourceName": "hubspotlayer",
-          "attributes": [
-            "Arn"
-          ]
-        },
-        {
-          "category": "function",
-          "resourceName": "amplifyhelperslayer",
-          "attributes": [
-            "Arn"
-          ]
-        },
-        {
-          "category": "api",
-          "resourceName": "warehouse",
-          "attributes": [
-            "GraphQLAPIIdOutput",
-            "GraphQLAPIEndpointOutput",
-            "GraphQLAPIKeyOutput"
-          ]
-        }
-      ]
-    },
-    "lotsold": {
-      "build": true,
-      "providerPlugin": "awscloudformation",
-      "service": "Lambda",
-      "dependsOn": [
-        {
-          "category": "function",
-          "resourceName": "baselayer",
-          "attributes": [
-            "Arn"
-          ]
-        },
-        {
-          "category": "function",
-          "resourceName": "telegramlayer",
-          "attributes": [
-            "Arn"
-          ]
-        },
-        {
-          "category": "function",
-          "resourceName": "hubspotlayer",
+          "resourceName": "warehousepycommon",
           "attributes": [
             "Arn"
           ]
         }
       ]
-    },
-    "amplifyhelperslayer": {
-      "providerPlugin": "awscloudformation",
-      "service": "LambdaLayer",
-      "build": true
     }
   },
   "secretman": {
@@ -258,6 +170,14 @@
       "providerPlugin": "awscloudformation"
     },
     "hubspottoken": {
+      "service": "secretsmanager",
+      "providerPlugin": "awscloudformation"
+    },
+    "ecwidapi": {
+      "service": "secretsmanager",
+      "providerPlugin": "awscloudformation"
+    },
+    "dostaapi": {
       "service": "secretsmanager",
       "providerPlugin": "awscloudformation"
     }

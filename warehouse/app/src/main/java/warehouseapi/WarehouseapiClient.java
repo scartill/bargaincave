@@ -19,7 +19,7 @@ import java.util.*;
 
 
 
-@com.amazonaws.mobileconnectors.apigateway.annotation.Service(endpoint = "https://qfqdtwzs6a.execute-api.eu-west-2.amazonaws.com/prod")
+@com.amazonaws.mobileconnectors.apigateway.annotation.Service(endpoint = "https://webapi.vkusb.ru")
 public interface WarehouseapiClient {
 
 
@@ -35,32 +35,16 @@ public interface WarehouseapiClient {
      * 
      * @return void
      */
-    @com.amazonaws.mobileconnectors.apigateway.annotation.Operation(path = "/crm/deal/create", method = "OPTIONS")
-    void crmDealCreateOptions();
+    @com.amazonaws.mobileconnectors.apigateway.annotation.Operation(path = "/ecwid/order/v0", method = "OPTIONS")
+    void ecwidOrderV0Options();
     
     /**
      * 
      * 
      * @return void
      */
-    @com.amazonaws.mobileconnectors.apigateway.annotation.Operation(path = "/crm/deal/create/{proxy+}", method = "OPTIONS")
-    void crmDealCreateProxyOptions();
-    
-    /**
-     * 
-     * 
-     * @return void
-     */
-    @com.amazonaws.mobileconnectors.apigateway.annotation.Operation(path = "/lot/{lotid}/sold", method = "OPTIONS")
-    void lotLotidSoldOptions();
-    
-    /**
-     * 
-     * 
-     * @return void
-     */
-    @com.amazonaws.mobileconnectors.apigateway.annotation.Operation(path = "/lot/{lotid}/sold/{proxy+}", method = "OPTIONS")
-    void lotLotidSoldProxyOptions();
+    @com.amazonaws.mobileconnectors.apigateway.annotation.Operation(path = "/ecwid/order/v0/{proxy+}", method = "OPTIONS")
+    void ecwidOrderV0ProxyOptions();
     
     /**
      * 

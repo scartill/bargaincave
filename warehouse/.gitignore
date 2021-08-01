@@ -33,3 +33,5 @@ amplifytools.xcconfig
 .secret-*
 
 __pycache__
+
+.doit*

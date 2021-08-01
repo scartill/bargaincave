@@ -1,0 +1,108 @@
+{
+  "id": "PIZUW",
+  "refundedAmount": 0,
+  "subtotal": 1,
+  "subtotalWithoutTax": 1,
+  "total": 1,
+  "totalWithoutTax": 1,
+  "giftCardRedemption": 0,
+  "totalBeforeGiftCardRedemption": 1,
+  "giftCardDoubleSpending": false,
+  "email": "boris@resnick.ru",
+  "paymentMethod": "\u041d\u0430\u043b\u0438\u0447\u043d\u044b\u043c\u0438",
+  "tax": 0,
+  "ipAddress": "188.123.231.214",
+  "couponDiscount": 0,
+  "paymentStatus": "AWAITING_PAYMENT",
+  "fulfillmentStatus": "AWAITING_PROCESSING",
+  "orderNumber": 276410272,
+  "vendorOrderNumber": "PIZUW",
+  "refererUrl": "https://store62177472.company.site/products/",
+  "orderComments": "",
+  "volumeDiscount": 0,
+  "customerId": 161701374,
+  "membershipBasedDiscount": 0,
+  "totalAndMembershipBasedDiscount": 0,
+  "customSurcharges": [],
+  "discount": 0,
+  "usdTotal": 0.01356040686644762,
+  "globalReferer": "https://store62177472.company.site/",
+  "createDate": "2021-07-29 07:15:49 +0000",
+  "updateDate": "2021-07-29 07:15:53 +0000",
+  "createTimestamp": 1627542949,
+  "updateTimestamp": 1627542953,
+  "items": [
+    {
+      "id": 800566293,
+      "productId": 378362891,
+      "categoryId": 0,
+      "price": 1,
+      "priceWithoutTax": 1,
+      "productPrice": 1,
+      "sku": "00000",
+      "quantity": 1,
+      "shortDescription": "Sepuled from the Sepulkarium",
+      "shortDescriptionTranslated": {
+        "ru": "Sepuled from the Sepulkarium"
+      },
+      "tax": 0,
+      "shipping": 0,
+      "quantityInStock": 0,
+      "name": "Sepulcas",
+      "nameTranslated": {
+        "ru": "Sepulcas"
+      },
+      "isShippingRequired": true,
+      "weight": 0,
+      "trackQuantity": false,
+      "fixedShippingRateOnly": false,
+      "fixedShippingRate": 0,
+      "digital": false,
+      "productAvailable": true,
+      "couponApplied": false,
+      "discountsAllowed": true,
+      "taxable": true,
+      "isGiftCard": false,
+      "isCustomerSetPrice": false
+    }
+  ],
+  "refunds": [],
+  "shippingPerson": {
+    "name": "\u0411\u043e\u0440\u0438\u0441 \u0420\u0435\u0437\u043d\u0438\u043a",
+    "firstName": "\u0411\u043e\u0440\u0438\u0441",
+    "lastName": "\u0420\u0435\u0437\u043d\u0438\u043a",
+    "phone": "+79161437959"
+  },
+  "shippingOption": {
+    "shippingMethodName": "\u0421\u0430\u043c\u043e\u0432\u044b\u0432\u043e\u0437",
+    "shippingRate": 0,
+    "shippingRateWithoutTax": 0,
+    "isPickup": true,
+    "pickupInstruction": "<p><b>\u0413\u0434\u0435 \u0437\u0430\u0431\u0440\u0430\u0442\u044c \u0437\u0430\u043a\u0430\u0437:</b></p><p> \u0420\u043e\u0441\u0441\u0438\u044f </p> <p><b> \u0413\u0440\u0430\u0444\u0438\u043a \u0440\u0430\u0431\u043e\u0442\u044b \u043c\u0430\u0433\u0430\u0437\u0438\u043d\u0430: </b></p> <p> \u041f\u043e\u043d\u0435\u0434\u0435\u043b\u044c\u043d\u0438\u043a \u2014 \u043f\u044f\u0442\u043d\u0438\u0446\u0430 \u0441 09:00 \u0434\u043e 18:00 </p>",
+    "fulfillmentType": "PICKUP"
+  },
+  "handlingFee": {
+    "value": 0,
+    "valueWithoutTax": 0,
+    "taxes": []
+  },
+  "predictedPackage": [],
+  "shipments": [],
+  "additionalInfo": {},
+  "paymentParams": {},
+  "hidden": false,
+  "taxesOnShipping": [],
+  "acceptMarketing": false,
+  "disableAllCustomerNotifications": false,
+  "externalFulfillment": false,
+  "invoices": [
+    {
+      "internalId": 1791715,
+      "id": "2",
+      "created": "2021-07-29 07:15:49 +0000",
+      "link": "https://app.ecwid.com/download_tax_invoice?ownerid=62177472&invoice_id=1791715&access_key=qT0ufkebx6dzfUuOBdVxcBKilKY17Vlw",
+      "type": "SALE"
+    }
+  ],
+  "pricesIncludeTax": true
+}

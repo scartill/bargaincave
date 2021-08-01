@@ -1,27 +1,6 @@
 {
     "paths": [
         {
-            "name": "/crm/deal/create",
-            "lambdaFunction": "hubspotdeal",
-            "privacy": {
-                "open": true
-            },
-            "policyResourceName": "/crm/deal/create"
-        },
-        {
-            "name": "/lot/{lotid}/sold",
-            "lambdaFunction": "lotsold",
-            "privacy": {
-                "private": true,
-                "auth": [
-                    "/GET",
-                    "/PUT",
-                    "/PATCH"
-                ]
-            },
-            "policyResourceName": "/lot/*/sold"
-        },
-        {
             "name": "/telegram/lot/publish",
             "lambdaFunction": "telegrampublish",
             "privacy": {
@@ -36,44 +15,33 @@
                 }
             },
             "policyResourceName": "/telegram/lot/publish"
+        },
+        {
+            "name": "/ecwid/order/v0",
+            "lambdaFunction": "ecwidorder",
+            "privacy": {
+                "open": true
+            },
+            "policyResourceName": "/ecwid/order/v0"
         }
     ],
     "resourceName": "warehouseapi",
     "apiName": "warehouseapi",
     "functionArns": [
         {
-            "lambdaFunction": "hubspotdeal"
-        },
-        {
-            "lambdaFunction": "lotsold"
-        },
-        {
             "lambdaFunction": "telegrampublish"
+        },
+        {
+            "lambdaFunction": "ecwidorder"
         }
     ],
     "privacy": {
-        "auth": 1,
+        "auth": 0,
         "unauth": 0,
         "authRoleName": "amplify-warehouse-dev-140728-authRole",
         "unAuthRoleName": "amplify-warehouse-dev-140728-unauthRole"
     },
     "dependsOn": [
-        {
-            "category": "function",
-            "resourceName": "hubspotdeal",
-            "attributes": [
-                "Name",
-                "Arn"
-            ]
-        },
-        {
-            "category": "function",
-            "resourceName": "lotsold",
-            "attributes": [
-                "Name",
-                "Arn"
-            ]
-        },
         {
             "category": "function",
             "resourceName": "telegrampublish",
@@ -95,8 +63,16 @@
             "attributes": [
                 "managersGroupRole"
             ]
+        },
+        {
+            "category": "function",
+            "resourceName": "ecwidorder",
+            "attributes": [
+                "Name",
+                "Arn"
+            ]
         }
     ],
-    "uuid": "416545f5",
+    "uuid": "ec862987",
     "authResourceName": "warehouse40c048f0"
 }

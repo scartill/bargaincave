@@ -13,50 +13,21 @@
     "env": {
       "Type": "String"
     },
-    "orderAppHost": {
-      "Type": "String"
-    },
-    "telegramChannel": {
-      "Type": "String"
-    },
     "s3Key": {
       "Type": "String"
     },
-    "functionbaselayerArn": {
-      "Type": "String",
-      "Default": "functionbaselayerArn"
-    },
-    "functiontelegramlayerArn": {
-      "Type": "String",
-      "Default": "functiontelegramlayerArn"
-    },
-    "storagephotosBucketName": {
-      "Type": "String",
-      "Default": "storagephotosBucketName"
-    },
-    "functionamplifyhelperslayerArn": {
-      "Type": "String",
-      "Default": "functionamplifyhelperslayerArn"
-    },
-    "apiwarehouseGraphQLAPIIdOutput": {
-      "Type": "String",
-      "Default": "apiwarehouseGraphQLAPIIdOutput"
-    },
-    "apiwarehouseGraphQLAPIEndpointOutput": {
-      "Type": "String",
-      "Default": "apiwarehouseGraphQLAPIEndpointOutput"
-    },
-    "apiwarehouseGraphQLAPIKeyOutput": {
-      "Type": "String",
-      "Default": "apiwarehouseGraphQLAPIKeyOutput"
-    },
-    "functionwarehousecommonlayerArn": {
-      "Type": "String",
-      "Default": "functionwarehousecommonlayerArn"
+    "ecwidDomain": {
+      "Type": "String"
     },
     "functionwarehousepycommonArn": {
       "Type": "String",
       "Default": "functionwarehousepycommonArn"
+    },
+    "serviceGroupId": {
+      "Type": "String"
+    },
+    "dostaDomain": {
+      "Type": "String"
     }
   },
   "Conditions": {
@@ -89,12 +60,12 @@
         "FunctionName": {
           "Fn::If": [
             "ShouldNotCreateEnvResources",
-            "telegrampublish",
+            "ecwidorder",
             {
               "Fn::Join": [
                 "",
                 [
-                  "telegrampublish",
+                  "ecwidorder",
                   "-",
                   {
                     "Ref": "env"
@@ -112,23 +83,14 @@
             "REGION": {
               "Ref": "AWS::Region"
             },
-            "APP_HOST": {
-              "Ref": "orderAppHost"
+            "ECWID_DOMAIN": {
+              "Ref": "ecwidDomain"
             },
-            "CHANNEL_ID": {
-              "Ref": "telegramChannel"
+            "SERVICE_GROUP_ID": {
+              "Ref": "serviceGroupId"
             },
-            "STORAGE_PHOTOS_BUCKETNAME": {
-              "Ref": "storagephotosBucketName"
-            },
-            "API_WAREHOUSE_GRAPHQLAPIIDOUTPUT": {
-              "Ref": "apiwarehouseGraphQLAPIIdOutput"
-            },
-            "API_WAREHOUSE_GRAPHQLAPIENDPOINTOUTPUT": {
-              "Ref": "apiwarehouseGraphQLAPIEndpointOutput"
-            },
-            "API_WAREHOUSE_GRAPHQLAPIKEYOUTPUT": {
-              "Ref": "apiwarehouseGraphQLAPIKeyOutput"
+            "DOSTA_DOMAIN": {
+              "Ref": "dostaDomain"
             }
           }
         },
@@ -153,12 +115,12 @@
         "RoleName": {
           "Fn::If": [
             "ShouldNotCreateEnvResources",
-            "warehouseLambdaRolee69be44f",
+            "warehouseLambdaRoled5a17993",
             {
               "Fn::Join": [
                 "",
                 [
-                  "warehouseLambdaRolee69be44f",
+                  "warehouseLambdaRoled5a17993",
                   "-",
                   {
                     "Ref": "env"
@@ -246,91 +208,6 @@
                   }
                 ]
               }
-            }
-          ]
-        }
-      }
-    },
-    "AmplifyResourcesPolicy": {
-      "DependsOn": [
-        "LambdaExecutionRole"
-      ],
-      "Type": "AWS::IAM::Policy",
-      "Properties": {
-        "PolicyName": "amplify-lambda-execution-policy",
-        "Roles": [
-          {
-            "Ref": "LambdaExecutionRole"
-          }
-        ],
-        "PolicyDocument": {
-          "Version": "2012-10-17",
-          "Statement": [
-            {
-              "Effect": "Allow",
-              "Action": [
-                "appsync:Get*",
-                "appsync:List*",
-                "appsync:Update*"
-              ],
-              "Resource": [
-                {
-                  "Fn::Join": [
-                    "",
-                    [
-                      "arn:aws:appsync:",
-                      {
-                        "Ref": "AWS::Region"
-                      },
-                      ":",
-                      {
-                        "Ref": "AWS::AccountId"
-                      },
-                      ":apis/",
-                      {
-                        "Ref": "apiwarehouseGraphQLAPIIdOutput"
-                      }
-                    ]
-                  ]
-                }
-              ]
-            },
-            {
-              "Effect": "Allow",
-              "Action": "s3:ListBucket",
-              "Resource": [
-                {
-                  "Fn::Join": [
-                    "",
-                    [
-                      "arn:aws:s3:::",
-                      {
-                        "Ref": "storagephotosBucketName"
-                      }
-                    ]
-                  ]
-                }
-              ]
-            },
-            {
-              "Effect": "Allow",
-              "Action": [
-                "s3:GetObject"
-              ],
-              "Resource": [
-                {
-                  "Fn::Join": [
-                    "",
-                    [
-                      "arn:aws:s3:::",
-                      {
-                        "Ref": "storagephotosBucketName"
-                      },
-                      "/*"
-                    ]
-                  ]
-                }
-              ]
             }
           ]
         }

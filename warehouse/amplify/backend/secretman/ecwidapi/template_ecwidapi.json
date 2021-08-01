@@ -1,0 +1,46 @@
+{
+  "AWSTemplateFormatVersion": "2010-09-09",
+  "Description": "Ecwid API secrets stored in AWS SM using Amplify CLI",
+  "Parameters": {
+    "env": {
+      "Type": "String"
+    }
+  },
+  "Conditions": {
+    "ShouldNotCreateEnvResources": {
+      "Fn::Equals": [
+        {
+          "Ref": "env"
+        },
+        "NONE"
+      ]
+    }
+  },
+  "Resources": {
+    "EcwidAPI": {
+      "Type": "AWS::SecretsManager::Secret",
+      "Properties": {
+        "Description": "Ecwid API secrets",
+        "Name": {
+          "Fn::If": [
+            "ShouldNotCreateEnvResources",
+            "ecwid_api",
+            {
+              "Fn::Join": [
+                "",
+                [
+                  "ecwid_api",
+                  "-",
+                  {
+                    "Ref": "env"
+                  }
+                ]
+              ]
+            }
+          ]
+        },
+        "SecretString": "{\"StoreID\": \"\", \"Public\": \"\", \"Secret\": \"\", \"Client\": \"\"}"
+      }
+    }
+  }
+}
