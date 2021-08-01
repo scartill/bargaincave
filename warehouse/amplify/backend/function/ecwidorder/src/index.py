@@ -153,4 +153,5 @@ def handler(event, context):
     except Exception as e:
         service_message(f'Ecwid webhook failed :: see logs')
         traceback.print_exc()
-        return make_response(error=e)
+        # NB: responding with 200 due to Ecwid Webhook handling policy
+        return make_response()
