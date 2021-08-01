@@ -18,6 +18,8 @@ class DostavistaAPI:
             'X-DV-Auth-Token': api_key
         }
 
+        self.bankcard_id = 'none'
+
     def set_origin(self, dispatch_address, dispatch_phone):
         self.dispatch_address = dispatch_address
         self.dispatch_phone = dispatch_phone
@@ -30,7 +32,7 @@ class DostavistaAPI:
         
         if not r['is_successful']:
             dosta_error = f"{r['errors']}, {r.get('parameter_errors')}"
-            print(f"DOSTA ERROR: {dosta_error}")
+            print(f"Dostavista error :: {dosta_error}")
             raise DostavistaError(f'Dostavista API error {dosta_error}')
 
         return r['order']
@@ -68,5 +70,11 @@ class DostavistaAPI:
             'name': order_props['customer_name'],
             'phone': order_props['customer_phone']
         }
+
+        if self.bankcard_id != 'cash':
+            order['payment_method'] = 'bank_card'
+            order['bank_card_id'] = self.bankcard_id
+        else:
+            print('Dostavista :: Using cash')
 
         return self.post('create-order', order)

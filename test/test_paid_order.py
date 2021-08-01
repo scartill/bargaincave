@@ -1,8 +1,6 @@
 import os
 from pathlib import Path
 import json
-from typing import Dict
-from warehouse.amplify.backend.function.ecwidorder.src.rest import make_response
 
 from warehouse.amplify.backend.function.ecwidorder.src.index import process_paid_order
 from warehouse.common.dostavista import DostavistaAPI

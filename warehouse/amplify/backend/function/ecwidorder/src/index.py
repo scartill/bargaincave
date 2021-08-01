@@ -19,29 +19,62 @@ def process_paid_order(ecwid_order, dosta):
 
     if shipping['isPickup']:
         print('Self-pick order :: ignoring')
-        return
+        return (False, None)
 
     try:
+        customer = ecwid_order['shippingPerson']
+
+        name = customer.get('name')
+        if not name:
+            service_message(f'No customer name for {ecwid_id}')
+
+        phone = customer.get('phone')
+        if not phone:
+            service_message(f'No customer phone for {ecwid_id}')
+            return (False, None)
+
+        target = '{}, {}'.format(
+            customer['city'],
+            customer['street']
+        )
+        note = ecwid_order['orderComments']
+
+        weight = sum(item['weight'] for item in ecwid_order['items'])
+
+        if weight == 0.0:
+            service_message(f'Order weight is zero ({ecwid_id})')
+            return (False, None)
+
         order_props = {
             'internal_order_id': ecwid_id,
-            'target': 'Москва, улица Острякова, 5',
-            'weight_kg': 4.0,
-            'customer_phone': '+79161437959',
-            'customer_name': 'Boris',
-            'customer_note': 'Позвонить за полчаса'
+            'target': target,
+            'weight_kg': weight,
+            'customer_phone': phone,
+            'customer_name': name,
+            'customer_note': note
         }
 
-        dosta_order = dosta.place_order(order_props)
-        
+        dosta_order = dosta.place_order(order_props)        
         print('DOSTA ORDER', dosta_order)
 
         dosta_id = dosta_order['order_id']
-
         service_message(
             f'Delivery called for {ecwid_id} with {dosta_id}'
         )
+
+        return (True, dosta_order)
     except DostavistaError as de:
         service_message(f'Dostavista delivery call failed ({de})')
+        return (False, None)
+
+
+def update_ecwid_order(api, ecwid_order, dosta_order):
+    ecwid_id = ecwid_order['id']
+    dosta_id = dosta_order['order_id']
+    ecwid_order['externalFulfillment'] = True
+    ecwid_order['externalOrderId'] = str(dosta_id)
+
+    api.update_order(ecwid_id, ecwid_order)
 
 
 def process_ecwid_event(event, wh, api, dosta):
@@ -50,6 +83,7 @@ def process_ecwid_event(event, wh, api, dosta):
 
     if ecwid_event['EventType'] != 'order.updated':
         # This is the only one we need now
+        print('Order in wrong status :: ignoring')
         return
 
     old_status = ecwid_event['EventData']['oldPaymentStatus']
@@ -62,10 +96,21 @@ def process_ecwid_event(event, wh, api, dosta):
         return
 
     order_id = ecwid_event['EventData']['orderId']
-    order = api.order(order_id)
-    print('ECWID ORDER', order)
+    ecwid_order = api.order(order_id)
+    print('ECWID ORDER', ecwid_order)
 
-    process_paid_order(order, dosta)
+    proceed, dosta_order = process_paid_order(ecwid_order, dosta)
+    if not proceed:
+        print('Delivery call failed :: exiting')
+        return
+
+    print('Order update :: setting delivery')
+    try:
+        # This should not fail in order to avoid double delivery
+        update_ecwid_order(api, ecwid_order, dosta_order)
+    except Exception as e:
+        service_message(f'Ecwid order update failed :: see logs')
+        traceback.print_exc()
 
 
 def accept_webhook(event):
@@ -87,7 +132,7 @@ def accept_webhook(event):
 
     dosta = DostavistaAPI(
         os.getenv('DOSTA_DOMAIN'), 
-        dosta_tokens('APIKey')
+        dosta_tokens['APIKey']
     )
     dosta.set_origin(
         dosta_tokens['DispatchAddress'],
@@ -106,5 +151,6 @@ def handler(event, context):
         accept_webhook(event)
         return make_response()
     except Exception as e:
+        service_message(f'Ecwid webhook failed :: see logs')
         traceback.print_exc()
         return make_response(error=e)

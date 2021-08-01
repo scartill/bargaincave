@@ -33,11 +33,17 @@ class EcwidAPI:
     def get_private(self, endpoint):
         return self._get_with_key(endpoint, self.secret)
 
-    def post(self, endpoint, payload):
+    def _private_request(self, method, endpoint, payload):
         url = f'{self.base_url}/{endpoint}?token={self.secret}'
-        r = requests.post(url, headers=self.headers, json=payload)
+        r = requests.request(method, url, headers=self.headers, json=payload)
         r.raise_for_status()
         return r.json()
+
+    def post(self, endpoint, payload):
+        return self._private_request('POST', endpoint, payload)
+
+    def put(self, endpoint, payload):
+        return self._private_request('PUT', endpoint, payload)
 
     def categories(self):
         return self.get('categories')
@@ -52,7 +58,7 @@ class EcwidAPI:
         return self.get_private(f'orders/{order_id}')
 
     def update_order(self, order_id, order_data):
-        return self.post(f'orders/{order_id}', order_data)
+        return self.put(f'orders/{order_id}', order_data)
 
 
 class EcwidWebhook:
