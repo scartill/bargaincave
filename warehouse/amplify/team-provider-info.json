@@ -38,7 +38,7 @@
           "ecwidDomain": "app.ecwid.com",
           "serviceGroupId": "-411578852",
           "deploymentBucketName": "amplify-warehouse-dev-140728-deployment",
-          "s3Key": "amplify-builds/dostaorder-51653362637558485835-build.zip"
+          "s3Key": "amplify-builds/dostaorder-78477a6d2f71566a6d43-build.zip"
         }
       }
     }
