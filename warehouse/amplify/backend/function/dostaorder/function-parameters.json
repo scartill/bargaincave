@@ -16,11 +16,6 @@
     {
       "cloudFormationParameterName": "serviceGroupId",
       "environmentVariableName": "SERVICE_GROUP_ID"
-    },
-    {
-      "cloudFormationParameterName": "dostaDomain",
-      "environmentVariableName": "DOSTA_DOMAIN"
     }
-  ],
-  "permissions": {}
+  ]
 }

@@ -35,6 +35,22 @@ public interface WarehouseapiClient {
      * 
      * @return void
      */
+    @com.amazonaws.mobileconnectors.apigateway.annotation.Operation(path = "/dostavista/order/v0", method = "OPTIONS")
+    void dostavistaOrderV0Options();
+    
+    /**
+     * 
+     * 
+     * @return void
+     */
+    @com.amazonaws.mobileconnectors.apigateway.annotation.Operation(path = "/dostavista/order/v0/{proxy+}", method = "OPTIONS")
+    void dostavistaOrderV0ProxyOptions();
+    
+    /**
+     * 
+     * 
+     * @return void
+     */
     @com.amazonaws.mobileconnectors.apigateway.annotation.Operation(path = "/ecwid/order/v0", method = "OPTIONS")
     void ecwidOrderV0Options();
     

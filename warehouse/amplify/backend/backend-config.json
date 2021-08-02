@@ -56,6 +56,14 @@
             "Name",
             "Arn"
           ]
+        },
+        {
+          "category": "function",
+          "resourceName": "dostaorder",
+          "attributes": [
+            "Name",
+            "Arn"
+          ]
         }
       ]
     }
@@ -150,6 +158,20 @@
       "build": true
     },
     "ecwidorder": {
+      "build": true,
+      "providerPlugin": "awscloudformation",
+      "service": "Lambda",
+      "dependsOn": [
+        {
+          "category": "function",
+          "resourceName": "warehousepycommon",
+          "attributes": [
+            "Arn"
+          ]
+        }
+      ]
+    },
+    "dostaorder": {
       "build": true,
       "providerPlugin": "awscloudformation",
       "service": "Lambda",

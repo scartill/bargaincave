@@ -12,6 +12,13 @@ PY_DEPS = {
         'gqlclient',
         'secrets',
         'bargain_cave_bot'
+    ],
+    'dostaorder': [
+        'rest',
+        'ecwid',
+        'dostavista',
+        'secrets',
+        'bargain_cave_bot'
     ]
 }
 

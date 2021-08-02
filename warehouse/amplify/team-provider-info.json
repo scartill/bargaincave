@@ -19,7 +19,7 @@
       "function": {
         "telegrampublish": {
           "deploymentBucketName": "amplify-warehouse-dev-140728-deployment",
-          "s3Key": "amplify-builds/telegrampublish-3752323055586e5a6275-build.zip",
+          "s3Key": "amplify-builds/telegrampublish-46365467436b47667645-build.zip",
           "telegramChannel": "-1001202477347",
           "orderAppHost": "dev-app.vkusb.ru"
         },
@@ -29,10 +29,16 @@
         },
         "ecwidorder": {
           "deploymentBucketName": "amplify-warehouse-dev-140728-deployment",
-          "s3Key": "amplify-builds/ecwidorder-38742f6a5653647a7264-build.zip",
+          "s3Key": "amplify-builds/ecwidorder-47636641516c4e74512f-build.zip",
           "ecwidDomain": "app.ecwid.com",
           "serviceGroupId": "-411578852",
           "dostaDomain": "robotapitest.dostavista.ru"
+        },
+        "dostaorder": {
+          "ecwidDomain": "app.ecwid.com",
+          "serviceGroupId": "-411578852",
+          "deploymentBucketName": "amplify-warehouse-dev-140728-deployment",
+          "s3Key": "amplify-builds/dostaorder-78477a6d2f71566a6d43-build.zip"
         }
       }
     }
@@ -66,11 +72,17 @@
           "serviceGroupId": "-524002722",
           "dostaDomain": "robotapitest.dostavista.ru",
           "deploymentBucketName": "amplify-warehouse-prod-111000-deployment",
-          "s3Key": "amplify-builds/ecwidorder-533869722f4c39664e6b-build.zip"
+          "s3Key": "amplify-builds/ecwidorder-38657636324b5a4c5059-build.zip"
         },
         "warehousepycommon": {
           "deploymentBucketName": "amplify-warehouse-prod-111000-deployment",
           "s3Key": "amplify-builds/warehousepycommon-LambdaLayerVersionc797a4bb-build.zip"
+        },
+        "dostaorder": {
+          "ecwidDomain": "app.ecwid.com",
+          "serviceGroupId": "-524002722",
+          "deploymentBucketName": "amplify-warehouse-prod-111000-deployment",
+          "s3Key": "amplify-builds/dostaorder-73466769426b79766e50-build.zip"
         }
       }
     },

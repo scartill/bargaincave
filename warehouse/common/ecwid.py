@@ -85,7 +85,7 @@ class EcwidWebhook:
         event_id = body['eventId']
         event_created = body['eventCreated']
         headers = norm_headers(payload['headers'])
-        print(headers)
+
         signature = headers['x-ecwid-webhook-signature']
         self.verify_signature(event_id, event_created, signature)
 
