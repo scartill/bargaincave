@@ -72,11 +72,17 @@
           "serviceGroupId": "-524002722",
           "dostaDomain": "robotapitest.dostavista.ru",
           "deploymentBucketName": "amplify-warehouse-prod-111000-deployment",
-          "s3Key": "amplify-builds/ecwidorder-533869722f4c39664e6b-build.zip"
+          "s3Key": "amplify-builds/ecwidorder-38657636324b5a4c5059-build.zip"
         },
         "warehousepycommon": {
           "deploymentBucketName": "amplify-warehouse-prod-111000-deployment",
           "s3Key": "amplify-builds/warehousepycommon-LambdaLayerVersionc797a4bb-build.zip"
+        },
+        "dostaorder": {
+          "ecwidDomain": "app.ecwid.com",
+          "serviceGroupId": "-524002722",
+          "deploymentBucketName": "amplify-warehouse-prod-111000-deployment",
+          "s3Key": "amplify-builds/dostaorder-73466769426b79766e50-build.zip"
         }
       }
     },

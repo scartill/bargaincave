@@ -19,7 +19,7 @@ import java.util.*;
 
 
 
-@com.amazonaws.mobileconnectors.apigateway.annotation.Service(endpoint = "https://devwebapi.vkusb.ru")
+@com.amazonaws.mobileconnectors.apigateway.annotation.Service(endpoint = "https://webapi.vkusb.ru")
 public interface WarehouseapiClient {
 
 
