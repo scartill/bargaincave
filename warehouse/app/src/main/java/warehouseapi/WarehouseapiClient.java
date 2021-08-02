@@ -19,7 +19,7 @@ import java.util.*;
 
 
 
-@com.amazonaws.mobileconnectors.apigateway.annotation.Service(endpoint = "https://webapi.vkusb.ru")
+@com.amazonaws.mobileconnectors.apigateway.annotation.Service(endpoint = "https://devwebapi.vkusb.ru")
 public interface WarehouseapiClient {
 
 
@@ -29,6 +29,22 @@ public interface WarehouseapiClient {
      * @return ApiResponse
      */
     com.amazonaws.mobileconnectors.apigateway.ApiResponse execute(com.amazonaws.mobileconnectors.apigateway.ApiRequest request);
+    
+    /**
+     * 
+     * 
+     * @return void
+     */
+    @com.amazonaws.mobileconnectors.apigateway.annotation.Operation(path = "/dostavista/order/v0", method = "OPTIONS")
+    void dostavistaOrderV0Options();
+    
+    /**
+     * 
+     * 
+     * @return void
+     */
+    @com.amazonaws.mobileconnectors.apigateway.annotation.Operation(path = "/dostavista/order/v0/{proxy+}", method = "OPTIONS")
+    void dostavistaOrderV0ProxyOptions();
     
     /**
      * 

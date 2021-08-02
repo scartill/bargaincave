@@ -1,4 +1,10 @@
 import requests
+import hmac
+import hashlib
+import json
+
+from rest import norm_headers
+
 
 DOST_ON_FOOT = 6
 DOST_BY_CAR = 7
@@ -78,3 +84,30 @@ class DostavistaAPI:
             print('Dostavista :: Using cash')
 
         return self.post('create-order', order)
+
+class DostavistaWebhook:
+
+    def __init__(self, callback_token):
+        self.secret = callback_token
+
+    def verify_signature(self, signed_data, signature):
+        signature_computed = hmac.new(
+            key=self.secret.encode(),
+            msg=signed_data.encode(),
+            digestmod=hashlib.sha256
+        ).hexdigest()
+
+        if signature != signature_computed:
+            raise RuntimeError('Invalid Dosta signature')
+
+    def process(self, payload):
+        headers = norm_headers(payload['headers'])
+
+        signature = headers['x-dv-signature']
+        self.verify_signature(payload['body'], signature)
+        print('Dostavista signature OK')
+
+        event = json.loads(payload['body'])
+
+        return event
+

@@ -1,0 +1,81 @@
+{
+    "resource": "/dostavista/order/v0",
+    "path": "/dostavista/order/v0",
+    "httpMethod": "POST",
+    "headers": {
+        "accept": "*/*",
+        "accept-encoding": "gzip",
+        "content-type": "application/json",
+        "Host": "devwebapi.vkusb.ru",
+        "X-Amzn-Trace-Id": "Root=1-61078fe4-5f86eb01515ffff02cc81efb",
+        "x-dv-signature": "1000982bd458cdd22456e38a14d336cfb42e938bb6fe456cf1b518590a8bbe0e",
+        "X-Forwarded-For": "81.23.10.138",
+        "X-Forwarded-Port": "443",
+        "X-Forwarded-Proto": "https"
+    },
+    "multiValueHeaders": {
+        "accept": [
+            "*/*"
+        ],
+        "accept-encoding": [
+            "gzip"
+        ],
+        "content-type": [
+            "application/json"
+        ],
+        "Host": [
+            "devwebapi.vkusb.ru"
+        ],
+        "X-Amzn-Trace-Id": [
+            "Root=1-61078fe4-5f86eb01515ffff02cc81efb"
+        ],
+        "x-dv-signature": [
+            "1000982bd458cdd22456e38a14d336cfb42e938bb6fe456cf1b518590a8bbe0e"
+        ],
+        "X-Forwarded-For": [
+            "81.23.10.138"
+        ],
+        "X-Forwarded-Port": [
+            "443"
+        ],
+        "X-Forwarded-Proto": [
+            "https"
+        ]
+    },
+    "queryStringParameters": null,
+    "multiValueQueryStringParameters": null,
+    "pathParameters": null,
+    "stageVariables": null,
+    "requestContext": {
+        "resourceId": "e7s3hi",
+        "resourcePath": "/dostavista/order/v0",
+        "httpMethod": "POST",
+        "extendedRequestId": "DbNrqFSLrPEFs1Q=",
+        "requestTime": "02/Aug/2021:06:25:40 +0000",
+        "path": "/dostavista/order/v0",
+        "accountId": "466719640610",
+        "protocol": "HTTP/1.1",
+        "stage": "dev",
+        "domainPrefix": "devwebapi",
+        "requestTimeEpoch": 1627885540091,
+        "requestId": "60b1a525-fea6-4a94-b904-aa04c1cd8300",
+        "identity": {
+            "cognitoIdentityPoolId": null,
+            "accountId": null,
+            "cognitoIdentityId": null,
+            "caller": null,
+            "sourceIp": "81.23.10.138",
+            "principalOrgId": null,
+            "accessKey": null,
+            "cognitoAuthenticationType": null,
+            "cognitoAuthenticationProvider": null,
+            "userArn": null,
+            "userAgent": null,
+            "user": null
+        },
+        "domainName": "devwebapi.vkusb.ru",
+        "apiId": "1klpcb6r2i"
+    },
+    "body": "{\"event_datetime\":\"2021-08-02T09:25:38+03:00\",\"event_type\":\"order_created\",\"order\":{\"type\":\"standard\",\"order_id\":101658,\"order_name\":\"01658\",\"vehicle_type_id\":6,\"created_datetime\":\"2021-08-02T09:25:38+03:00\",\"finish_datetime\":null,\"status\":\"new\",\"status_description\":\"Создан\",\"matter\":\"Продукты\",\"total_weight_kg\":1,\"is_client_notification_enabled\":false,\"is_contact_person_notification_enabled\":false,\"loaders_count\":0,\"backpayment_details\":null,\"points\":[],\"payment_amount\":\"1617.00\",\"delivery_fee_amount\":\"1617.00\",\"intercity_delivery_fee_amount\":\"0.00\",\"weight_fee_amount\":\"0.00\",\"insurance_amount\":\"0.00\",\"insurance_fee_amount\":\"0.00\",\"loading_fee_amount\":\"0.00\",\"money_transfer_fee_amount\":\"0.00\",\"suburban_delivery_fee_amount\":\"0.00\",\"overnight_fee_amount\":\"0.00\",\"discount_amount\":\"0.00\",\"backpayment_amount\":\"0.00\",\"cod_fee_amount\":\"0.00\",\"backpayment_photo_url\":null,\"itinerary_document_url\":null,\"waybill_document_url\":null,\"courier\":null,\"is_motobox_required\":false,\"payment_method\":\"cash\",\"bank_card_id\":null}}",
+    "isBase64Encoded": false
+}
