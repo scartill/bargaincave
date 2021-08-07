@@ -15,7 +15,8 @@ dosta.set_origin(
     os.getenv('DOSTA_DISPATCH_PHONE')
 )
 
-dosta.set_bankcard(
+dosta.set_payment_method(
+    os.getenv('DOSTA_PAYMENT_METHOD'),
     os.getenv('DOSTA_BANKCARD_ID')
 )
 

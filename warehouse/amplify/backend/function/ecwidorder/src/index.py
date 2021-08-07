@@ -140,7 +140,8 @@ def accept_webhook(event):
         dosta_tokens['DispatchAddress'],
         dosta_tokens['DispatchPhone']
     )
-    dosta.set_bankcard(
+    dosta.set_payment_method(
+        dosta_tokens['PaymentMethod'],
         dosta_tokens['BankCardID']
     )
         
