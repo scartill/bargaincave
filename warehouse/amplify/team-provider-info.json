@@ -29,7 +29,7 @@
         },
         "ecwidorder": {
           "deploymentBucketName": "amplify-warehouse-dev-140728-deployment",
-          "s3Key": "amplify-builds/ecwidorder-47636641516c4e74512f-build.zip",
+          "s3Key": "amplify-builds/ecwidorder-574357546c6d3164512b-build.zip",
           "ecwidDomain": "app.ecwid.com",
           "serviceGroupId": "-411578852",
           "dostaDomain": "robotapitest.dostavista.ru"
@@ -38,7 +38,7 @@
           "ecwidDomain": "app.ecwid.com",
           "serviceGroupId": "-411578852",
           "deploymentBucketName": "amplify-warehouse-dev-140728-deployment",
-          "s3Key": "amplify-builds/dostaorder-78477a6d2f71566a6d43-build.zip"
+          "s3Key": "amplify-builds/dostaorder-56654635523961627830-build.zip"
         }
       }
     }

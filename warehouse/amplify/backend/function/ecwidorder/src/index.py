@@ -81,17 +81,19 @@ def process_ecwid_event(event, wh, api, dosta):
     ecwid_event = wh.process(event)
     print('ECWID EVENT', ecwid_event)
 
-    if ecwid_event['EventType'] != 'order.updated':
-        # This is the only one we need now
-        print('Order in wrong status :: ignoring')
-        return
+    was_paid = False
 
-    old_status = ecwid_event['EventData']['oldPaymentStatus']
-    new_status = ecwid_event['EventData']['newPaymentStatus']
+    if ecwid_event['EventType'] == 'order.created':
+        status = ecwid_event['EventData']['newPaymentStatus']
+        was_paid = status == 'PAID'
 
-    was_paid = (old_status != 'PAID') and (new_status == 'PAID')
+    if ecwid_event['EventType'] == 'order.updated':
+        old_status = ecwid_event['EventData']['oldPaymentStatus']
+        new_status = ecwid_event['EventData']['newPaymentStatus']
+        was_paid = was_paid or (old_status != 'PAID') and (new_status == 'PAID')
 
     if not was_paid:
+        print('Order transition not important :: exiting')
         # This is the only situation we need
         return
 
@@ -101,7 +103,7 @@ def process_ecwid_event(event, wh, api, dosta):
 
     proceed, dosta_order = process_paid_order(ecwid_order, dosta)
     if not proceed:
-        print('Delivery call failed :: exiting')
+        print('Delivery failed or not requisted :: exiting')
         return
 
     print('Order update :: setting delivery')
