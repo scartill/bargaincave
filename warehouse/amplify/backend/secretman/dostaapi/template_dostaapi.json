@@ -39,7 +39,7 @@
             }
           ]
         },
-        "SecretString": "{\"APIKey\": \"\", \"CallbackKey\": \"\", \"BankCardID\": \"\", \"DispatchAddress\": \"\", \"DispatchPhone\": \"\"}"
+        "SecretString": "{\"APIKey\": \"\", \"CallbackKey\": \"\", \"PaymentMethod\": \"\", \"BankCardID\": \"\", \"DispatchAddress\": \"\", \"DispatchPhone\": \"\"}"
       }
     }
   }

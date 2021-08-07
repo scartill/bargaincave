@@ -30,7 +30,14 @@ class DostavistaAPI:
         self.dispatch_address = dispatch_address
         self.dispatch_phone = dispatch_phone
 
-    def set_bankcard(self, bankcard_id):
+    def set_payment_method(self, method, bankcard_id=None):
+        if not method in ['cash', 'non_cash', 'bank_card']:
+            raise DostavistaError(f'Bad payment method {method}')
+
+        if method == 'bank_card' and not bankcard_id:
+            raise DostavistaError('Bank card ID required')
+
+        self.payment_method = method
         self.bankcard_id = bankcard_id
 
     def post(self, endpoint, payload):
@@ -77,13 +84,15 @@ class DostavistaAPI:
             'phone': order_props['customer_phone']
         }
 
-        if self.bankcard_id != 'cash':
-            order['payment_method'] = 'bank_card'
+        order['payment_method'] = self.payment_method
+
+        if self.payment_method == 'bank_card':
             order['bank_card_id'] = self.bankcard_id
         else:
-            print('Dostavista :: Using cash')
+            print(f'Dostavista :: Using payment method {self.payment_method}')
 
         return self.post('create-order', order)
+
 
 class DostavistaWebhook:
 
