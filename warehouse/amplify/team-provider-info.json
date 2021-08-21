@@ -70,7 +70,7 @@
         "ecwidorder": {
           "ecwidDomain": "app.ecwid.com",
           "serviceGroupId": "-524002722",
-          "dostaDomain": "robotapitest.dostavista.ru",
+          "dostaDomain": "robot.dostavista.ru",
           "deploymentBucketName": "amplify-warehouse-prod-111000-deployment",
           "s3Key": "amplify-builds/ecwidorder-5a7565634a31304c5235-build.zip"
         },
