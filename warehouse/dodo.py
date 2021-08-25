@@ -19,6 +19,11 @@ PY_DEPS = {
         'dostavista',
         'secrets',
         'bargain_cave_bot'
+    ],
+    'warehouseorders': [
+        'rest',
+        'ecwid',
+        'secrets'
     ]
 }
 

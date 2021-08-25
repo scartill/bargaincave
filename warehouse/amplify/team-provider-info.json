@@ -29,7 +29,7 @@
         },
         "ecwidorder": {
           "deploymentBucketName": "amplify-warehouse-dev-140728-deployment",
-          "s3Key": "amplify-builds/ecwidorder-6a516c583666364b4b4c-build.zip",
+          "s3Key": "amplify-builds/ecwidorder-37504a69314e4a58574c-build.zip",
           "ecwidDomain": "app.ecwid.com",
           "serviceGroupId": "-411578852",
           "dostaDomain": "robotapitest.dostavista.ru"
@@ -38,7 +38,12 @@
           "ecwidDomain": "app.ecwid.com",
           "serviceGroupId": "-411578852",
           "deploymentBucketName": "amplify-warehouse-dev-140728-deployment",
-          "s3Key": "amplify-builds/dostaorder-4952422b323633787275-build.zip"
+          "s3Key": "amplify-builds/dostaorder-6e66617a754e504a5841-build.zip"
+        },
+        "warehouseorders": {
+          "ecwidDomain": "app.ecwid.com",
+          "deploymentBucketName": "amplify-warehouse-dev-140728-deployment",
+          "s3Key": "amplify-builds/warehouseorders-6733325a7871556b6934-build.zip"
         }
       }
     }
@@ -83,6 +88,9 @@
           "serviceGroupId": "-524002722",
           "deploymentBucketName": "amplify-warehouse-prod-111000-deployment",
           "s3Key": "amplify-builds/dostaorder-73466769426b79766e50-build.zip"
+        },
+        "warehouseorders": {
+          "ecwidDomain": "app.ecwid.com"
         }
       }
     },
