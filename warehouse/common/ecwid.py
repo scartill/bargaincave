@@ -21,17 +21,18 @@ class EcwidAPI:
         self.public = public_token
         self.secret = secret_token
 
-    def _get_with_key(self, endpoint, key):
-        url = f'{self.base_url}/{endpoint}?token={key}'
-        r = requests.get(url, headers=self.headers)
+    def _get_with_key(self, endpoint, key, params={}):
+        params['token'] = key
+        url = f'{self.base_url}/{endpoint}'
+        r = requests.get(url, headers=self.headers, params=params)
         r.raise_for_status()
         return r.json()
 
-    def get(self, endpoint):
-        return self._get_with_key(endpoint, self.public)
+    def get(self, endpoint, params={}):
+        return self._get_with_key(endpoint, self.public, params)
 
-    def get_private(self, endpoint):
-        return self._get_with_key(endpoint, self.secret)
+    def get_private(self, endpoint, params={}):
+        return self._get_with_key(endpoint, self.secret, params)
 
     def _private_request(self, method, endpoint, payload):
         url = f'{self.base_url}/{endpoint}?token={self.secret}'
@@ -60,9 +61,12 @@ class EcwidAPI:
     def update_order(self, order_id, order_data):
         return self.put(f'orders/{order_id}', order_data)
 
+    def orders(self, params={}):
+        return self.get_private('orders', params)
+
 
 class EcwidWebhook:
-    
+
     def __init__(self, client_secret):
         self.secret = client_secret
 
@@ -93,5 +97,3 @@ class EcwidWebhook:
             'EventType': payload['queryStringParameters']['eventtype'],
             'EventData': body['data']
         }
-
-   

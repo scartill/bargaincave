@@ -64,6 +64,14 @@
             "Name",
             "Arn"
           ]
+        },
+        {
+          "category": "function",
+          "resourceName": "warehouseorders",
+          "attributes": [
+            "Name",
+            "Arn"
+          ]
         }
       ]
     }
@@ -172,6 +180,20 @@
       ]
     },
     "dostaorder": {
+      "build": true,
+      "providerPlugin": "awscloudformation",
+      "service": "Lambda",
+      "dependsOn": [
+        {
+          "category": "function",
+          "resourceName": "warehousepycommon",
+          "attributes": [
+            "Arn"
+          ]
+        }
+      ]
+    },
+    "warehouseorders": {
       "build": true,
       "providerPlugin": "awscloudformation",
       "service": "Lambda",

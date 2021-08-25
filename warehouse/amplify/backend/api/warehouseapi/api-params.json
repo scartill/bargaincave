@@ -31,6 +31,14 @@
                 "open": true
             },
             "policyResourceName": "/dostavista/order/v0"
+        },
+        {
+            "name": "/warehouse/orders",
+            "lambdaFunction": "warehouseorders",
+            "privacy": {
+                "open": true
+            },
+            "policyResourceName": "/warehouse/orders"
         }
     ],
     "resourceName": "warehouseapi",
@@ -44,6 +52,9 @@
         },
         {
             "lambdaFunction": "dostaorder"
+        },
+        {
+            "lambdaFunction": "warehouseorders"
         }
     ],
     "privacy": {
@@ -90,8 +101,16 @@
                 "Name",
                 "Arn"
             ]
+        },
+        {
+            "category": "function",
+            "resourceName": "warehouseorders",
+            "attributes": [
+                "Name",
+                "Arn"
+            ]
         }
     ],
-    "uuid": "a7bae6c9",
+    "uuid": "77335043",
     "authResourceName": "warehouse40c048f0"
 }
