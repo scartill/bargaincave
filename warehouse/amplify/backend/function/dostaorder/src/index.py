@@ -19,13 +19,13 @@ def set_fulfillment(order, fulfillment):
 def process_dosta_event(event, wh, api):
     dosta_event = wh.process(event)
     event_type = dosta_event['event_type']
-    dosta_order_id = dosta_event['order']['order_id']
-    order_status = dosta_event['order']['status']
-    ecwid_order_id = dosta_event['order']['points'][0]['client_order_id']
 
     update_ecwid = None
 
     if event_type == 'order_changed':
+        dosta_order_id = dosta_event['order']['order_id']
+        order_status = dosta_event['order']['status']
+        ecwid_order_id = dosta_event['order']['points'][0]['client_order_id']
 
         if order_status == 'available':
             service_message(f'Delivery {dosta_order_id} approved for {ecwid_order_id}')
