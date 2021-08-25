@@ -6,7 +6,7 @@ from rest import make_response
 from secrets import get_sm_secret
 from ecwid import EcwidAPI
 from bargain_cave_bot import service_message
-from dostavista import DostavistaWebhook, DostavistaError
+from dostavista import DostavistaWebhook
 
 ECWID_SECRET_NAME = 'ecwid_api'
 DOSTA_SECRET_NAME = 'dostavista_api'
@@ -71,7 +71,7 @@ def accept_webhook(event):
     wh = DostavistaWebhook(
         dosta_tokens['CallbackKey']
     )
-        
+
     process_dosta_event(event, wh, api)
 
 
