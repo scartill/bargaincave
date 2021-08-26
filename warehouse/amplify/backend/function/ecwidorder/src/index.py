@@ -54,7 +54,7 @@ def process_paid_order(ecwid_order, dosta):
             'customer_note': note
         }
 
-        dosta_order = dosta.place_order(order_props)        
+        dosta_order = dosta.place_order(order_props)
         print('DOSTA ORDER', dosta_order)
 
         dosta_id = dosta_order['order_id']
@@ -79,7 +79,6 @@ def update_ecwid_order(api, ecwid_order, dosta_order):
 
 def process_ecwid_event(event, wh, api, dosta):
     ecwid_event = wh.process(event)
-    print('ECWID EVENT', ecwid_event)
 
     was_paid = False
 
@@ -99,7 +98,6 @@ def process_ecwid_event(event, wh, api, dosta):
 
     order_id = ecwid_event['EventData']['orderId']
     ecwid_order = api.order(order_id)
-    print('ECWID ORDER', ecwid_order)
 
     proceed, dosta_order = process_paid_order(ecwid_order, dosta)
     if not proceed:
@@ -121,6 +119,7 @@ def accept_webhook(event):
     )
 
     wh = EcwidWebhook(ecwid_tokens['Client'])
+
     api = EcwidAPI(
         os.getenv('ECWID_DOMAIN'),
         ecwid_tokens['StoreID'],
@@ -144,7 +143,7 @@ def accept_webhook(event):
         dosta_tokens['PaymentMethod'],
         dosta_tokens['BankCardID']
     )
-        
+
     process_ecwid_event(event, wh, api, dosta)
 
 
