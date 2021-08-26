@@ -43,7 +43,7 @@
         "warehouseorders": {
           "ecwidDomain": "app.ecwid.com",
           "deploymentBucketName": "amplify-warehouse-dev-140728-deployment",
-          "s3Key": "amplify-builds/warehouseorders-6733325a7871556b6934-build.zip"
+          "s3Key": "amplify-builds/warehouseorders-323461584950746d4c56-build.zip"
         }
       }
     }

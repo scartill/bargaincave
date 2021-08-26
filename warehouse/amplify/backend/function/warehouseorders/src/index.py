@@ -9,15 +9,21 @@ from ecwid import EcwidAPI
 ECWID_SECRET_NAME = 'ecwid_api'
 
 
+def item_line(item):
+    name = item['name']
+    quantity = item['quantity']
+    return f'<li>{name} x {quantity}</li>'
+
+
 def order_section(order):
-    items = '\n'.join(
-        f'<li>{item["name"]} x {item["quantity"]}</li>'
-        for item in order['items']
-    )
+    items = '\n'.join(item_line(item) for item in order['items'])
+    pickup = '&nbsp;(самовывоз)' if order['shippingOption']['isPickup'] else ''
+
     return f"""
-        <h2>{order['id'][:-1]}</h2>
+        <h2>{order['id'][:-1]}{pickup}</h2>
         <ol>{items}</ol>
     """
+
 
 def generate_report(api):
     params = {
@@ -38,8 +44,10 @@ def generate_report(api):
             crossorigin="anonymous"/>
     </head>
     <body>
-        <h1>Заказы</h1>
-        {order_sections}
+        <div class="container">
+            <h1>Заказы</h1><br/>
+            {order_sections}
+        </div>
     </body>
 </html>
     """
