@@ -16,17 +16,20 @@
     "s3Key": {
       "Type": "String"
     },
-    "ecwidDomain": {
-      "Type": "String"
-    },
     "functionwarehousepycommonArn": {
       "Type": "String",
       "Default": "functionwarehousepycommonArn"
+    },
+    "ecwidDomain": {
+      "Type": "String"
     },
     "serviceGroupId": {
       "Type": "String"
     },
     "dostaDomain": {
+      "Type": "String"
+    },
+    "dadataDomain": {
       "Type": "String"
     }
   },
@@ -91,6 +94,9 @@
             },
             "DOSTA_DOMAIN": {
               "Ref": "dostaDomain"
+            },
+            "DADATA_DOMAIN": {
+              "Ref": "dadataDomain"
             }
           }
         },

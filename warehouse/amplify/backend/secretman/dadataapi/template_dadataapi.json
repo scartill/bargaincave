@@ -1,0 +1,46 @@
+{
+  "AWSTemplateFormatVersion": "2010-09-09",
+  "Description": "Dadata API secrets stored in AWS SM using Amplify CLI",
+  "Parameters": {
+    "env": {
+      "Type": "String"
+    }
+  },
+  "Conditions": {
+    "ShouldNotCreateEnvResources": {
+      "Fn::Equals": [
+        {
+          "Ref": "env"
+        },
+        "NONE"
+      ]
+    }
+  },
+  "Resources": {
+    "EcwidAPI": {
+      "Type": "AWS::SecretsManager::Secret",
+      "Properties": {
+        "Description": "Dadata API secrets",
+        "Name": {
+          "Fn::If": [
+            "ShouldNotCreateEnvResources",
+            "dadata_api",
+            {
+              "Fn::Join": [
+                "",
+                [
+                  "dadata_api",
+                  "-",
+                  {
+                    "Ref": "env"
+                  }
+                ]
+              ]
+            }
+          ]
+        },
+        "SecretString": "{\"Token\": \"\", \"Secret\": \"\"}"
+      }
+    }
+  }
+}

@@ -5,7 +5,8 @@ PY_DEPS = {
         'ecwid',
         'dostavista',
         'secrets',
-        'bargain_cave_bot'
+        'bargain_cave_bot',
+        'dadata'
     ],
     'telegrampublish': [
         'rest',

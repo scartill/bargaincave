@@ -224,6 +224,10 @@
     "dostaapi": {
       "service": "secretsmanager",
       "providerPlugin": "awscloudformation"
+    },
+    "dadataapi": {
+      "service": "secretsmanager",
+      "providerPlugin": "awscloudformation"
     }
   }
 }

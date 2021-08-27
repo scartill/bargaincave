@@ -20,6 +20,10 @@
     {
       "cloudFormationParameterName": "dostaDomain",
       "environmentVariableName": "DOSTA_DOMAIN"
+    },
+    {
+      "cloudFormationParameterName": "dadataDomain",
+      "environmentVariableName": "DADATA_DOMAIN"
     }
   ],
   "permissions": {}
