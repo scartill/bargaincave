@@ -21,6 +21,7 @@ def process_dosta_event(event, wh, api):
     event_type = dosta_event['event_type']
 
     update_ecwid = None
+    ecwid_order_id = None
 
     if event_type == 'order_changed':
         dosta_order_id = dosta_event['order']['order_id']

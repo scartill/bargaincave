@@ -39,7 +39,7 @@ def process_paid_order(ecwid_order, dosta):
         )
         note = ecwid_order['orderComments']
 
-        weight = sum(item['weight'] for item in ecwid_order['items'])
+        weight = sum(item['weight']*item['quantity'] for item in ecwid_order['items'])
 
         if weight == 0.0:
             service_message(f'Order weight is zero ({ecwid_id})')
