@@ -54,8 +54,8 @@ def generate_report(api):
 
     response = {
         'statusCode': 200,
-        "body": content,
-        "headers": {
+        'body': content,
+        'headers': {
             'Content-Type': 'text/html'
         }
     }

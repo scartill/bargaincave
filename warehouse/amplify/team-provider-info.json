@@ -29,7 +29,7 @@
         },
         "ecwidorder": {
           "deploymentBucketName": "amplify-warehouse-dev-140728-deployment",
-          "s3Key": "amplify-builds/ecwidorder-37504a69314e4a58574c-build.zip",
+          "s3Key": "amplify-builds/ecwidorder-30532f4235486c42686a-build.zip",
           "ecwidDomain": "app.ecwid.com",
           "serviceGroupId": "-411578852",
           "dostaDomain": "robotapitest.dostavista.ru"
@@ -38,12 +38,12 @@
           "ecwidDomain": "app.ecwid.com",
           "serviceGroupId": "-411578852",
           "deploymentBucketName": "amplify-warehouse-dev-140728-deployment",
-          "s3Key": "amplify-builds/dostaorder-6e66617a754e504a5841-build.zip"
+          "s3Key": "amplify-builds/dostaorder-327966556557387a3668-build.zip"
         },
         "warehouseorders": {
           "ecwidDomain": "app.ecwid.com",
           "deploymentBucketName": "amplify-warehouse-dev-140728-deployment",
-          "s3Key": "amplify-builds/warehouseorders-323461584950746d4c56-build.zip"
+          "s3Key": "amplify-builds/warehouseorders-7665347a70587a464e6a-build.zip"
         }
       }
     }
@@ -77,7 +77,7 @@
           "serviceGroupId": "-524002722",
           "dostaDomain": "robot.dostavista.ru",
           "deploymentBucketName": "amplify-warehouse-prod-111000-deployment",
-          "s3Key": "amplify-builds/ecwidorder-5a7565634a31304c5235-build.zip"
+          "s3Key": "amplify-builds/ecwidorder-7452584742363669386f-build.zip"
         },
         "warehousepycommon": {
           "deploymentBucketName": "amplify-warehouse-prod-111000-deployment",
@@ -87,10 +87,12 @@
           "ecwidDomain": "app.ecwid.com",
           "serviceGroupId": "-524002722",
           "deploymentBucketName": "amplify-warehouse-prod-111000-deployment",
-          "s3Key": "amplify-builds/dostaorder-73466769426b79766e50-build.zip"
+          "s3Key": "amplify-builds/dostaorder-6238664232386c4a4b49-build.zip"
         },
         "warehouseorders": {
-          "ecwidDomain": "app.ecwid.com"
+          "ecwidDomain": "app.ecwid.com",
+          "deploymentBucketName": "amplify-warehouse-prod-111000-deployment",
+          "s3Key": "amplify-builds/warehouseorders-787a6c32624c53614a50-build.zip"
         }
       }
     },
