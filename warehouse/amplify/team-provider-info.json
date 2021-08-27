@@ -29,16 +29,17 @@
         },
         "ecwidorder": {
           "deploymentBucketName": "amplify-warehouse-dev-140728-deployment",
-          "s3Key": "amplify-builds/ecwidorder-30532f4235486c42686a-build.zip",
+          "s3Key": "amplify-builds/ecwidorder-4546672f32655a4e6e48-build.zip",
           "ecwidDomain": "app.ecwid.com",
           "serviceGroupId": "-411578852",
-          "dostaDomain": "robotapitest.dostavista.ru"
+          "dostaDomain": "robotapitest.dostavista.ru",
+          "dadataDomain": "cleaner.dadata.ru"
         },
         "dostaorder": {
           "ecwidDomain": "app.ecwid.com",
           "serviceGroupId": "-411578852",
           "deploymentBucketName": "amplify-warehouse-dev-140728-deployment",
-          "s3Key": "amplify-builds/dostaorder-327966556557387a3668-build.zip"
+          "s3Key": "amplify-builds/dostaorder-6e6c596e65674b563954-build.zip"
         },
         "warehouseorders": {
           "ecwidDomain": "app.ecwid.com",
@@ -77,7 +78,8 @@
           "serviceGroupId": "-524002722",
           "dostaDomain": "robot.dostavista.ru",
           "deploymentBucketName": "amplify-warehouse-prod-111000-deployment",
-          "s3Key": "amplify-builds/ecwidorder-7452584742363669386f-build.zip"
+          "s3Key": "amplify-builds/ecwidorder-70464e554a5867344834-build.zip",
+          "dadataDomain": "cleaner.dadata.ru"
         },
         "warehousepycommon": {
           "deploymentBucketName": "amplify-warehouse-prod-111000-deployment",
@@ -87,7 +89,7 @@
           "ecwidDomain": "app.ecwid.com",
           "serviceGroupId": "-524002722",
           "deploymentBucketName": "amplify-warehouse-prod-111000-deployment",
-          "s3Key": "amplify-builds/dostaorder-6238664232386c4a4b49-build.zip"
+          "s3Key": "amplify-builds/dostaorder-385568704b354f34356e-build.zip"
         },
         "warehouseorders": {
           "ecwidDomain": "app.ecwid.com",

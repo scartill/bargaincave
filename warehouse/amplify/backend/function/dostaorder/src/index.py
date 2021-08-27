@@ -29,14 +29,17 @@ def process_dosta_event(event, wh, api):
         ecwid_order_id = dosta_event['order']['points'][0]['client_order_id']
 
         if order_status == 'available':
-            service_message(f'Delivery {dosta_order_id} approved for {ecwid_order_id}')
+            # NB: removed from telegram channel as superfluous
+            print(f'Delivery {dosta_order_id} approved for {ecwid_order_id}')
 
         if order_status == 'active':
-            service_message(f'Delivery {dosta_order_id} active for {ecwid_order_id}')
+            # NB: removed from telegram channel as superfluous
+            print(f'Delivery {dosta_order_id} active for {ecwid_order_id}')
             update_ecwid = lambda eo: set_fulfillment(eo, 'PROCESSING')
 
         if order_status == 'completed':
-            service_message(f'Delivery {dosta_order_id} completed for {ecwid_order_id}')
+            # NB: removed from telegram channel as superfluous
+            print(f'Delivery {dosta_order_id} completed for {ecwid_order_id}')
             update_ecwid = lambda eo: set_fulfillment(eo, 'DELIVERED')
 
         if order_status == 'canceled':
