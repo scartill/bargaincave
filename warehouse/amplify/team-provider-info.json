@@ -19,7 +19,7 @@
       "function": {
         "telegrampublish": {
           "deploymentBucketName": "amplify-warehouse-dev-140728-deployment",
-          "s3Key": "amplify-builds/telegrampublish-596e557574767a435072-build.zip",
+          "s3Key": "amplify-builds/telegrampublish-3545726d54726b632b41-build.zip",
           "telegramChannel": "-1001202477347",
           "orderAppHost": "dev-app.vkusb.ru"
         },

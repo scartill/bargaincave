@@ -11,8 +11,10 @@
   "permissions": {
     "api": {
       "warehouse": [
+        "create",
         "read",
-        "update"
+        "update",
+        "delete"
       ]
     },
     "storage": {
