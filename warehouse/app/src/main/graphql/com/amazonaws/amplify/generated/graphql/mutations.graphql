@@ -26,11 +26,11 @@ mutation CreateLot(
     updatedAt
   }
 }
-mutation UpdateLot(
-  $input: UpdateLotInput!
+mutation DeleteLot(
+  $input: DeleteLotInput!
   $condition: ModelLotConditionInput
 ) {
-  updateLot(input: $input, condition: $condition) {
+  deleteLot(input: $input, condition: $condition) {
     id
     fruit
     variety
@@ -53,11 +53,11 @@ mutation UpdateLot(
     updatedAt
   }
 }
-mutation DeleteLot(
-  $input: DeleteLotInput!
+mutation UpdateLot(
+  $input: UpdateLotInput!
   $condition: ModelLotConditionInput
 ) {
-  deleteLot(input: $input, condition: $condition) {
+  updateLot(input: $input, condition: $condition) {
     id
     fruit
     variety

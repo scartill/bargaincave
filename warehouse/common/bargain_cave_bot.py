@@ -14,11 +14,11 @@ def get_bot_client():
 
 
 def service_message(text):
-    # This must always successed
+    # This must always succeed
     try:
         bot = get_bot_client()
         group_id = os.getenv('SERVICE_GROUP_ID')
-        message = bot.send_message(
+        bot.send_message(
             chat_id=group_id,
             text=text
         )

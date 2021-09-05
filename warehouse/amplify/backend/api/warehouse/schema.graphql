@@ -1,4 +1,11 @@
-type Lot @model {
+type Lot @model 
+  @auth (
+    rules: [
+      { allow: groups, groups: ["managers"] },
+      { allow: groups, groups: ["sorters"], operations: [create, read] },
+      { allow: private, provider: iam, operations: [read, update] }
+    ]
+  ) {
   id: ID!
   fruit: String
   variety: String
@@ -15,4 +22,3 @@ type Lot @model {
   priceCurrency: String
   state: String
 }
- 

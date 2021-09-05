@@ -2,14 +2,12 @@ import os
 import json
 import traceback
 
-import boto3
+from telegram import InputMediaPhoto
 
-from telegram import Bot, InputMediaPhoto
 
-TELEGRAM_BOT_TOKEN_SECRET_NAME = "telegram_token"
-
-from gqlclient import GQLClient  # type: ignore
-from rest import make_response  # type: ignore
+from bargain_cave_bot import get_bot_client
+from gqlclient import GQLClient
+from rest import make_response
 
 
 PRICE_QUERY = '''
@@ -71,18 +69,6 @@ def get_lot(lot_id):
     })
 
     return r['getLot']
-
-
-# TODO: Use library
-def get_bot_client():
-    # TODO: use secrets.py
-    sm = boto3.client('secretsmanager')
-    secret_value_response = sm.get_secret_value(
-        SecretId=f"{TELEGRAM_BOT_TOKEN_SECRET_NAME}-{os.getenv('ENV')}"
-    )
-    bot_token = secret_value_response['SecretString']
-
-    return Bot(bot_token)
 
 
 def get_photo_url(photo_key):
