@@ -88,8 +88,7 @@ def get_photo_url(photo_key):
 
 def telegram_api_command(payload):
     if 'lot_by_id' not in payload:
-        print(f'Unsupported payload {payload}')
-        return 503
+        raise RuntimeError(f'Unsupported payload {payload}')
 
     lot_id = payload['lot_by_id']
     lot = get_lot(lot_id)
