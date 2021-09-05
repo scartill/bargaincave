@@ -4,7 +4,6 @@ import traceback
 
 from telegram import InputMediaPhoto
 
-
 from bargain_cave_bot import get_bot_client
 from gqlclient import GQLClient
 from rest import make_response
@@ -26,31 +25,31 @@ PRICE_QUERY = '''
 '''
 
 FRUIT_TRANSLATE = {
-    "RU": {
-        "Mango": "манго",
-        "Avocado": "авокадо"
+    'RU': {
+        'Mango': 'манго',
+        'Avocado': 'авокадо'
     }
 }
 
 VARIETY_TRANSLATE = {
-    "RU": {
-        "Kent": "Кент",
-        "Keitt": "Кит",
-        "Fuerte": "Фуэрте",
-        "Hass": "Хасс"
+    'RU': {
+        'Kent': 'Кент',
+        'Keitt': 'Кит',
+        'Fuerte': 'Фуэрте',
+        'Hass': 'Хасс'
     }
 }
 
 ORIGIN_TRANSLATE = {
-    "RU": {
-        "Peru": "Перу",
-        "Africa": "Африка",
-        "Egypt": "Египет",
-        "Israel": "Израиль",
-        "Colombia": "Колумбия",
-        "Kenya": "Кения",
-        "Venezuela": "Венесуэла",
-        "Brazil": "Бразилия"
+    'RU': {
+        'Peru': 'Перу',
+        'Africa': 'Африка',
+        'Egypt': 'Египет',
+        'Israel': 'Израиль',
+        'Colombia': 'Колумбия',
+        'Kenya': 'Кения',
+        'Venezuela': 'Венесуэла',
+        'Brazil': 'Бразилия'
     }
 }
 
@@ -138,4 +137,3 @@ def handler(event, _):
         print(e)
         traceback.print_exc()
         return make_response(error=e)
-
