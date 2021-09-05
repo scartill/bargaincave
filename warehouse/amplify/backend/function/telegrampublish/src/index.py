@@ -117,10 +117,7 @@ def telegram_api_command(payload):
     announce = ANNOUNCE_TEMPLATE.format(**lot)
     text = f'{announce}{deep_url}'
 
-    message = bot.send_message(
-        chat_id=channel_id,
-        text=text
-    )
+    message = bot.send_message(chat_id=channel_id, text=text)
 
     if not message:
         raise RuntimeError('Cannot send telegram message')
