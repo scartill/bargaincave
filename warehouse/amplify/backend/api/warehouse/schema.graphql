@@ -1,4 +1,4 @@
-type Lot @model @auth(rules: [{allow: public}]) {
+type Lot @model {
   id: ID!
   fruit: String
   variety: String

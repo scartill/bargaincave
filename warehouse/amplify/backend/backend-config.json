@@ -6,18 +6,14 @@
       "output": {
         "authConfig": {
           "defaultAuthentication": {
-            "authenticationType": "API_KEY",
-            "apiKeyConfig": {
-              "apiKeyExpirationDays": 365,
-              "description": "datastore-api"
+            "authenticationType": "AMAZON_COGNITO_USER_POOLS",
+            "userPoolConfig": {
+              "userPoolId": "authwarehouse40c048f0"
             }
           },
           "additionalAuthenticationProviders": [
             {
-              "authenticationType": "AMAZON_COGNITO_USER_POOLS",
-              "userPoolConfig": {
-                "userPoolId": "authwarehouse40c048f0"
-              }
+              "authenticationType": "AWS_IAM"
             }
           ]
         }
@@ -136,19 +132,11 @@
       "service": "Lambda",
       "dependsOn": [
         {
-          "category": "function",
-          "resourceName": "warehousepycommon",
-          "attributes": [
-            "Arn"
-          ]
-        },
-        {
           "category": "api",
           "resourceName": "warehouse",
           "attributes": [
             "GraphQLAPIIdOutput",
-            "GraphQLAPIEndpointOutput",
-            "GraphQLAPIKeyOutput"
+            "GraphQLAPIEndpointOutput"
           ]
         },
         {
@@ -156,6 +144,13 @@
           "resourceName": "photos",
           "attributes": [
             "BucketName"
+          ]
+        },
+        {
+          "category": "function",
+          "resourceName": "warehousepycommon",
+          "attributes": [
+            "Arn"
           ]
         }
       ]

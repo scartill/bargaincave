@@ -19,7 +19,7 @@
       "function": {
         "telegrampublish": {
           "deploymentBucketName": "amplify-warehouse-dev-140728-deployment",
-          "s3Key": "amplify-builds/telegrampublish-46365467436b47667645-build.zip",
+          "s3Key": "amplify-builds/telegrampublish-6133506f5a4352414436-build.zip",
           "telegramChannel": "-1001202477347",
           "orderAppHost": "dev-app.vkusb.ru"
         },
@@ -29,7 +29,7 @@
         },
         "ecwidorder": {
           "deploymentBucketName": "amplify-warehouse-dev-140728-deployment",
-          "s3Key": "amplify-builds/ecwidorder-4546672f32655a4e6e48-build.zip",
+          "s3Key": "amplify-builds/ecwidorder-6b53416c58545a70394c-build.zip",
           "ecwidDomain": "app.ecwid.com",
           "serviceGroupId": "-411578852",
           "dostaDomain": "robotapitest.dostavista.ru",
@@ -39,7 +39,7 @@
           "ecwidDomain": "app.ecwid.com",
           "serviceGroupId": "-411578852",
           "deploymentBucketName": "amplify-warehouse-dev-140728-deployment",
-          "s3Key": "amplify-builds/dostaorder-6e6c596e65674b563954-build.zip"
+          "s3Key": "amplify-builds/dostaorder-49476a756c7235703137-build.zip"
         },
         "warehouseorders": {
           "ecwidDomain": "app.ecwid.com",
