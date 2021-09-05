@@ -60,10 +60,16 @@ ANNOUNCE_TEMPLATE = '''Продается {fruitLocal} {varietyLocal} ({originLo
 
 
 def get_lot(lot_id):
-    url = os.getenv('API_WAREHOUSE_GRAPHQLAPIENDPOINTOUTPUT')
-    api_key = os.getenv('API_WAREHOUSE_GRAPHQLAPIKEYOUTPUT')
+    endpoint = os.getenv('API_WAREHOUSE_GRAPHQLAPIENDPOINTOUTPUT')
 
-    cli = GQLClient(url, api_key)
+    cli = GQLClient(
+        endpoint=endpoint,
+        aws_region=os.getenv('AWS_REGION'),
+        iam_access_key=os.getenv('AWS_ACCESS_KEY_ID'),
+        iam_access_secret=os.getenv('AWS_SECRET_ACCESS_KEY'),
+        iam_session_token=os.getenv('AWS_SESSION_TOKEN')
+    )
+
     r = cli.execute(PRICE_QUERY, variables={
         'lotID' : lot_id
     })
